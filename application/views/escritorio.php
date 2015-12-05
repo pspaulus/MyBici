@@ -1,0 +1,80 @@
+<div id="wrapper">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+        <!--Barra arriba-->
+        <div class="navbar-header">
+
+            <!--boton menu cuando estas en celular-->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href=""><i class="fa fa-fw fa-bicycle"></i> MyBici</a>
+        </div>
+
+        <!--Menu del usuario-->
+        <ul class="nav navbar-right top-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Administrador <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a><i class="fa fa-fw fa-power-off"></i> Salir</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <!--Menú lateral izquierdo-->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="active">
+                    <a onclick="Escritorio.load.ticket()"><i class="fa fa-fw fa-ticket"></i> Tickets</a>
+                </li>
+                <li>
+                    <a onclick="Escritorio.load.inventario()"><i class="fa fa-fw fa-bicycle"></i> Inventario</a>
+                </li>
+                <li>
+                    <a onclick="Escritorio.load.persona()"><i class="fa fa-fw fa-users"></i> Usuarios</a>
+                </li>
+                <li>
+                    <a onclick="Escritorio.load.estacion()"><i class="fa fa-fw fa-map-marker"></i> Estaciones</a>
+                </li>
+                <li>
+                    <a onclick="Escritorio.load.evento()"><i class="fa fa-fw fa-envelope"></i> Eventos</a>
+                </li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-list"></i> Tablas Auxiliares<i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a onclick="Escritorio.load.marca()"><i class="fa fa-fw fa-star"></i> Marca</a>
+                        </li>
+                        <li>
+                            <a onclick="Escritorio.load.modelo()"><i class="fa fa-fw fa-cube"></i> Modelo</a>
+                        </li>
+                        <li>
+                            <a onclick="Escritorio.load.estado()"><i class="fa fa-fw fa-tasks"></i> Estados</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="resultado">
+
+        <div id="page-wrapper">
+            <div class="container">
+                <div class="text-center huge"><i class="fa fa-fw fa-bicycle"></i> Bienvenido</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

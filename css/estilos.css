@@ -1,0 +1,21 @@
+.text-color-red {
+    color: #a94442;
+}
+
+.text-color-white {
+     color: white;
+ }
+
+.form-control-espacio {
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.oculto{
+    display: none;
+}
+
+.bg-color-green {
+    background-color: #76b900;
+    color: white;
+}
