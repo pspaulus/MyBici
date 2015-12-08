@@ -17,14 +17,14 @@
         <!--Menu del usuario-->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Administrador <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $usuario ?> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
                         <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a><i class="fa fa-fw fa-power-off"></i> Salir</a>
+                        <a onclick="Escritorio.Acciones.salir()"><i class="fa fa-fw fa-power-off"></i> Salir</a>
                     </li>
                 </ul>
             </li>
@@ -35,7 +35,7 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li class="active">
-                    <a onclick="Escritorio.load.ticket()"><i class="fa fa-fw fa-ticket"></i> Tickets</a>
+                    <a onclick="Escritorio.load.ticket()"><i class="fa fa-fw fa-ticket"></i> Reservas</a>
                 </li>
                 <li>
                     <a onclick="Escritorio.load.inventario()"><i class="fa fa-fw fa-bicycle"></i> Inventario</a>
@@ -68,13 +68,27 @@
     </nav>
 
     <div id="resultado">
-
         <div id="page-wrapper">
-            <div class="container">
-                <div class="text-center huge"><i class="fa fa-fw fa-bicycle"></i> Bienvenido</div>
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1 text-center">
+                        <h2 class="page-header">Sistema de Gesti&oacute;n de Alquiler de Bicicletas</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 text-right">
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                Bienvenido <?= ucfirst($usuario)?>
+                            </li>
+                        </ol>
+
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 
 </div>

@@ -5,11 +5,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    <i class="fa fa-fw fa-ticket"></i> Tickets
+                    <i class="fa fa-fw fa-ticket"></i> Reservas
                 </h1>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <i class="fa fa-clock-o"></i> Hoy: DD-MM-AAA <button class="btn btn-xs btn-default" type="button"><i class="fa fa-refresh"></i></button>
+                        <i class="fa fa-clock-o"></i> Hoy: <?= date('Y-m-d');?> <button class="btn btn-xs btn-default" type="button"><i class="fa fa-refresh"></i></button>
                     </li>
                 </ol>
             </div>

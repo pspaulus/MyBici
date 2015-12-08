@@ -104,6 +104,19 @@ var Escritorio = {
                 .done(function (r) {
                     container.html(r);
                 });
+        },
+    },
+    Acciones: {
+        salir: function () {
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Escritorio/salir"
+
+            })
+                .done(function (r) {
+                    console.log(r);
+                    window.location.replace("http://mybici.server/Login");
+                });
         }
 
     }

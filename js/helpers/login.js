@@ -15,11 +15,18 @@ var Login = {
             if (input_usuario.val().length >= 4 && input_contrasena.val().length >= 8) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Login/validarUSuario",
-                    data: {usuario: input_usuario.val().toLowerCase(), contrasena: $.md5(input_contrasena.val().toLowerCase())}
+                    url: "http://mybici.server/Login/validarUsuario",
+                    data: {usuario: input_usuario.val().toLowerCase().trim(), contrasena: $.md5(input_contrasena.val().trim())},
                 })
                     .done(function (r) {
-                        alert('validar login en el sever');
+                        console.log(r);
+
+                        if (r.status){
+                            alert(r.msg);
+                            //return false;
+                        }else{
+                            window.location.replace("http://mybici.server/Escritorio");
+                        }
                     });
             }
         },

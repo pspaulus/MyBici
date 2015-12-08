@@ -6,8 +6,6 @@ class Login extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-//        $this->load->helper('login');
-        $this->load->helper('url');
     }
 
     public function index()
@@ -19,12 +17,35 @@ class Login extends CI_Controller
         $this->load->view('footer');
     }
 
-    public function validarUSuario()
+    public function validarUsuario()
     {
         $nombre = $_POST['usuario'];
-        $contrasena = $_POST['$contrasena'];
-        echo 'php usuario ->' . $nombre . '<br>';
-        echo 'php contrasena ->' . $contrasena;
+        //$contrasena = md5( $_POST['contrasena'] );
+        $contrasena =  $_POST['contrasena'] ;
+
+//        $usuario = \App\Usuario::where("nombre", "LIKE", $nombre)
+//            ->where("contrasena", "=", md5($contrasena))
+//            ->first();
+
+        //dd($usuario);
+        $usuario = true;
+         session_start();
+
+        if ((bool) $usuario) {
+
+            $_SESSION["Usuario"] = $nombre;
+            echo $_SESSION["Usuario"];
+
+            //if ( isset($_SESSION["Usuario"]) ) dd("muere");
+            $esctritorio = new Escritorio();
+            $esctritorio->index();
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true,
+                'msg' => "Usuario o Clave incorrecta!",
+            ]);
+        }
 
     }
 }
