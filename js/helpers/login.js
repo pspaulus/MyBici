@@ -3,7 +3,7 @@ var Login = {
     index: {
 
         /**
-         * Validar usuario al presionar enviar
+         * Validar usuario al presionar ingresar en el logeo
          */
         validarUsuario: function () {
             var input_usuario = $('#usuario');
@@ -13,11 +13,10 @@ var Login = {
             this.validoVacio(input_contrasena);
 
             if (input_usuario.val().length >= 4 && input_contrasena.val().length >= 8) {
-
                 $.ajax({
                     method: "POST",
                     url: "http://mybici.server/Login/validarUSuario",
-                    data: {usuario: input_usuario.val(), contrasena: $.md5(input_contrasena.val())}
+                    data: {usuario: input_usuario.val().toLowerCase(), contrasena: $.md5(input_contrasena.val().toLowerCase())}
                 })
                     .done(function (r) {
                         alert('validar login en el sever');
@@ -26,7 +25,7 @@ var Login = {
         },
 
         /**
-         * Validar numero de caracteres para usuario 4 y contraseña 8
+         * Validar número de caracteres, esto valores los recibo de la vista (para usuario 4 y contraseña 8)
          * @param elem
          * @param numero
          */
@@ -68,7 +67,6 @@ var Login = {
             } else {
                 $(elem).parents('.agrupador').children('.error').addClass(' oculto');
             }
-
         }
     }
 };
