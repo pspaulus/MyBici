@@ -15,12 +15,16 @@ class Usuario extends CI_Controller
     public function consultarUsuario($nombre, $contrasena)
     {
 
-        dd( md5('123123123'));
+
 
         $usuario = \App\Usuario::where("nombre", "LIKE", $nombre)
             ->where("contrasena", "=", $contrasena)
             ->first();
         dd($usuario);
         return $usuario;
+    }
+
+    public function testMD5(){
+        //dd( md5('123123123'));
     }
 }

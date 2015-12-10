@@ -3,18 +3,15 @@
 session_start();
 
 
+
 class Escritorio extends CI_Controller
 {
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function index()
     {
 
-        $data['helpers'] = base_url() . 'js/helpers/escritorio.js';
+        $data['helpers']['escritorio'] = base_url() . 'js/helpers/escritorio.js';
+        $data['helpers']['usuario'] = base_url() . 'js/helpers/usuario.js';
 
 
         if ( isset($_SESSION["Usuario"]) ) {

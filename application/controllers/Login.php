@@ -3,14 +3,14 @@
 class Login extends CI_Controller
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
+//    public function __construct()
+//    {
+//        parent::__construct();
+//    }
 
     public function index()
     {
-        $data['helpers'] = base_url() . 'js/helpers/login.js';
+        $data['helpers']['login'] = base_url() . 'js/helpers/login.js';
 
         $this->load->view('header');
         $this->load->view('login', $data);
@@ -19,20 +19,21 @@ class Login extends CI_Controller
 
     public function validarUsuario()
     {
-        $nombre = $_POST['usuario'];
+        //http://mybici.server/Login/validarUsuario?usuario=admin&contrasena=123123123
+        $nombre = $_REQUEST['usuario'];
         //$contrasena = md5( $_POST['contrasena'] );
-        $contrasena =  $_POST['contrasena'] ;
+        $contrasena =  $_REQUEST['contrasena'] ;
 
-//        $usuario = \App\Usuario::where("nombre", "LIKE", $nombre)
-//            ->where("contrasena", "=", md5($contrasena))
-//            ->first();
+        $usuario = \App\Usuario::where("nombre", "LIKE", $nombre)
+            ->where("contrasena", "=", md5($contrasena))
+            ->first();
 
         //dd($usuario);
         $usuario = true;
-         session_start();
+
 
         if ((bool) $usuario) {
-
+            session_start();
             $_SESSION["Usuario"] = $nombre;
             echo $_SESSION["Usuario"];
 

@@ -1,4 +1,6 @@
-<script type="text/javascript" src="<?= $helpers ?>"></script>
+<?php foreach ($helpers as $helper) { ?>
+    <script type="text/javascript" src="<?= $helper ?>"></script>
+<?php } ?>
 <script src="/js/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/raphael.min.js"></script>
