@@ -30,13 +30,13 @@ class Persona extends CI_Controller
         $nombre = $_REQUEST['nombre'];
         $contrasena = $_REQUEST['contrasena'];
 
-        $user = \App\Usuario::firstOrCreate([
+        $usuario = \App\Usuario::firstOrCreate([
             'nombre' => $nombre,
             'contrasena' => $contrasena,
             'ESTADO_id' => 1
         ]);
 
-        //dd($user);
+        //dd($usuario);
     }
 
     public function cargarUltimoId()
@@ -53,8 +53,15 @@ class Persona extends CI_Controller
     }
 
     public function editarUsuario(){
-//        $user = User::find(1);
-//        $user->email = 'john@foo.com';
-//        $user->save();
+        $id = $_REQUEST['id'];
+        $nombre = $_REQUEST['nombre'];
+        $contrasena = $_REQUEST['contrasena'];
+        $estado = $_REQUEST['estado'];
+
+        $usuario = \App\Usuario::find($id);
+        $usuario->nombre = $nombre;
+        $usuario->contrasena = $contrasena;
+        $usuario->ESTADO_id = $estado;
+        $usuario->save();
     }
 }
