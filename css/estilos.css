@@ -11,9 +11,13 @@
     margin-bottom: 30px;
 }
 
-.oculto{
+.oculto,
+.ocultoInactivo,
+.ocultoFiltro {
     display: none;
 }
+
+
 
 .bg-color-green {
     background-color: #76b900;

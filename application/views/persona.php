@@ -48,7 +48,7 @@
                                         <label>ID</label>
                                     </div>
                                     <div class="col-xs-6">
-                                        <input class="form-control" type="text" placeholder="" value="<?=  $Persona->cargarUltimoId() ?>" disabled="">
+                                        <input class="form-control" type="text" placeholder="" value="<?= $Persona->cargarUltimoId() ?>" disabled="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -116,7 +116,7 @@
             <div class="col-lg-12 text-right">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" value="">Incluir Inactivos
+                        <input id="verInactivos" type="checkbox" onchange="Usuario.acciones.verInactivos();">Ver Inactivos
                     </label>
                 </div>
             </div>
@@ -125,16 +125,15 @@
         <!-- Busqueda -->
         <div class="row">
             <div class="col-xs-4">
-                <select class="form-control">
-                    <option>ID</option>
-                    <option>Login</option>
+                <select class="form-control" id="filtro_usuario">
+                    <option value="1">ID</option>
+                    <option value="2" selected>Login</option>
                 </select>
             </div>
             <div class="col-xs-8">
-
                 <div class="form-group input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
+                    <span class="input-group-btn"><button class="btn btn-default" type="button" onclick="Usuario.acciones.buscar(); Usuario.acciones.verInactivos();"><i class="fa fa-search"></i></button></span>
+                    <input type="text" class="form-control" id="valor_a_buscar" onkeyup="Usuario.acciones.buscar(); Usuario.acciones.verInactivos();">
                 </div>
             </div>
 
@@ -142,9 +141,9 @@
                 <?php $collection_usuario = $Persona->cargarUsuariosTodos(true); ?>
 
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped">
+                    <table id="tabla_usuario" class="table  table-hover">
                         <thead>
-                        <tr>
+                        <tr class="text-center">
                             <th>ID</th>
                             <th>Login</th>
                             <th>Estado</th>
@@ -155,7 +154,7 @@
                         <?php
                         foreach($collection_usuario as $obj_usuario){
                         ?>
-                        <tr>
+                        <tr class="<?= ($obj_usuario->ESTADO_id == 1)? 'activo ' : 'inactivo '?>">
                             <td><?= $obj_usuario->id ?></td>
                             <td><?= $obj_usuario->nombre ?></td>
                             <td><?= ($obj_usuario->ESTADO_id == 1)? 'Activo' : 'Inactivo' ?></td>
@@ -309,11 +308,14 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </td>
 
                         </tr>
                         <?php }?>
+
+                        <script>
+                            Usuario.acciones.verInactivos();
+                        </script>
 
                         </tbody>
                     </table>

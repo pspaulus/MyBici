@@ -15,14 +15,18 @@ var Usuario = {
                 });
         },
 
-        eliminar: function (id) {
+        eliminar: function (id, el) {
             $.ajax({
                 method: "POST",
                 url: "http://mybici.server/Persona/eliminarUsuario",
                 data: {id: id}
             })
                 .done(function (r) {
-                    console.log('eliminado -> ' + id);
+                    //if (r.JSON.status) {
+                    //    $(el).up('tr').class("ocultar");
+                    //}
+                    //
+                    //alert(r.JSON.status);
                 });
         },
 
@@ -41,11 +45,61 @@ var Usuario = {
                 });
         },
 
+        verInactivos: function () {
+            var check = $('#verInactivos');
+
+            if (check.is(":checked")) {
+                $('tr.inactivo').removeClass(' ocultoInactivo');
+            } else {
+                $('tr.inactivo').addClass(' ocultoInactivo');
+            }
+
+            //console.log('ver inactivos -> ' + check.is(":checked"));
+        },
+        buscar: function () {
+            var filtro = $('#filtro_usuario');
+            var valor_a_buscar = $('#valor_a_buscar');
+
+            var tds = $('#tabla_usuario  td:nth-of-type(' + filtro.val() + ')');
+
+            tds.each(function (i, td) {
+
+                var texto_td = td.innerHTML.toString();
+                var que_busco = valor_a_buscar.val().toString();
+
+                //if (texto_td == que_busco) {
+                if (texto_td.indexOf(que_busco) > -1) {
+                    console.log('encontro -> ' + texto_td);
+                    $(td).parents('tr').removeClass(' ocultoFiltro');
+                } else {
+                    $(td).parents('tr').addClass(' ocultoFiltro');
+                }
+            });
+
+        },
+
         limpiar: function () {
             $('#nombre').val('');
             $('#contrasena').val('');
             $('#confirmar_contrasena').val('');
-        }
+        },
 
+        update: function (id) {
+            var nombre = $('#nombre_editar').val().toLowerCase().trim();
+            var contrasena = $('#contrasena_editar').val().trim();
+            var estado = $('#estado_editar').val();
+
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/api/collection",
+                data: {
+                    model: 'Usuario',
+                    type: 'yaml',
+                }
+            })
+                .done(function (r) {
+                    console.log('editar -> ' + id);
+                });
+        },
     }
 };

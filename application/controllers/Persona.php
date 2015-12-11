@@ -64,4 +64,5 @@ class Persona extends CI_Controller
         $usuario->ESTADO_id = $estado;
         $usuario->save();
     }
+
 }
