@@ -29,14 +29,22 @@ class Persona extends CI_Controller
     {
         $nombre = $_REQUEST['nombre'];
         $contrasena = $_REQUEST['contrasena'];
+        $tipo = $_REQUEST['tipo'];
 
         $usuario = \App\Usuario::firstOrCreate([
             'nombre' => $nombre,
             'contrasena' => $contrasena,
+            'tipo' => $tipo,
             'ESTADO_id' => 1
         ]);
 
         //dd($usuario);
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => true,
+
+        ]);
     }
 
     public function cargarUltimoId()

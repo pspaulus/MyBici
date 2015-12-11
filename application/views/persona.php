@@ -77,10 +77,21 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-2 col-xs-offset-1">
+                                        <label>Tipo</label>
+                                    </div>
+                                    <div class="col-xs-6" id="estado">
+                                        <select class="form-control" id="tipo_usuario">
+                                            <option value="0">Est&aacute;ndar</option>
+                                            <option value="1">Administrador</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-2 col-xs-offset-1">
                                         <label>Estado</label>
                                     </div>
                                     <div class="col-xs-6" id="estado">
-                                        <select class="form-control">
+                                        <select class="form-control" disabled>
                                             <option value="1">Activo</option>
                                             <option value="2">Inactivo</option>
                                         </select>
@@ -132,8 +143,8 @@
             </div>
             <div class="col-xs-8">
                 <div class="form-group input-group">
-                    <span class="input-group-btn"><button class="btn btn-default" type="button" onclick="Usuario.acciones.buscar(); Usuario.acciones.verInactivos();"><i class="fa fa-search"></i></button></span>
-                    <input type="text" class="form-control" id="valor_a_buscar" onkeyup="Usuario.acciones.buscar(); Usuario.acciones.verInactivos();">
+                    <span class="input-group-btn"><button class="btn btn-default" type="button" onclick="Usuario.acciones.buscar();"><i class="fa fa-search"></i></button></span>
+                    <input type="text" class="form-control" id="valor_a_buscar" onkeyup="Usuario.acciones.buscar();">
                 </div>
             </div>
 
@@ -143,11 +154,12 @@
                 <div class="table-responsive">
                     <table id="tabla_usuario" class="table  table-hover">
                         <thead>
-                        <tr class="text-center">
+                        <tr >
                             <th>ID</th>
                             <th>Login</th>
+                            <th>Tipo</th>
                             <th>Estado</th>
-                            <th>Acciones</th>
+                            <th class="text-center">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -157,8 +169,9 @@
                         <tr class="<?= ($obj_usuario->ESTADO_id == 1)? 'activo ' : 'inactivo '?>">
                             <td><?= $obj_usuario->id ?></td>
                             <td><?= $obj_usuario->nombre ?></td>
+                            <td><?= ($obj_usuario->TIPO_id == 0)? 'Est&aacute;ndar' : 'Administrador' ?></td>
                             <td><?= ($obj_usuario->ESTADO_id == 1)? 'Activo' : 'Inactivo' ?></td>
-                            <td>
+                            <td class="text-center">
                                 <button class="btn btn-sm btn-default" type="button" data-toggle="modal" data-target="#verUsuario_<?= $obj_usuario->id ?>"><i class="fa fa-search"></i></button>
                                 <button class="btn btn-sm btn-default" type="button" data-toggle="modal" data-target="#editarUsuario_<?= $obj_usuario->id ?>"><i class="fa fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#eliminarUsuario_<?= $obj_usuario->id ?>"><i class="fa fa-trash"></i></button>

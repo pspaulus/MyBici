@@ -4,14 +4,21 @@ var Usuario = {
         guardar: function () {
             var nombre = $('#nombre').val().toLowerCase().trim();
             var contrasena = $('#contrasena').val().trim();
+            var tipo = $('#tipo_usuario').val();
 
             $.ajax({
                 method: "POST",
                 url: "http://mybici.server/Persona/ingresarUsuario",
-                data: {nombre: nombre, contrasena: $.md5(contrasena)}
+                data: {nombre: nombre, contrasena: $.md5(contrasena), tipo: tipo}
             })
                 .done(function (r) {
-                    console.log(nombre + '\n' + contrasena + '\n');
+                    if (r.status){
+                        console.log('usuario guardaro');
+                        Escritorio.load.persona();
+
+                    } else{
+                        console.log('NO guarda');
+                    }
                 });
         },
 
@@ -22,6 +29,8 @@ var Usuario = {
                 data: {id: id}
             })
                 .done(function (r) {
+
+                    Escritorio.load.persona();
                     //if (r.JSON.status) {
                     //    $(el).up('tr').class("ocultar");
                     //}
@@ -41,6 +50,7 @@ var Usuario = {
                 data: {id: id, nombre: nombre, contrasena: $.md5(contrasena), estado: estado}
             })
                 .done(function (r) {
+                    Escritorio.load.persona();
                     console.log('editar -> ' + id);
                 });
         },
@@ -76,6 +86,7 @@ var Usuario = {
                 }
             });
 
+            Usuario.acciones.verInactivos();
         },
 
         limpiar: function () {
@@ -100,6 +111,6 @@ var Usuario = {
                 .done(function (r) {
                     console.log('editar -> ' + id);
                 });
-        },
+        }
     }
 };
