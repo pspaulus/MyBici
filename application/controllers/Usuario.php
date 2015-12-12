@@ -25,6 +25,6 @@ class Usuario extends CI_Controller
     }
 
     public function testMD5(){
-        //dd( md5('123123123'));
+        dd( md5('mendoza2015'));
     }
 }

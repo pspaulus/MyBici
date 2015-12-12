@@ -56,7 +56,8 @@
                                         <label for="Descripcion">Nombre</label>
                                     </div>
                                     <div class="col-xs-6">
-                                        <input class="form-control" id="nombre" type="text" maxlength="16" placeholder="Ingrese un nombre" value="">
+                                        <input class="form-control" id="nombre" type="text" maxlength="40" placeholder="Ingrese un nombre" value=""
+                                               onkeyup="Login.index.validarNumeroCaracteres(this,4)">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -64,7 +65,7 @@
                                         <label for="Descripcion">Contrase&ntilde;a</label>
                                     </div>
                                     <div class="col-xs-6">
-                                        <input class="form-control" id="contrasena" type="password" maxlength="16" placeholder="Ingrese una contrase&ntilde;a" value="">
+                                        <input class="form-control" id="contrasena" type="password" maxlength="40" placeholder="Ingrese una contrase&ntilde;a" value="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -72,7 +73,7 @@
                                         <label for="Descripcion">Confirme Contrase&ntilde;a</label>
                                     </div>
                                     <div class="col-xs-6">
-                                        <input class="form-control" id="confirmar_contrasena" type="password" maxlength="16" placeholder="repita la contrase&ntilde;a" value="">
+                                        <input class="form-control" id="confirmar_contrasena" type="password" maxlength="40" placeholder="repita la contrase&ntilde;a" value="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -81,7 +82,7 @@
                                     </div>
                                     <div class="col-xs-6" id="estado">
                                         <select class="form-control" id="tipo_usuario">
-                                            <option value="0">Est&aacute;ndar</option>
+                                            <option value="2">Est&aacute;ndar</option>
                                             <option value="1">Administrador</option>
                                         </select>
                                     </div>
@@ -144,7 +145,7 @@
             <div class="col-xs-8">
                 <div class="form-group input-group">
                     <span class="input-group-btn"><button class="btn btn-default" type="button" onclick="Usuario.acciones.buscar();"><i class="fa fa-search"></i></button></span>
-                    <input type="text" class="form-control" id="valor_a_buscar" onkeyup="Usuario.acciones.buscar();">
+                    <input type="text" class="form-control" id="valor_a_buscar" onkeyup="Usuario.acciones.buscar();" maxlength="40">
                 </div>
             </div>
 
@@ -169,7 +170,7 @@
                         <tr class="<?= ($obj_usuario->ESTADO_id == 1)? 'activo ' : 'inactivo '?>">
                             <td><?= $obj_usuario->id ?></td>
                             <td><?= $obj_usuario->nombre ?></td>
-                            <td><?= ($obj_usuario->TIPO_id == 0)? 'Est&aacute;ndar' : 'Administrador' ?></td>
+                            <td><?= ($obj_usuario->TIPO_id == 2)? 'Est&aacute;ndar' : 'Administrador' ?></td>
                             <td><?= ($obj_usuario->ESTADO_id == 1)? 'Activo' : 'Inactivo' ?></td>
                             <td class="text-center">
                                 <button class="btn btn-sm btn-default" type="button" data-toggle="modal" data-target="#verUsuario_<?= $obj_usuario->id ?>"><i class="fa fa-search"></i></button>
@@ -197,14 +198,14 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Ver Usuario</h4>
+                                                <h4 class="modal-title text-left" id="myModalLabel">Ver Usuario</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <form class="form-horizontal" id="form_usuario">
                                                     <div class="row">
 
                                                         <div class="form-group">
-                                                            <div class="col-xs-2 col-xs-offset-1">
+                                                            <div class="col-xs-2 col-xs-offset-1 text-left">
                                                                 <label>ID</label>
                                                             </div>
                                                             <div class="col-xs-6">
@@ -212,28 +213,39 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class="col-xs-2 col-xs-offset-1">
+                                                            <div class="col-xs-2 col-xs-offset-1 text-left">
                                                                 <label for="Descripcion">Nombre</label>
                                                             </div>
                                                             <div class="col-xs-6">
-                                                                <input class="form-control" id="nombre_ver" type="text" maxlength="16" placeholder="Ingrese un nombre" value="<?= $obj_usuario->nombre ?>">
+                                                                <input class="form-control" id="nombre_ver" type="text" maxlength="40" placeholder="Ingrese un nombre" value="<?= $obj_usuario->nombre ?>" disabled="">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class="col-xs-2 col-xs-offset-1">
+                                                            <div class="col-xs-2 col-xs-offset-1 text-left">
                                                                 <label for="Descripcion">Contrase&ntilde;a</label>
                                                             </div>
                                                             <div class="col-xs-6">
-                                                                <input class="form-control" id="contrasena_ver" type="password" maxlength="16" placeholder="Ingrese una contrase&ntilde;a" value="<?= $obj_usuario->contrasena ?>">
+                                                                <input class="form-control" id="contrasena_ver" type="password" maxlength="40" placeholder="Ingrese una contrase&ntilde;a" value="<?= $obj_usuario->contrasena ?>" disabled="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <div class="col-xs-2 col-xs-offset-1 text-left">
+                                                                <label>Tipo</label>
+                                                            </div>
+                                                            <div class="col-xs-6" id="estado" >
+                                                                <select class="form-control" id="tipo_usuario" disabled="">
+                                                                    <option value="2" <?= ($obj_usuario->TIPO_id == 2)? 'selected' : '' ?>>Est&aacute;ndar</option>
+                                                                    <option value="1" <?= ($obj_usuario->TIPO_id == 1)? 'selected' : '' ?>>Administrador</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class="col-xs-2 col-xs-offset-1">
+                                                            <div class="col-xs-2 col-xs-offset-1 text-left">
                                                                 <label>Estado</label>
                                                             </div>
                                                             <div class="col-xs-6">
 
-                                                                <select class="form-control"  id="estado_editar">
+                                                                <select class="form-control"  id="estado_editar" disabled="">
                                                                     <option value="1" <?= ($obj_usuario->ESTADO_id == 1)? 'selected' : '' ?>>Activo</option>
                                                                     <option value="2" <?= ($obj_usuario->ESTADO_id == 2)? 'selected' : '' ?>>Inactivo</option>
                                                                 </select>
@@ -245,7 +257,7 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Acepttar</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
                                             </div>
 
                                         </div>
@@ -258,14 +270,14 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Editar Usuario</h4>
+                                                <h4 class="modal-title text-left" id="myModalLabel">Editar Usuario</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <form class="form-horizontal" id="form_usuario">
                                                     <div class="row">
 
                                                         <div class="form-group">
-                                                            <div class="col-xs-2 col-xs-offset-1">
+                                                            <div class="col-xs-2 col-xs-offset-1 text-left">
                                                                 <label>ID</label>
                                                             </div>
                                                             <div class="col-xs-6">
@@ -273,36 +285,46 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class="col-xs-2 col-xs-offset-1">
+                                                            <div class="col-xs-2 col-xs-offset-1 text-left">
                                                                 <label for="Descripcion">Nombre</label>
                                                             </div>
                                                             <div class="col-xs-6">
-                                                                <input class="form-control" id="nombre_editar" type="text" maxlength="16" placeholder="Ingrese un nombre" value="<?= $obj_usuario->nombre ?>">
+                                                                <input class="form-control" id="nombre_editar<?= $obj_usuario->id ?>" type="text" maxlength="40" placeholder="Ingrese un nombre" value="<?= $obj_usuario->nombre ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class="col-xs-2 col-xs-offset-1">
+                                                            <div class="col-xs-2 col-xs-offset-1 text-left">
                                                                 <label for="Descripcion">Contrase&ntilde;a</label>
                                                             </div>
                                                             <div class="col-xs-6">
-                                                                <input class="form-control" id="contrasena_editar" type="password" maxlength="16" placeholder="Ingrese una contrase&ntilde;a" value="<?= $obj_usuario->contrasena ?>">
+                                                                <input class="form-control" id="contrasena_editar<?= $obj_usuario->id ?>" type="password" maxlength="40" placeholder="Ingrese una contrase&ntilde;a" value="<?= $obj_usuario->contrasena ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class="col-xs-2 col-xs-offset-1">
+                                                            <div class="col-xs-2 col-xs-offset-1 text-left">
                                                                 <label for="Descripcion">Confirme Contrase&ntilde;a</label>
                                                             </div>
                                                             <div class="col-xs-6">
-                                                                <input class="form-control" id="confirmar_contrasena_editar" type="password" maxlength="16" placeholder="repita la contrase&ntilde;a" value="<?= $obj_usuario->contrasena ?>">
+                                                                <input class="form-control" id="confirmar_contrasena_editar" type="password" maxlength="40" placeholder="repita la contrase&ntilde;a" value="<?= $obj_usuario->contrasena ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class="col-xs-2 col-xs-offset-1">
+                                                            <div class="col-xs-2 col-xs-offset-1 text-left">
+                                                                <label>Tipo</label>
+                                                            </div>
+                                                            <div class="col-xs-6 text-left" id="estado" >
+                                                                <select class="form-control" id="tipo_usuario_editar<?= $obj_usuario->id ?>">
+                                                                    <option value="2" <?= ($obj_usuario->TIPO_id == 2)? 'selected' : '' ?>>Est&aacute;ndar</option>
+                                                                    <option value="1" <?= ($obj_usuario->TIPO_id == 1)? 'selected' : '' ?>>Administrador</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-xs-2 col-xs-offset-1 text-left">
                                                                 <label>Estado</label>
                                                             </div>
                                                             <div class="col-xs-6">
-
-                                                                <select class="form-control"  id="estado_editar">
+                                                                <select class="form-control"  id="estado_editar<?= $obj_usuario->id ?>">
                                                                     <option value="1" <?= ($obj_usuario->ESTADO_id == 1)? 'selected' : '' ?>>Activo</option>
                                                                     <option value="2" <?= ($obj_usuario->ESTADO_id == 2)? 'selected' : '' ?>>Inactivo</option>
                                                                 </select>
@@ -338,3 +360,4 @@
 
     </div>
 </div>
+

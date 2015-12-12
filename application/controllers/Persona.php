@@ -34,7 +34,7 @@ class Persona extends CI_Controller
         $usuario = \App\Usuario::firstOrCreate([
             'nombre' => $nombre,
             'contrasena' => $contrasena,
-            'tipo' => $tipo,
+            'TIPO_id' => $tipo,
             'ESTADO_id' => 1
         ]);
 
@@ -64,11 +64,13 @@ class Persona extends CI_Controller
         $id = $_REQUEST['id'];
         $nombre = $_REQUEST['nombre'];
         $contrasena = $_REQUEST['contrasena'];
+        $tipo = $_REQUEST['tipo'];
         $estado = $_REQUEST['estado'];
 
         $usuario = \App\Usuario::find($id);
         $usuario->nombre = $nombre;
         $usuario->contrasena = $contrasena;
+        $usuario->TIPO_id = $tipo;
         $usuario->ESTADO_id = $estado;
         $usuario->save();
     }

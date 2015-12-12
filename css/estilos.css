@@ -27,3 +27,8 @@
 body{
     cursor: default;
 }
+
+.sobrepasa {
+    /*max-height: 500px;*/
+    overflow: scroll;
+}

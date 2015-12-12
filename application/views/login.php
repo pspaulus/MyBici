@@ -16,7 +16,7 @@
                 <div class="agrupador">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-fw fa-user"></i>&nbsp;</div>
-                        <input type="text" class="form-control" placeholder="Usuario" id="usuario" maxlength="16"
+                        <input type="text" class="form-control" placeholder="Usuario" id="usuario" maxlength="40"
                                onkeyup="Login.index.validarNumeroCaracteres(this,4)">
                     </div>
                     <label class="control-label vacio oculto" for="usuario" id="usuario_vacio">&iexcl;Ingrese
@@ -28,7 +28,7 @@
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-fw fa-lock"></i>&nbsp;</div>
                         <input type="password" class="form-control" placeholder="Contrase&ntilde;a" id="contrasena"
-                               maxlength="16" onkeyup="Login.index.validarNumeroCaracteres(this,8)">
+                               maxlength="40" onkeyup="Login.index.validarNumeroCaracteres(this,8)">
                     </div>
                     <label class="control-label vacio oculto" for="contrasena" id="contrasena_vacio">&iexcl;Ingrese
                         contrase&ntilde;a!</label>

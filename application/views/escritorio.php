@@ -19,9 +19,9 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $usuario ?> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>
-                    </li>
+<!--                    <li>-->
+<!--                        <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>-->
+<!--                    </li>-->
                     <li class="divider"></li>
                     <li>
                         <a onclick="Escritorio.Acciones.salir()"><i class="fa fa-fw fa-power-off"></i> Salir</a>

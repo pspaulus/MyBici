@@ -10,6 +10,6 @@ class Usuario extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'nombre', 'contrasena', 'ESTADO_id'
+        'nombre', 'contrasena', 'TIPO_id', 'ESTADO_id'
     ];
 }
