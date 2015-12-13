@@ -19,34 +19,32 @@ class Login extends CI_Controller
 
     public function validarUsuario()
     {
-        //http://mybici.server/Login/validarUsuario?usuario=admin&contrasena=123123123
+        http://mybici.server/Login/validarUsuario?usuario=admin&contrasena=123123123
         $nombre = $_REQUEST['usuario'];
-        //$contrasena = md5( $_POST['contrasena'] );
-        $contrasena =  $_REQUEST['contrasena'] ;
+        $contrasena = $_REQUEST['contrasena'];
 
         $usuario = \App\Usuario::where("nombre", "LIKE", $nombre)
-            ->where("contrasena", "=", md5($contrasena))
+            ->where("contrasena", "=", $contrasena)
             ->first();
 
-        //dd($usuario);
-        $usuario = true;
-
-
-        if ((bool) $usuario) {
-            session_start();
-            $_SESSION["Usuario"] = $nombre;
-            echo $_SESSION["Usuario"];
-
-            //if ( isset($_SESSION["Usuario"]) ) dd("muere");
-            $esctritorio = new Escritorio();
-            $esctritorio->index();
+        if ( (bool) $usuario ){
+            if ( $usuario->TIPO_id == 1 ) {
+                session_start();
+                $_SESSION["Usuario"] = $nombre;
+                $esctritorio = new Escritorio();
+                $esctritorio->index();
+            }
         } else {
             header('Content-Type: application/json');
             echo json_encode([
-                'status' => true,
-                'msg' => "Usuario o Clave incorrecta!",
+                'status' => true
             ]);
         }
 
+    }
+
+    public function prueba($contrasena)
+    {
+        dd(md5($contrasena));
     }
 }

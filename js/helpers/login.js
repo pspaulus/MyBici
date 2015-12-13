@@ -16,15 +16,16 @@ var Login = {
                 $.ajax({
                     method: "POST",
                     url: "http://mybici.server/Login/validarUsuario",
-                    data: {usuario: input_usuario.val().toLowerCase().trim(), contrasena: $.md5(input_contrasena.val().trim())},
+                    data: {
+                        usuario: input_usuario.val().toLowerCase().trim(),
+                        contrasena: $.md5(input_contrasena.val().trim())
+                    }
                 })
                     .done(function (r) {
-                        console.log(r);
-
-                        if (r.status){
-                            alert(r.msg);
-                            //return false;
-                        }else{
+                        //alert(r.status);
+                        if (r.status) {
+                            Login.index.mensajeUsuarioContrasenaIncorrecto(r.status);
+                        } else {
                             window.location.replace("http://mybici.server/Escritorio");
                         }
                     });
@@ -74,6 +75,11 @@ var Login = {
             } else {
                 $(elem).parents('.agrupador').children('.error').addClass(' oculto');
             }
+        },
+
+        mensajeUsuarioContrasenaIncorrecto: function (bandera) {
+            var mensaje = $('#usuario_contrasena_incorrecta');
+            (bandera) ? mensaje.removeClass(' oculto') : mensaje.addClass(' oculto');
         }
     }
 };
