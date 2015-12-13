@@ -37,7 +37,7 @@ var Login = {
          * @param numero
          */
         validarNumeroCaracteres: function (elem, numero) {
-            this.mensajeNumeroCaracteres(elem, numero);
+            Login.index.mensajeNumeroCaracteres(elem, numero);
 
             if ($(elem).val().length < numero) {
                 $(elem).parents('.agrupador').removeClass(' has-error');

@@ -2,24 +2,35 @@ var Usuario = {
 
     acciones: {
         guardar: function () {
-            var nombre = $('#nombre').val().toLowerCase().trim();
-            var contrasena = $('#contrasena').val().trim();
-            var tipo = $('#tipo_usuario').val();
+            var nombre = $('#nombre');
+            var contrasena = $('#contrasena');
+            var confirmar_contrasena = $('#confirmar_contrasena');
+            var tipo = $('#tipo_usuario');
 
-            $.ajax({
-                method: "POST",
-                url: "http://mybici.server/Persona/ingresarUsuario",
-                data: {nombre: nombre, contrasena: $.md5(contrasena), tipo: tipo}
-            })
-                .done(function (r) {
-                    if (r.status) {
-                        console.log('usuario guardaro');
-                        $('#resultado').html(Escritorio.load.persona());
-                        $('.modal-backdrop').remove();
-                    } else {
-                        //console.log('NO guarda');
+            this.validoVacioUsuario(nombre);
+            this.validoVacioUsuario(contrasena);
+            this.validoVacioUsuario(confirmar_contrasena);
+
+            if (nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena)) {
+                $.ajax({
+                    method: "POST",
+                    url: "http://mybici.server/Persona/ingresarUsuario",
+                    data: {
+                        nombre: nombre.val().toLowerCase().trim(),
+                        contrasena: $.md5(contrasena.val().trim()),
+                        tipo: tipo.val()
                     }
-                });
+                })
+                    .done(function (r) {
+                        if (r.status) {
+                            console.log('usuario guardaro');
+                            $('#resultado').html(Escritorio.load.persona());
+                            $('.modal-backdrop').remove();
+                        } else {
+                            //console.log('NO guarda');
+                        }
+                    });
+            }
         },
 
         eliminar: function (id, el) {
@@ -41,12 +52,13 @@ var Usuario = {
         },
 
         editar: function (id) {
-            var nombre = $('#nombre_editar'+id).val().toLowerCase().trim();
-            var contrasena = $('#contrasena_editar'+id).val().trim();
-            var tipo = $('#tipo_usuario_editar'+id).val();
-            var estado = $('#estado_editar'+id).val();
+            var nombre = $('#nombre_editar' + id).val().toLowerCase().trim();
+            var contrasena = $('#contrasena_editar' + id).val().trim();
+            var tipo = $('#tipo_usuario_editar' + id).val();
+            var estado = $('#estado_editar' + id).val();
 
-            console.log(nombre); alert(nombre);
+            console.log(nombre);
+            alert(nombre);
 
             $.ajax({
                 method: "POST",
@@ -95,14 +107,70 @@ var Usuario = {
         },
 
         limpiar: function () {
-            $('#nombre').val('');
-            $('#contrasena').val('');
-            $('#confirmar_contrasena').val('');
+            var input_nombre = $('#nombre');
+            var contrasena = $('#contrasena');
+            var confirmar_contrasena = $('#confirmar_contrasena');
+
+            input_nombre.val('');
+            contrasena.val('');
+            confirmar_contrasena.val('');
+            $('#nombre_vacio').addClass(' oculto');
+            $('#nombre_error').addClass(' oculto');
+            $('#contrasena_vacio').addClass(' oculto');
+            $('#contrasena_error').addClass(' oculto');
+            $('#confirmar_contrasena_vacio').addClass(' oculto');
+            $('#confirmar_contrasena_error').addClass(' oculto');
+            $('#contrasena_no_coinciden').addClass(' oculto');
+
+            input_nombre.parents('.agrupador').removeClass(' has-error has-warning');
+            contrasena.parents('.agrupador').removeClass(' has-error has-warning');
+            confirmar_contrasena.parents('.agrupador').removeClass(' has-error has-warning');
+
         },
 
-        validarContrasena: function(input_contrasena, input_confirmar){
-            return ( input_contrasena.val().trim() == input_confirmar.val().trim() )? true : false;
+        validarContrasena: function (input_contrasena, input_confirmar) {
+            if (input_contrasena.val().trim() == input_confirmar.val().trim()) {
+                $('#contrasena_no_coinciden').addClass(' oculto');
+                return true;
+            } else {
+                $('#contrasena_no_coinciden').removeClass(' oculto');
+                return false;
+            }
 
+        },
+
+        validarNumeroCaracteresUsuario: function (elem, numero) {
+            Usuario.acciones.mensajeNumeroCaracteresUsuario(elem, numero);
+            $(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').addClass(' oculto');
+
+            if ($(elem).val().length < numero) {
+                $(elem).parents('.agrupador').removeClass(' has-error');
+                $(elem).parents('.agrupador').addClass(' has-warning');
+                $(elem).parents('.agrupador').children('.vacio').addClass(' oculto');
+            }
+            else {
+                $(elem).parents('.agrupador').removeClass(' has-warning');
+            }
+        },
+
+        validoVacioUsuario: function (elem) {
+            if (elem.val() == '') {
+                elem.parents('.agrupador').addClass(' has-error');
+                elem.parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').removeClass(' oculto');
+                $(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.error').removeClass(' oculto');
+            } else {
+                elem.parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').addClass(' oculto');
+            }
+        },
+
+        mensajeNumeroCaracteresUsuario: function (elem, numero) {
+            if ($(elem).val().length < numero) {
+                $(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.error').removeClass(' oculto');
+                //$(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').removeClass(' oculto');
+            } else {
+                $(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.error').addClass(' oculto');
+                $(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').addClass(' oculto');
+            }
         }
 
         //update: function (id) {
