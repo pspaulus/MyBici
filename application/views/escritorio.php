@@ -1,8 +1,8 @@
 <div id="wrapper">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top sinBordeRedondeado" role="navigation">
 
         <!--Barra arriba-->
-        <div class="navbar-header">
+        <div class="navbar-header ">
 
             <!--boton menu cuando estas en celular-->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -17,12 +17,13 @@
         <!--Menu del usuario-->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $usuario ?> <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $usuario ?> <b
+                        class="caret"></b></a>
                 <ul class="dropdown-menu">
-<!--                    <li>-->
-<!--                        <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>-->
-<!--                    </li>-->
-                    <li class="divider"></li>
+                    <!--                    <li>-->
+                    <!--                        <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>-->
+                    <!--                    </li>-->
+<!--                    <li class="divider"></li>-->
                     <li>
                         <a onclick="Escritorio.Acciones.salir()"><i class="fa fa-fw fa-power-off"></i> Salir</a>
                     </li>
@@ -50,7 +51,8 @@
                     <a onclick="Escritorio.load.evento()"><i class="fa fa-fw fa-envelope"></i> Eventos</a>
                 </li>
                 <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-list"></i> Tablas Auxiliares<i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-list"></i>
+                        Tablas Auxiliares<i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
                         <li>
                             <a onclick="Escritorio.load.marca()"><i class="fa fa-fw fa-star"></i> Marca</a>
@@ -77,16 +79,35 @@
                         <h2 class="page-header">Sistema de Gesti&oacute;n de Alquiler de Bicicletas</h2>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 text-right">
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                Bienvenido <?= ucfirst($usuario)?>
-                            </li>
-                        </ol>
 
+                <!--                <div class="row">-->
+                <!--                    <div class="col-xs-12 text-right">-->
+                <!--                        <ol class="breadcrumb">-->
+                <!--                            <li class="active">-->
+                <!--                                Bienvenido --><? //= ucfirst($usuario)?>
+                <!--                            </li>-->
+                <!--                        </ol>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Bienvenido <?= ucfirst($usuario) ?></h3>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <iframe class="sinBordeRedondeado"
+                                src="https://www.google.com/maps/d/embed?mid=z0LzSFRAV0FQ.k1s6TjP9IzTE" width="100%"
+                                height="300px"></iframe>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

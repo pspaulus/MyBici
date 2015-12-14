@@ -3,8 +3,8 @@
 }
 
 .text-color-white {
-     color: white;
- }
+    color: white;
+}
 
 .form-control-espacio {
     margin-top: 0;
@@ -17,18 +17,26 @@
     display: none;
 }
 
-
+.colorPlomo {
+    background-color: #222222;
+    color: white;
+}
 
 .bg-color-green {
     background-color: #76b900;
     color: white;
 }
 
-body{
+body {
     cursor: default;
 }
 
 .sobrepasa {
     /*max-height: 500px;*/
     overflow: scroll;
+}
+
+.sinBordeRedondeado {
+    border: medium none;
+    border-radius: 10px;
 }

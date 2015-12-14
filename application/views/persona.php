@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <ol class="breadcrumb">
-                    <li class="active">
+                    <li class="active ">
                         <i class="fa fa-plus"></i> Agregar
                     </li>
                 </ol>
