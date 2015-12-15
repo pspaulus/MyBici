@@ -1,4 +1,4 @@
-<?php $Persona = new Persona();?>
+<?php $Persona = new Persona(); ?>
 
 <div id="page-wrapper">
 
@@ -27,7 +27,8 @@
         <!-- Button trigger modal agregar -->
         <div class="row form-control-espacio">
             <div class="col-lg-12">
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#agregarUsuario" ><i class="fa fa-plus"></i></button>
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#agregarUsuario"><i
+                        class="fa fa-plus"></i></button>
             </div>
         </div>
 
@@ -50,7 +51,8 @@
             <div class="col-lg-12 text-right">
                 <div class="checkbox">
                     <label>
-                        <input id="verInactivos" type="checkbox" onchange="Usuario.acciones.verInactivos();">Ver Inactivos
+                        <input id="verInactivos" type="checkbox" onchange="Usuario.acciones.verInactivos();">Ver
+                        Inactivos
                     </label>
                 </div>
             </div>
@@ -66,8 +68,11 @@
             </div>
             <div class="col-xs-8 col-sm-3">
                 <div class="form-group input-group">
-                    <span class="input-group-btn"><button class="btn btn-default" type="button" onclick="Usuario.acciones.buscar();"><i class="fa fa-search"></i></button></span>
-                    <input type="text" class="form-control" id="valor_a_buscar" onkeyup="Usuario.acciones.buscar();" maxlength="40">
+                    <span class="input-group-btn"><button class="btn btn-default" type="button"
+                                                          onclick="Usuario.acciones.buscar();"><i
+                                class="fa fa-search"></i></button></span>
+                    <input type="text" class="form-control" id="valor_a_buscar" onkeyup="Usuario.acciones.buscar();"
+                           maxlength="40">
                 </div>
             </div>
 
@@ -75,9 +80,9 @@
                 <?php $collection_usuario = $Persona->cargarUsuariosTodos(true); ?>
 
                 <div class="table-responsive">
-                    <table id="tabla_usuario" class="table  table-hover">
+                    <table id="tabla_usuario" class="table table-hover">
                         <thead>
-                        <tr >
+                        <tr>
                             <th>ID</th>
                             <th>Login</th>
                             <th>Tipo</th>
@@ -86,30 +91,34 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        foreach($collection_usuario as $obj_usuario){
-                        ?>
-                        <tr class="<?= ($obj_usuario->ESTADO_id == 1)? 'activo ' : 'inactivo '?>">
-                            <td><?= $obj_usuario->id ?></td>
-                            <td><?= $obj_usuario->nombre ?></td>
-                            <td><?= ($obj_usuario->TIPO_id == 2)? 'Est&aacute;ndar' : 'Administrador' ?></td>
-                            <td><?= ($obj_usuario->ESTADO_id == 1)? 'Activo' : 'Inactivo' ?></td>
-                            <td class="text-center">
-                                <button class="btn btn-sm btn-default" type="button" data-toggle="modal" data-target="#verUsuario_<?= $obj_usuario->id ?>"><i class="fa fa-search"></i></button>
-                                <button class="btn btn-sm btn-default" type="button" data-toggle="modal" data-target="#editarUsuario_<?= $obj_usuario->id ?>"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#eliminarUsuario_<?= $obj_usuario->id ?>"><i class="fa fa-trash"></i></button>
+                        <?php foreach ($collection_usuario as $obj_usuario) { ?>
+                            <tr class="<?= ($obj_usuario->ESTADO_id == 1) ? 'activo ' : 'inactivo ' ?>">
+                                <td><?= $obj_usuario->id ?></td>
+                                <td><?= $obj_usuario->nombre ?></td>
+                                <td><?= ($obj_usuario->TIPO_id == 2) ? 'Est&aacute;ndar' : 'Administrador' ?></td>
+                                <td><?= ($obj_usuario->ESTADO_id == 1) ? 'Activo' : 'Inactivo' ?></td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-default" type="button" data-toggle="modal"
+                                            data-target="#verUsuario_<?= $obj_usuario->id ?>"><i
+                                            class="fa fa-search"></i></button>
+                                    <button class="btn btn-sm btn-default" type="button" data-toggle="modal"
+                                            data-target="#editarUsuario_<?= $obj_usuario->id ?>"><i
+                                            class="fa fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger" type="button" data-toggle="modal"
+                                            data-target="#eliminarUsuario_<?= $obj_usuario->id ?>"><i
+                                            class="fa fa-trash"></i></button>
 
-                                <!--Modal Eliminar-->
-                                <?php $Persona->load->view('usuario/eliminar', compact('obj_usuario')); ?>
+                                    <!--Modal Eliminar-->
+                                    <?php $Persona->load->view('usuario/eliminar', compact('obj_usuario')); ?>
 
-                                <!-- ver modal-->
-                                <?php $Persona->load->view('usuario/ver', compact('obj_usuario')); ?>
+                                    <!-- ver modal-->
+                                    <?php $Persona->load->view('usuario/ver', compact('obj_usuario')); ?>
 
-                                <!-- Editar modal-->
-                                <?php $Persona->load->view('usuario/editar', compact('obj_usuario')); ?>
-                            </td>
-                        </tr>
-                        <?php }?>
+                                    <!-- Editar modal-->
+                                    <?php $Persona->load->view('usuario/editar', compact('obj_usuario')); ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
 
                         <script>
                             Usuario.acciones.verInactivos();
