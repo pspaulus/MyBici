@@ -50,3 +50,17 @@ body {
     overflow: hidden;
     /*max-height: 700px;*/
 }
+
+.bg-color-rojo {
+    color: rgba(208, 123, 80, 0.98) !important;
+}
+
+.tip {
+    color: #2E6DA4;
+    font-size: 14px;
+}
+
+.bg-color-azul {
+    color: #337ab7;
+    text-decoration: none;
+}

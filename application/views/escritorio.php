@@ -17,13 +17,13 @@
         <!--Menu del usuario-->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $usuario ?> <b
+                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $usuario ?> <b
                         class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <!--                    <li>-->
                     <!--                        <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>-->
                     <!--                    </li>-->
-                    <li class="divider"></li>
+<!--                    <li class="divider"></li>-->
                     <li>
                         <a onclick="Escritorio.Acciones.salir()"><i class="fa fa-fw fa-power-off"></i> Salir</a>
                     </li>
@@ -94,7 +94,7 @@
                     <div class="col-xs-12 text-center">
                         <iframe class="sinBordeRedondeado"
                                 src="https://www.google.com/maps/d/embed?mid=z0LzSFRAV0FQ.k1s6TjP9IzTE" width="100%"
-                                height="300px"></iframe>
+                                height="450px"></iframe>
                     </div>
                 </div>
 
