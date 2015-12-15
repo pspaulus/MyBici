@@ -12,4 +12,4 @@
     <link rel="stylesheet" href="/css/morris.css">
     <link rel="stylesheet" href="/css/font-awesome.css">
 </head>
-<body>
+<body class="sinScroll">

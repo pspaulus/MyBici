@@ -19,7 +19,7 @@ class Login extends CI_Controller
 
     public function validarUsuario()
     {
-        http://mybici.server/Login/validarUsuario?usuario=admin&contrasena=123123123
+        //http://mybici.server/Login/validarUsuario?usuario=admin&contrasena=123123123
         $nombre = $_REQUEST['usuario'];
         $contrasena = $_REQUEST['contrasena'];
 
@@ -28,7 +28,7 @@ class Login extends CI_Controller
             ->first();
 
         if ( (bool) $usuario ){
-            if ( $usuario->TIPO_id == 1 ) {
+            if ( $usuario->TIPO_id == 1  && $usuario->ESTADO_id == 1 ) {
                 session_start();
                 $_SESSION["Usuario"] = $nombre;
                 $esctritorio = new Escritorio();

@@ -11,7 +11,7 @@ class Persona extends CI_Controller
 
     public function index()
     {
-        $this->load->view('persona');
+        $this->load->view('usuario/persona');
     }
 
     public function cargarUsuariosTodos($inactivos = false)

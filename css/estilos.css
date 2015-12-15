@@ -40,3 +40,13 @@ body {
     border: medium none;
     border-radius: 10px;
 }
+
+.scroll {
+    max-height: 615px;
+    overflow: auto;
+}
+
+.sinScroll {
+    overflow: hidden;
+    /*max-height: 700px;*/
+}
