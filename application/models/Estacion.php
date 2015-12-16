@@ -17,6 +17,6 @@ class Estacion extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'codigo','nombre', 'coordenada_x', 'coordenada_y'
+        'codigo', 'nombre', 'coordenada_x', 'coordenada_y'
     ];
 }

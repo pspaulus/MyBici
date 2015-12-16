@@ -21,6 +21,18 @@
                         <div class="agrupador">
                             <div class="form-group">
                                 <div class="col-xs-2 col-xs-offset-1">
+                                    <label for="Descripcion">C&oacute;digo</label>
+                                </div>
+                                <div class="col-xs-2 mensaje">
+                                    <input class="form-control" id="codigo" type="text" maxlength="1"
+                                           placeholder="_" value=""
+                                           onkeypress="return Escritorio.Validaciones.soloLetras(event)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="agrupador">
+                            <div class="form-group">
+                                <div class="col-xs-2 col-xs-offset-1">
                                     <label for="Descripcion">Nombre</label>
                                 </div>
                                 <div class="col-xs-6 mensaje">
@@ -38,7 +50,7 @@
                                 <div class="col-xs-6 mensaje">
                                     <input class="form-control" id="coordenada_x" type="text" maxlength="40"
                                            placeholder="-2.15222" value=""
-                                           onkeyup="">
+                                           onkeypress="return Escritorio.Validaciones.soloNumeros(event)">
                                 </div>
                             </div>
                         </div>
@@ -50,7 +62,7 @@
                                 <div class="col-xs-6 mensaje">
                                     <input class="form-control" id="coordenada_y" type="text" maxlength="40"
                                            placeholder="-79.9529" value=""
-                                           onkeyup="">
+                                           onkeypress="return Escritorio.Validaciones.soloNumeros(event)">
                                 </div>
                             </div>
                         </div>
@@ -61,7 +73,8 @@
                                 </div>
                                 <div class="col-xs-2 mensaje">
                                     <input class="form-control" id="numero_estaciones" type="number" min="0" max="999"
-                                           maxlength="3" value="1">
+                                           maxlength="3" value="1"
+                                           onkeypress="return Escritorio.Validaciones.soloNumeros(event)">
                                 </div>
                             </div>
                         </div>

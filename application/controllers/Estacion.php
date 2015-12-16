@@ -17,14 +17,18 @@ class Estacion extends CI_Controller
     public function crearEstacion()
     {
         $nombre = $_REQUEST['nombre'];
+        $codigo = $_REQUEST['codigo'];
         $coordenada_x = $_REQUEST['coordenada_x'];
         $coordenada_y = $_REQUEST['coordenada_y'];
 
-        $estaciones = \App\Estacion::where('nombre', '=', $nombre)->get();
+        $estaciones = \App\Estacion::where('nombre', '=', $nombre)
+            ->where('codigo','=',$codigo)
+            ->get();
 
         if ( (bool) $estaciones ) {
             \App\Estacion::firstOrCreate([
                 'nombre' => $nombre,
+                'codigo' => $codigo,
                 'coordenada_x' => $coordenada_x,
                 'coordenada_y' => $coordenada_y
             ]);

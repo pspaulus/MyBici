@@ -51,7 +51,8 @@
             <div class="col-xs-5">
                 <select class="form-control form-group">
                     <?php foreach ($estaciones as $estacion) { ?>
-                        <option value="<?= $estacion->id ?>"><?= $estacion->nombre ?></option>
+                        <option
+                            value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
                     <?php } ?>
                 </select>
             </div>
