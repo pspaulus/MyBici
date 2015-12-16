@@ -1,5 +1,4 @@
-<?php //$Estacionamiento = new Estacionamiento(); dd($Estacionamiento); ?>
-
+<?php //$Estacion = new Estacion(); ?>
 <div class="col-xs-12">
     <h3>Lista de parqueos - (Nombre del Estacionamiento)</h3>
 
@@ -12,13 +11,16 @@
                 <th>Acciones</th>
             </tr>
             </thead>
-<!--            --><?php //$estacionamientos = $Estacionamiento->cargarEstacionamientos(1, 'todos'); ?>
+
+            <?php //todo-ps debe ser controler estacionamiento
+            $estacionamientos = $Estacion->cargarEstacionamientos($estacion_id, $estado); ?>
             <tbody>
-<!--            --><?php //dd($estacionamientos); ?>
-<!--            --><?php //foreach ($estacionamientos as $estacionamiento) { ?>
+            <?php foreach ($estacionamientos as $estacionamiento) { ?>
                 <tr>
-                    <td>GP001</td>
-                    <td>GB001</td>
+                    <td><?= $Estacion->getCodigoEstacion($estacion_id) . $estacionamiento->codigo; ?></td>
+                    <?php // todo-ps ESTO DEBE IR EN BICICLETA CONTROLLER
+                    $bicicleta = Escritorio::cargarBicicleta($estacionamiento->BICICLETA_id); ?>
+                    <td><?= ((bool)$bicicleta) ? $bicicleta->codigo : '-'; ?></td>
                     <td>
                         <button class="btn btn-sm btn-default" type="button" title="Agregar Bicicleta"><i
                                 class="fa fa-plus"></i></button>
@@ -26,7 +28,7 @@
                                 class="fa fa-minus"></i></button>
                     </td>
                 </tr>
-<!--            --><?php //} ?>
+            <?php } ?>
             </tbody>
         </table>
     </div>

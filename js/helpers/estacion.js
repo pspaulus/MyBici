@@ -27,12 +27,26 @@ var Estacion = {
                             //console.log('modal -> '+$('#crearEstacion'));
                             $('#crearEstacion').removeClass('in')
                             $('.modal-backdrop').remove();
-                            Escritorio.load.estacion();
+                            $('#resultado').html(Escritorio.load.estacion());
                         } else {
                             console.log('Error al guardar Estacion');
                         }
                     });
             }
+        },
+
+        cargarListaParqueos: function () {
+            var id = $('#select_estacion').val();
+            var estado = $('#filtro_estado_parqueo').val();
+            //alert('cargar lista parqueo ->' + id);
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Estacion/cargarVistaParqueos/" + id +'/'+estado,
+                data: {}
+            })
+                .done(function (r) {
+                        $('#parqueos').html(r);
+                });
         },
 
         limpiar: function () {

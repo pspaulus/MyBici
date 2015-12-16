@@ -50,4 +50,13 @@ class Escritorio extends CI_Controller
         $Login->index();
     }
 
+
+    // todo-ps ESTO DEBE IR EN BICICLETA CONTROLLER
+    public static function cargarBicicleta($id)
+    {
+        $bicicleta = \App\Bicicleta::find($id);
+        //dd($bicicleta);
+        return $bicicleta;
+    }
+
 }

@@ -49,12 +49,33 @@
         <?php $estaciones = $Estacion->cargarEstaciones() ?>
         <div class="row">
             <div class="col-xs-5">
-                <select class="form-control form-group">
+                <select id="select_estacion" class="form-control form-group">
                     <?php foreach ($estaciones as $estacion) { ?>
                         <option
                             value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
                     <?php } ?>
                 </select>
+            </div>
+        </div>
+
+        <!--Select Estado Parqueo-->
+        <div class="row">
+            <div class="col-xs-2">
+                <select class="form-control" id="filtro_estado_parqueo">
+                    <option value="todos" selected>Todos</option>
+                    <option value="ocupados">Ocupados</option>
+                    <option value="libres">Libres</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Button buscar lista parqueo -->
+        <div class="row">
+            <div class=" form-control-espacio">
+                <div class="col-lg-12">
+                    <button class="btn btn-primary" type="button"
+                            onclick="Estacion.acciones.cargarListaParqueos()"><i class="fa fa-search"></i></button>
+                </div>
             </div>
         </div>
 
@@ -71,11 +92,11 @@
                 </ul>
 
                 <!-- Tab panels -->
-                <div id="contentVideo4" class="tab-content tab-contenido">
+                <div id="" class="tab-content tab-contenido">
 
                     <div role="tabpanel" class="tab-pane fade in active" id="parqueos">
                         <!-- tab parqueos -->
-                        <?php $Estacion->load->view('estacion/parqueos', compact('Estacion')); ?>
+                        <!-- se llena por ajax -->
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade" id="datos">

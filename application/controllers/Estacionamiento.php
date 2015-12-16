@@ -1,12 +1,14 @@
 <?php
 
+//NO LO USO TODO ESTA EN ESTACION (Puesto de alquiler)
+
 class Estacionamiento extends CI_Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->helper('url');
-    }
+//    public function __construct()
+//    {
+//        parent::__construct();
+//        $this->load->helper('url');
+//    }
 
     public function index()
     {
@@ -57,7 +59,7 @@ class Estacionamiento extends CI_Controller
         }
     }
 
-    public function cargarUltimoId()
+    public function cargarUltimoIdEstacionamiento()
     {
         $estacionamiento = \App\Estacionamiento::all()->last();
         //dd($estacionamiento->codigo);

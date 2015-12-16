@@ -14,9 +14,6 @@ class Usuario extends CI_Controller
 
     public function consultarUsuario($nombre, $contrasena)
     {
-
-
-
         $usuario = \App\Usuario::where("nombre", "LIKE", $nombre)
             ->where("contrasena", "=", $contrasena)
             ->first();
