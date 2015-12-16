@@ -46,6 +46,8 @@
             </div>
         </div>
 
+        <h3>Lista de Usuario</h3>
+
         <!-- check inactivos -->
         <div class="row">
             <div class="col-lg-12 text-right">

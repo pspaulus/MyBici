@@ -17,6 +17,6 @@ class Estacionamiento extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'BICICLETA_id', 'PUESTO_ALQIULER_id', 'ESTADO_id'
+        'codigo', 'PUESTO_ALQUILER_id', 'BICICLETA_id', 'ESTADO_id'
     ];
 }

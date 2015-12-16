@@ -74,7 +74,7 @@
 
                     <div role="tabpanel" class="tab-pane fade in active" id="parqueos">
                         <!-- tab parqueos -->
-                        <?php $Estacion->load->view('estacion/parqueos'); ?>
+                        <?php $Estacion->load->view('estacion/parqueos', compact('Estacion')); ?>
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade" id="datos">
