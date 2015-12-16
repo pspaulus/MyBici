@@ -13,6 +13,7 @@ class Escritorio extends CI_Controller
         $data['helpers']['escritorio'] = base_url() . 'js/helpers/escritorio.js';
         $data['helpers']['usuario'] = base_url() . 'js/helpers/usuario.js';
         $data['helpers']['login'] = base_url() . 'js/helpers/login.js';
+        $data['helpers']['estacion'] = base_url() . 'js/helpers/estacion.js';
 
 
         if ( isset($_SESSION["Usuario"]) ) {

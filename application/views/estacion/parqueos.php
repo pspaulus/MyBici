@@ -1,24 +1,22 @@
 <div class="col-xs-12">
     <h3>Lista de parqueos - (Nombre del Estacionamiento)</h3>
+
     <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped">
+        <table id="tabla_usuario" class="table table-hover">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Descripci&oacute;n</th>
-                <th>Estado</th>
+                <th>N&uacute;mero</th>
+                <th>Cod. Bicicleta</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr class="active">
-                <td>001</td>
-                <td>lorem ipsum</td>
-                <td>Activo</td>
+            <tr>
+                <td>GP001</td>
+                <td>GB001</td>
                 <td>
-                    <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i></button>
-                    <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
-                    <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-target="#eliminarMarca"><i class="fa fa-trash"></i></button>
+                    <button class="btn btn-sm btn-default" type="button" title="Agregar Bicicleta"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-sm btn-danger" type="button" title="Quitar Bicicleta"><i class="fa fa-minus"></i></button>
                 </td>
             </tr>
             </tbody>
