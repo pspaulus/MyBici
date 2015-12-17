@@ -58,11 +58,18 @@ class Estacion extends CI_Controller
         return $estaciones;
     }
 
-    public function getCodigoEstacion($id)
+    public static function getCodigoEstacion($id)
     {
         $estacion = \App\Estacion::find($id);
         //dd($estacion->codigo);
         return $estacion->codigo;
+    }
+
+    public static function getNombreEstacion($id)
+    {
+        $estacion = \App\Estacion::find($id);
+        //dd($estacion->codigo);
+        return $estacion->nombre;
     }
 
 

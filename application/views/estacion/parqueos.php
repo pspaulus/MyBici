@@ -19,8 +19,7 @@
             <?php foreach ($estacionamientos as $estacionamiento) { ?>
                 <tr>
                     <td><?= $Estacion->getCodigoEstacion($estacion_id) . $estacionamiento->codigo; ?></td>
-                    <?php // todo-ps ESTO DEBE IR EN BICICLETA CONTROLLER
-                    $bicicleta = $Bicicleta->cargarBicicleta($estacionamiento->BICICLETA_id); ?>
+                    <?php  $bicicleta = $Bicicleta->cargarBicicleta($estacionamiento->BICICLETA_id); ?>
                     <td><?= ((bool)$bicicleta) ? $bicicleta->codigo : '-'; ?></td>
                     <td>
                         <button class="btn btn-sm btn-default" type="button" title="Agregar Bicicleta"><i

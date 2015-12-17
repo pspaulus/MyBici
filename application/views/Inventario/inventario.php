@@ -1,16 +1,19 @@
 <?php $Bicicletas = new Bicicleta(); ?>
+<?php $Estacion = new Estacion(); ?>
 <div id="page-wrapper">
     <div class="container-fluid">
 
+        <!--Titulo-->
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    <i class="fa fa-fw fa-bicycle"></i> Inventario
+                    <i class="fa fa-fw fa-archive"></i> Inventario
                 </h1>
-                <h3>Bicicletas</h3>
+
+                <h3> <i class="fa fa-fw fa-bicycle"></i> Bicicletas</h3>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <i class="fa fa-clock-o"></i> Hoy: <?= date('Y-m-d'); ?>
+                        <i class="fa fa-clock-o"></i> Hoy: <?= date('Y-m-d'); ?> &nbsp;
                         <button class="btn btn-xs btn-default" type="button" onclick="Inventario.acciones.refrescar()">
                             <i class="fa fa-refresh"></i></button>
                     </li>
@@ -18,76 +21,10 @@
             </div>
         </div>
 
+        <!--Resumen-->
+        <?php $Bicicletas->load->view('inventario/resumen', compact('Bicicletas')); ?>
 
-
-        <div class="row">
-            <div class="col-xs-3">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-circle-o fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge"><?= $Bicicletas->contarBicicletas(); ?></div>
-                                <div>Total</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-xs-3">
-                <div class="panel panel-green">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-check-circle-o fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge"><?= $Bicicletas->contarBicicletasEstado('disponibles'); ?></div>
-                                <div>Disponibles</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-3">
-                <div class="panel panel-yellow">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-times-circle-o fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge"><?= $Bicicletas->contarBicicletasEstado('mantenimiento'); ?></div>
-                                <div>En mantenimiento</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-3">
-                <div class="panel panel-red">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-times-circle-o fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge"><?= $Bicicletas->contarBicicletasEstado('en_uso'); ?></div>
-                                <div>En uso</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+        <!--Buscar-->
         <div class="row">
             <div class="col-xs-12">
                 <ol class="breadcrumb">
@@ -98,120 +35,84 @@
             </div>
         </div>
 
+        <?php $estaciones = $Estacion->cargarEstaciones() ?>
+
+        <!--Form buscar-->
         <div class="row">
-            <div class="col-xs-4">
-                <select class="form-control">
-                    <option>ID</option>
-                    <option>Nombre</option>
-                    <option>Estado</option>
-                </select>
-            </div>
-            <div class="col-xs-8">
-
-                <div class="form-group input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn"><button class="btn btn-default" type="button"><i
-                                class="fa fa-search"></i></button></span>
-                </div>
-            </div>
-            <div class="col-xs-12">
-
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre Completo</th>
-                            <th>Origen</th>
-                            <th>Destino</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="active">
-                            <td>001</td>
-                            <td>lorem ipsum</td>
-                            <td>Retiro</td>
-                            <td>Llegada</td>
-                            <td>Activo</td>
-                            <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr class="success">
-                            <td>002</td>
-                            <td>lorem ipsum</td>
-                            <td>Retiro</td>
-                            <td>Llegada</td>
-                            <td>Activo</td>
-                            <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>003</td>
-                            <td>lorem ipsum</td>
-                            <td>Retiro</td>
-                            <td>Llegada</td>
-                            <td>Activo</td>
-                            <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr class="danger">
-                            <td>004</td>
-                            <td>lorem ipsum</td>
-                            <td>Retiro</td>
-                            <td>Llegada</td>
-                            <td>Activo</td>
-                            <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>005</td>
-                            <td>lorem ipsum</td>
-                            <td>Retiro</td>
-                            <td>Llegada</td>
-                            <td>Activo</td>
-                            <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>006</td>
-                            <td>lorem ipsum</td>
-                            <td>Retiro</td>
-                            <td>Llegada</td>
-                            <td>Activo</td>
-                            <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div class="form-inline">
+                <div class="form-group">
+                    <!--Select Estacion-->
+                    <div class="col-xs-3">
+                        <label class="control-label" for="select_estacion_inventario">Estacion</label>
+                    </div>
+                    <div class="col-xs-4">
+                        <select id="select_estacion_inventario" class="form-control form-group">
+                            <option>Todas</option>
+                            <?php foreach ($estaciones as $estacion) { ?>
+                                <option
+                                    value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!--Espacio-->
+        <div class="row">
+            <div class="col-xs-12">&nbsp;</div>
+        </div>
+
+        <div class="row">
+            <div class="form-inline">
+                <div class="form-group">
+                    <!--Select Estacion-->
+                    <div class="col-xs-3">
+                        <label class="control-label" for="select_estacion_inventario">Estado</label>
+                    </div>
+                    <div class="col-xs-4">
+                        <select id="select_estacion_inventario" class="form-control form-group">
+                            <option>Todas</option>
+                            <?php foreach ($estaciones as $estacion) { ?>
+                                <option
+                                    value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Espacio-->
+        <div class="row">
+            <div class="col-xs-12">&nbsp;</div>
+        </div>
+
+        <div class="row">
+            <div class="form-inline">
+               <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="codigo_bicicleta">C&oacute;digo</label>
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="form-group input-group">
+                            <input type="text" class="form-control" id="codigo_bicicleta" maxlength="5">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Espacio-->
+        <div class="row">
+            <div class="col-xs-12">&nbsp;</div>
+        </div>
+
+        <?php $Bicicletas->load->view('inventario/listado', compact('Bicicletas')); ?>
+
+        </div>
     </div>
 </div>

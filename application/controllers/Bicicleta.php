@@ -45,4 +45,27 @@ class Bicicleta extends CI_Controller
         //dd($conteo_bicicletas);
         return $conteo_bicicletas;
     }
+
+    public function cargarTodasBicicletas(){
+        $bicicletas = \App\Bicicleta::all();
+        //dd($bicicleta);
+        return $bicicletas;
+    }
+
+    public static function getEstadoBicicleta($id)
+    {
+        $bicicleta = \App\Bicicleta::find($id);
+        $estado = \App\Estado::find($bicicleta->ESTADO_id);
+        //dd($estacion->codigo);
+        return $estado->descripcion;
+    }
+
+    public static function getEstacionamiento($id)
+    {
+        $estacionamientos = \App\Estacionamiento::where('BICICLETA_id', '=', $id)
+            ->get()
+            ->first();
+        //dd($estacionamientos->codigo);
+        return $estacionamientos->codigo;
+    }
 }

@@ -43,40 +43,51 @@
                         <i class="fa fa-search"></i> Buscar
                     </li>
                 </ol>
+                <h3>Parqueos</h3>
             </div>
         </div>
 
         <?php $estaciones = $Estacion->cargarEstaciones() ?>
-        <div class="row">
-            <div class="col-xs-5">
-                <select id="select_estacion" class="form-control form-group">
-                    <?php foreach ($estaciones as $estacion) { ?>
-                        <option
-                            value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
-                    <?php } ?>
-                </select>
-            </div>
-        </div>
 
-        <!--Select Estado Parqueo-->
         <div class="row">
-            <div class="col-xs-2">
-                <select class="form-control" id="filtro_estado_parqueo">
-                    <option value="todos" selected>Todos</option>
-                    <option value="ocupados">Ocupados</option>
-                    <option value="libres">Libres</option>
-                </select>
-            </div>
-        </div>
+            <div class="form-inline">
+                <!--Select Estacion-->
+                <div class="col-xs-4">
+                    <label class="control-label" for="select_estacion">Nombre</label>
+                    <select id="select_estacion" class="form-control form-group">
+                        <?php foreach ($estaciones as $estacion) { ?>
+                            <option
+                                value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
 
-        <!-- Button buscar lista parqueo -->
-        <div class="row">
-            <div class=" form-control-espacio">
-                <div class="col-lg-12">
-                    <button class="btn btn-primary" type="button"
-                            onclick="Estacion.acciones.cargarListaParqueos()"><i class="fa fa-search"></i></button>
+                <!--Select Estado Parqueo-->
+                <div class="col-xs-4">
+                    <label class="control-label" for="filtro_estado_parqueo">Estado</label>
+                    <select class="form-control" id="filtro_estado_parqueo">
+                        <option value="todos" selected>Todos</option>
+                        <option value="ocupados">Ocupados</option>
+                        <option value="libres">Libres</option>
+                    </select>
+                </div>
+
+                <!-- Button buscar lista parqueo -->
+                <div class="col-xs-4">
+                    <div class=" form-control-espacio">
+                        <div class="col-xs-12">
+                            <button class="btn btn-primary" type="button"
+                                    onclick="Estacion.acciones.cargarListaParqueos()"><i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!--Espacio-->
+        <div class="row">
+            <div class="col-xs-12">&nbsp;</div>
         </div>
 
         <div class="row">
@@ -97,6 +108,10 @@
                     <div role="tabpanel" class="tab-pane fade in active" id="parqueos">
                         <!-- tab parqueos -->
                         <!-- se llena por ajax -->
+                        <!--Espacio-->
+                        <div class="row">
+                            <div class="col-xs-12">&nbsp;</div>
+                        </div>
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade" id="datos">

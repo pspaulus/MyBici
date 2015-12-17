@@ -24,7 +24,6 @@ class Escritorio extends CI_Controller
             $this->load->view('header');
             $this->load->view('escritorio', $data);
             $this->load->view('footer');
-
         } else {
             $Login = new Login();
             $Login->index();

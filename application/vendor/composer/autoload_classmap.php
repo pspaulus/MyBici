@@ -7,13 +7,12 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Bicicleta' => $baseDir . '/controllers/Bicicleta.php',
-    'Bicis' => $baseDir . '/controllers/Bicis.php',
     'Escritorio' => $baseDir . '/controllers/Escritorio.php',
     'Estacion' => $baseDir . '/controllers/Estacion.php',
     'Estacionamiento' => $baseDir . '/controllers/Estacionamiento.php',
     'Estado' => $baseDir . '/controllers/Estado.php',
     'Evento' => $baseDir . '/controllers/Evento.php',
-    'inventario' => $baseDir . '/controllers/inventario.php',
+    'Inventario' => $baseDir . '/controllers/Inventario.php',
     'Login' => $baseDir . '/controllers/Login.php',
     'Marca' => $baseDir . '/controllers/Marca.php',
     'Modelo' => $baseDir . '/controllers/Modelo.php',

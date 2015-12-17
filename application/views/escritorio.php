@@ -38,7 +38,7 @@
                     <a onclick="Escritorio.load.ticket()"><i class="fa fa-fw fa-ticket"></i> Reservas</a>
                 </li>
                 <li>
-                    <a onclick="Escritorio.load.inventario()"><i class="fa fa-fw fa-bicycle"></i> Inventario</a>
+                    <a onclick="Escritorio.load.inventario()"><i class="fa fa-fw fa-archive"></i> Inventario</a>
                 </li>
                 <li>
                     <a onclick="Escritorio.load.persona()"><i class="fa fa-fw fa-users"></i> Usuarios</a>
