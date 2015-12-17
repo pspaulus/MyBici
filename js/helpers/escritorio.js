@@ -20,7 +20,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Inventario",
+                url: "http://mybici.server/inventario",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -104,7 +104,7 @@ var Escritorio = {
                 .done(function (r) {
                     container.html(r);
                 });
-        },
+        }
     },
 
     Acciones: {
@@ -124,12 +124,12 @@ var Escritorio = {
 
     Validaciones:{
         soloLetras: function (e) {
-            key = e.keyCode || e.which;
-            tecla = String.fromCharCode(key).toLowerCase();
-            letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-            especiales = "8-37-39-46";
+            var key = e.keyCode || e.which;
+            var tecla = String.fromCharCode(key).toLowerCase();
+            var letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+            var especiales = "8-37-39-46";
 
-            tecla_especial = false
+            var tecla_especial = false;
             for (var i in especiales) {
                 if (key == especiales[i]) {
                     tecla_especial = true;
@@ -143,12 +143,12 @@ var Escritorio = {
         },
 
         soloNumeros: function (e) {
-            key = e.keyCode || e.which;
-            tecla = String.fromCharCode(key).toLowerCase();
-            letras = "0123456789-.";
-            especiales = "8-37-39-46";
+            var key = e.keyCode || e.which;
+            var tecla = String.fromCharCode(key).toLowerCase();
+            var letras = "0123456789-.";
+            var especiales = "8-37-39-46";
 
-            tecla_especial = false
+            var tecla_especial = false;
             for (var i in especiales) {
                 if (key == especiales[i]) {
                     tecla_especial = true;

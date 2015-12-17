@@ -1,4 +1,5 @@
-<?php //$Estacion = new Estacion(); ?>
+<?php $Estacionamiento = new Estacionamiento(); ?>
+<?php $Bicicleta = new Bicicleta(); ?>
 <div class="col-xs-12">
     <h3>Lista de parqueos - (Nombre del Estacionamiento)</h3>
 
@@ -13,13 +14,13 @@
             </thead>
 
             <?php //todo-ps debe ser controler estacionamiento
-            $estacionamientos = $Estacion->cargarEstacionamientos($estacion_id, $estado); ?>
+            $estacionamientos = $Estacionamiento->cargarEstacionamientos($estacion_id, $estado); ?>
             <tbody>
             <?php foreach ($estacionamientos as $estacionamiento) { ?>
                 <tr>
                     <td><?= $Estacion->getCodigoEstacion($estacion_id) . $estacionamiento->codigo; ?></td>
                     <?php // todo-ps ESTO DEBE IR EN BICICLETA CONTROLLER
-                    $bicicleta = Escritorio::cargarBicicleta($estacionamiento->BICICLETA_id); ?>
+                    $bicicleta = $Bicicleta->cargarBicicleta($estacionamiento->BICICLETA_id); ?>
                     <td><?= ((bool)$bicicleta) ? $bicicleta->codigo : '-'; ?></td>
                     <td>
                         <button class="btn btn-sm btn-default" type="button" title="Agregar Bicicleta"><i

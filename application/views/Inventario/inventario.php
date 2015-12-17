@@ -1,5 +1,5 @@
+<?php $Bicicletas = new Bicicleta(); ?>
 <div id="page-wrapper">
-    <!-- todo-ps Contenido Inventario que debe ser internal frame -->
     <div class="container-fluid">
 
         <div class="row">
@@ -7,13 +7,18 @@
                 <h1 class="page-header">
                     <i class="fa fa-fw fa-bicycle"></i> Inventario
                 </h1>
+                <h3>Bicicletas</h3>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <i class="fa fa-clock-o"></i> Hoy:  <?= date('Y-m-d');?> <button class="btn btn-xs btn-default" type="button"><i class="fa fa-refresh"></i></button>
+                        <i class="fa fa-clock-o"></i> Hoy: <?= date('Y-m-d'); ?>
+                        <button class="btn btn-xs btn-default" type="button" onclick="Inventario.acciones.refrescar()">
+                            <i class="fa fa-refresh"></i></button>
                     </li>
                 </ol>
             </div>
         </div>
+
+
 
         <div class="row">
             <div class="col-xs-3">
@@ -24,7 +29,7 @@
                                 <i class="fa fa-circle-o fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">26</div>
+                                <div class="huge"><?= $Bicicletas->contarBicicletas(); ?></div>
                                 <div>Total</div>
                             </div>
                         </div>
@@ -41,7 +46,7 @@
                                 <i class="fa fa-check-circle-o fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">12</div>
+                                <div class="huge"><?= $Bicicletas->contarBicicletasEstado('disponibles'); ?></div>
                                 <div>Disponibles</div>
                             </div>
                         </div>
@@ -57,7 +62,7 @@
                                 <i class="fa fa-times-circle-o fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">2</div>
+                                <div class="huge"><?= $Bicicletas->contarBicicletasEstado('mantenimiento'); ?></div>
                                 <div>En mantenimiento</div>
                             </div>
                         </div>
@@ -73,7 +78,7 @@
                                 <i class="fa fa-times-circle-o fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">13</div>
+                                <div class="huge"><?= $Bicicletas->contarBicicletasEstado('en_uso'); ?></div>
                                 <div>En uso</div>
                             </div>
                         </div>
@@ -105,7 +110,8 @@
 
                 <div class="form-group input-group">
                     <input type="text" class="form-control">
-                    <span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
+                    <span class="input-group-btn"><button class="btn btn-default" type="button"><i
+                                class="fa fa-search"></i></button></span>
                 </div>
             </div>
             <div class="col-xs-12">
@@ -130,7 +136,8 @@
                             <td>Llegada</td>
                             <td>Activo</td>
                             <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
+                                </button>
                                 <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
                             </td>
@@ -142,7 +149,8 @@
                             <td>Llegada</td>
                             <td>Activo</td>
                             <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
+                                </button>
                                 <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
                             </td>
@@ -154,7 +162,8 @@
                             <td>Llegada</td>
                             <td>Activo</td>
                             <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
+                                </button>
                                 <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
                             </td>
@@ -166,7 +175,8 @@
                             <td>Llegada</td>
                             <td>Activo</td>
                             <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
+                                </button>
                                 <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
                             </td>
@@ -178,7 +188,8 @@
                             <td>Llegada</td>
                             <td>Activo</td>
                             <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
+                                </button>
                                 <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
                             </td>
@@ -190,7 +201,8 @@
                             <td>Llegada</td>
                             <td>Activo</td>
                             <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
+                                </button>
                                 <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
                                 <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
                             </td>

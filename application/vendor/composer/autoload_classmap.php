@@ -6,15 +6,20 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Bicicleta' => $baseDir . '/controllers/Bicicleta.php',
+    'Bicis' => $baseDir . '/controllers/Bicis.php',
     'Escritorio' => $baseDir . '/controllers/Escritorio.php',
     'Estacion' => $baseDir . '/controllers/Estacion.php',
+    'Estacionamiento' => $baseDir . '/controllers/Estacionamiento.php',
     'Estado' => $baseDir . '/controllers/Estado.php',
     'Evento' => $baseDir . '/controllers/Evento.php',
-    'Inventario' => $baseDir . '/controllers/Inventario.php',
+    'inventario' => $baseDir . '/controllers/inventario.php',
     'Login' => $baseDir . '/controllers/Login.php',
     'Marca' => $baseDir . '/controllers/Marca.php',
     'Modelo' => $baseDir . '/controllers/Modelo.php',
     'Persona' => $baseDir . '/controllers/Persona.php',
     'Ticket' => $baseDir . '/controllers/Ticket.php',
+    'Usuario' => $baseDir . '/controllers/Usuario.php',
     'Welcome' => $baseDir . '/controllers/Welcome.php',
+    'api' => $baseDir . '/controllers/api.php',
 );

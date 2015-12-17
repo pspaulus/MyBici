@@ -41,7 +41,7 @@ var Estacion = {
             //alert('cargar lista parqueo ->' + id);
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Estacion/cargarVistaParqueos/" + id +'/'+estado,
+                url: "http://mybici.server/Estacionamiento/cargarVistaParqueos/" + id +'/'+estado,
                 data: {}
             })
                 .done(function (r) {

@@ -1,5 +1,6 @@
 <div class="container" id="formLogin">
 
+    <!--texo login-->
     <div class="row">
         <div class="col-xs-4 col-xs-offset-4">
             <div class="form-group">
@@ -43,7 +44,6 @@
     <div class="row">
         <div class="col-xs-4 col-xs-offset-4 text-center">
             <div class="form-group">
-<!--                <button class="btn bg-color-green " onclick="Login.index.validarUsuario()">Ingresar</button>-->
                 <button class="btn btn-primary " onclick="Login.index.validarUsuario()">Ingresar</button>
             </div>
         </div>
