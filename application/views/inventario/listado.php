@@ -41,12 +41,65 @@ if ($filtro == 'codigo') {
                         <td><?= $codigo_estacion . $codigo_estacionamiento ?></td>
                         <td><?= $estado_bicicleta ?></td>
                         <td>
-                            <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i></button>
-                            <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
-                            <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
+                            <?php if ($bicicleta->ESTADO_id  == 7) { //buena ?>
+                                <button class="btn btn-sm btn-warning" type="button" title="Enviar a Reparar"
+                                        data-toggle="modal"
+                                        data-target="#marcarEstadoReparar_<?= $bicicleta->id ?>"><i
+                                        class="fa fa-wrench"></i></button>
+
+                                <button class="btn btn-sm btn-danger" type="button" title="Marcar Da&ntilde;ada"
+                                        data-toggle="modal"
+                                        data-target="#marcarEstadoDanada_<?= $bicicleta->id ?>"><i
+                                        class="fa fa-close"></i>
+                                </button>
+                                <!--Modal marcar Dañada-->
+                                <?php $Bicicletas->load->view('inventario/danada', compact('bicicleta')); ?>
+
+                                <!--modal enviar a taller -->
+                                <?php $Bicicletas->load->view('inventario/reparar', compact('bicicleta')); ?>
+                            <?php }  ?>
+
+
+                            <?php if ($bicicleta->ESTADO_id  == 8) { // danada ?>
+                                <button class="btn btn-sm btn-warning" type="button" title="Enviar a Reparar"
+                                        data-toggle="modal"
+                                        data-target="#marcarEstadoReparar_<?= $bicicleta->id ?>"><i
+                                        class="fa fa-wrench"></i></button>
+                                <button class="btn btn-sm btn-success" type="button" title="Marcar Buena"
+                                        data-toggle="modal"
+                                        data-target="#marcarEstadoBuena_<?= $bicicleta->id ?>"><i
+                                        class="fa fa-check"></i></button>
+                                <!--modal enviar a taller -->
+                                <?php $Bicicletas->load->view('inventario/reparar', compact('bicicleta')); ?>
+
+                                <!--modal marca buena -->
+                                <?php $Bicicletas->load->view('inventario/buena', compact('bicicleta')); ?>
+                            <?php }  ?>
+
+
+                            <?php if ($bicicleta->ESTADO_id  == 3) { // reparar ?>
+                                <button class="btn btn-sm btn-danger" type="button" title="Marcar Da&ntilde;ada"
+                                        data-toggle="modal"
+                                        data-target="#marcarEstadoDanada_<?= $bicicleta->id ?>"><i
+                                        class="fa fa-close"></i>
+                                </button>
+
+                                <button class="btn btn-sm btn-success" type="button" title="Marcar Buena"
+                                        data-toggle="modal"
+                                        data-target="#marcarEstadoBuena_<?= $bicicleta->id ?>"><i
+                                        class="fa fa-check"></i></button>
+
+                                <!--Modal marcar Dañada-->
+                                <?php $Bicicletas->load->view('inventario/danada', compact('bicicleta')); ?>
+
+                                <!--modal marca buena -->
+                                <?php $Bicicletas->load->view('inventario/buena', compact('bicicleta')); ?>
+                            <?php }  ?>
+
                         </td>
                     </tr>
                 <?php } ?>
+
                 </tbody>
             </table>
         </div>

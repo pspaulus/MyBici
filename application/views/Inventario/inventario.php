@@ -11,12 +11,12 @@
                     <i class="fa fa-fw fa-archive"></i> Inventario
                 </h1>
 
-                <h3><i class="fa fa-fw fa-bicycle"></i> Bicicletas</h3>
+                <h3><i class="fa fa-fw fa-bicycle"></i> Bicicletas<small> Total: <?= $Bicicletas->contarBicicletas(); ?></small></h3>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <i class="fa fa-clock-o"></i> Resumen de Estados
-                        <small>(<?= date('Y-m-d'); ?>) &nbsp;</small>
-                        <button class="btn btn-xs btn-default" type="button" onclick="Inventario.acciones.refrescar()">
+                        <i class="fa fa-clock-o"></i> Estados
+<!--                        <small>(--><?//= date('Y-m-d'); ?><!--) &nbsp;</small>-->
+                        <button class="btn btn-xs btn-default" type="button" onclick="Inventario.acciones.refrescar();">
                             <i class="fa fa-refresh"></i></button>
                     </li>
                 </ol>

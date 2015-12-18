@@ -67,7 +67,7 @@ var Usuario = {
             }
         },
 
-        eliminar: function (id, el) {
+        eliminar: function (id) {
             $.ajax({
                 method: "POST",
                 url: "http://mybici.server/Persona/eliminarUsuario",
@@ -77,11 +77,6 @@ var Usuario = {
                     console.log('usuario eliminado');
                     $('#resultado').html(Escritorio.load.persona());
                     $('.modal-backdrop').remove();
-                    //if (r.JSON.status) {
-                    //    $(el).up('tr').class("ocultar");
-                    //}
-                    //
-                    //alert(r.JSON.status);
                 });
         },
 
@@ -141,27 +136,6 @@ var Usuario = {
             input_nombre.parents('.agrupador').removeClass(' has-error has-warning');
             contrasena.parents('.agrupador').removeClass(' has-error has-warning');
             confirmar_contrasena.parents('.agrupador').removeClass(' has-error has-warning');
-
-
-            //var input_nombre_editar = $('#nombre_editar');
-            //var contrasena_editar = $('#contrasena_editar');
-            //var confirmar_contrasena_editar = $('#confirmar_contrasena_editar');
-            //
-            //input_nombre_editar.val('');
-            //contrasena_editar.val('');
-            //confirmar_contrasena_editar.val('');
-            //$('#nombre_vacio_editar').addClass(' oculto');
-            //$('#nombre_error_editar').addClass(' oculto');
-            //$('#contrasena_vacio_editar').addClass(' oculto');
-            //$('#contrasena_error_editar').addClass(' oculto');
-            //$('#confirmar_contrasena_vacio_editar').addClass(' oculto');
-            //$('#confirmar_contrasena_error_editar').addClass(' oculto');
-            //$('#contrasena_no_coinciden_editar').addClass(' oculto');
-            //
-            //input_nombre_editar.parents('.agrupador').removeClass(' has-error has-warning');
-            //contrasena_editar.parents('.agrupador').removeClass(' has-error has-warning');
-            //confirmar_contrasena_editar.parents('.agrupador').removeClass(' has-error has-warning');
-
         },
 
         limpiarEditar: function (){

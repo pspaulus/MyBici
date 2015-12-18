@@ -28,14 +28,17 @@ class Bicicleta extends CI_Controller
     public function contarBicicletasEstado($estado)
     {
         switch ($estado) {
-            case 'disponibles':
+            case 'buena':
                 $estado = 7;
                 break;
-            case 'mantenimiento':
-                $estado = 8;
+            case 'reparar':
+                $estado = 3;
                 break;
             case 'en_uso':
                 $estado = 9;
+                break;
+            case 'danada':
+                $estado = 8;
                 break;
         }
         $conteo_bicicletas = \App\Bicicleta::where('ESTADO_id', '=', $estado)
@@ -142,4 +145,36 @@ class Bicicleta extends CI_Controller
 
         $this->load->view('inventario/listado', $data);
     }
+
+    public function marcarEstado($estado){
+        $id = $_REQUEST['id'];
+
+        switch ($estado){
+            case 'danada': //dañada
+                $estado = 8;
+                break;
+
+            case 'reparar': //reparar
+                $estado = 3;
+                break;
+
+            case 'buena': //buena
+                $estado = 7;
+                break;
+
+            case 'en_uso': //en_uso
+                $estado = 9;
+                break;
+        }
+
+        $bicicleta = \App\Bicicleta::find($id);
+        $bicicleta->ESTADO_id = $estado;
+        $bicicleta->save();
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => true,
+        ]);
+    }
+
 }

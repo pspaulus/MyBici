@@ -68,3 +68,21 @@ body {
 .espacio{
     margin-right: 3%; !important;
 }
+
+.panel-celeste {
+    border-color: #5bc0de;
+}
+
+.panel-celeste > .panel-heading {
+    border-color: #5bc0de;
+    color: #fff;
+    background-color: #5bc0de;
+}
+
+.panel-celeste > a {
+    color: #5bc0de;
+}
+
+.panel-celeste > a:hover {
+    color: #5bc0de;
+}
