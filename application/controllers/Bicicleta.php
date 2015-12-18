@@ -65,35 +65,13 @@ class Bicicleta extends CI_Controller
                 ->get();
         }
 
-        //por codigo
-//        if ($estacion_id == -1 && $estado_id == -1 && $bicicleta_codigo != -1) {
-//            $cogdigo_estacion = substr($bicicleta_codigo, 0, 1);
-//            $bicicleta_estacion_id = Estacion::getIdByCodigo($cogdigo_estacion);
-//            $bicicleta_codigo = substr($bicicleta_codigo, 1, 4);
-//
-//            $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id','=',$bicicleta_estacion_id)
-//                ->where('codigo', '=', $bicicleta_codigo)
-//                ->get();
-//        }
-
         //por estacion y estado
         if ($estacion_id != -1 && $estado_id != -1) {
-            $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id','=',$estacion_id)
+            $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $estacion_id)
                 ->where('ESTADO_id', '=', $estado_id)
                 ->get();
         }
 
-        //por estacion y codigo
-//        if ($estacion_id != -1 && $estado_id == -1 && $bicicleta_codigo != -1) {
-//            $cogdigo_estacion = substr($bicicleta_codigo, 0, 1);
-//            $bicicleta_estacion_id = Estacion::getIdByCodigo($cogdigo_estacion);
-//            $bicicleta_codigo = substr($bicicleta_codigo, 1, 4);
-//
-//            $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id','=',$estacion_id)
-//                ->where('codigo', '=', $bicicleta_codigo)
-//                ->where('codigo', '=', $bicicleta_estacion_id)
-//                ->get();
-//        }
         return $bicicletas;
     }
 
@@ -102,13 +80,17 @@ class Bicicleta extends CI_Controller
         if ($bicicleta_codigo == -1) {
             $bicicletas = \App\Bicicleta::all();
         } else {
-            $cogdigo_estacion = substr($bicicleta_codigo, 0, 1);
-            $bicicleta_estacion_id = Estacion::getIdByCodigo($cogdigo_estacion);
-            $bicicleta_codigo = substr($bicicleta_codigo, 1, 4);
+            $bicicleta_estacion_id = Estacion::getIdByCodigo($bicicleta_codigo[0]);
 
-            $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id','=',$bicicleta_estacion_id)
-                ->where('codigo', '=', $bicicleta_codigo)
-                ->get();
+            if (empty($bicicleta_estacion_id) ){
+                return null;
+            } else {
+                $bicicleta_codigo = substr($bicicleta_codigo, 2, strlen($bicicleta_codigo));
+
+                $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $bicicleta_estacion_id)
+                    ->where('codigo', '=', $bicicleta_codigo)
+                    ->get();
+            }
         }
 
         return $bicicletas;
@@ -126,7 +108,8 @@ class Bicicleta extends CI_Controller
         $estacionamientos = \App\Estacionamiento::where('BICICLETA_id', '=', $id)
             ->get()
             ->first();
-        return $estacionamientos->codigo;
+
+        return (!$estacionamientos == null) ? $estacionamientos->codigo : null;
     }
 
     public function cargarVistaListadoBicicletasPorEstacion($estacion_id, $estado_id)
@@ -146,10 +129,11 @@ class Bicicleta extends CI_Controller
         $this->load->view('inventario/listado', $data);
     }
 
-    public function marcarEstado($estado){
+    public function marcarEstado($estado)
+    {
         $id = $_REQUEST['id'];
 
-        switch ($estado){
+        switch ($estado) {
             case 'danada': //dañada
                 $estado = 8;
                 break;
@@ -175,6 +159,62 @@ class Bicicleta extends CI_Controller
         echo json_encode([
             'status' => true,
         ]);
+    }
+
+    public function cargarUltimoId()
+    {
+        $bicicleta = \App\Bicicleta::all()->last();
+        return $bicicleta->id + 1;
+    }
+
+    public function getSecuenciaCodigo($bicicleta_estacion_id)
+    {
+        $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $bicicleta_estacion_id)
+            ->get()
+            ->last();
+
+        $bicicleta_secuencia = ($bicicletas == null) ? 1 : $bicicletas->codigo + 1;
+
+        echo $bicicleta_secuencia;
+    }
+
+    public function guardarBicicleta()
+    {
+        $codigo = $_REQUEST['codigo'];
+        $PUESTO_ALQUILER_id = $_REQUEST['PUESTO_ALQUILER_id'];
+        $TIPO_id = $_REQUEST['TIPO_id'];
+        $ESTADO_id = $_REQUEST['ESTADO_id'];
+
+        $secuencia = substr($codigo, 2);
+
+        $bicicleta = \App\Bicicleta::where('codigo', '=', $secuencia)
+            ->where('PUESTO_ALQUILER_id', '=', $PUESTO_ALQUILER_id)
+            ->get();
+
+        if ($bicicleta->first() == null) {
+
+            \App\Bicicleta::firstOrCreate([
+                'codigo' => $secuencia,
+                'PUESTO_ALQUILER_id' => $PUESTO_ALQUILER_id,
+                'TIPO_id' => $TIPO_id,
+                'ESTADO_id' => $ESTADO_id
+            ]);
+
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true,
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false,
+            ]);
+        }
+    }
+
+    public static function getTipo($tipo_id){
+        $tipo_descripcion = \App\Tipo::find($tipo_id);
+        return $tipo_descripcion->descripcion;
     }
 
 }

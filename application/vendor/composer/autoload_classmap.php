@@ -18,6 +18,7 @@ return array(
     'Modelo' => $baseDir . '/controllers/Modelo.php',
     'Persona' => $baseDir . '/controllers/Persona.php',
     'Ticket' => $baseDir . '/controllers/Ticket.php',
+    'Tipo' => $baseDir . '/controllers/Tipo.php',
     'Usuario' => $baseDir . '/controllers/Usuario.php',
     'Welcome' => $baseDir . '/controllers/Welcome.php',
     'api' => $baseDir . '/controllers/api.php',

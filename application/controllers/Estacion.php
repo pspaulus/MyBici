@@ -70,10 +70,16 @@ class Estacion extends CI_Controller
 
     public static function getIdByCodigo($codigo)
     {
-        $estacion = \App\Estacion::where('codigo','=',$codigo)
+        $estacion = \App\Estacion::where('codigo', '=', $codigo)
             ->get()
             ->first();
-        return $estacion->id;
+        return ($estacion == null) ? null : $estacion->id;
+
     }
 
+    public static function getCodigoEstacionById($id)
+    {
+        $estacion = \App\Estacion::find($id);
+        echo $estacion->codigo;
+    }
 }

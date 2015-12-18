@@ -7,7 +7,9 @@ if ($filtro == 'codigo') {
 }
 ?>
 
-<h3>Lista de bicicletas</h3>
+<h3>Lista de bicicletas
+    <small> Total: <?= count($bicicletas_todas); ?></small>
+</h3>
 
 <!--Tabla-->
 <div class="row">
@@ -18,6 +20,7 @@ if ($filtro == 'codigo') {
                 <tr>
                     <th>No.</th>
                     <th>C&oacute;digo</th>
+                    <th>Tipo</th>
                     <th>Estaci&oacute;n</th>
                     <th>Estacionamiento</th>
                     <th>Estado</th>
@@ -25,81 +28,101 @@ if ($filtro == 'codigo') {
                 </tr>
                 </thead>
                 <tbody>
-                <?php $i = 1 ?>
-                <?php foreach ($bicicletas_todas as $bicicleta) { ?>
-                    <?php
-                    $codigo_estacion = Estacion::getCodigoEstacion($bicicleta->PUESTO_ALQUILER_id);
-                    $nombre_estacion = Estacion::getNombreEstacion($bicicleta->PUESTO_ALQUILER_id);
-                    $estado_bicicleta = Bicicleta::getEstadoBicicleta($bicicleta->id);
-                    $codigo_estacionamiento = Bicicleta::getEstacionamiento($bicicleta->id);
-                    ?>
-                    <tr>
-                        <td><?= $i ?></td>
-                        <?php $i++ ?>
-                        <td><?= $codigo_estacion . $bicicleta->codigo ?></td>
-                        <td><?= $codigo_estacion . ' - ' . $nombre_estacion ?></td>
-                        <td><?= $codigo_estacion . $codigo_estacionamiento ?></td>
-                        <td><?= $estado_bicicleta ?></td>
-                        <td>
-                            <?php if ($bicicleta->ESTADO_id  == 7) { //buena ?>
-                                <button class="btn btn-sm btn-warning" type="button" title="Enviar a Reparar"
-                                        data-toggle="modal"
-                                        data-target="#marcarEstadoReparar_<?= $bicicleta->id ?>"><i
-                                        class="fa fa-wrench"></i></button>
+                <?php if ($bicicletas_todas != null) { ?>
+                    <?php $i = 1 ?>
+                    <?php foreach ($bicicletas_todas as $bicicleta) { ?>
+                        <?php
+                        $codigo_estacion = Estacion::getCodigoEstacion($bicicleta->PUESTO_ALQUILER_id);
+                        $nombre_estacion = Estacion::getNombreEstacion($bicicleta->PUESTO_ALQUILER_id);
+                        $estado_bicicleta = Bicicleta::getEstadoBicicleta($bicicleta->id);
+                        $codigo_estacionamiento = Bicicleta::getEstacionamiento($bicicleta->id);
+                        $tipo_bibicleta = Bicicleta::getTipo($bicicleta->TIPO_id);
 
-                                <button class="btn btn-sm btn-danger" type="button" title="Marcar Da&ntilde;ada"
-                                        data-toggle="modal"
-                                        data-target="#marcarEstadoDanada_<?= $bicicleta->id ?>"><i
-                                        class="fa fa-close"></i>
-                                </button>
-                                <!--Modal marcar Dañada-->
-                                <?php $Bicicletas->load->view('inventario/danada', compact('bicicleta')); ?>
-
-                                <!--modal enviar a taller -->
-                                <?php $Bicicletas->load->view('inventario/reparar', compact('bicicleta')); ?>
-                            <?php }  ?>
-
-
-                            <?php if ($bicicleta->ESTADO_id  == 8) { // danada ?>
-                                <button class="btn btn-sm btn-warning" type="button" title="Enviar a Reparar"
-                                        data-toggle="modal"
-                                        data-target="#marcarEstadoReparar_<?= $bicicleta->id ?>"><i
-                                        class="fa fa-wrench"></i></button>
-                                <button class="btn btn-sm btn-success" type="button" title="Marcar Buena"
-                                        data-toggle="modal"
-                                        data-target="#marcarEstadoBuena_<?= $bicicleta->id ?>"><i
-                                        class="fa fa-check"></i></button>
-                                <!--modal enviar a taller -->
-                                <?php $Bicicletas->load->view('inventario/reparar', compact('bicicleta')); ?>
-
-                                <!--modal marca buena -->
-                                <?php $Bicicletas->load->view('inventario/buena', compact('bicicleta')); ?>
-                            <?php }  ?>
+                        switch ($bicicleta->ESTADO_id) {
+                            case 7:
+                                $icono = '<i class="fa fa-check"></i>';
+                                $tr_class = 'success';
+                                break;
+                            case 3:
+                                $icono = '<i class="fa fa-wrench"></i>';
+                                $tr_class = 'warning';
+                                break;
+                            case 8:
+                                $icono = '<i class="fa fa-close"></i>';
+                                $tr_class = 'danger';
+                                break;
+                        }
+                        ?>
+                        <tr class="<?=$tr_class?>">
+                            <td><strong><?= $i ?></strong></td>
+                            <?php $i++ ?>
+                            <td><?= $codigo_estacion . 'B' . $bicicleta->codigo ?></td>
+                            <td><?= $tipo_bibicleta ?></td>
+                            <td><?= $nombre_estacion ?></td>
+                            <td><?= ($codigo_estacionamiento != null) ? $codigo_estacion . $codigo_estacionamiento : '-'; ?></td>
 
 
-                            <?php if ($bicicleta->ESTADO_id  == 3) { // reparar ?>
-                                <button class="btn btn-sm btn-danger" type="button" title="Marcar Da&ntilde;ada"
-                                        data-toggle="modal"
-                                        data-target="#marcarEstadoDanada_<?= $bicicleta->id ?>"><i
-                                        class="fa fa-close"></i>
-                                </button>
+                            <td><?= $icono . ' ' . $estado_bicicleta ?></td>
+                            <td>
+                                <?php if ($bicicleta->ESTADO_id == 7) { //buena ?>
+                                    <button class="btn btn-sm btn-warning" type="button" title="Enviar a Reparar"
+                                            data-toggle="modal"
+                                            data-target="#marcarEstadoReparar_<?= $bicicleta->id ?>"><i
+                                            class="fa fa-wrench"></i></button>
 
-                                <button class="btn btn-sm btn-success" type="button" title="Marcar Buena"
-                                        data-toggle="modal"
-                                        data-target="#marcarEstadoBuena_<?= $bicicleta->id ?>"><i
-                                        class="fa fa-check"></i></button>
+                                    <button class="btn btn-sm btn-danger" type="button" title="Marcar Da&ntilde;ada"
+                                            data-toggle="modal"
+                                            data-target="#marcarEstadoDanada_<?= $bicicleta->id ?>"><i
+                                            class="fa fa-close"></i>
+                                    </button>
+                                    <!--Modal marcar Dañada-->
+                                    <?php $Bicicletas->load->view('inventario/danada', compact('bicicleta')); ?>
 
-                                <!--Modal marcar Dañada-->
-                                <?php $Bicicletas->load->view('inventario/danada', compact('bicicleta')); ?>
+                                    <!--modal enviar a taller -->
+                                    <?php $Bicicletas->load->view('inventario/reparar', compact('bicicleta')); ?>
+                                <?php } ?>
 
-                                <!--modal marca buena -->
-                                <?php $Bicicletas->load->view('inventario/buena', compact('bicicleta')); ?>
-                            <?php }  ?>
 
-                        </td>
-                    </tr>
+                                <?php if ($bicicleta->ESTADO_id == 8) { // danada ?>
+                                    <button class="btn btn-sm btn-warning" type="button" title="Enviar a Reparar"
+                                            data-toggle="modal"
+                                            data-target="#marcarEstadoReparar_<?= $bicicleta->id ?>"><i
+                                            class="fa fa-wrench"></i></button>
+                                    <button class="btn btn-sm btn-success" type="button" title="Marcar Buena"
+                                            data-toggle="modal"
+                                            data-target="#marcarEstadoBuena_<?= $bicicleta->id ?>"><i
+                                            class="fa fa-check"></i></button>
+                                    <!--modal enviar a taller -->
+                                    <?php $Bicicletas->load->view('inventario/reparar', compact('bicicleta')); ?>
+
+                                    <!--modal marca buena -->
+                                    <?php $Bicicletas->load->view('inventario/buena', compact('bicicleta')); ?>
+                                <?php } ?>
+
+
+                                <?php if ($bicicleta->ESTADO_id == 3) { // reparar ?>
+                                    <button class="btn btn-sm btn-danger" type="button" title="Marcar Da&ntilde;ada"
+                                            data-toggle="modal"
+                                            data-target="#marcarEstadoDanada_<?= $bicicleta->id ?>"><i
+                                            class="fa fa-close"></i>
+                                    </button>
+
+                                    <button class="btn btn-sm btn-success" type="button" title="Marcar Buena"
+                                            data-toggle="modal"
+                                            data-target="#marcarEstadoBuena_<?= $bicicleta->id ?>"><i
+                                            class="fa fa-check"></i></button>
+
+                                    <!--Modal marcar Dañada-->
+                                    <?php $Bicicletas->load->view('inventario/danada', compact('bicicleta')); ?>
+
+                                    <!--modal marca buena -->
+                                    <?php $Bicicletas->load->view('inventario/buena', compact('bicicleta')); ?>
+                                <?php } ?>
+
+                            </td>
+                        </tr>
+                    <?php } ?>
                 <?php } ?>
-
                 </tbody>
             </table>
         </div>

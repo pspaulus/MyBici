@@ -1,6 +1,8 @@
 <?php $Bicicletas = new Bicicleta(); ?>
 <?php $Estacion = new Estacion(); ?>
 <?php $Estado = new Estado(); ?>
+<?php $Tipo = new Tipo(); ?>
+
 <div id="page-wrapper">
     <div class="container-fluid">
 
@@ -8,15 +10,15 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    <i class="fa fa-fw fa-archive"></i> Inventario
+                    <i class="fa fa-fw fa-bicycle"></i> Inventario de Bicicletas
+                    <small> Total: <?= $Bicicletas->contarBicicletas(); ?></small>
                 </h1>
-
-                <h3><i class="fa fa-fw fa-bicycle"></i> Bicicletas<small> Total: <?= $Bicicletas->contarBicicletas(); ?></small></h3>
                 <ol class="breadcrumb">
                     <li class="active">
                         <i class="fa fa-clock-o"></i> Estados
-<!--                        <small>(--><?//= date('Y-m-d'); ?><!--) &nbsp;</small>-->
-                        <button class="btn btn-xs btn-default" type="button" onclick="Inventario.acciones.refrescar();">
+                        <!--                        <small>(--><? //= date('Y-m-d'); ?><!--) &nbsp;</small>-->
+                        <button class="btn btn-xs btn-default" type="button" title="Refrescar"
+                                onclick="Inventario.acciones.refrescar();">
                             <i class="fa fa-refresh"></i></button>
                     </li>
                 </ol>
@@ -25,6 +27,28 @@
 
         <!--Resumen-->
         <?php $Bicicletas->load->view('inventario/resumen', compact('Bicicletas')); ?>
+
+        <!--Agregar-->
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-plus-circle"></i> Agregar
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Button trigger modal agregar bicicleta-->
+        <div class="row form-control-espacio">
+            <div class="col-lg-12">
+                <button class="btn btn-primary" type="button" title="Agregar bicicleta" data-toggle="modal"
+                        data-target="#agregarBicicleta"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+
+        <!-- Modal Agregar bicicleta -->
+        <?php $Bicicletas->load->view('inventario/agregar', compact('Bicicletas','Estacion','Estado','Tipo')); ?>
 
         <!--Buscar-->
         <div class="row">
@@ -65,13 +89,19 @@
                             <!--Codigo-->
                             <div class="form-group espacio">
                                 <label class="control-label" for="codigo_bicicleta">C&oacute;digo</label>
-                                <input type="text" class="form-control" id="codigo_bicicleta" maxlength="5" placeholder="GB001">
+                                <input type="text" class="form-control" id="codigo_bicicleta" maxlength="6"
+                                       placeholder="GB1" onkeyup="Bicicleta.acciones.validarFormatoCodigo();">
+                                <div class="mensaje oculto">
+                                    <label class="control-label " id="error_formato_codigo">&iexcl;Error de formato de codigo!</label>
+                                </div>
                             </div>
+
 
                             <!--Boton buscar-->
                             <div class="form-group">
                                 <button class="btn btn-primary" type="button"
-                                        onclick="Bicicleta.acciones.cargarListaBicicletasPorCodigo()"><i class="fa fa-search"></i></button>
+                                        onclick="Bicicleta.acciones.cargarListaBicicletasPorCodigo()"><i
+                                        class="fa fa-search"></i></button>
                             </div>
 
                         </div>
@@ -107,7 +137,7 @@
                             <!--Select Estado-->
                             <div class="form-group espacio">
                                 <?php $estados_bicicletas = $Estado->getEstadoBicicletas(); ?>
-                                <label class="control-label" for="select_estacion_inventario">Estado</label>
+                                <label class="control-label" for="select_estado_inventario">Estado</label>
                                 <select id="select_estado_inventario" class="form-control">
                                     <option value="-1">Todas</option>
                                     <?php foreach ($estados_bicicletas as $estado) { ?>
@@ -120,7 +150,8 @@
                             <!--Boton buscar-->
                             <div class="form-group">
                                 <button class="btn btn-primary" type="button"
-                                        onclick="Bicicleta.acciones.cargarListaBicicletasPorEstacion()"><i class="fa fa-search"></i></button>
+                                        onclick="Bicicleta.acciones.cargarListaBicicletasPorEstacion()"><i
+                                        class="fa fa-search"></i></button>
                             </div>
 
                         </div>
@@ -136,6 +167,7 @@
 
         <div id="listado_bicicletas">
             <h3>Lista de bicicletas</h3>
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="table-responsive">
