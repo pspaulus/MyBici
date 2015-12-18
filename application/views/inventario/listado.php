@@ -1,4 +1,13 @@
-<?php $bicicletas_todas = $Bicicletas->cargarTodasBicicletas(); ?>
+<?php
+$Bicicletas = new Bicicleta();
+if ($filtro == 'codigo') {
+    $bicicletas_todas = $Bicicletas->cargarListaBicicletasPorCodigo($bicicleta_codigo);
+} elseif ($filtro == 'estacion') {
+    $bicicletas_todas = $Bicicletas->cargarListaBicicletasporEstacion($estacion_id, $estado_id);
+}
+?>
+
+<h3>Lista de bicicletas</h3>
 
 <!--Tabla-->
 <div class="row">
@@ -7,6 +16,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th>No.</th>
                     <th>C&oacute;digo</th>
                     <th>Estaci&oacute;n</th>
                     <th>Estacionamiento</th>
@@ -15,6 +25,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php $i = 1 ?>
                 <?php foreach ($bicicletas_todas as $bicicleta) { ?>
                     <?php
                     $codigo_estacion = Estacion::getCodigoEstacion($bicicleta->PUESTO_ALQUILER_id);
@@ -23,9 +34,11 @@
                     $codigo_estacionamiento = Bicicleta::getEstacionamiento($bicicleta->id);
                     ?>
                     <tr>
+                        <td><?= $i ?></td>
+                        <?php $i++ ?>
                         <td><?= $codigo_estacion . $bicicleta->codigo ?></td>
                         <td><?= $codigo_estacion . ' - ' . $nombre_estacion ?></td>
-                        <td><?= $codigo_estacion . $codigo_estacionamiento?></td>
+                        <td><?= $codigo_estacion . $codigo_estacionamiento ?></td>
                         <td><?= $estado_bicicleta ?></td>
                         <td>
                             <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i></button>

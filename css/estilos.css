@@ -64,3 +64,7 @@ body {
     color: #337ab7;
     text-decoration: none;
 }
+
+.espacio{
+    margin-right: 3%; !important;
+}

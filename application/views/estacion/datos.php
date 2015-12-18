@@ -1,3 +1,4 @@
+<!--<h3>Lista de parqueos - --><?//= Estacion::getNombreEstacion($estacion_id)?><!--</h3>-->
 <div class="row">
     <div class="form-group">
         <div class="col-xs-2 col-xs-offset-1 text-left">

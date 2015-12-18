@@ -47,112 +47,33 @@ class Estacion extends CI_Controller
     public function cargarUltimoId()
     {
         $estacion = \App\Estacion::all()->last();
-        //dd($estacion->id+1);
         return $estacion->id + 1;
     }
 
     public function cargarEstaciones()
     {
         $estaciones = \App\Estacion::all();
-        //dd($estaciones);
         return $estaciones;
     }
 
     public static function getCodigoEstacion($id)
     {
         $estacion = \App\Estacion::find($id);
-        //dd($estacion->codigo);
         return $estacion->codigo;
     }
 
     public static function getNombreEstacion($id)
     {
         $estacion = \App\Estacion::find($id);
-        //dd($estacion->codigo);
         return $estacion->nombre;
     }
 
-
-    //todo-ps debe ir en controller estacionamiento
-
-//    public function cargarEstacionamientos($estacion_id, $estado = 'todos')
-//    {
-//        switch ($estado) {
-//            case 'libres':
-//                $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
-//                    ->where('ESTADO_id', '=', '4')
-//                    ->get();
-//                break;
-//            case 'ocupados':
-//                $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
-//                    ->where('ESTADO_id', '=', '5')
-//                    ->get();
-//                break;
-//            case 'todos':
-//                $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
-//                    ->get();
-//                break;
-//        }
-//
-//        //dd($estacionamientos);
-//        return $estacionamientos;
-//    }
-//
-//    public function crearEstacionamiento($estacion_id, $cantidad)
-//    {
-//        for ($i = 1; $i <= $cantidad; $i++) {
-//            $estacion_codigo = $this->getCodigoEstacion($estacion_id);
-//            $estacionamiento_secuencia = $this->getSecuenciaEstacionamiento($estacion_id);
-//
-//            $nuevo_codigo = $estacion_codigo . 'P' . $estacionamiento_secuencia;
-//
-//            //dd($nuevo_codigo);
-//
-//            //echo $i.' - >'.$nuevo_codigo.'<br>';
-//
-//            $crear = \App\Estacionamiento::Create([
-//                'codigo' => $nuevo_codigo,
-//                'PUESTO_ALQIULER_id' => $estacion_id,
-//                'BICICLETA_id' => 1,
-//                'ESTADO_id' => 4
-//            ]);
-//        }
-//    }
-//
-//    public function cargarUltimoIdEstacionamiento()
-//    {
-//        $estacionamiento = \App\Estacionamiento::all()->last();
-//        //dd($estacionamiento->codigo);
-//        return $estacionamiento->id + 1;
-//    }
-//
-//    public function getCodigoEstacion($id)
-//    {
-//        $estacion = \App\Estacion::find($id);
-//        //dd($estacion->codigo);
-//        return $estacion->codigo;
-//    }
-//
-//    public function getSecuenciaEstacionamiento($estacion_id)
-//    {
-//        $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
-//            ->get()
-//            ->last();
-//        $siguiente = substr($estacionamientos->codigo, -3) + 1;
-//        $siguiente = ($siguiente < 99) ? '0' . $siguiente : $siguiente;
-//        //dd($siguiente);
-//        return $siguiente;
-//    }
-//
-//    public function cargarVistaParqueos($estacion_id, $estado)
-//    {
-//        $data['estacion_id'] = $estacion_id;
-//
-//        //$Estacion = new Estacion();
-//        $data['Estacion'] = $this;
-//        $data['estado'] = $estado;
-//
-//        $this->load->view('estacion/parqueos',$data);
-//    }
+    public static function getIdByCodigo($codigo)
+    {
+        $estacion = \App\Estacion::where('codigo','=',$codigo)
+            ->get()
+            ->first();
+        return $estacion->id;
+    }
 
 }

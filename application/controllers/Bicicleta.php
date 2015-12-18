@@ -15,7 +15,6 @@ class Bicicleta extends CI_Controller
     public function cargarBicicleta($id)
     {
         $bicicleta = \App\Bicicleta::find($id);
-        //dd($bicicleta);
         return $bicicleta;
     }
 
@@ -23,7 +22,6 @@ class Bicicleta extends CI_Controller
     {
         $conteo_bicicletas = \App\Bicicleta::all()
             ->count();
-        //dd($conteo_bicicletas);
         return $conteo_bicicletas;
     }
 
@@ -42,13 +40,74 @@ class Bicicleta extends CI_Controller
         }
         $conteo_bicicletas = \App\Bicicleta::where('ESTADO_id', '=', $estado)
             ->count();
-        //dd($conteo_bicicletas);
         return $conteo_bicicletas;
     }
 
-    public function cargarTodasBicicletas(){
-        $bicicletas = \App\Bicicleta::all();
-        //dd($bicicleta);
+    public function cargarListaBicicletasporEstacion($estacion_id, $estado_id)
+    {
+        //todas
+        if ($estacion_id == -1 && $estado_id == -1) {
+            $bicicletas = \App\Bicicleta::all();
+        }
+
+        //por estacion
+        if ($estacion_id != -1 && $estado_id == -1) {
+            $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+                ->get();
+        }
+
+        //por estado
+        if ($estacion_id == -1 && $estado_id != -1) {
+            $bicicletas = \App\Bicicleta::where('ESTADO_id', '=', $estado_id)
+                ->get();
+        }
+
+        //por codigo
+//        if ($estacion_id == -1 && $estado_id == -1 && $bicicleta_codigo != -1) {
+//            $cogdigo_estacion = substr($bicicleta_codigo, 0, 1);
+//            $bicicleta_estacion_id = Estacion::getIdByCodigo($cogdigo_estacion);
+//            $bicicleta_codigo = substr($bicicleta_codigo, 1, 4);
+//
+//            $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id','=',$bicicleta_estacion_id)
+//                ->where('codigo', '=', $bicicleta_codigo)
+//                ->get();
+//        }
+
+        //por estacion y estado
+        if ($estacion_id != -1 && $estado_id != -1) {
+            $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id','=',$estacion_id)
+                ->where('ESTADO_id', '=', $estado_id)
+                ->get();
+        }
+
+        //por estacion y codigo
+//        if ($estacion_id != -1 && $estado_id == -1 && $bicicleta_codigo != -1) {
+//            $cogdigo_estacion = substr($bicicleta_codigo, 0, 1);
+//            $bicicleta_estacion_id = Estacion::getIdByCodigo($cogdigo_estacion);
+//            $bicicleta_codigo = substr($bicicleta_codigo, 1, 4);
+//
+//            $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id','=',$estacion_id)
+//                ->where('codigo', '=', $bicicleta_codigo)
+//                ->where('codigo', '=', $bicicleta_estacion_id)
+//                ->get();
+//        }
+        return $bicicletas;
+    }
+
+    public function cargarListaBicicletasPorCodigo($bicicleta_codigo)
+    {
+        if ($bicicleta_codigo == -1) {
+            $bicicletas = \App\Bicicleta::all();
+        } else {
+            $cogdigo_estacion = substr($bicicleta_codigo, 0, 1);
+            $bicicleta_estacion_id = Estacion::getIdByCodigo($cogdigo_estacion);
+            $bicicleta_codigo = substr($bicicleta_codigo, 1, 4);
+
+            $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id','=',$bicicleta_estacion_id)
+                ->where('codigo', '=', $bicicleta_codigo)
+                ->get();
+        }
+
         return $bicicletas;
     }
 
@@ -56,7 +115,6 @@ class Bicicleta extends CI_Controller
     {
         $bicicleta = \App\Bicicleta::find($id);
         $estado = \App\Estado::find($bicicleta->ESTADO_id);
-        //dd($estacion->codigo);
         return $estado->descripcion;
     }
 
@@ -65,7 +123,23 @@ class Bicicleta extends CI_Controller
         $estacionamientos = \App\Estacionamiento::where('BICICLETA_id', '=', $id)
             ->get()
             ->first();
-        //dd($estacionamientos->codigo);
         return $estacionamientos->codigo;
+    }
+
+    public function cargarVistaListadoBicicletasPorEstacion($estacion_id, $estado_id)
+    {
+        $data['estacion_id'] = $estacion_id;
+        $data['estado_id'] = $estado_id;
+        $data['filtro'] = 'estacion';
+
+        $this->load->view('inventario/listado', $data);
+    }
+
+    public function cargarVistaListadoBicicletasPorCodigo($bicicleta_codigo = -1)
+    {
+        $data['bicicleta_codigo'] = $bicicleta_codigo;
+        $data['filtro'] = 'codigo';
+
+        $this->load->view('inventario/listado', $data);
     }
 }
