@@ -17,19 +17,19 @@ class Estacion extends CI_Controller
     {
         $nombre = $_REQUEST['nombre'];
         $codigo = $_REQUEST['codigo'];
-        $coordenada_x = $_REQUEST['coordenada_x'];
-        $coordenada_y = $_REQUEST['coordenada_y'];
+        $longitud = $_REQUEST['longitud'];
+        $latitud = $_REQUEST['latitud'];
 
         $estaciones = \App\Estacion::where('nombre', '=', $nombre)
             ->where('codigo', '=', $codigo)
             ->get();
 
-        if ((bool)$estaciones) {
+        if ($estaciones->first() == null) {
             \App\Estacion::firstOrCreate([
                 'nombre' => $nombre,
                 'codigo' => $codigo,
-                'coordenada_x' => $coordenada_x,
-                'coordenada_y' => $coordenada_y
+                'longitud' => $longitud,
+                'latitud' => $latitud
             ]);
 
             header('Content-Type: application/json');

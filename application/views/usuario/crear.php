@@ -106,7 +106,6 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal" onclick="Usuario.acciones.limpiar()">
                     Cancelar
                 </button>
-                <!--                        <button type="button" class="btn btn-primary" onclick="Usuario.acciones.guardar();" data-dismiss="modal">Guardar</button>-->
                 <button type="button" class="btn btn-primary" onclick="Usuario.acciones.guardar();">Guardar</button>
             </div>
 

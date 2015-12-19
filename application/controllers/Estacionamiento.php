@@ -36,25 +36,25 @@ class Estacionamiento extends CI_Controller
         return $estacionamientos;
     }
 
-    public function crearEstacionamiento($estacion_id, $cantidad)
+    public function crearEstacionamiento($estacion_id)
     {
-        for ($i = 1; $i <= $cantidad; $i++) {
-            $estacion_codigo = $this->getCodigoEstacion($estacion_id);
-            $estacionamiento_secuencia = $this->getSecuenciaEstacionamiento($estacion_id);
 
-            $nuevo_codigo = $estacion_codigo . 'P' . $estacionamiento_secuencia;
+        $estacion_codigo = $this->getCodigoEstacion($estacion_id);
+        $estacionamiento_secuencia = $this->getSecuenciaEstacionamiento($estacion_id);
 
-            //dd($nuevo_codigo);
+        $nuevo_codigo = $estacion_codigo . 'P' . $estacionamiento_secuencia;
 
-            //echo $i.' - >'.$nuevo_codigo.'<br>';
+        //dd($nuevo_codigo);
 
-            $crear = \App\Estacionamiento::Create([
-                'codigo' => $nuevo_codigo,
-                'PUESTO_ALQIULER_id' => $estacion_id,
-                'BICICLETA_id' => 1,
-                'ESTADO_id' => 4
-            ]);
-        }
+        //echo $i.' - >'.$nuevo_codigo.'<br>';
+
+        \App\Estacionamiento::Create([
+            'codigo' => $nuevo_codigo,
+            'PUESTO_ALQIULER_id' => $estacion_id,
+            'BICICLETA_id' => 1,
+            'ESTADO_id' => 4
+        ]);
+
     }
 
     public function cargarUltimoIdEstacionamiento()
@@ -90,7 +90,7 @@ class Estacionamiento extends CI_Controller
         $data['Estacion'] = $this;
         $data['estado'] = $estado;
 
-        $this->load->view('estacion/parqueos',$data);
+        $this->load->view('estacion/parqueos', $data);
     }
 //    public function __construct()
 //    {
