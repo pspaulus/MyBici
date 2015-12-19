@@ -78,7 +78,7 @@ var Bicicleta = {
         },
 
         limpiar: function () {
-            var input_cantidad_nuevo = $('#select_estacion_inventario_nuevo');
+            var input_cantidad_nuevo = $('#input_cantidad_nuevo');
             var select_estado_nuevo = $('#select_estado_nuevo');
             var select_tipo_nuevo = $('#select_tipo_nuevo');
 
@@ -108,6 +108,10 @@ var Bicicleta = {
 
                     secuencia = parseInt(input_codigo_bicicleta_nuevo.val()) + i;
 
+                    console.log('codigo:'+ input_codigo_estacion_nuevo.val() + 'B' + secuencia +'\n'+
+                        'PUESTO_ALQUILER_id:' + select_estacion_inventario_nuevo.val() +'\n'+
+                        'TIPO_id:' + select_tipo_nuevo.val()+'\n'+
+                        'ESTADO_id:' + select_estado_nuevo.val());
                     $.ajax({
                         method: "POST",
                         url: "http://mybici.server/Bicicleta/guardarBicicleta/",

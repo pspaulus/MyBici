@@ -14,7 +14,7 @@ var Usuario = {
             if (nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena, -1)) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Persona/ingresarUsuario",
+                    url: "http://mybici.server/Usuario/ingresarUsuario",
                     data: {
                         nombre: nombre.val().toLowerCase().trim(),
                         contrasena: $.md5(contrasena.val().trim()),
@@ -24,7 +24,7 @@ var Usuario = {
                     .done(function (r) {
                         if (r.status) {
                             console.log('usuario guardado');
-                            $('#resultado').html(Escritorio.load.persona());
+                            $('#resultado').html(Escritorio.load.usuario());
                             $('.modal-backdrop').remove();
                         } else {
                             console.log('Error al guardar');
@@ -48,7 +48,7 @@ var Usuario = {
             if (nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena, id)) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Persona/editarUsuario",
+                    url: "http://mybici.server/Usuario/editarUsuario",
                     data: {
                         id: id,
                         nombre: nombre.val().toLowerCase().trim(),
@@ -59,7 +59,7 @@ var Usuario = {
                 })
                     .done(function (r) {
                         console.log(' usuario actualizado -> ' + id);
-                        $('#resultado').html(Escritorio.load.persona());
+                        $('#resultado').html(Escritorio.load.usuario());
                         $('.modal-backdrop').remove();
                     });
             } else {
@@ -70,12 +70,12 @@ var Usuario = {
         eliminar: function (id) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Persona/eliminarUsuario",
+                url: "http://mybici.server/Usuario/eliminarUsuario",
                 data: {id: id}
             })
                 .done(function (r) {
                     console.log('usuario eliminado');
-                    $('#resultado').html(Escritorio.load.persona());
+                    $('#resultado').html(Escritorio.load.usuario());
                     $('.modal-backdrop').remove();
                 });
         },
@@ -91,8 +91,7 @@ var Usuario = {
                 tr.addClass(' ocultoInactivo');
                 tr.children().children('.btn-danger').removeClass(' oculto')
             }
-
-            //console.log('ver inactivos -> ' + check.is(":checked"));
+            
         },
         buscar: function () {
             var filtro = $('#filtro_usuario');
@@ -139,7 +138,7 @@ var Usuario = {
         },
 
         limpiarEditar: function (){
-            $('#resultado').html(Escritorio.load.persona());
+            $('#resultado').html(Escritorio.load.usuario());
             $('.modal-backdrop').remove();
         },
 
@@ -185,29 +184,11 @@ var Usuario = {
         mensajeNumeroCaracteresUsuario: function (elem, numero) {
             if ($(elem).val().length < numero) {
                 $(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.error').removeClass(' oculto');
-                //$(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').removeClass(' oculto');
             } else {
                 $(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.error').addClass(' oculto');
                 $(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').addClass(' oculto');
             }
         }
 
-        //update: function (id) {
-        //    var nombre = $('#nombre_editar').val().toLowerCase().trim();
-        //    var contrasena = $('#contrasena_editar').val().trim();
-        //    var estado = $('#estado_editar').val();
-        //
-        //    $.ajax({
-        //        method: "POST",
-        //        url: "http://mybici.server/api/collection",
-        //        data: {
-        //            model: 'Usuario',
-        //            type: 'yaml',
-        //        }
-        //    })
-        //        .done(function (r) {
-        //            console.log('editar -> ' + id);
-        //        });
-        //}
     }
 };

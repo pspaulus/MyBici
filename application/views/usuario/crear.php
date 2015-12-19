@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Agregar Usuario</h4>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-circle"></i> Agregar Usuario</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="form_usuario">
@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <input class="form-control" type="text" placeholder=""
-                                       value="<?= $Persona->cargarUltimoId() ?>" disabled="">
+                                       value="<?= $Usuario->cargarUltimoId() ?>" disabled="">
                             </div>
                         </div>
                         <div class="agrupador">
@@ -28,7 +28,7 @@
                                            placeholder="Ingrese un nombre" value=""
                                            onkeyup="Usuario.acciones.validarNumeroCaracteresUsuario(this,4)">
                                     <label class="control-label vacio oculto" for="nombre" id="nombre_vacio">&iexcl;Ingrese
-                                        usuario!</label>
+                                        nombre usuario!</label>
                                     <label class="control-label error oculto" for="nombre" id="nombre_error">&iexcl;El
                                         usuario debe contener al menos 4 caracteres!</label>
                                 </div>

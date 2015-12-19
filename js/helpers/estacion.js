@@ -8,8 +8,9 @@ var Estacion = {
             var input_codigo = $('#codigo');
             var input_coordenada_x = $('#coordenada_x');
             var input_coordenada_y = $('#coordenada_y');
+            var input_numero_estaciones = $('#numero_estaciones');
 
-            if (input_nombre.val() != '' && input_coordenada_x.val() != '' && input_coordenada_y.val() != '') {
+            if (input_nombre.val() != '' && input_coordenada_x.val() != '' && input_coordenada_y.val() != '' && input_numero_estaciones.val()>0) {
                 //alert('guarda -> '+id.val());
                 $.ajax({
                     method: "POST",
@@ -32,6 +33,10 @@ var Estacion = {
                             console.log('Error al guardar Estacion');
                         }
                     });
+            } else {
+                var mensaje = $('#error_cantidad_parqueos');
+                mensaje.parent('.mensaje').addClass(' has-error');
+                mensaje.parent('.mensaje').removeClass(' oculto');
             }
         },
 
@@ -59,6 +64,12 @@ var Estacion = {
             input_codigo.val('');
             input_coordenada_x.val('');
             input_coordenada_y.val('');
+        },
+
+        validarCantidad: function () {
+            var mensaje = $('#error_cantidad_parqueos');
+            mensaje.parent('.mensaje').removeClass(' has-error');
+            mensaje.parent('.mensaje').addClass(' oculto');
         }
     }
 };

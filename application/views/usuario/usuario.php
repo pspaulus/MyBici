@@ -1,4 +1,4 @@
-<?php $Persona = new Persona(); ?>
+<?php $Usuario = new Usuario(); ?>
 
 <div id="page-wrapper">
 
@@ -18,7 +18,7 @@
             <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li class="active ">
-                        <i class="fa fa-plus"></i> Agregar
+                        <i class="fa fa-plus-circle"></i> Agregar
                     </li>
                 </ol>
             </div>
@@ -33,7 +33,7 @@
         </div>
 
         <!-- Modal Agregar -->
-        <?php $Persona->load->view('usuario/crear', compact('Persona')); ?>
+        <?php $Usuario->load->view('usuario/crear', compact('Usuario')); ?>
 
         <!-- Subtitulo -->
         <div class="row">
@@ -79,7 +79,7 @@
             </div>
 
             <div class="col-xs-12">
-                <?php $collection_usuario = $Persona->cargarUsuariosTodos(true); ?>
+                <?php $collection_usuario = $Usuario->cargarUsuariosTodos(true); ?>
 
                 <div class="table-responsive">
                     <table id="tabla_usuario" class="table table-hover">
@@ -94,9 +94,9 @@
                         </thead>
                         <tbody>
                         <?php foreach ($collection_usuario as $obj_usuario) { ?>
-                            <tr class="<?= ($obj_usuario->ESTADO_id == 1) ? 'activo ' : 'inactivo ' ?>">
+                            <tr class="<?= ($obj_usuario->ESTADO_id == 1) ? 'activo success' : 'inactivo danger' ?>">
                                 <td><?= $obj_usuario->id ?></td>
-                                <td><?= $obj_usuario->nombre ?></td>
+                                <td><strong><?= $obj_usuario->nombre ?></strong></td>
                                 <td><?= ($obj_usuario->TIPO_id == 2) ? 'Est&aacute;ndar' : 'Administrador' ?></td>
                                 <td><?= ($obj_usuario->ESTADO_id == 1) ? 'Activo' : 'Inactivo' ?></td>
                                 <td class="text-center">
@@ -111,13 +111,13 @@
                                             class="fa fa-trash"></i></button>
 
                                     <!--Modal Eliminar-->
-                                    <?php $Persona->load->view('usuario/eliminar', compact('obj_usuario')); ?>
+                                    <?php $Usuario->load->view('usuario/eliminar', compact('obj_usuario')); ?>
 
                                     <!-- ver modal-->
-                                    <?php $Persona->load->view('usuario/ver', compact('obj_usuario')); ?>
+                                    <?php $Usuario->load->view('usuario/ver', compact('obj_usuario')); ?>
 
                                     <!-- Editar modal-->
-                                    <?php $Persona->load->view('usuario/editar', compact('obj_usuario')); ?>
+                                    <?php $Usuario->load->view('usuario/editar', compact('obj_usuario')); ?>
                                 </td>
                             </tr>
                         <?php } ?>

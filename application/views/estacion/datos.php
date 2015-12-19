@@ -1,14 +1,34 @@
-<!--<h3>Lista de parqueos - --><?//= Estacion::getNombreEstacion($estacion_id)?><!--</h3>-->
+<!--<h3>Lista de parqueos - --><? //= Estacion::getNombreEstacion($estacion_id)?><!--</h3>-->
 <div class="row">
-    <div class="form-group">
+    <div class="col-lg-12">
+        &nbsp;
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group form-control-espacio">
         <div class="col-xs-2 col-xs-offset-1 text-left">
             <label>Nombre</label>
         </div>
         <div class="col-xs-6">
             <input class="form-control" type="text" placeholder="" value="">
         </div>
+        <div class="col-xs-4">
+        </div>
     </div>
 </div>
+    <div class="form-group ">
+        <div class="col-xs-2 col-xs-offset-1 text-left">
+            <label>Nombre</label>
+        </div>
+        <div class="col-xs-6">
+            <input class="form-control" type="text" placeholder="" value="">
+        </div>
+        <div class="col-xs-4">
+        </div>
+    </div>
+
+
 <div class="row">
     <div class="col-xs-6 col-md-4">
         <div class="panel panel-primary">

@@ -9,7 +9,7 @@ class Bicicleta extends CI_Controller
 
     public function index()
     {
-        echo "controlador bicicleta";
+        echo "Controlador bicicleta";
     }
 
     public function cargarBicicleta($id)
@@ -170,11 +170,9 @@ class Bicicleta extends CI_Controller
     public function getSecuenciaCodigo($bicicleta_estacion_id)
     {
         $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $bicicleta_estacion_id)
-            ->get()
-            ->last();
+            ->get();
 
-        $bicicleta_secuencia = ($bicicletas == null) ? 1 : $bicicletas->codigo + 1;
-
+        $bicicleta_secuencia = ($bicicletas == null) ? 1 : count($bicicletas) + 1;
         echo $bicicleta_secuencia;
     }
 

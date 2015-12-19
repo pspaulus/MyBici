@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Crear Estaci&oacute;n</h4>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-circle"></i> Crear Estaci&oacute;n</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="form_estacion">
@@ -50,7 +50,7 @@
                                 <div class="col-xs-6 mensaje">
                                     <input class="form-control" id="coordenada_x" type="text" maxlength="40"
                                            placeholder="-2.15222" value=""
-                                           onkeypress="return Escritorio.Validaciones.soloNumeros(event)">
+                                           onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                                 <div class="col-xs-6 mensaje">
                                     <input class="form-control" id="coordenada_y" type="text" maxlength="40"
                                            placeholder="-79.9529" value=""
-                                           onkeypress="return Escritorio.Validaciones.soloNumeros(event)">
+                                           onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
                                 </div>
                             </div>
                         </div>
@@ -72,9 +72,13 @@
                                     <label for="Descripcion"> No. de Parqueos</label>
                                 </div>
                                 <div class="col-xs-2 mensaje">
-                                    <input class="form-control" id="numero_estaciones" type="number" min="0" max="999"
-                                           maxlength="3" value="1"
-                                           onkeypress="return Escritorio.Validaciones.soloNumeros(event)">
+                                    <input class="form-control" id="numero_estaciones" type="text"
+                                           maxlength="2" value="1"
+                                           onkeypress="return Escritorio.Validaciones.soloNumeros(event)"
+                                           onkeyup="Estacion.acciones.validarCantidad();">
+                                </div>
+                                <div class="col-xs-2 mensaje oculto">
+                                    <label class="control-label" id="error_cantidad_parqueos">&iexcl;Error de cantidad!</label>
                                 </div>
                             </div>
                         </div>

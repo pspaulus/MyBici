@@ -28,12 +28,12 @@ var Escritorio = {
                 });
         },
 
-        persona: function () {
+        usuario: function () {
             var container = $('#resultado');
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Persona",
+                url: "http://mybici.server/Usuario",
                 data: {datos: ""}
             })
                 .done(function (r) {

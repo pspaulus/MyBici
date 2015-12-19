@@ -41,7 +41,7 @@
                     <a onclick="Escritorio.load.inventario()"><i class="fa fa-fw fa-bicycle"></i> Inventario</a>
                 </li>
                 <li>
-                    <a onclick="Escritorio.load.persona()"><i class="fa fa-fw fa-users"></i> Usuarios</a>
+                    <a onclick="Escritorio.load.usuario()"><i class="fa fa-fw fa-users"></i> Usuarios</a>
                 </li>
                 <li>
                     <a onclick="Escritorio.load.estacion()"><i class="fa fa-fw fa-map-marker"></i> Estaciones</a>
