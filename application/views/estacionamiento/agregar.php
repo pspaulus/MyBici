@@ -19,12 +19,17 @@
                             </div>
                             <div class="agrupador">
                                 <div class="col-xs-4">
-                                    <input class="form-control" id="bicicleta_codigo_<?= $estacionamiento->id ?>" type="text" maxlength="5"
-                                           placeholder="GB1">
+                                    <input class="form-control" id="bicicleta_codigo_<?= $estacionamiento->id ?>"
+                                           type="text" maxlength="5" placeholder="GB1" onkeyup="Estacion.mensajes.oculta($('#error_bicicleta_codigo_<?= $estacionamiento->id ?>'))">
                                 </div>
-                                <div class="col-xs-2 mensaje oculto">
-                                    <label class="control-label" id="error_bicicleta_codigo_<?= $estacionamiento->id ?>">&iexcl;Error de
-                                        cantidad!</label>
+                                <div class="col-xs-10 col-xs-offset-1 mensaje oculto">
+                                    <label class="control-label"
+                                           id="error_bicicleta_codigo_<?= $estacionamiento->id ?>">&iexcl;Error de
+                                        c&oacute;digo de bicicleta!</label>
+                                </div>
+                                <div class="col-xs-10 col-xs-offset-1 mensaje oculto">
+                                    <label class="control-label"
+                                           id="bicicleta_ya_estacionada_<?= $estacionamiento->id ?>">&iexcl;La bicicleta ya se encuentra estacionada en otra estaci&oacute;n!</label>
                                 </div>
                             </div>
                         </div>

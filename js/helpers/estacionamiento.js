@@ -58,6 +58,7 @@ var Estacionamiento = {
         limpiarAgregar: function (estacionamiento_id) {
             $('#bicicleta_codigo_' + estacionamiento_id).val('');
             Estacion.mensajes.oculta($('#error_bicicleta_codigo_' + estacionamiento_id));
+            Estacion.mensajes.oculta($('#bicicleta_ya_estacionada_' + estacionamiento_id));
         },
 
         obtenerCodigoBicicleta: function (estacionamiento_id) {
@@ -71,19 +72,37 @@ var Estacionamiento = {
                 })
                     .done(function (r) {
                         if (r.status) {
-                            console.log('OK: agregar bicicleta');
-                            Estacionamiento.acciones.agregarBicicleta(estacionamiento_id, r.bicicleta_id);
+                            console.log('OK: obtener id bicicleta ->'+r.bicicleta_id);
+                            Estacionamiento.acciones.verificarBicicletaEstacionada(estacionamiento_id, r.bicicleta_id);
+                            //Estacionamiento.acciones.agregarBicicleta(estacionamiento_id, r.bicicleta_id);
                         } else {
-                            console.log('ERROR: agregar bicicleta');
+                            console.log('ERROR: obtener id bicicleta');
+                            Estacion.mensajes.mostrar($('#error_bicicleta_codigo_' + estacionamiento_id));
                         }
-
-
                     });
             } else {
                 Estacion.mensajes.mostrar($('#error_bicicleta_codigo_' + estacionamiento_id));
             }
 
         },
+
+        verificarBicicletaEstacionada: function (estacionamiento_id, bicicleta_id) {
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Bicicleta/verificarBicicletaEstacionada/" + bicicleta_id,
+                data: {}
+            })
+                .done(function (r) {
+                    if (r.status) {
+                        console.log('OK: bicicleta no estacionada, entonce la estaciono ');
+                        Estacionamiento.acciones.agregarBicicleta(estacionamiento_id, bicicleta_id);
+                    } else {
+                        console.log('ERROR: bicicleta ya estacionada en '+ r.estacionamiento_id);
+                        Estacion.mensajes.mostrar($('#bicicleta_ya_estacionada_' + estacionamiento_id))
+                    }
+                });
+        },
+
 
         agregarBicicleta: function (estacionamiento_id, bicicleta_id) {
             $.ajax({
@@ -106,6 +125,7 @@ var Estacionamiento = {
             })
                 .done(function (r) {
                     //$('#parqueos').html(r);
+                    $('.modal-backdrop').remove();
                     Estacionamiento.acciones.cargarListaParqueos();
                 });
         }

@@ -82,7 +82,7 @@ class Bicicleta extends CI_Controller
         } else {
             $bicicleta_estacion_id = Estacion::getIdByCodigo($bicicleta_codigo[0]);
 
-            if (empty($bicicleta_estacion_id) ){
+            if (empty($bicicleta_estacion_id)) {
                 return null;
             } else {
                 $bicicleta_codigo = substr($bicicleta_codigo, 2, strlen($bicicleta_codigo));
@@ -210,14 +210,15 @@ class Bicicleta extends CI_Controller
         }
     }
 
-    public static function getTipo($tipo_id){
+    public static function getTipo($tipo_id)
+    {
         $tipo_descripcion = \App\Tipo::find($tipo_id);
         return $tipo_descripcion->descripcion;
     }
 
     public function getIdBicicletaByCodigo($bicicleta_codigo)
     {
-        $estacion_codigo = substr($bicicleta_codigo, 0,1);
+        $estacion_codigo = substr($bicicleta_codigo, 0, 1);
         $estacion_id = Estacion::getIdByCodigo($estacion_codigo);
 
         $bicicleta_secuencia = substr($bicicleta_codigo, 2, strlen($bicicleta_codigo));
@@ -227,13 +228,13 @@ class Bicicleta extends CI_Controller
             ->get()
             ->first();
 
-        if ($bicicleta != null){
+        if ($bicicleta != null) {
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => true,
                 'bicicleta_id' => $bicicleta->id
             ]);
-        } else{
+        } else {
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => false,
@@ -242,8 +243,29 @@ class Bicicleta extends CI_Controller
 
     }
 
-    public static function getCodigoEstacionByBicicletaEstacionId($bicicleta_ESTACION_id){
+    public static function getCodigoEstacionByBicicletaEstacionId($bicicleta_ESTACION_id)
+    {
         $estacion = \App\Estacion::find($bicicleta_ESTACION_id);
         return $estacion->codigo;
+    }
+
+    public function verificarBicicletaEstacionada($bicicleta_id)
+    {
+        $estacionamiento = \App\Estacionamiento::where('BICICLETA_id', '=', $bicicleta_id)
+            ->get()
+            ->first();
+
+        if ($estacionamiento == null) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true, //no esta estacionada en ningun lado
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false,
+                'estacionamiento_id' => $estacionamiento->id
+            ]);
+        }
     }
 }

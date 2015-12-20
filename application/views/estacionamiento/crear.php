@@ -18,8 +18,8 @@
                             </div>
                             <div class="agrupador">
                                 <div class="col-xs-3">
-                                    <input class="form-control" id="numero_estaciones_nuevo" type="text" maxlength="2" value="1"
-                                           onkeypress="return Escritorio.Validaciones.soloNumeros(event)"
+                                    <input class="form-control" id="numero_estaciones_nuevo" type="text" maxlength="2"
+                                           value="1" onkeypress="return Escritorio.Validaciones.soloNumeros(event)"
                                            onkeyup="Estacionamiento.label.cantidad();">
                                 </div>
                                 <div class="col-xs-2 mensaje oculto">
