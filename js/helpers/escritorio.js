@@ -118,8 +118,12 @@ var Escritorio = {
                     console.log(r);
                     window.location.replace("http://mybici.server/Login");
                 });
-        }
+        },
 
+        ocultarMostrar: function(elemento, titulo) {
+            elemento.toggle();
+            titulo.toggleClass('active','inactive')
+        }
     },
 
     Validaciones:{

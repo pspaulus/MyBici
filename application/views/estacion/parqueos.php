@@ -17,7 +17,7 @@
             <tbody>
             <?php foreach ($estacionamientos as $estacionamiento) { ?>
                 <tr>
-                    <td><?= $Estacion->getCodigoEstacion($estacion_id) . $estacionamiento->codigo; ?></td>
+                    <td><?= $Estacion->getCodigoEstacion($estacion_id) .'P'. $estacionamiento->codigo; ?></td>
                     <?php $bicicleta = $Bicicleta->cargarBicicleta($estacionamiento->BICICLETA_id); ?>
                     <td><?= ((bool)$bicicleta) ? $bicicleta->codigo : '-'; ?></td>
                     <td>

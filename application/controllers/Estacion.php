@@ -21,11 +21,11 @@ class Estacion extends CI_Controller
         $latitud = $_REQUEST['latitud'];
 
         $estaciones = \App\Estacion::where('nombre', '=', $nombre)
-            ->where('codigo', '=', $codigo)
+            ->orwhere('codigo', '=', $codigo)
             ->get();
 
         if ($estaciones->first() == null) {
-            \App\Estacion::firstOrCreate([
+            $nueva_estacion = \App\Estacion::firstOrCreate([
                 'nombre' => $nombre,
                 'codigo' => $codigo,
                 'longitud' => $longitud,
@@ -35,6 +35,7 @@ class Estacion extends CI_Controller
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => true,
+                'estacion_nueva_id' => $nueva_estacion->id
             ]);
         } else {
             header('Content-Type: application/json');
@@ -80,6 +81,19 @@ class Estacion extends CI_Controller
     public static function getCodigoEstacionById($id)
     {
         $estacion = \App\Estacion::find($id);
-        echo $estacion->codigo;
+        echo ($estacion != null) ? $estacion->codigo : null;
     }
+
+    public static function cargarEstacion($id)
+    {
+        return $estacion = \App\Estacion::find($id);
+    }
+
+    public function cargarDatosEstacion($id){
+        $data['estacion_actual'] = $this->cargarEstacion($id);
+        $data['Estacion'] = $this;
+
+        $this->load->view('estacion/datos',$data);
+    }
+
 }

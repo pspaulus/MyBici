@@ -6,11 +6,10 @@
     <meta name="author" content="Paul Sabando">
     <title>MyBici</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/icons.css">
     <link rel="stylesheet" href="/css/estilos.css">
     <link rel="stylesheet" href="/css/sb-admin.css">
     <link rel="stylesheet" href="/css/morris.css">
     <link rel="stylesheet" href="/css/font-awesome.css">
-<!--    <link rel="icon" type="image/png" href="/images/mifavicon.png" />-->
+    <link rel="icon" type="image/png" href="/icons/ico_bicicleta.jpg" />
 </head>
 <body class="sinScroll">
