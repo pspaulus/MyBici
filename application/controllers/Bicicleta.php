@@ -215,4 +215,35 @@ class Bicicleta extends CI_Controller
         return $tipo_descripcion->descripcion;
     }
 
+    public function getIdBicicletaByCodigo($bicicleta_codigo)
+    {
+        $estacion_codigo = substr($bicicleta_codigo, 0,1);
+        $estacion_id = Estacion::getIdByCodigo($estacion_codigo);
+
+        $bicicleta_secuencia = substr($bicicleta_codigo, 2, strlen($bicicleta_codigo));
+
+        $bicicleta = \App\Bicicleta::where('codigo', '=', $bicicleta_secuencia)
+            ->where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->get()
+            ->first();
+
+        if ($bicicleta != null){
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true,
+                'bicicleta_id' => $bicicleta->id
+            ]);
+        } else{
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false,
+            ]);
+        }
+
+    }
+
+    public static function getCodigoEstacionByBicicletaEstacionId($bicicleta_ESTACION_id){
+        $estacion = \App\Estacion::find($bicicleta_ESTACION_id);
+        return $estacion->codigo;
+    }
 }

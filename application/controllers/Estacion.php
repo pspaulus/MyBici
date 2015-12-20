@@ -96,4 +96,21 @@ class Estacion extends CI_Controller
         $this->load->view('estacion/datos',$data);
     }
 
+    public function editarEstacion()
+    {
+        $estacion_id = $_REQUEST['id'];
+        $codigo = $_REQUEST['codigo'];
+        $nombre = $_REQUEST['nombre'];
+
+        $estacion = \App\Estacion::find($estacion_id);
+        $estacion->codigo = $codigo;
+        $estacion->nombre = $nombre;
+
+
+        dd($estacion->save());
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => true,
+        ]);
+    }
 }

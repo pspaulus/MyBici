@@ -129,7 +129,8 @@
                                     <table id="tabla_usuario" class="table table-hover">
                                         <thead>
                                         <tr>
-                                            <th>N&uacute;mero</th>
+                                            <th>Nro.</th>
+                                            <th>Cod. Estaci&oacute;n</th>
                                             <th>Cod. Bicicleta</th>
                                             <th>Acciones</th>
                                         </tr>

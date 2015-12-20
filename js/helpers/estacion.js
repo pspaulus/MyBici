@@ -14,7 +14,7 @@ var Estacion = {
             var validacion_nombre = true;
             var validacion_longitud = true;
             var validacion_latitud = true;
-            var validacion_estaciones = true;
+            //var validacion_estaciones = true;
 
             if (input_codigo.val() == '') {
                 validacion_codigo = false;
@@ -87,7 +87,24 @@ var Estacion = {
         },
 
         guardarEditar: function () {
-            Estacion.acciones.cargarDatosEstacion();
+            var estacion_id = $('#select_estacion').val();
+            var estacion_codigo = $('#editar_estacion_codigo').val().toUpperCase();
+            var estacion_nombre = $('#editar_estacion_nombre').val();
+
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Estacion/editarEstacion",
+                data: {
+                    id: estacion_id,
+                    nombre: estacion_nombre,
+                    codigo: estacion_codigo
+                }
+            })
+                .done(function (r) {
+                    console.log('Actualizado');
+                });
+            Escritorio.load.estacion();
+            //Estacion.acciones.cargarDatosEstacion();
         },
 
         cargarDatosEstacion: function () {
@@ -182,10 +199,10 @@ var Estacion = {
             input_editar_estacion_nombre.removeAttr('disabled');
         },
 
-        ocultarBusqueda: function () {
-            $('#btn_editar_estacion').hide();
-            $('#btn_guardar_estacion').hide();
-        },
+        //ocultarBusqueda: function () {
+        //    $('#btn_editar_estacion').hide();
+        //    $('#btn_guardar_estacion').hide();
+        //},
 
         botonEditar: function (accion) {
             if (accion == 'ocultar')
