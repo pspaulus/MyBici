@@ -13,9 +13,8 @@
                 <th>Acciones</th>
             </tr>
             </thead>
-
-            <?php $estacionamientos = $Estacionamiento->cargarEstacionamientos($estacion_id, $estado); ?>
             <tbody>
+            <?php $estacionamientos = $Estacionamiento->cargarEstacionamientos($estacion_id, $estado); ?>
             <?php $i = 1 ?>
             <?php foreach ($estacionamientos as $estacionamiento) { ?>
                 <tr>
@@ -23,29 +22,28 @@
                     <?php $i++ ?>
                     <td><?= $Estacion->getCodigoEstacion($estacion_id) . 'P' . $estacionamiento->codigo; ?></td>
                     <?php $bicicleta = $Bicicleta->cargarBicicleta($estacionamiento->BICICLETA_id); ?>
-                    <?php $existe_bicicleta = ((bool)$bicicleta); ?>
-                    <?php if ($existe_bicicleta) {
+                    <?php if ($bicicleta != null) {
                         $bicicleta_estacion_codigo = $Bicicleta->getCodigoEstacionByBicicletaEstacionId($bicicleta->PUESTO_ALQUILER_id);
+                        $codigo_para_mostrar = $bicicleta_estacion_codigo . 'B' . $bicicleta->codigo;
+                    } else {
+                        $codigo_para_mostrar = '-';
                     } ?>
-                    <td><?= ($existe_bicicleta) ? $bicicleta_estacion_codigo . 'B' . $bicicleta->codigo : '-'; ?></td>
+                    <td><?= $codigo_para_mostrar ?></td>
                     <td>
-                        <?php //if ($existe_bicicleta) { ?>
-                        <button class="btn btn-sm btn-default" type="button" title="Agregar Bicicleta"
-                                data-toggle="modal" data-target="#agregarBicicleta_<?= $estacionamiento->id ?>"><i
-                                class="fa fa-plus"></i></button>
-                        <!--Modal Agregar-->
-                        <?php $Estacionamiento->load->view('estacionamiento/agregar', compact('estacionamiento')); ?>
-
-                        <? //} ?>
-                        <?php // if ($existe_bicicleta) { ?>
+                        <?php if ($bicicleta == null) { ?>
+                            <button class="btn btn-sm btn-default" type="button" title="Agregar Bicicleta"
+                                    data-toggle="modal" data-target="#agregarBicicleta_<?= $estacionamiento->id ?>"><i
+                                    class="fa fa-plus"></i></button>
+                            <!--Modal Agregar-->
+                            <?php $Estacionamiento->load->view('estacionamiento/agregar', compact('estacionamiento'));
+                        } else { ?>
                             <button class="btn btn-sm btn-danger" type="button" title="Quitar Bicicleta"
                                     data-toggle="modal" data-target="#quitarBicicleta_<?= $estacionamiento->id ?>"><i
                                     class="fa fa-minus"></i></button>
 
                             <!--Modal Eliminar-->
-                            <?php $Estacionamiento->load->view('estacionamiento/quitar', compact('estacionamiento')); ?>
-
-                        <? //} ?>
+                            <?php $Estacionamiento->load->view('estacionamiento/quitar', compact('estacionamiento'));
+                        } ?>
                     </td>
                 </tr>
             <?php } ?>

@@ -80,7 +80,29 @@ class Usuario extends CI_Controller
         $usuario->save();
     }
 
-    public function testMD5(){
-        dd( md5('mendoza2015'));
+    public static function getUsuarioIdByNombre($usuario_nombre)
+    {
+        $usuario = \App\Usuario::where('nombre', '=', $usuario_nombre)
+            ->where('ESTADO_id', '=', 1)
+            ->get()
+            ->first();
+
+        if ($usuario != null) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true,
+                'usuario_id' => $usuario->id
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false,
+            ]);
+        }
+    }
+
+    public function testMD5()
+    {
+        dd(md5('mendoza2015'));
     }
 }

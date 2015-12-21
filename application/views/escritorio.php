@@ -46,9 +46,9 @@
                 <li>
                     <a onclick="Escritorio.load.estacion()"><i class="fa fa-fw fa-map-marker"></i> Estaciones</a>
                 </li>
-                <li>
-                    <a onclick="Escritorio.load.evento()"><i class="fa fa-fw fa-envelope"></i> Eventos</a>
-                </li>
+<!--                <li>-->
+<!--                    <a onclick="Escritorio.load.evento()"><i class="fa fa-fw fa-envelope"></i> Eventos</a>-->
+<!--                </li>-->
 <!--                <li>-->
 <!--                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-list"></i>-->
 <!--                        Tablas Auxiliares<i class="fa fa-fw fa-caret-down"></i></a>-->

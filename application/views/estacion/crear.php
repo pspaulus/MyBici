@@ -61,7 +61,7 @@
                                            onkeyup="Estacion.label.longitud()">
                                 </div>
                                 <div class="col-xs-1">
-                                    <a href="http://www.mapcoordinates.net/es" target="_blank"><i
+                                    <a href="http://www.mapcoordinates.net/es" target="_blank" title="Consultar coordenadas"><i
                                             class="fa fa-info-circle fa-2x"></i></a>
                                 </div>
                                 <div class=" row col-xs-4 col-xs-offset-3 oculto mensaje">

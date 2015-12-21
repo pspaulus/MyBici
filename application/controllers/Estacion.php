@@ -113,4 +113,10 @@ class Estacion extends CI_Controller
             'status' => true,
         ]);
     }
+
+    public static function getCodigoEstacionByIdRetornar($id)
+    {
+        $estacion = \App\Estacion::find($id);
+        return ($estacion != null) ? $estacion->codigo : null;
+    }
 }

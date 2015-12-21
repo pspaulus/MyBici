@@ -63,7 +63,7 @@ var Usuario = {
                         $('.modal-backdrop').remove();
                     });
             } else {
-                console.log('no edito' +id);
+                console.log('no edito' + id);
             }
         },
 
@@ -82,7 +82,7 @@ var Usuario = {
 
         verInactivos: function () {
             var check = $('#verInactivos');
-            var tr =  $('tr.inactivo');
+            var tr = $('tr.inactivo');
 
             if (check.is(":checked")) {
                 tr.removeClass(' ocultoInactivo');
@@ -91,7 +91,7 @@ var Usuario = {
                 tr.addClass(' ocultoInactivo');
                 tr.children().children('.btn-danger').removeClass(' oculto')
             }
-            
+
         },
         buscar: function () {
             var filtro = $('#filtro_usuario');
@@ -137,22 +137,22 @@ var Usuario = {
             confirmar_contrasena.parents('.agrupador').removeClass(' has-error has-warning');
         },
 
-        limpiarEditar: function (){
+        limpiarEditar: function () {
             $('#resultado').html(Escritorio.load.usuario());
             $('.modal-backdrop').remove();
         },
 
         validarContrasena: function (input_contrasena, input_confirmar, id) {
-            console.log(input_contrasena.val().trim()+' == '+ input_confirmar.val().trim());
+            console.log(input_contrasena.val().trim() + ' == ' + input_confirmar.val().trim());
             if (input_contrasena.val().trim() == input_confirmar.val().trim()) {
                 ( id == -1 ) ?
                     $('#contrasena_no_coinciden').addClass(' oculto') :
-                    $('#contrasena_no_coinciden_editar'+id).addClass(' oculto');
+                    $('#contrasena_no_coinciden_editar' + id).addClass(' oculto');
                 return true;
             } else {
                 ( id == -1 ) ?
                     $('#contrasena_no_coinciden').removeClass(' oculto') :
-                    $('#contrasena_no_coinciden_editar'+id).removeClass(' oculto');
+                    $('#contrasena_no_coinciden_editar' + id).removeClass(' oculto');
                 return false;
             }
         },
@@ -187,6 +187,30 @@ var Usuario = {
             } else {
                 $(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.error').addClass(' oculto');
                 $(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').addClass(' oculto');
+            }
+        },
+
+        getUsuarioIdByNombre: function () {
+            var usuario_nombre = $('#ticket_usuario_nombre').val();
+
+            if (usuario_nombre.length = '') {
+                $.ajax({
+                    method: "POST",
+                    url: "http://mybici.server/Usuario/getUsuarioIdByNombre/" + usuario_nombre,
+                    data: {}
+                })
+                    .done(function (r) {
+                        if (r.status) {
+                            $('#ticket_usuario_codigo').val(r.usuario_id);
+                            Estacion.mensajes.oculta($('#usuario_no_existe'));
+                        } else {
+                            $('#ticket_usuario_codigo').val('-');
+                            Estacion.mensajes.mostrar($('#usuario_no_existe'));
+                        }
+                    });
+            } else {
+                $('#ticket_usuario_codigo').val('-');
+                Estacion.mensajes.mostrar($('#usuario_no_existe'));
             }
         }
 

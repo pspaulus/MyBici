@@ -10,6 +10,7 @@ class Tipo extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'descripcion'
+        'descripcion',
+        'objeto'
     ];
 }

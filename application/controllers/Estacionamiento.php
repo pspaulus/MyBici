@@ -111,6 +111,7 @@ class Estacionamiento extends CI_Controller
         $estacionamiento = \App\Estacionamiento::find($estacionamiento_id);
 
         $estacionamiento->BICICLETA_id = null;
+        $estacionamiento->ESTADO_id = 4;
         if ($estacionamiento->save()) {
             echo 'OK: eliminar bicicleta en E->' . $estacionamiento->id;
         } else {
@@ -123,6 +124,7 @@ class Estacionamiento extends CI_Controller
         $estacionamiento = \App\Estacionamiento::find($estacionamiento_id);
 
         $estacionamiento->BICICLETA_id = $bicicleta_id;
+        $estacionamiento->ESTADO_id = 5;
         if ($estacionamiento->save()) {
             echo 'OK: agregar bicicleta en E->' . $estacionamiento->id.' B->'.$bicicleta_id;
         } else {

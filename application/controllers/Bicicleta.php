@@ -268,4 +268,41 @@ class Bicicleta extends CI_Controller
             ]);
         }
     }
+
+    public static function cargarBicicletaDisponibleMostrar($estacion_id)
+    {
+        $estacion_codigo = Estacion::getCodigoEstacionByIdRetornar($estacion_id);
+
+        $bicicleta = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->where('ESTADO_id', '=', 7)
+            ->get()
+            ->first();
+
+        echo $estacion_codigo . 'B' . $bicicleta->codigo;
+
+    }
+
+    public static function cargarBicicletaDisponible($estacion_id)
+    {
+        $estacion_codigo = Estacion::getCodigoEstacionByIdRetornar($estacion_id);
+
+        $bicicleta = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->where('ESTADO_id', '=', 7)
+            ->get()
+            ->first();
+
+        if ($bicicleta != null) {
+            $codigo_bicicleta = $estacion_codigo . 'B' . $bicicleta->codigo;
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true,
+                'codigo_bicicleta' => $codigo_bicicleta
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false,
+            ]);
+        }
+    }
 }
