@@ -15,8 +15,9 @@ class Ticket extends Model
         'BICICLETA_id',
         'origen_puesto_alquiler',
         'destino_puesto_alquiler',
-        'fecha_hora_retiro',
-        'fecha_hora_entrega',
+        'fecha',
+        'hora_retiro',
+        'hora_entrega',
         'duracion',
         'ESTADO_id'
     ];

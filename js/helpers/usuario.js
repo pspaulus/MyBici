@@ -192,8 +192,8 @@ var Usuario = {
 
         getUsuarioIdByNombre: function () {
             var usuario_nombre = $('#ticket_usuario_nombre').val();
-
-            if (usuario_nombre.length = '') {
+            console.log('busco usuario -> '+usuario_nombre);
+            if (usuario_nombre.length != '') {
                 $.ajax({
                     method: "POST",
                     url: "http://mybici.server/Usuario/getUsuarioIdByNombre/" + usuario_nombre,

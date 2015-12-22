@@ -107,7 +107,7 @@ class Estacion extends CI_Controller
         $estacion->nombre = $nombre;
 
 
-        dd($estacion->save());
+        $estacion->save();
         header('Content-Type: application/json');
         echo json_encode([
             'status' => true,

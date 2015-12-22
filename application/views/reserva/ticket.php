@@ -1,4 +1,7 @@
+<?php $Estacion = new Estacion(); ?>
+<?php $Estado = new Estado(); ?>
 <?php $Ticket = new Ticket(); ?>
+
 <div id="page-wrapper">
 
     <div class="container-fluid">
@@ -76,27 +79,128 @@
         </a>
 
         <div id="contenido_buscar">
-            <div class="row">
 
-                <div class="col-xs-4">
-                    <select class="form-control">
-                        <option>ID</option>
-                        <option>Usuario</option>
-                        <option>C&oacute;digo Bicicleta</option>
-                    </select>
-                </div>
+            <!-- Tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#por_codigo" data-toggle="tab" role="tab">Por C&oacute;digo</a>
+                </li>
+                <li role="presentation">
+                    <a href="#por_estacion" data-toggle="tab" role="tab">Por Estaci&oacute;n</a>
+                </li>
+            </ul>
 
-                <div class="col-xs-4">
-                    <div class="form-group input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn"><button class="btn btn-default" type="button"><i
-                                    class="fa fa-search"></i></button></span>
+            <!-- Tab panels -->
+            <div class="tab-content tab-contenido">
+
+                <!--Por codigo-->
+                <div role="tabpanel" class="tab-pane fade in active" id="por_codigo">
+
+                    <!--Espacio-->
+                    <div class="row">
+                        <div class="col-xs-12">&nbsp;</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-inline">
+                            <div class="col-xs-12">
+
+                                <!--Identificador-->
+                                <div class="col-xs-3">
+                                    <select class="form-control" id="ticket_buscar_tipo">
+                                        <option value="id">ID</option>
+                                        <option value="usuario">Usuario</option>
+                                        <option value="bicicleta">C&oacute;digo Bicicleta</option>
+                                    </select>
+                                </div>
+
+                                <!--Codigo-->
+                                <div class="form-group espacio">
+                                    <div class="agrupador">
+                                        <label class="control-label" for="ticket_codigo">C&oacute;digo</label>
+                                        <input type="text" class="form-control" id="ticket_valor" maxlength="45"
+                                               onkeyup="Estacion.mensajes.oculta($('#error_no_valor'));">
+                                        <!--Boton buscar-->
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" type="button"
+                                                    onclick="Ticket.acciones.buscar()"><i
+                                                    class="fa fa-search"></i></button>
+                                        </div>
+                                        <div class="col-xs-12 col-xs-offset-1 mensaje oculto">
+                                            <label class="control-label" id="error_no_valor">&iexcl;Ingrese valor a
+                                                buscar!</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+                <!--Por Estacion-->
+                <div role="tabpanel" class="tab-pane fade" id="por_estacion">
+
+                    <!--Espacio-->
+                    <div class="row">
+                        <div class="col-xs-12">&nbsp;</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-inline">
+                            <div class="col-xs-12">
+
+                                <!--Select Estacion-->
+                                <div class="form-group espacio">
+                                    <?php $estaciones = $Estacion->cargarEstaciones() ?>
+                                    <label class="control-label"
+                                           for="select_ticket_estacion">Estaci&oacute;n</label>
+                                    <select id="select_ticket_estacion" class="form-control">
+                                        <option value="-1">Todas</option>
+                                        <?php foreach ($estaciones as $estacion) { ?>
+                                            <option
+                                                value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+                                <!--Select Estado-->
+                                <div class="form-group espacio">
+                                    <?php $estados_bicicletas = $Estado->getEstadoTickets(); ?>
+                                    <label class="control-label" for="select_ticket_estado">Estado</label>
+                                    <select id="select_estado_inventario" class="form-control">
+                                        <option value="-1">Todas</option>
+                                        <?php foreach ($estados_bicicletas as $estado) { ?>
+                                            <option
+                                                value="<?= $estado->id ?>"><?= $estado->descripcion ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+                                <!--Boton buscar-->
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="button"
+                                            onclick="Ticket.acciones.cargarListaTicketPorEstacion()"><i
+                                            class="fa fa-search"></i></button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Espacio-->
+            <div class="row">
+                <div class="col-xs-12">&nbsp;</div>
+            </div>
+
+            <div id="listado_ticket">
+                <h3>Lista de Tickets</h3>
+
                 <div class="col-xs-12">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover table-striped">
+                        <table class="table table-hover">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -107,24 +211,6 @@
                                 <th>Acciones</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr
-                            ">
-                            <td>001</td>
-                            <td>lorem ipsum</td>
-                            <td>Retiro</td>
-                            <td>Llegada</td>
-                            <td>Activo</td>
-                            <td>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-search"></i>
-                                </button>
-                                <button class="btn btn-sm btn-default" type="button"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-sm btn-success" type="button"><i class="fa fa-check"></i>
-                                </button>
-                                <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i></button>
-                            </td>
-                            </tr>
-                            </tbody>
                         </table>
                     </div>
                 </div>

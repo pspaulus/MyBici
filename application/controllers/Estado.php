@@ -15,7 +15,14 @@ class Estado extends CI_Controller
 
     public function getEstadoBicicletas()
     {
-        $estados = \App\Estado::whereIn('id',[3,7,8,9])
+        $estados = \App\Estado::whereIn('id', [3, 7, 8, 9])
+            ->get();
+        return $estados;
+    }
+
+    public function getEstadoTickets()
+    {
+        $estados = \App\Estado::where('objeto', '=', 'ticket')
             ->get();
         return $estados;
     }
