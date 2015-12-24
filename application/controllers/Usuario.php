@@ -101,6 +101,12 @@ class Usuario extends CI_Controller
         }
     }
 
+    public static function getUsuarioNombreById($usuario_id){
+        $usuario = \App\Usuario::find($usuario_id);
+
+        return $usuario->nombre;
+    }
+
     public function testMD5()
     {
         dd(md5('mendoza2015'));

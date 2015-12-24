@@ -19,4 +19,11 @@ class Tipo extends CI_Controller
             ->get();
         return $bicicleta_tipo;
     }
+
+    public static function getReservaTipoById($tipo_id)
+    {
+        $tipo = \App\Tipo::find($tipo_id);
+
+        return $tipo->descripcion;
+    }
 }

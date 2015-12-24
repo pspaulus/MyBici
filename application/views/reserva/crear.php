@@ -24,7 +24,7 @@
                                     <input class="form-control" id="ticket_id" type="text"
                                            value="<?= Ticket::cargarUltimoId(); ?>" disabled>
                                 </div>
-                                <div class="col-xs-1 col-xs-offset-1">
+                                <div class="col-xs-2 col-xs-offset-1">
                                     <label for="ticket_tipo">Tipo</label>
                                 </div>
                                 <div class="col-xs-3">
@@ -44,10 +44,10 @@
 
                             <div class="col-xs-3">
                                 <input class="form-control" id="ticket_fecha" type="text"
-                                       value="<?= date('Y-m-d') ?>" disabled>
+                                       value="<?= Escritorio::getFechaEcuador() ?>" disabled>
                             </div>
                             <div class="agrupador">
-                                <div class="col-xs-1">
+                                <div class="col-xs-2">
                                     <label for="ticket_bicicleta">Bicicleta</label>
                                 </div>
                                 <div class="col-xs-3">
@@ -68,7 +68,7 @@
                                 <div class="col-xs-2 col-xs-offset-1">
                                     <label for="ticket_usuario_nombre">Usuario</label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-3">
                                     <input class="form-control" id="ticket_usuario_codigo" type="text" placeholder="Id"
                                            disabled>
                                 </div>
@@ -96,7 +96,7 @@
                                 <label for="estacion_origen">Origen</label>
                             </div>
                             <div class="agrupador">
-                                <div class="col-xs-7">
+                                <div class="col-xs-8">
                                     <select id="estacion_origen" class="form-control"
                                             onchange="Ticket.acciones.cargarBicicletaDisponible()">
                                         <?php foreach ($estaciones as $estacion) { ?>
@@ -114,7 +114,7 @@
                                 <label for="estacion_destino">Destino</label>
                             </div>
                             <div class="agrupador">
-                                <div class="col-xs-7">
+                                <div class="col-xs-8">
                                     <select id="estacion_destino" class="form-control">
                                         <?php foreach ($estaciones as $estacion) { ?>
                                             <option

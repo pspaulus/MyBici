@@ -26,4 +26,11 @@ class Estado extends CI_Controller
             ->get();
         return $estados;
     }
+
+    public static function getEstadoNombreById($estado_id)
+    {
+        $estado = \App\Estado::find($estado_id);
+
+        return $estado->descripcion;
+    }
 }

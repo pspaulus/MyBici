@@ -22,7 +22,7 @@
                 <div class="col-lg-12">
                     <ol class="breadcrumb">
                         <li class="active" id="titulo">
-                            <i class="fa fa-clock-o"></i> Hoy: <?= date('Y-m-d'); ?>
+                            <i class="fa fa-clock-o"></i> Hoy: <?= Escritorio::getFechaEcuador() ?>
                             <button class="btn btn-xs btn-default" type="button"
                                     onclick="Ticket.acciones.refrescar();"><i class="fa fa-refresh"></i></button>
                         </li>
@@ -107,7 +107,7 @@
 
                                 <!--Identificador-->
                                 <div class="col-xs-3">
-                                    <select class="form-control" id="ticket_buscar_tipo">
+                                    <select class="form-control" id="ticket_campo">
                                         <option value="id">ID</option>
                                         <option value="usuario">Usuario</option>
                                         <option value="bicicleta">C&oacute;digo Bicicleta</option>
@@ -123,7 +123,7 @@
                                         <!--Boton buscar-->
                                         <div class="form-group">
                                             <button class="btn btn-primary" type="button"
-                                                    onclick="Ticket.acciones.buscar()"><i
+                                                    onclick="Ticket.acciones.cargarListaTicketPorCampo()"><i
                                                     class="fa fa-search"></i></button>
                                         </div>
                                         <div class="col-xs-12 col-xs-offset-1 mensaje oculto">
@@ -154,7 +154,7 @@
                                 <div class="form-group espacio">
                                     <?php $estaciones = $Estacion->cargarEstaciones() ?>
                                     <label class="control-label"
-                                           for="select_ticket_estacion">Estaci&oacute;n</label>
+                                           for="select_ticket_estacion">Destino</label>
                                     <select id="select_ticket_estacion" class="form-control">
                                         <option value="-1">Todas</option>
                                         <?php foreach ($estaciones as $estacion) { ?>
@@ -168,7 +168,7 @@
                                 <div class="form-group espacio">
                                     <?php $estados_bicicletas = $Estado->getEstadoTickets(); ?>
                                     <label class="control-label" for="select_ticket_estado">Estado</label>
-                                    <select id="select_estado_inventario" class="form-control">
+                                    <select id="select_estado_ticket" class="form-control">
                                         <option value="-1">Todas</option>
                                         <?php foreach ($estados_bicicletas as $estado) { ?>
                                             <option

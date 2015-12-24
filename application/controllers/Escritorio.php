@@ -43,4 +43,14 @@ class Escritorio extends CI_Controller
         $Login->index();
     }
 
+    public static function getHoraEcuador()
+    {
+        return date('H:i:s', time() - ((60 * 60) * 5));
+    }
+
+    public static function getFechaEcuador()
+    {
+        return date('Y-m-d', time() - ((60 * 60) * 5));
+    }
+
 }

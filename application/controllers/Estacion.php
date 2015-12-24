@@ -119,4 +119,10 @@ class Estacion extends CI_Controller
         $estacion = \App\Estacion::find($id);
         return ($estacion != null) ? $estacion->codigo : null;
     }
+
+    public static function getEstacionNombreById($estacion_id)
+    {
+        $estacion = \App\Estacion::find($estacion_id);
+        return $estacion->nombre;
+    }
 }

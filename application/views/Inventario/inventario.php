@@ -17,7 +17,6 @@
                     <ol class="breadcrumb">
                         <li class="active" id="titulo">
                             <i class="fa fa-clock-o"></i> Estados
-                            <!--                        <small>(--><? //= date('Y-m-d'); ?><!--) &nbsp;</small>-->
                             <button class="btn btn-xs btn-default" type="button" title="Refrescar"
                                     onclick="Inventario.acciones.refrescar();">
                                 <i class="fa fa-refresh"></i></button>

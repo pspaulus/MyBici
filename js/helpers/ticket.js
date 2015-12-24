@@ -49,7 +49,7 @@ var Ticket = {
                         if (r.status) {
                             console.log('Ok: guardar ticket ->' + r.ticket_nuevo_id);
 
-                            Ticket.acciones.marcarBicicletaEstadoEnUso(r.ticket_bicicleta_id,'en_uso');
+                            Ticket.acciones.marcarBicicletaEstadoEnUso(r.ticket_bicicleta_id, 'en_uso');
 
                             $('#crearTicket').removeClass('in');
                             $('.modal-backdrop').remove();
@@ -69,36 +69,110 @@ var Ticket = {
             })
                 .done(function (r) {
                     if (r.status) {
-                        console.log('OK: cambio estado bicicleta ->'+estado);
+                        console.log('OK: cambio estado bicicleta ->' + estado);
                     } else {
                         console.log('ERROR: cambio estado bicicleta');
                     }
                 });
         },
 
-        buscar: function(){
-            var buscar_tipo = $('#ticket_buscar_tipo').val();
+        cambiarEstado: function (ticket_id, estado) {
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Ticket/cambiarEstado/" + ticket_id + '/' + estado,
+                data: {}
+            })
+                .done(function (r) {
+                    if (r.status) {
+                        console.log('OK: cambio estado ticket'+ r.ticket_id );
+
+                        if (estado == 'en_curso'){
+                            Ticket.acciones.marcarHora(ticket_id,'retiro');
+                        }
+                        if (estado == 'realizada'){
+                            Ticket.acciones.marcarHora(ticket_id,'entrega');
+                        }
+
+                        $('.modal-backdrop').remove();
+                        Ticket.acciones.refrescar();
+                    } else {
+                        console.log('ERROR: cambio estado ticket');
+                    }
+                });
+        },
+
+        marcarHora: function (ticket_id,tipo_hora){
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Ticket/marcarHora/" + ticket_id + '/' + tipo_hora,
+                data: {}
+            })
+                .done(function (r) {
+                    if (r.status) {
+                        console.log('OK: registro hora retiro'+ r.ticket_id );
+                    } else {
+                        console.log('ERROR: registro hora retiro');
+                    }
+                });
+        },
+
+        cargarListaTicketPorEstacion: function () {
+            var estacion_id = $('#select_ticket_estacion').val();
+            var estado_id = $('#select_estado_ticket').val();
+
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Ticket/cargarListaTicketPorEstacion/" + estacion_id + '/' + estado_id,
+                data: {}
+            })
+                .done(function (r) {
+                    $('#listado_ticket').html(r);
+                });
+
+        },
+
+        cargarListaTicketPorCampo: function () {
+            var campo = $('#ticket_campo').val();
             var valor = $('#ticket_valor').val();
 
-            if (valor.length != ''){
+            if (valor.length != '') {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Ticket/cargarTicket/" + valor,
+                    url: "http://mybici.server/Ticket/cargarListaTicketPorCampo/" + campo + '/' + valor,
                     data: {}
                 })
                     .done(function (r) {
-                        if (r.status) {
-                            Estacion.mensajes.oculta($('#error_no_valor'));
-                            console.log('OK: cambio estado bicicleta ->'+estado);
-                        } else {
-                            console.log('ERROR: cambio estado bicicleta');
-                        }
+                        $('#listado_ticket').html(r);
                     });
 
-            } else{
+            } else {
                 Estacion.mensajes.mostrar($('#error_no_valor'));
             }
         },
+
+        //buscar: function () {
+        //    var campo = $('#ticket_campo').val();
+        //    var valor = $('#ticket_valor').val();
+        //
+        //    if (valor.length != '') {
+        //        $.ajax({
+        //            method: "POST",
+        //            url: "http://mybici.server/Ticket/cargarTicket/" + campo + '/' + valor,
+        //            data: {}
+        //        })
+        //            .done(function (r) {
+        //                if (r.status) {
+        //                    Estacion.mensajes.oculta($('#error_no_valor'));
+        //                    console.log('OK: cargar ticket ->' + r.ticket);
+        //                } else {
+        //                    console.log('ERROR: cargar ticket');
+        //                }
+        //            });
+        //
+        //    } else {
+        //        Estacion.mensajes.mostrar($('#error_no_valor'));
+        //    }
+        //},
 
         limpiar: function () {
             $('#estacion_origen').prop('selectedIndex', 0);
@@ -124,11 +198,6 @@ var Ticket = {
                         Estacion.mensajes.mostrar($('#estacion_sin_bicicleta'));
                     }
                 });
-        },
-
-        cargarListaTicketPorEstacion: function(){
-            console.log('Carga listado por estacion');
         }
-
     }
 };
