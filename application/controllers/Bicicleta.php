@@ -225,8 +225,7 @@ class Bicicleta extends CI_Controller
 
         $bicicleta = \App\Bicicleta::where('codigo', '=', $bicicleta_secuencia)
             ->where('PUESTO_ALQUILER_id', '=', $estacion_id)
-            ->get()
-            ->first();
+            ->get();
 
         if ($bicicleta != null) {
             header('Content-Type: application/json');
@@ -323,5 +322,13 @@ class Bicicleta extends CI_Controller
         } else {
             return false;
         }
+    }
+
+    public static function getBicicletaCodigoById($bicicleta_id)
+    {
+        $bicicleta = \App\Bicicleta::find($bicicleta_id);
+        $estacion_codigo = Estacion::getCodigoEstacionByIdRetornar($bicicleta->PUESTO_ALQUILER_id);
+
+        echo $estacion_codigo . 'B' . $bicicleta->codigo;
     }
 }

@@ -153,10 +153,7 @@ class Ticket extends CI_Controller
         switch ($campo_tipo) {
             case 'id':
                 $campo = 'id';
-                break;
-
-            case 'usuario':
-                $campo = 'USUARIO_id';
+                //return $ticket = \App\Ticket::find($valor);
                 break;
 
             case 'bicicleta':
@@ -164,12 +161,17 @@ class Ticket extends CI_Controller
                 $campo = 'BICICLETA_id';
                 break;
 
-        }
-        $ticket = \App\Ticket::where($campo, '=', $valor)
-            ->get()
-            ->first();
+            case 'usuario':
+                $campo = 'USUARIO_id';
+                $valor = Usuario::getUsuarioIdByNombreDevolver($valor);
+                //return  $ticket = \App\Ticket::where($campo, '=', $valor)->get();
+                break;
 
-        return $ticket;
+        }
+        $tickets = \App\Ticket::where($campo, '=', $valor)
+            ->get();
+
+        return $tickets;
     }
 
     public function cambiarEstado($ticket_id, $estado_descripcion)

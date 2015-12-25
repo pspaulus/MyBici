@@ -5,8 +5,6 @@ if ($filtro == 'estacion') {
 } elseif ($filtro == 'campo') {
     $tickets = $Ticket->cargarTicket($campo, $valor);
 }
-
-//dd($tickets);
 ?>
 <div id="listado_ticket">
     <h3>Lista de Tickets</h3>
@@ -25,6 +23,7 @@ if ($filtro == 'estacion') {
                     <th>Fecha</th>
                     <th>Hora Retiro</th>
                     <th>Hora Entrega</th>
+                    <th>Cod. Bicicleta</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -44,6 +43,7 @@ if ($filtro == 'estacion') {
                             <td><?= $ticket->fecha ?></td>
                             <td><?= $ticket->hora_retiro ?></td>
                             <td><?= $ticket->hora_entrega ?></td>
+                            <td><?= Bicicleta::getBicicletaCodigoById($ticket->BICICLETA_id) ?></td>
                             <td><?= Estado::getEstadoNombreById($ticket->ESTADO_id) ?></td>
                             <td>
 
@@ -58,10 +58,11 @@ if ($filtro == 'estacion') {
                                 <?php } ?>
 
                                 <?php if ($ticket->ESTADO_id == 11) { ?>
-                                <button class="btn btn-sm btn-success" type="button" title="Marcar Realizada"
-                                        data-toggle="modal" data-target="#marcarEstadoRealizada_<?= $ticket->id ?>"
-                                        id="realizado_ticket_<?= $ticket->id ?>"><i class="fa fa-check-circle-o fa-2x"></i>
-                                </button>
+                                    <button class="btn btn-sm btn-success" type="button" title="Marcar Realizada"
+                                            data-toggle="modal" data-target="#marcarEstadoRealizada_<?= $ticket->id ?>"
+                                            id="realizado_ticket_<?= $ticket->id ?>"><i
+                                            class="fa fa-check-circle-o fa-2x"></i>
+                                    </button>
 
                                     <!--Modal marcar Realizada-->
                                     <?php $Ticket->load->view('reserva/realizada', compact('ticket')); ?>
@@ -70,7 +71,8 @@ if ($filtro == 'estacion') {
                                 <?php if ($ticket->ESTADO_id == 10) { ?>
                                     <button class="btn btn-sm btn-danger" type="button" title="Marcar Anulada"
                                             data-toggle="modal" data-target="#marcarEstadoAnulada_<?= $ticket->id ?>"
-                                            id="anular_ticket_<?= $ticket->id ?>"><i class="fa fa-times-circle-o fa-2x"></i>
+                                            id="anular_ticket_<?= $ticket->id ?>"><i
+                                            class="fa fa-times-circle-o fa-2x"></i>
                                     </button>
 
                                     <!--Modal marcar Anulada-->

@@ -85,6 +85,10 @@
                 <li role="presentation" class="active">
                     <a href="#por_codigo" data-toggle="tab" role="tab">Por C&oacute;digo</a>
                 </li>
+                <!-- DESACTIVADO TAB USUARIO -->
+<!--                <li role="presentation">-->
+<!--                    <a href="#por_usuario" data-toggle="tab" role="tab">Por Usuario</a>-->
+<!--                </li>-->
                 <li role="presentation">
                     <a href="#por_estacion" data-toggle="tab" role="tab">Por Estaci&oacute;n</a>
                 </li>
@@ -106,31 +110,34 @@
                             <div class="col-xs-12">
 
                                 <!--Identificador-->
-                                <div class="col-xs-3">
+                                <div class="form-group espacio">
+                                    <label class="control-label"
+                                           for="ticket_campo">Identificador</label>
                                     <select class="form-control" id="ticket_campo">
                                         <option value="id">ID</option>
+                                        <option value="bicicleta">Bicicleta</option>
                                         <option value="usuario">Usuario</option>
-                                        <option value="bicicleta">C&oacute;digo Bicicleta</option>
                                     </select>
                                 </div>
 
                                 <!--Codigo-->
                                 <div class="form-group espacio">
+                                    <label class="control-label" for="ticket_codigo">C&oacute;digo</label>
                                     <div class="agrupador">
-                                        <label class="control-label" for="ticket_codigo">C&oacute;digo</label>
                                         <input type="text" class="form-control" id="ticket_valor" maxlength="45"
                                                onkeyup="Estacion.mensajes.oculta($('#error_no_valor'));">
-                                        <!--Boton buscar-->
-                                        <div class="form-group">
-                                            <button class="btn btn-primary" type="button"
-                                                    onclick="Ticket.acciones.cargarListaTicketPorCampo()"><i
-                                                    class="fa fa-search"></i></button>
-                                        </div>
                                         <div class="col-xs-12 col-xs-offset-1 mensaje oculto">
                                             <label class="control-label" id="error_no_valor">&iexcl;Ingrese valor a
                                                 buscar!</label>
                                         </div>
                                     </div>
+                                </div>
+
+                                <!--Boton buscar-->
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="button"
+                                            onclick="Ticket.acciones.cargarListaTicketPorCampo()"><i
+                                            class="fa fa-search"></i></button>
                                 </div>
 
                             </div>
@@ -203,10 +210,15 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>ID</th>
-                                <th>Nombre Completo</th>
+                                <th>Tipo</th>
+                                <th>Usuario</th>
                                 <th>Origen</th>
                                 <th>Destino</th>
+                                <th>Fecha</th>
+                                <th>Hora Retiro</th>
+                                <th>Hora Entrega</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>

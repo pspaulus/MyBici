@@ -16,6 +16,9 @@
 
         <!--Menu del usuario-->
         <ul class="nav navbar-right top-nav">
+            <li>
+                <a class="nav-texto">Bienvenido</a>
+            </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $usuario ?> <b
                         class="caret"></b></a>
@@ -79,16 +82,16 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Bienvenido <?= ucfirst($usuario) ?></h3>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="row">-->
+<!--                    <div class="col-xs-12">-->
+<!--                        <div class="panel panel-primary">-->
+<!--                            <div class="panel-heading bg-color-zulado">-->
+<!--                                <h3 class="panel-title">Bienvenido --><?//= ucfirst($usuario) ?><!--</h3>-->
+<!--                            </div>-->
+<!---->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <div class="row">
                     <div class="col-xs-12 text-center">

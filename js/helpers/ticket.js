@@ -16,18 +16,26 @@ var Ticket = {
 
             var validacion_input_bicicleta_codigo = true;
             var validacion_input_usuario_id = true;
+            var validacion_origen_destino = true;
+
+            if (select_estacion_origen == select_estacion_destino) {
+                validacion_origen_destino = false;
+                Estacion.mensajes.mostrar($('#error_origen_destino'));
+                console.log('Error: el origen es el mismo del destino');
+            }
 
             if (input_bicicleta_codigo == '' || input_bicicleta_codigo == '-') {
                 validacion_input_bicicleta_codigo = false;
                 console.log('Error: bicicleta_codigo');
             }
 
-            if (input_usuario_id == 'Id' || input_usuario_id == '-') {
+            if (input_usuario_id == 'Id' || input_usuario_id == '-' || input_usuario_id == '') {
                 validacion_input_usuario_id = false;
+                Estacion.mensajes.mostrar($('#usuario_no_existe'));
                 console.log('Error: usuario_id');
             }
 
-            if (validacion_input_usuario_id && validacion_input_bicicleta_codigo) {
+            if (validacion_input_usuario_id && validacion_input_bicicleta_codigo && validacion_origen_destino) {
                 $.ajax({
                     method: "POST",
                     url: "http://mybici.server/Ticket/guardarTicket",
@@ -84,13 +92,13 @@ var Ticket = {
             })
                 .done(function (r) {
                     if (r.status) {
-                        console.log('OK: cambio estado ticket'+ r.ticket_id );
+                        console.log('OK: cambio estado ticket' + r.ticket_id);
 
-                        if (estado == 'en_curso'){
-                            Ticket.acciones.marcarHora(ticket_id,'retiro');
+                        if (estado == 'en_curso') {
+                            Ticket.acciones.marcarHora(ticket_id, 'retiro');
                         }
-                        if (estado == 'realizada'){
-                            Ticket.acciones.marcarHora(ticket_id,'entrega');
+                        if (estado == 'realizada') {
+                            Ticket.acciones.marcarHora(ticket_id, 'entrega');
                         }
 
                         $('.modal-backdrop').remove();
@@ -101,7 +109,7 @@ var Ticket = {
                 });
         },
 
-        marcarHora: function (ticket_id,tipo_hora){
+        marcarHora: function (ticket_id, tipo_hora) {
             $.ajax({
                 method: "POST",
                 url: "http://mybici.server/Ticket/marcarHora/" + ticket_id + '/' + tipo_hora,
@@ -109,7 +117,7 @@ var Ticket = {
             })
                 .done(function (r) {
                     if (r.status) {
-                        console.log('OK: registro hora retiro'+ r.ticket_id );
+                        console.log('OK: registro hora retiro' + r.ticket_id);
                     } else {
                         console.log('ERROR: registro hora retiro');
                     }
@@ -144,7 +152,24 @@ var Ticket = {
                     .done(function (r) {
                         $('#listado_ticket').html(r);
                     });
+            } else {
+                Estacion.mensajes.mostrar($('#error_no_valor'));
+            }
+        },
 
+        cargarListaTicketPorUsuario: function () {
+            var campo = $('#ticket_campo').val();
+            var valor = $('#ticket_valor').val();
+
+            if (valor.length != '') {
+                $.ajax({
+                    method: "POST",
+                    url: "http://mybici.server/Ticket/cargarListaTicketPorCampo/" + campo + '/' + valor,
+                    data: {}
+                })
+                    .done(function (r) {
+                        $('#listado_ticket').html(r);
+                    });
             } else {
                 Estacion.mensajes.mostrar($('#error_no_valor'));
             }
@@ -198,6 +223,36 @@ var Ticket = {
                         Estacion.mensajes.mostrar($('#estacion_sin_bicicleta'));
                     }
                 });
+        },
+
+        validarOrigenDestino: function () {
+            var select_estacion_origen = $('#estacion_origen').val();
+            var select_estacion_destino = $('#estacion_destino').val();
+
+            if (select_estacion_origen == select_estacion_destino) {
+                Estacion.mensajes.mostrar($('#error_origen_destino'));
+            } else {
+                Estacion.mensajes.oculta($('#error_origen_destino'));
+            }
+        },
+
+        quitarDestinoRepetido: function () {
+            var select_estacion_origen = $('#estacion_origen');
+            //var select_estacion_destino = $('#estacion_destino');
+            var valor = select_estacion_origen.val();
+
+            $("#estacion_destino option[value=" + valor + "]").remove();
+        },
+
+        agregarDestinoRepetido: function () {
+            var select_estacion_origen = $('#estacion_origen');
+            //var select_estacion_destino = $('#estacion_destino');
+            var valor = select_estacion_origen.val();
+            var texto = $( "#estacion_origen option:selected" ).text();
+
+            $("#estacion_destino").append('<option value="' + valor + '">'+texto+'</option>');
+            //Ticket.acciones.quitarDestinoRepetido();
         }
+
     }
 };

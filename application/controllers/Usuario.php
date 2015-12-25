@@ -101,7 +101,18 @@ class Usuario extends CI_Controller
         }
     }
 
-    public static function getUsuarioNombreById($usuario_id){
+    public static function getUsuarioIdByNombreDevolver($usuario_nombre)
+    {
+        $usuario = \App\Usuario::where('nombre', '=', $usuario_nombre)
+            ->where('ESTADO_id', '=', 1)
+            ->get()
+            ->first();
+
+        return ($usuario != null) ? $usuario->id : false;
+    }
+
+    public static function getUsuarioNombreById($usuario_id)
+    {
         $usuario = \App\Usuario::find($usuario_id);
 
         return $usuario->nombre;

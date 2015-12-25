@@ -37,23 +37,8 @@ if ($filtro == 'codigo') {
                         $estado_bicicleta = Bicicleta::getEstadoBicicleta($bicicleta->id);
                         $codigo_estacionamiento = Bicicleta::getEstacionamiento($bicicleta->id);
                         $tipo_bibicleta = Bicicleta::getTipo($bicicleta->TIPO_id);
-
-                        switch ($bicicleta->ESTADO_id) {
-                            case 7:
-                                $icono = '<i class="fa fa-check"></i>';
-                                $tr_class = 'success';
-                                break;
-                            case 3:
-                                $icono = '<i class="fa fa-wrench"></i>';
-                                $tr_class = 'warning';
-                                break;
-                            case 8:
-                                $icono = '<i class="fa fa-close"></i>';
-                                $tr_class = 'danger';
-                                break;
-                        }
                         ?>
-                        <tr class="<?=$tr_class?>">
+                        <tr>
                             <td><strong><?= $i ?></strong></td>
                             <?php $i++ ?>
                             <td><?= $codigo_estacion . 'B' . $bicicleta->codigo ?></td>
@@ -62,7 +47,7 @@ if ($filtro == 'codigo') {
                             <td><?= ($codigo_estacionamiento != null) ? $codigo_estacion . $codigo_estacionamiento : '-'; ?></td>
 
 
-                            <td><?= $icono . ' ' . $estado_bicicleta ?></td>
+                            <td><?= $estado_bicicleta ?></td>
                             <td>
                                 <?php if ($bicicleta->ESTADO_id == 7) { //buena ?>
                                     <button class="btn btn-sm btn-warning" type="button" title="Enviar a Reparar"

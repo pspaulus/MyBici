@@ -55,6 +55,10 @@ body {
     color: rgba(208, 123, 80, 0.98) !important;
 }
 
+ .bg-color-zulado {
+     background-color: #4D6A79 !important;
+ }
+
 .tip {
     color: #2E6DA4;
     font-size: 14px;
@@ -85,4 +89,9 @@ body {
 
 .panel-celeste > a:hover {
     color: #5bc0de;
+}
+
+a.nav-texto:hover{
+    background-color: #222222 !important;
+    color: #999 !important;
 }

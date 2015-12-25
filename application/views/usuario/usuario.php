@@ -103,7 +103,7 @@
                             </thead>
                             <tbody>
                             <?php foreach ($collection_usuario as $obj_usuario) { ?>
-                                <tr class="<?= ($obj_usuario->ESTADO_id == 1) ? 'activo success' : 'inactivo danger' ?>">
+                                <tr class="<?= ($obj_usuario->ESTADO_id == 1) ? 'activo' : 'inactivo' ?>">
                                     <td><?= $obj_usuario->id ?></td>
                                     <td><strong><?= $obj_usuario->nombre ?></strong></td>
                                     <td><?= ($obj_usuario->TIPO_id == 2) ? 'Est&aacute;ndar' : 'Administrador' ?></td>

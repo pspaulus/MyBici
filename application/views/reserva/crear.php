@@ -25,26 +25,27 @@
                                            value="<?= Ticket::cargarUltimoId(); ?>" disabled>
                                 </div>
                                 <div class="col-xs-2 col-xs-offset-1">
-                                    <label for="ticket_tipo">Tipo</label>
+                                    <label for="ticket_fecha">Fecha</label>
                                 </div>
+
                                 <div class="col-xs-3">
-                                    <select class="form-control" id="ticket_tipo" disabled>
-                                        <option value="3">Recorrido</option>
-                                        <option value="4">Tiempo</option>
-                                    </select>
+                                    <input class="form-control" id="ticket_fecha" type="text"
+                                           value="<?= Escritorio::getFechaEcuador() ?>" disabled>
                                 </div>
                             </div>
                         </div>
 
                         <!--fecha-->
                         <div class="form-group">
-                            <div class="col-xs-2 col-xs-offset-1">
-                                <label for="ticket_fecha">Fecha</label>
-                            </div>
 
+                            <div class="col-xs-2 col-xs-offset-1">
+                                <label for="ticket_tipo">Tipo</label>
+                            </div>
                             <div class="col-xs-3">
-                                <input class="form-control" id="ticket_fecha" type="text"
-                                       value="<?= Escritorio::getFechaEcuador() ?>" disabled>
+                                <select class="form-control" id="ticket_tipo" disabled>
+                                    <option value="3">Recorrido</option>
+                                    <option value="4">Tiempo</option>
+                                </select>
                             </div>
                             <div class="agrupador">
                                 <div class="col-xs-2">
@@ -75,7 +76,8 @@
                                 <div class="col-xs-5">
                                     <div class="form-group input-group">
                                         <input class="form-control" id="ticket_usuario_nombre" type="text"
-                                               placeholder="nombre de usuario">
+                                               placeholder="nombre de usuario"
+                                               onkeyup="Estacion.mensajes.oculta($('#usuario_no_existe'));">
                                         <span class="input-group-btn">
                                             <button class="btn btn-primary" type="button"
                                                     onclick="Usuario.acciones.getUsuarioIdByNombre()"><i
@@ -83,7 +85,8 @@
                                         </span>
                                     </div>
                                     <div class="oculto mensaje">
-                                        <label class="control-label" id="usuario_no_existe">&iexcl;Usuario no existe o inactivo!</label>
+                                        <label class="control-label" id="usuario_no_existe">&iexcl;Usuario no existe o
+                                            inactivo!</label>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +101,8 @@
                             <div class="agrupador">
                                 <div class="col-xs-8">
                                     <select id="estacion_origen" class="form-control"
-                                            onchange="Ticket.acciones.cargarBicicletaDisponible()">
+                                            onchange="Ticket.acciones.cargarBicicletaDisponible();
+                                                      Ticket.acciones.validarOrigenDestino();">
                                         <?php foreach ($estaciones as $estacion) { ?>
                                             <option
                                                 value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
@@ -122,8 +126,19 @@
                                         <?php } ?>
                                     </select>
                                 </div>
+                                <div class="col-xs-9 col-xs-offset-3">
+                                    <div class="oculto mensaje">
+                                        <label class="control-label" id="error_origen_destino">&iexcl;El detino no puede
+                                            ser el mismo que el origen!</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <script>
+                            //Ticket.acciones.quitarDestinoRepetido();
+                            $('#estacion_destino').prop('selectedIndex', 1);
+                        </script>
 
                         <!--Mensajes de error-->
                         <div class="form-group">
