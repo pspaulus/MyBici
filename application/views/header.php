@@ -12,4 +12,4 @@
     <link rel="stylesheet" href="/css/font-awesome.css">
     <link rel="icon" type="image/png" href="/icons/ico_bicicleta.jpg" />
 </head>
-<body class="sinScroll">
+<body class="">

@@ -1,4 +1,3 @@
-<!-- todo-ps Contenido Modelo que debe ser internal frame -->
 <div id="page-wrapper">
     <div class="container-fluid">
 

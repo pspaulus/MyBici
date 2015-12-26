@@ -86,9 +86,9 @@
                     <a href="#por_codigo" data-toggle="tab" role="tab">Por C&oacute;digo</a>
                 </li>
                 <!-- DESACTIVADO TAB USUARIO -->
-<!--                <li role="presentation">-->
-<!--                    <a href="#por_usuario" data-toggle="tab" role="tab">Por Usuario</a>-->
-<!--                </li>-->
+                <!--                <li role="presentation">-->
+                <!--                    <a href="#por_usuario" data-toggle="tab" role="tab">Por Usuario</a>-->
+                <!--                </li>-->
                 <li role="presentation">
                     <a href="#por_estacion" data-toggle="tab" role="tab">Por Estaci&oacute;n</a>
                 </li>
@@ -111,8 +111,7 @@
 
                                 <!--Identificador-->
                                 <div class="form-group espacio">
-                                    <label class="control-label"
-                                           for="ticket_campo">Identificador</label>
+                                    <label class="control-label" for="ticket_campo">Identificador</label>
                                     <select class="form-control" id="ticket_campo">
                                         <option value="id">ID</option>
                                         <option value="bicicleta">Bicicleta</option>
@@ -123,10 +122,12 @@
                                 <!--Codigo-->
                                 <div class="form-group espacio">
                                     <label class="control-label" for="ticket_codigo">C&oacute;digo</label>
+
                                     <div class="agrupador">
                                         <input type="text" class="form-control" id="ticket_valor" maxlength="45"
                                                onkeyup="Estacion.mensajes.oculta($('#error_no_valor'));">
-                                        <div class="col-xs-12 col-xs-offset-1 mensaje oculto">
+
+                                        <div class=" mensaje oculto">
                                             <label class="control-label" id="error_no_valor">&iexcl;Ingrese valor a
                                                 buscar!</label>
                                         </div>
@@ -219,6 +220,7 @@
                                 <th>Fecha</th>
                                 <th>Hora Retiro</th>
                                 <th>Hora Entrega</th>
+                                <th>Cod. Bicicleta</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>

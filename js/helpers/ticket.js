@@ -13,6 +13,7 @@ var Ticket = {
             var input_usuario_id = $('#ticket_usuario_codigo').val();
             var select_estacion_origen = $('#estacion_origen').val();
             var select_estacion_destino = $('#estacion_destino').val();
+            var estacion_destino_parqueo_disponible = $('#estacion_destino_parqueo_disponible').val();
 
             var validacion_input_bicicleta_codigo = true;
             var validacion_input_usuario_id = true;
@@ -20,7 +21,7 @@ var Ticket = {
 
             if (select_estacion_origen == select_estacion_destino) {
                 validacion_origen_destino = false;
-                Estacion.mensajes.mostrar($('#error_origen_destino'));
+                //Estacion.mensajes.mostrar($('#error_origen_destino'));
                 console.log('Error: el origen es el mismo del destino');
             }
 
@@ -35,7 +36,7 @@ var Ticket = {
                 console.log('Error: usuario_id');
             }
 
-            if (validacion_input_usuario_id && validacion_input_bicicleta_codigo && validacion_origen_destino) {
+            if (validacion_input_usuario_id && validacion_input_bicicleta_codigo && validacion_origen_destino && (estacion_destino_parqueo_disponible == 1)) {
                 $.ajax({
                     method: "POST",
                     url: "http://mybici.server/Ticket/guardarTicket",
@@ -96,9 +97,11 @@ var Ticket = {
 
                         if (estado == 'en_curso') {
                             Ticket.acciones.marcarHora(ticket_id, 'retiro');
+                            Bicicleta.acciones.quitarEstacionamiento(ticket_id);
                         }
                         if (estado == 'realizada') {
                             Ticket.acciones.marcarHora(ticket_id, 'entrega');
+                            Ticket.acciones.registrarNuevoParqueo(ticket_id);
                         }
 
                         $('.modal-backdrop').remove();
@@ -117,9 +120,24 @@ var Ticket = {
             })
                 .done(function (r) {
                     if (r.status) {
-                        console.log('OK: registro hora retiro' + r.ticket_id);
+                        console.log('OK: registro hora retiro');
                     } else {
                         console.log('ERROR: registro hora retiro');
+                    }
+                });
+        },
+
+        registrarNuevoParqueo: function (ticket_id) {
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Bicicleta/registrarNuevoParqueo/" + ticket_id,
+                data: {}
+            })
+                .done(function (r) {
+                    if (r.status) {
+                        console.log('OK: registro bicicleta en nuevo parqueo' + r.movimiento);
+                    } else {
+                        console.log('ERROR: registro bicicleta en nuevo parqueo');
                     }
                 });
         },
@@ -201,7 +219,7 @@ var Ticket = {
 
         limpiar: function () {
             $('#estacion_origen').prop('selectedIndex', 0);
-            $('#estacion_destino').prop('selectedIndex', 0);
+            $('#estacion_destino').prop('selectedIndex', 1);
             Estacion.mensajes.oculta($('#estacion_sin_bicicleta'));
             Estacion.mensajes.oculta($('#usuario_no_existe'));
         },
@@ -221,6 +239,28 @@ var Ticket = {
                     } else {
                         $('#ticket_bicicleta').val('-');
                         Estacion.mensajes.mostrar($('#estacion_sin_bicicleta'));
+                    }
+                });
+        },
+
+        validarEstacionamientoDisponible: function () {
+            var estacion_destino_id = $('#estacion_destino').val();
+            var estacion_destino_parqueo_disponible = $('#estacion_destino_parqueo_disponible');
+
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Estacionamiento/validarEstacionamientoDisponible/" + estacion_destino_id,
+                data: {}
+            })
+                .done(function (r) {
+                    if (r.status) {
+                        estacion_destino_parqueo_disponible.val(1);
+                        console.log('OK: estacionamiento libre -> ' + r.estacionamiento_id);
+                        Estacion.mensajes.oculta($('#error_sin_parqueo'));
+                    } else {
+                        estacion_destino_parqueo_disponible.val(0);
+                        console.log('Error: No hay estacionamiento libre');
+                        Estacion.mensajes.mostrar($('#error_sin_parqueo'));
                     }
                 });
         },
@@ -248,9 +288,9 @@ var Ticket = {
             var select_estacion_origen = $('#estacion_origen');
             //var select_estacion_destino = $('#estacion_destino');
             var valor = select_estacion_origen.val();
-            var texto = $( "#estacion_origen option:selected" ).text();
+            var texto = $("#estacion_origen option:selected").text();
 
-            $("#estacion_destino").append('<option value="' + valor + '">'+texto+'</option>');
+            $("#estacion_destino").append('<option value="' + valor + '">' + texto + '</option>');
             //Ticket.acciones.quitarDestinoRepetido();
         }
 

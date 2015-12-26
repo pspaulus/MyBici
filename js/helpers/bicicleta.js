@@ -52,6 +52,21 @@ var Bicicleta = {
                 });
         },
 
+        quitarEstacionamiento: function (ticket_id) {
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Bicicleta/quitarEstacionamiento/" + ticket_id,
+                data: {}
+            })
+                .done(function (r) {
+                    if (r.status) {
+                        console.log('OK: se quita la bicicleta del estacionamiento');
+                    } else {
+                        console.log('Error: no se quita la bicicleta del estacionamiento');
+                    }
+                });
+        },
+
         cargarUltimoCodigoEstacion: function () {
             var estacion_id = $('#select_estacion_inventario_nuevo').val();
 

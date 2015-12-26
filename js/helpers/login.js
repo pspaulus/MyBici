@@ -80,6 +80,14 @@ var Login = {
         mensajeUsuarioContrasenaIncorrecto: function (bandera) {
             var mensaje = $('#usuario_contrasena_incorrecta');
             (bandera) ? mensaje.removeClass(' oculto') : mensaje.addClass(' oculto');
+        },
+
+        pressEnter: function (e) {
+            if (e.keyCode == 13) {
+                console.log('Presiona enter');
+                Login.index.validarUsuario()
+            }
         }
+
     }
 };

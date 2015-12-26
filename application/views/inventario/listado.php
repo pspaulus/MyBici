@@ -44,7 +44,7 @@ if ($filtro == 'codigo') {
                             <td><?= $codigo_estacion . 'B' . $bicicleta->codigo ?></td>
                             <td><?= $tipo_bibicleta ?></td>
                             <td><?= $nombre_estacion ?></td>
-                            <td><?= ($codigo_estacionamiento != null) ? $codigo_estacion . $codigo_estacionamiento : '-'; ?></td>
+                            <td><?= ($codigo_estacionamiento != null) ? $codigo_estacion .'P'. $codigo_estacionamiento : '-'; ?></td>
 
 
                             <td><?= $estado_bicicleta ?></td>

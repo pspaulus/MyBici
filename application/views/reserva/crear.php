@@ -13,6 +13,8 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="form_ticket">
                     <div class="row">
+                        <!-- validacion parqueos disponibles en estacion destino -->
+                        <input type="hidden" id="estacion_destino_parqueo_disponible" value="1">
 
                         <!--id-->
                         <div class="form-group">
@@ -61,6 +63,10 @@
                                 </div>
                             </div>
                         </div>
+
+                        <script>
+                            Ticket.acciones.cargarBicicletaDisponible();
+                        </script>
 
                         <!--Usuario-->
                         <div class="form-group">
@@ -119,7 +125,9 @@
                             </div>
                             <div class="agrupador">
                                 <div class="col-xs-8">
-                                    <select id="estacion_destino" class="form-control">
+                                    <select id="estacion_destino" class="form-control"
+                                            onchange="Ticket.acciones.validarEstacionamientoDisponible();
+                                                      Ticket.acciones.validarOrigenDestino();">
                                         <?php foreach ($estaciones as $estacion) { ?>
                                             <option
                                                 value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
@@ -131,6 +139,10 @@
                                         <label class="control-label" id="error_origen_destino">&iexcl;El detino no puede
                                             ser el mismo que el origen!</label>
                                     </div>
+                                    <div class="oculto mensaje">
+                                        <label class="control-label" id="error_sin_parqueo">&iexcl;El detino no tiene
+                                            parqueos disponibes!</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -138,6 +150,7 @@
                         <script>
                             //Ticket.acciones.quitarDestinoRepetido();
                             $('#estacion_destino').prop('selectedIndex', 1);
+                            Ticket.acciones.validarEstacionamientoDisponible();
                         </script>
 
                         <!--Mensajes de error-->
@@ -159,6 +172,8 @@
                     Cancelar
                 </button>
                 <button type="button" class="btn btn-primary" onclick="Ticket.acciones.guardar();">Guardar</button>
+                <!-- todo-ps validar que destino tenga parqueos-->
+                <!-- todo-ps al anular ticket debe volver al bicicleta a su estado-->
             </div>
 
         </div>

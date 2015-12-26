@@ -225,7 +225,8 @@ class Bicicleta extends CI_Controller
 
         $bicicleta = \App\Bicicleta::where('codigo', '=', $bicicleta_secuencia)
             ->where('PUESTO_ALQUILER_id', '=', $estacion_id)
-            ->get();
+            ->get()
+            ->first();
 
         if ($bicicleta != null) {
             header('Content-Type: application/json');
@@ -270,27 +271,32 @@ class Bicicleta extends CI_Controller
 
     public static function cargarBicicletaDisponibleMostrar($estacion_id)
     {
-        $estacion_codigo = Estacion::getCodigoEstacionByIdRetornar($estacion_id);
-
-        $bicicleta = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $estacion_id)
-            ->where('ESTADO_id', '=', 7)
+        $estacionamiento = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->whereNotNull('BICICLETA_id')
             ->get()
             ->first();
 
-        echo $estacion_codigo . 'B' . $bicicleta->codigo;
+        if($estacionamiento!= null){
+        $bicicleta = \App\Bicicleta::find($estacionamiento->BICICLETA_id);
+        $estacion_codigo = Estacion::getCodigoEstacionByIdRetornar($bicicleta->PUESTO_ALQUILER_id);
 
+        echo $estacion_codigo . 'B' . $bicicleta->codigo;
+        } else {
+            echo '-';
+        }
     }
 
     public static function cargarBicicletaDisponible($estacion_id)
     {
-        $estacion_codigo = Estacion::getCodigoEstacionByIdRetornar($estacion_id);
-
-        $bicicleta = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $estacion_id)
-            ->where('ESTADO_id', '=', 7)
+        $estacionamiento = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->whereNotNull('BICICLETA_id')
             ->get()
             ->first();
 
-        if ($bicicleta != null) {
+        if ($estacionamiento != null) {
+            $bicicleta = \App\Bicicleta::find($estacionamiento->BICICLETA_id);
+            $estacion_codigo = Estacion::getCodigoEstacionByIdRetornar($bicicleta->PUESTO_ALQUILER_id);
+
             $codigo_bicicleta = $estacion_codigo . 'B' . $bicicleta->codigo;
             header('Content-Type: application/json');
             echo json_encode([
@@ -318,7 +324,7 @@ class Bicicleta extends CI_Controller
             ->first();
 
         if ($bicicleta != null) {
-                return $bicicleta->id;
+            return $bicicleta->id;
         } else {
             return false;
         }
@@ -330,5 +336,61 @@ class Bicicleta extends CI_Controller
         $estacion_codigo = Estacion::getCodigoEstacionByIdRetornar($bicicleta->PUESTO_ALQUILER_id);
 
         echo $estacion_codigo . 'B' . $bicicleta->codigo;
+    }
+
+    public static function getCodigoEstacionamiento($bicicleta_id)
+    {
+        $estacionamiento = \App\Estacionamiento::where('BICICLETA_ID', '=', $bicicleta_id)
+            ->get()
+            ->first();
+        if ($estacionamiento != null) {
+            $codigo_estacion = Estacionamiento::getCodigoEstacion($estacionamiento->PUESTO_ALQUILER_id);
+
+            return $codigo_estacion . 'P' . $estacionamiento->codigo;
+        } else {
+            return '-';
+        }
+
+    }
+
+    public function registrarNuevoParqueo($ticket_id)
+    {
+        $ticket = \App\Ticket::find($ticket_id);
+
+        $bicicleta_id = $ticket->BICICLETA_id;
+
+        $estacion_destino_id = $ticket->destino_puesto_alquiler;
+
+        $estacionamiento_id_quitar = Estacionamiento::getEstacionamiento($bicicleta_id);
+        $estacionamiento_id_colocar = Estacionamiento::cargarEstacionamientosDisponible($estacion_destino_id);
+
+        $Estacionamiento = new Estacionamiento();
+
+        //la saco del parqueo anterior
+        $Estacionamiento->quitarBicicleta($estacionamiento_id_quitar);
+
+        //y la registro en el nuevo parqueo
+        $Estacionamiento->agregarBicicleta($estacionamiento_id_colocar, $bicicleta_id);
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => true,
+            'movimiento' => $bicicleta_id . '->' . $estacionamiento_id_colocar
+        ]);
+    }
+
+    public function quitarEstacionamiento($ticket_id)
+    {
+        $ticket = \App\Ticket::find($ticket_id);
+        $bicicleta_id = $ticket->BICICLETA_id;
+        $estacionamiento_id_quitar = Estacionamiento::getEstacionamiento($bicicleta_id);
+
+        $Estacionamiento = new Estacionamiento();
+        $Estacionamiento->quitarBicicleta($estacionamiento_id_quitar);
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => true,
+        ]);
     }
 }

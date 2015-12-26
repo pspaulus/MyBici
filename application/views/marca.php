@@ -1,7 +1,6 @@
 <!--prueba helper-->
 <?//= prueba();?>
 
-<!-- todo-ps Contenido Marca que debe ser internal frame -->
 <div id="page-wrapper">
 <div class="container-fluid">
 

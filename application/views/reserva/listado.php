@@ -24,6 +24,7 @@ if ($filtro == 'estacion') {
                     <th>Hora Retiro</th>
                     <th>Hora Entrega</th>
                     <th>Cod. Bicicleta</th>
+                    <th>Cod. Parqueo</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -38,12 +39,13 @@ if ($filtro == 'estacion') {
                             <td><?= $ticket->id ?></td>
                             <td><?= Tipo::getReservaTipoById($ticket->TIPO_id) ?></td>
                             <td><?= Usuario::getUsuarioNombreById($ticket->USUARIO_id) ?></td>
-                            <td><?= Estacion::getEstacionNombreById($ticket->origen_puesto_alquiler) ?></td>
+                            <td><?= Estacion::getEstacionNombreById($ticket->origen_puesto_alquiler)?></td>
                             <td><?= Estacion::getEstacionNombreById($ticket->destino_puesto_alquiler) ?></td>
                             <td><?= $ticket->fecha ?></td>
                             <td><?= $ticket->hora_retiro ?></td>
                             <td><?= $ticket->hora_entrega ?></td>
                             <td><?= Bicicleta::getBicicletaCodigoById($ticket->BICICLETA_id) ?></td>
+                            <td><?= Bicicleta::getCodigoEstacionamiento($ticket->BICICLETA_id) ?></td>
                             <td><?= Estado::getEstadoNombreById($ticket->ESTADO_id) ?></td>
                             <td>
 
