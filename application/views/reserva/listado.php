@@ -50,7 +50,7 @@ if ($filtro == 'estacion') {
                             <td>
 
                                 <?php if ($ticket->ESTADO_id == 10) { ?>
-                                    <button class="btn btn-sm btn-primary" type="button" title="Marcar En curso"
+                                    <button class="btn btn-xs btn-primary" type="button" title="Marcar En curso"
                                             data-toggle="modal" data-target="#marcarEstadoEnCurso_<?= $ticket->id ?>"
                                             id="en_curso_ticket_<?= $ticket->id ?>"><i class="fa fa-circle-o fa-2x"></i>
                                     </button>
@@ -60,7 +60,7 @@ if ($filtro == 'estacion') {
                                 <?php } ?>
 
                                 <?php if ($ticket->ESTADO_id == 11) { ?>
-                                    <button class="btn btn-sm btn-success" type="button" title="Marcar Realizada"
+                                    <button class="btn btn-xs btn-success" type="button" title="Marcar Realizada"
                                             data-toggle="modal" data-target="#marcarEstadoRealizada_<?= $ticket->id ?>"
                                             id="realizado_ticket_<?= $ticket->id ?>"><i
                                             class="fa fa-check-circle-o fa-2x"></i>
@@ -71,7 +71,7 @@ if ($filtro == 'estacion') {
                                 <?php } ?>
 
                                 <?php if ($ticket->ESTADO_id == 10) { ?>
-                                    <button class="btn btn-sm btn-danger" type="button" title="Marcar Anulada"
+                                    <button class="btn btn-xs btn-danger" type="button" title="Marcar Anulada"
                                             data-toggle="modal" data-target="#marcarEstadoAnulada_<?= $ticket->id ?>"
                                             id="anular_ticket_<?= $ticket->id ?>"><i
                                             class="fa fa-times-circle-o fa-2x"></i>

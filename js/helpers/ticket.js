@@ -78,7 +78,7 @@ var Ticket = {
             })
                 .done(function (r) {
                     if (r.status) {
-                        console.log('OK: cambio estado bicicleta ->' + estado);
+                        console.log('OK: cambio estado bicicleta -> ' + estado);
                     } else {
                         console.log('ERROR: cambio estado bicicleta');
                     }
@@ -101,13 +101,32 @@ var Ticket = {
                         }
                         if (estado == 'realizada') {
                             Ticket.acciones.marcarHora(ticket_id, 'entrega');
+                            Ticket.acciones.cambiarEstadoBicicleta(ticket_id, 'buena');
                             Ticket.acciones.registrarNuevoParqueo(ticket_id);
+                        }
+                        if (estado == 'anulada') {
+
                         }
 
                         $('.modal-backdrop').remove();
                         Ticket.acciones.refrescar();
                     } else {
                         console.log('ERROR: cambio estado ticket');
+                    }
+                });
+        },
+
+        cambiarEstadoBicicleta: function (ticket_id,estado_texto){
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Ticket/cambiarEstadoBicicleta/" + ticket_id + '/' + estado_texto ,
+                data: {}
+            })
+                .done(function (r) {
+                    if (r.status) {
+                        console.log('OK: cambio estado bicicleta ->' + r.bicicleta_id);
+                    } else {
+                        console.log('ERROR: cambio estado bicicleta');
                     }
                 });
         },
@@ -135,7 +154,7 @@ var Ticket = {
             })
                 .done(function (r) {
                     if (r.status) {
-                        console.log('OK: registro bicicleta en nuevo parqueo' + r.movimiento);
+                        console.log('OK: registro bicicleta en nuevo parqueo ' + r.movimiento);
                     } else {
                         console.log('ERROR: registro bicicleta en nuevo parqueo');
                     }

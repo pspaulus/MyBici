@@ -35,19 +35,19 @@ var Bicicleta = {
                 });
         },
 
-        marcarEstado: function (id, estado) {
+        marcarEstado: function (bicicleta_id, estado_texto) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Bicicleta/marcarEstado/" + estado,
-                data: {id: id}
+                url: "http://mybici.server/Bicicleta/marcarEstado/" + estado_texto,
+                data: {id: bicicleta_id}
             })
                 .done(function (r) {
                     if (r.status) {
-                        console.log('ok cambio estado bicicleta');
+                        console.log('OK: cambio estado bicicleta');
                         $('.modal-backdrop').remove();
                         Inventario.acciones.refrescar();
                     } else {
-                        console.log('error cambio estado bicicleta');
+                        console.log('ERROR: cambio estado bicicleta');
                     }
                 });
         },

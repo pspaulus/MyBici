@@ -235,5 +235,66 @@ class Ticket extends CI_Controller
         }
     }
 
+    public function getTicketBiciccleta_id($ticket_id)
+    {
+        $ticket = \App\Ticket::find($ticket_id);
+
+        if ($ticket != null){
+            $bicicleta_id =  $ticket->BICICLETA_id;
+
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true,
+                'bicicleta_id' => $bicicleta_id
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false,
+            ]);
+        }
+    }
+
+    public function cambiarEstadoBicicleta($ticket_id,$estado_texto)
+    {
+        $ticket = \App\Ticket::find($ticket_id);
+
+        $bicicleta_id =  $ticket->BICICLETA_id;
+
+        switch ($estado_texto) {
+            case 'danada': //dañada
+                $estado_id = 8;
+                break;
+
+            case 'reparar': //reparar
+                $estado_id = 3;
+                break;
+
+            case 'buena': //buena
+                $estado_id = 7;
+                break;
+
+            case 'en_uso': //en_uso
+                $estado_id = 9;
+                break;
+        }
+
+        $bicicleta = \App\Bicicleta::find($bicicleta_id);
+        $bicicleta->ESTADO_id = $estado_id;
+
+        if ( $bicicleta->save() ){
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true,
+                'bicicleta_id' => $bicicleta_id
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false,
+            ]);
+        }
+
+    }
 
 }

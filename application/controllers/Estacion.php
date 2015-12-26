@@ -84,6 +84,12 @@ class Estacion extends CI_Controller
         echo ($estacion != null) ? $estacion->codigo : null;
     }
 
+    public static function getCodigoEstacionByIdDevolver($id)
+    {
+        $estacion = \App\Estacion::find($id);
+        return ($estacion != null) ? $estacion->codigo : null;
+    }
+
     public static function cargarEstacion($id)
     {
         return $estacion = \App\Estacion::find($id);

@@ -172,8 +172,6 @@
                     Cancelar
                 </button>
                 <button type="button" class="btn btn-primary" onclick="Ticket.acciones.guardar();">Guardar</button>
-                <!-- todo-ps validar que destino tenga parqueos-->
-                <!-- todo-ps al anular ticket debe volver al bicicleta a su estado-->
             </div>
 
         </div>

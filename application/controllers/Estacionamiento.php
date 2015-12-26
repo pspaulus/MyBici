@@ -126,9 +126,9 @@ class Estacionamiento extends CI_Controller
         $estacionamiento->BICICLETA_id = $bicicleta_id;
         $estacionamiento->ESTADO_id = 5;
         if ($estacionamiento->save()) {
-            echo 'OK: agregar bicicleta en E->' . $estacionamiento->id.' B->'.$bicicleta_id;
+            echo 'OK: agregar bicicleta en E->' . $estacionamiento->id . ' B->' . $bicicleta_id;
         } else {
-            echo 'ERROR: agregar bicicleta en E->' . $estacionamiento->id.' B->'.$bicicleta_id;
+            echo 'ERROR: agregar bicicleta en E->' . $estacionamiento->id . ' B->' . $bicicleta_id;
         }
     }
 
@@ -145,16 +145,16 @@ class Estacionamiento extends CI_Controller
 
     public static function getEstacionamiento($bicicleta_id)
     {
-        $estacionamiento = \App\Estacionamiento::where('BICICLETA_id','=',$bicicleta_id)
+        $estacionamiento = \App\Estacionamiento::where('BICICLETA_id', '=', $bicicleta_id)
             ->get()
             ->first();
-        return $estacionamiento->id;
+        return ($estacionamiento != null) ? $estacionamiento->id : null;
     }
 
     public static function validarEstacionamientoDisponible($estacion_id)
     {
-        $estacionamiento = \App\Estacionamiento::where('PUESTO_ALQUILER_id','=',$estacion_id)
-            ->where('ESTADO_id','=',4) //libre
+        $estacionamiento = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->where('ESTADO_id', '=', 4)//libre
             ->get()
             ->first();
         //dd($estacionamiento->id);

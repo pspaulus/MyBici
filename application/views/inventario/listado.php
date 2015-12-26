@@ -35,7 +35,8 @@ if ($filtro == 'codigo') {
                         $codigo_estacion = Estacion::getCodigoEstacion($bicicleta->PUESTO_ALQUILER_id);
                         $nombre_estacion = Estacion::getNombreEstacion($bicicleta->PUESTO_ALQUILER_id);
                         $estado_bicicleta = Bicicleta::getEstadoBicicleta($bicicleta->id);
-                        $codigo_estacionamiento = Bicicleta::getEstacionamiento($bicicleta->id);
+                        $estacionamiento_codigo = Bicicleta::getEstacionamiento($bicicleta->id);
+                        $estacionamiento_estacion_codigo = Bicicleta::getEstacionamientoEstacionCodigo($bicicleta->id);
                         $tipo_bibicleta = Bicicleta::getTipo($bicicleta->TIPO_id);
                         ?>
                         <tr>
@@ -44,7 +45,7 @@ if ($filtro == 'codigo') {
                             <td><?= $codigo_estacion . 'B' . $bicicleta->codigo ?></td>
                             <td><?= $tipo_bibicleta ?></td>
                             <td><?= $nombre_estacion ?></td>
-                            <td><?= ($codigo_estacionamiento != null) ? $codigo_estacion .'P'. $codigo_estacionamiento : '-'; ?></td>
+                            <td><?= ($estacionamiento_codigo != null) ? $estacionamiento_estacion_codigo .'P'. $estacionamiento_codigo : '-'; ?></td>
 
 
                             <td><?= $estado_bicicleta ?></td>

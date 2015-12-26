@@ -112,6 +112,23 @@ class Bicicleta extends CI_Controller
         return (!$estacionamientos == null) ? $estacionamientos->codigo : null;
     }
 
+    public static function getEstacionamientoEstacionCodigo($bicicleta_id)
+    {
+        $estacionamiento = \App\Estacionamiento::where('BICICLETA_id', '=', $bicicleta_id)
+            ->get()
+            ->first();
+
+
+        if ($estacionamiento != null)
+        {
+            $estacion_id = $estacionamiento->PUESTO_ALQUILER_id;
+
+            $estacion_codigo = Estacion::getCodigoEstacionByIdDevolver($estacion_id);
+
+            return (!$estacion_codigo == null) ? $estacion_codigo : null;
+        }
+    }
+
     public function cargarVistaListadoBicicletasPorEstacion($estacion_id, $estado_id)
     {
         $data['estacion_id'] = $estacion_id;
@@ -367,7 +384,8 @@ class Bicicleta extends CI_Controller
         $Estacionamiento = new Estacionamiento();
 
         //la saco del parqueo anterior
-        $Estacionamiento->quitarBicicleta($estacionamiento_id_quitar);
+        if($estacionamiento_id_quitar != null)
+            $Estacionamiento->quitarBicicleta($estacionamiento_id_quitar);
 
         //y la registro en el nuevo parqueo
         $Estacionamiento->agregarBicicleta($estacionamiento_id_colocar, $bicicleta_id);
