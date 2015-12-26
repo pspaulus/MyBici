@@ -55,7 +55,6 @@
         </a>
 
         <div id="contenido_buscar">
-            <h3>Estaci&oacute;n</h3>
 
             <!--Form buscar-->
             <div class="row">
@@ -123,15 +122,15 @@
                             <!-- tab parqueos -->
                             <!-- se llena por ajax -->
                             <div class="col-xs-12">
-                                <h3>Lista de parqueos</h3>
+                                <h3>Lista de Estacionamiento</h3>
 
                                 <div class="table-responsive">
                                     <table id="tabla_usuario" class="table table-hover">
                                         <thead>
                                         <tr>
                                             <th>Nro.</th>
-                                            <th>Cod. Estaci&oacute;n</th>
-                                            <th>Cod. Bicicleta</th>
+                                            <th>Codigo</th>
+                                            <th>Bicicleta</th>
                                             <th>Acciones</th>
                                         </tr>
                                         </thead>

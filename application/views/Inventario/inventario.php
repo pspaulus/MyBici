@@ -16,7 +16,7 @@
                 <a onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_estados'), $('#titulo'))">
                     <ol class="breadcrumb">
                         <li class="active" id="titulo">
-                            <i class="fa fa-clock-o"></i> Estados
+                            <i class="fa fa-clock-o"></i> Estados &nbsp;
                             <button class="btn btn-xs btn-default" type="button" title="Refrescar"
                                     onclick="Inventario.acciones.refrescar();">
                                 <i class="fa fa-refresh"></i></button>
@@ -193,6 +193,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>C&oacute;digo</th>
+                                    <th>Tipo</th>
                                     <th>Estaci&oacute;n</th>
                                     <th>Estacionamiento</th>
                                     <th>Estado</th>

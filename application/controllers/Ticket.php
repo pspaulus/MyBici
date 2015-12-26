@@ -281,8 +281,12 @@ class Ticket extends CI_Controller
                 $estado_id = 7;
                 break;
 
-            case 'en_uso': //en_uso
+            case 'en_reserva': //en_uso
                 $estado_id = 9;
+                break;
+
+            case 'en_uso': //en_uso
+                $estado_id = 6;
                 break;
         }
 

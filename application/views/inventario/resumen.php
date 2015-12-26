@@ -23,7 +23,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-check-circle-o fa-4x"></i>
+                        <i class="fa fa-check fa-4x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= $Bicicletas->contarBicicletasEstado('buena'); ?></div>
@@ -39,11 +39,11 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-times-circle-o fa-4x"></i>
+                        <i class="fa fa-wrench fa-4x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= $Bicicletas->contarBicicletasEstado('reparar'); ?></div>
-                        <div><strong>En reparaci&oacute;n</strong></div>
+                        <div><strong>Reparaci&oacute;n</strong></div>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-times-circle-o fa-4x"></i>
+                        <i class="fa fa-close fa-4x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= $Bicicletas->contarBicicletasEstado('danada'); ?></div>

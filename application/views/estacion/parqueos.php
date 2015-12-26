@@ -1,21 +1,24 @@
 <?php $Estacionamiento = new Estacionamiento(); ?>
 <?php $Bicicleta = new Bicicleta(); ?>
 <div class="col-xs-12">
-    <h3>Lista de parqueos - <?= Estacion::getNombreEstacion($estacion_id) ?></h3>
+    <h3>Lista de Estacionamiento - <?= Estacion::getNombreEstacion($estacion_id) ?></h3>
 
     <div class="table-responsive">
         <table id="tabla_usuario" class="table table-hover">
             <thead>
             <tr>
                 <th>Nro.</th>
-                <th>Cod. Estaci&oacute;n</th>
-                <th>Cod. Bicicleta</th>
+                <th>Codigo</th>
+                <th>Bicicleta</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
             <?php $estacionamientos = $Estacionamiento->cargarEstacionamientos($estacion_id, $estado); ?>
             <?php $i = 1 ?>
+
+            <?php if( count($estacionamientos) == 0) $Estacionamiento->load->view('sin_datos')?>
+
             <?php foreach ($estacionamientos as $estacionamiento) { ?>
                 <tr>
                     <td><strong><?= $i ?></strong></td>
@@ -24,7 +27,7 @@
                     <?php $bicicleta = $Bicicleta->cargarBicicleta($estacionamiento->BICICLETA_id); ?>
                     <?php if ($bicicleta != null) {
                         $bicicleta_estacion_codigo = $Bicicleta->getCodigoEstacionByBicicletaEstacionId($bicicleta->PUESTO_ALQUILER_id);
-                        $codigo_para_mostrar = $bicicleta_estacion_codigo . 'B' . $bicicleta->codigo;
+                        $codigo_para_mostrar = $bicicleta_estacion_codigo . 'B' . $bicicleta->codigo . ' - '. Bicicleta::getEstadoBicicleta($bicicleta->id);
                     } else {
                         $codigo_para_mostrar = '-';
                     } ?>

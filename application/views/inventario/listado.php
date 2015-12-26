@@ -28,8 +28,11 @@ if ($filtro == 'codigo') {
                 </tr>
                 </thead>
                 <tbody>
+                <?php if( count($bicicletas_todas) == 0) $Bicicletas->load->view('sin_datos')?>
+
                 <?php if ($bicicletas_todas != null) { ?>
                     <?php $i = 1 ?>
+
                     <?php foreach ($bicicletas_todas as $bicicleta) { ?>
                         <?php
                         $codigo_estacion = Estacion::getCodigoEstacion($bicicleta->PUESTO_ALQUILER_id);

@@ -58,7 +58,7 @@ var Ticket = {
                         if (r.status) {
                             console.log('Ok: guardar ticket ->' + r.ticket_nuevo_id);
 
-                            Ticket.acciones.marcarBicicletaEstadoEnUso(r.ticket_bicicleta_id, 'en_uso');
+                            Ticket.acciones.marcarBicicletaEstadoEnUso(r.ticket_bicicleta_id, 'en_reserva');
 
                             $('#crearTicket').removeClass('in');
                             $('.modal-backdrop').remove();
@@ -93,10 +93,11 @@ var Ticket = {
             })
                 .done(function (r) {
                     if (r.status) {
-                        console.log('OK: cambio estado ticket' + r.ticket_id);
+                        console.log('OK: cambio estado ticket -> ' + r.ticket_id);
 
                         if (estado == 'en_curso') {
                             Ticket.acciones.marcarHora(ticket_id, 'retiro');
+                            Ticket.acciones.cambiarEstadoBicicleta(ticket_id, 'en_uso');
                             Bicicleta.acciones.quitarEstacionamiento(ticket_id);
                         }
                         if (estado == 'realizada') {

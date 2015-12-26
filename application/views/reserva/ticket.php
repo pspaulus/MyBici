@@ -22,7 +22,7 @@
                 <div class="col-lg-12">
                     <ol class="breadcrumb">
                         <li class="active" id="titulo">
-                            <i class="fa fa-calendar"></i> Hoy: <?= Escritorio::getFechaEcuador() ?>
+                            <i class="fa fa-calendar"></i> Hoy: <?= Escritorio::getFechaEcuador() ?> &nbsp;
                             <button class="btn btn-xs btn-default" type="button"
                                     onclick="Ticket.acciones.refrescar();"><i class="fa fa-refresh"></i></button>
                         </li>
@@ -188,17 +188,22 @@
                                 <!--fecha-->
                                 <div class="form-group espacio">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="filtro_fecha"
-                                               data-date-format="yyyy-mm-dd" readonly
-                                               value="<?= Escritorio::getFechaEcuador() ?>">
-
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
+                                        <input type="text" class="form-control" id="filtro_fecha"
+                                               readonly value="<?= Escritorio::getFechaEcuador() ?>">
                                     </div>
                                 </div>
                                 <script>
-                                    $('#filtro_fecha').datepicker({})
+                                    $('#filtro_fecha').datepicker({
+                                        format: "yyyy-mm-dd",
+                                        autoclose: true,
+                                        todayBtn: "linked",
+                                        language: "es",
+                                        orientation: "top right",
+                                        todayHighlight: true
+                                    });
                                 </script>
 
                                 <!--Boton buscar-->

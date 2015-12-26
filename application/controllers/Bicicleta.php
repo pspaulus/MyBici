@@ -31,15 +31,23 @@ class Bicicleta extends CI_Controller
             case 'buena':
                 $estado = 7;
                 break;
+
             case 'reparar':
                 $estado = 3;
                 break;
-            case 'en_uso':
-                $estado = 9;
-                break;
+
             case 'danada':
                 $estado = 8;
                 break;
+
+            case 'en_uso':
+                $estado = [9,6];
+                $conteo_bicicletas = \App\Bicicleta::whereIn('ESTADO_id', $estado)
+                    ->get()
+                    ->count();
+                return $conteo_bicicletas;
+                break;
+
         }
         $conteo_bicicletas = \App\Bicicleta::where('ESTADO_id', '=', $estado)
             ->count();
@@ -119,8 +127,7 @@ class Bicicleta extends CI_Controller
             ->first();
 
 
-        if ($estacionamiento != null)
-        {
+        if ($estacionamiento != null) {
             $estacion_id = $estacionamiento->PUESTO_ALQUILER_id;
 
             $estacion_codigo = Estacion::getCodigoEstacionByIdDevolver($estacion_id);
@@ -151,20 +158,24 @@ class Bicicleta extends CI_Controller
         $id = $_REQUEST['id'];
 
         switch ($estado) {
-            case 'danada': //dañada
+            case 'danada':
                 $estado = 8;
                 break;
 
-            case 'reparar': //reparar
+            case 'reparar':
                 $estado = 3;
                 break;
 
-            case 'buena': //buena
+            case 'buena':
                 $estado = 7;
                 break;
 
-            case 'en_uso': //en_uso
+            case 'en_reserva':
                 $estado = 9;
+                break;
+
+            case 'en_uso':
+                $estado = 6;
                 break;
         }
 
@@ -286,18 +297,33 @@ class Bicicleta extends CI_Controller
         }
     }
 
+    public static function hallarBicicletaEnEstaciocionamiento($estacion_id)
+    {
+        // busco los estacionamientos de la estacion, que tengan una bicicleta
+        $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->whereNotNull('BICICLETA_id')
+            ->get();
+
+        foreach ($estacionamientos as $estacionamiento) {
+            $bicicleta = \App\Bicicleta::find($estacionamiento->BICICLETA_id);
+
+            if ($bicicleta->ESTADO_id == 7) {
+                return $bicicleta;
+            }
+        }
+
+        return null;
+    }
+
     public static function cargarBicicletaDisponibleMostrar($estacion_id)
     {
-        $estacionamiento = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
-            ->whereNotNull('BICICLETA_id')
-            ->get()
-            ->first();
+        $bicicleta = Bicicleta::hallarBicicletaEnEstaciocionamiento($estacion_id);
 
-        if($estacionamiento!= null){
-        $bicicleta = \App\Bicicleta::find($estacionamiento->BICICLETA_id);
-        $estacion_codigo = Estacion::getCodigoEstacionByIdRetornar($bicicleta->PUESTO_ALQUILER_id);
+        if ($bicicleta != null) {
 
-        echo $estacion_codigo . 'B' . $bicicleta->codigo;
+            $estacion_codigo = Estacion::getCodigoEstacionByIdRetornar($bicicleta->PUESTO_ALQUILER_id);
+            echo $estacion_codigo . 'B' . $bicicleta->codigo;
+
         } else {
             echo '-';
         }
@@ -305,21 +331,19 @@ class Bicicleta extends CI_Controller
 
     public static function cargarBicicletaDisponible($estacion_id)
     {
-        $estacionamiento = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
-            ->whereNotNull('BICICLETA_id')
-            ->get()
-            ->first();
+        $bicicleta = Bicicleta::hallarBicicletaEnEstaciocionamiento($estacion_id);
 
-        if ($estacionamiento != null) {
-            $bicicleta = \App\Bicicleta::find($estacionamiento->BICICLETA_id);
+        if ($bicicleta != null) {
+
             $estacion_codigo = Estacion::getCodigoEstacionByIdRetornar($bicicleta->PUESTO_ALQUILER_id);
-
             $codigo_bicicleta = $estacion_codigo . 'B' . $bicicleta->codigo;
+
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => true,
                 'codigo_bicicleta' => $codigo_bicicleta
             ]);
+
         } else {
             header('Content-Type: application/json');
             echo json_encode([
@@ -388,7 +412,7 @@ class Bicicleta extends CI_Controller
         $Estacionamiento = new Estacionamiento();
 
         //la saco del parqueo anterior
-        if($estacionamiento_id_quitar != null)
+        if ($estacionamiento_id_quitar != null)
             $Estacionamiento->quitarBicicleta($estacionamiento_id_quitar);
 
         //y la registro en el nuevo parqueo
