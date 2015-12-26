@@ -164,10 +164,11 @@ var Ticket = {
         cargarListaTicketPorEstacion: function () {
             var estacion_id = $('#select_ticket_estacion').val();
             var estado_id = $('#select_estado_ticket').val();
+            var fecha = $('#filtro_fecha').val();
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Ticket/cargarListaTicketPorEstacion/" + estacion_id + '/' + estado_id,
+                url: "http://mybici.server/Ticket/cargarListaTicketPorEstacion/" + estacion_id + '/' + estado_id+'/'+fecha,
                 data: {}
             })
                 .done(function (r) {

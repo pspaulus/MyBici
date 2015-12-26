@@ -1,10 +1,10 @@
 <?php
-$Ticket = new Ticket();
-if ($filtro == 'estacion') {
-    $tickets = $Ticket->cargarTicketPorEstacionEstado($estacion_id, $estado_id);
-} elseif ($filtro == 'campo') {
-    $tickets = $Ticket->cargarTicket($campo, $valor);
-}
+    $Ticket = new Ticket();
+    if ($filtro == 'estacion') {
+        $tickets = $Ticket->cargarTicketPorEstacionEstado($estacion_id, $estado_id, $fecha);
+    } elseif ($filtro == 'campo') {
+        $tickets = $Ticket->cargarTicket($campo, $valor);
+    }
 ?>
 <div id="listado_ticket">
     <h3>Lista de Tickets</h3>
@@ -39,7 +39,7 @@ if ($filtro == 'estacion') {
                             <td><?= $ticket->id ?></td>
                             <td><?= Tipo::getReservaTipoById($ticket->TIPO_id) ?></td>
                             <td><?= Usuario::getUsuarioNombreById($ticket->USUARIO_id) ?></td>
-                            <td><?= Estacion::getEstacionNombreById($ticket->origen_puesto_alquiler)?></td>
+                            <td><?= Estacion::getEstacionNombreById($ticket->origen_puesto_alquiler) ?></td>
                             <td><?= Estacion::getEstacionNombreById($ticket->destino_puesto_alquiler) ?></td>
                             <td><?= $ticket->fecha ?></td>
                             <td><?= $ticket->hora_retiro ?></td>

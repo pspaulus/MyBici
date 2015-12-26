@@ -15,7 +15,7 @@ class Ticket extends CI_Controller
 
     public static function contarTicketHoy()
     {
-        $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador() )
+        $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador())
             ->get()
             ->count();
         return $conteo_tickets;
@@ -23,7 +23,7 @@ class Ticket extends CI_Controller
 
     public static function contarTicketVigentesHoy()
     {
-        $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador() )
+        $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador())
             ->whereIn('ESTADO_id', [10])
             ->get()
             ->count();
@@ -44,7 +44,7 @@ class Ticket extends CI_Controller
                 break;
         }
         $conteo_tickets = \App\Ticket::where('ESTADO_id', '=', $estado)
-            ->where('fecha', '=', Escritorio::getFechaEcuador() )
+            ->where('fecha', '=', Escritorio::getFechaEcuador())
             ->get()
             ->count();
         return $conteo_tickets;
@@ -101,10 +101,11 @@ class Ticket extends CI_Controller
         }
     }
 
-    public function cargarListaTicketPorEstacion($estacion_id, $estado_id)
+    public function cargarListaTicketPorEstacion($estacion_id, $estado_id, $fecha)
     {
         $data['estacion_id'] = $estacion_id;
         $data['estado_id'] = $estado_id;
+        $data['fecha'] = $fecha;
         $data['filtro'] = 'estacion';
 
         $this->load->view('reserva/listado', $data);
@@ -119,22 +120,25 @@ class Ticket extends CI_Controller
         $this->load->view('reserva/listado', $data);
     }
 
-    public function cargarTicketPorEstacionEstado($estacion_id, $estado_id)
+    public function cargarTicketPorEstacionEstado($estacion_id, $estado_id, $fecha)
     {
         //todas
         if ($estacion_id == -1 && $estado_id == -1) {
-            $tickets = \App\Ticket::all();
+            $tickets = \App\Ticket::where('fecha','=',$fecha)
+                ->get();
         }
 
         //por estacion
         if ($estacion_id != -1 && $estado_id == -1) {
             $tickets = \App\Ticket::where('destino_puesto_alquiler', '=', $estacion_id)
+                ->where('fecha','=',$fecha)
                 ->get();
         }
 
         //por estado
         if ($estacion_id == -1 && $estado_id != -1) {
             $tickets = \App\Ticket::where('ESTADO_id', '=', $estado_id)
+                ->where('fecha','=',$fecha)
                 ->get();
         }
 
@@ -142,6 +146,7 @@ class Ticket extends CI_Controller
         if ($estacion_id != -1 && $estado_id != -1) {
             $tickets = \App\Ticket::where('destino_puesto_alquiler', '=', $estacion_id)
                 ->where('ESTADO_id', '=', $estado_id)
+                ->where('fecha','=',$fecha)
                 ->get();
         }
 
@@ -239,8 +244,8 @@ class Ticket extends CI_Controller
     {
         $ticket = \App\Ticket::find($ticket_id);
 
-        if ($ticket != null){
-            $bicicleta_id =  $ticket->BICICLETA_id;
+        if ($ticket != null) {
+            $bicicleta_id = $ticket->BICICLETA_id;
 
             header('Content-Type: application/json');
             echo json_encode([
@@ -255,11 +260,11 @@ class Ticket extends CI_Controller
         }
     }
 
-    public function cambiarEstadoBicicleta($ticket_id,$estado_texto)
+    public function cambiarEstadoBicicleta($ticket_id, $estado_texto)
     {
         $ticket = \App\Ticket::find($ticket_id);
 
-        $bicicleta_id =  $ticket->BICICLETA_id;
+        $bicicleta_id = $ticket->BICICLETA_id;
 
         switch ($estado_texto) {
             case 'danada': //dañada
@@ -282,7 +287,7 @@ class Ticket extends CI_Controller
         $bicicleta = \App\Bicicleta::find($bicicleta_id);
         $bicicleta->ESTADO_id = $estado_id;
 
-        if ( $bicicleta->save() ){
+        if ($bicicleta->save()) {
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => true,

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/sb-admin.css">
     <link rel="stylesheet" href="/css/morris.css">
     <link rel="stylesheet" href="/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/datepicker.css">
     <link rel="icon" type="image/png" href="/icons/ico_bicicleta.jpg" />
 </head>
 <body class="">

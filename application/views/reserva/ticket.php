@@ -111,7 +111,7 @@
 
                                 <!--Identificador-->
                                 <div class="form-group espacio">
-<!--                                    <label class="control-label" for="ticket_campo">Identificador</label>-->
+                                    <!--                                    <label class="control-label" for="ticket_campo">Identificador</label>-->
                                     <select class="form-control" id="ticket_campo">
                                         <option value="id">ID</option>
                                         <option value="bicicleta">Bicicleta</option>
@@ -121,7 +121,7 @@
 
                                 <!--Codigo-->
                                 <div class="form-group espacio">
-<!--                                    <label class="control-label" for="ticket_codigo">C&oacute;digo</label>-->
+                                    <!--                                    <label class="control-label" for="ticket_codigo">C&oacute;digo</label>-->
 
                                     <div class="agrupador">
                                         <input type="text" class="form-control" id="ticket_valor" maxlength="45"
@@ -185,6 +185,22 @@
                                     </select>
                                 </div>
 
+                                <!--fecha-->
+                                <div class="form-group espacio">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="filtro_fecha"
+                                               data-date-format="yyyy-mm-dd" readonly
+                                               value="<?= Escritorio::getFechaEcuador() ?>">
+
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    $('#filtro_fecha').datepicker({})
+                                </script>
+
                                 <!--Boton buscar-->
                                 <div class="form-group">
                                     <button class="btn btn-primary" type="button"
@@ -221,6 +237,7 @@
                                 <th>Hora Retiro</th>
                                 <th>Hora Entrega</th>
                                 <th>Cod. Bicicleta</th>
+                                <th>Cod. Parqueo</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
