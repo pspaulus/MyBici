@@ -1,10 +1,10 @@
 <?php
-    $Ticket = new Ticket();
-    if ($filtro == 'estacion') {
-        $tickets = $Ticket->cargarTicketPorEstacionEstado($estacion_id, $estado_id, $fecha);
-    } elseif ($filtro == 'campo') {
-        $tickets = $Ticket->cargarTicket($campo, $valor);
-    }
+$Ticket = new Ticket();
+if ($filtro == 'estacion') {
+    $tickets = $Ticket->cargarTicketPorEstacionEstado($estacion_id, $estado_id, $fecha);
+} elseif ($filtro == 'campo') {
+    $tickets = $Ticket->cargarTicket($campo, $valor);
+}
 ?>
 <div id="listado_ticket">
     <h3>Lista de Tickets</h3>
@@ -18,13 +18,12 @@
                     <th>ID</th>
                     <th>Tipo</th>
                     <th>Usuario</th>
+                    <th>Bicicleta</th>
                     <th>Origen</th>
                     <th>Destino</th>
                     <th>Fecha</th>
                     <th>Hora Retiro</th>
                     <th>Hora Entrega</th>
-                    <th>Cod. Bicicleta</th>
-                    <th>Cod. Parqueo</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -36,16 +35,17 @@
                         <tr>
                             <td><strong><?= $i ?></strong></td>
                             <?php $i++ ?>
+                            <?php $estacionamiento_origen = Estacionamiento::getEstacionamientoOrigenDestino($ticket->origen_estacionamiento) ?>
+                            <?php $estacionamiento_destino = Estacionamiento::getEstacionamientoOrigenDestino($ticket->destino_estacionamiento) ?>
                             <td><?= $ticket->id ?></td>
                             <td><?= Tipo::getReservaTipoById($ticket->TIPO_id) ?></td>
                             <td><?= Usuario::getUsuarioNombreById($ticket->USUARIO_id) ?></td>
-                            <td><?= Estacion::getEstacionNombreById($ticket->origen_puesto_alquiler) ?></td>
-                            <td><?= Estacion::getEstacionNombreById($ticket->destino_puesto_alquiler) ?></td>
+                            <td><?= Bicicleta::getBicicletaCodigoById($ticket->BICICLETA_id) ?></td>
+                            <td><?= Estacion::getEstacionNombreById($ticket->origen_puesto_alquiler) . ' - ' . $estacionamiento_origen ?></td>
+                            <td><?= Estacion::getEstacionNombreById($ticket->destino_puesto_alquiler) . ' - ' . $estacionamiento_destino ?></td>
                             <td><?= $ticket->fecha ?></td>
                             <td><?= $ticket->hora_retiro ?></td>
                             <td><?= $ticket->hora_entrega ?></td>
-                            <td><?= Bicicleta::getBicicletaCodigoById($ticket->BICICLETA_id) ?></td>
-                            <td><?= Bicicleta::getCodigoEstacionamiento($ticket->BICICLETA_id) ?></td>
                             <td><?= Estado::getEstadoNombreById($ticket->ESTADO_id) ?></td>
                             <td>
 

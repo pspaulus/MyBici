@@ -41,7 +41,6 @@ class Estacionamiento extends CI_Controller
 
             $estacionamiento_secuencia = $this->getSecuenciaEstacionamiento($estacion_id);
 
-//            if ($estacion = \App\Estacion::find($estacion_id) != null) {
             $estacion_nueva = \App\Estacionamiento::firstOrCreate([
                 'codigo' => $estacionamiento_secuencia,
                 'PUESTO_ALQUILER_id' => $estacion_id,
@@ -50,20 +49,6 @@ class Estacionamiento extends CI_Controller
             ]);
 
             echo 'E->' . $estacion_nueva->PUESTO_ALQUILER_id . ' P->' . $estacion_nueva->codigo . ' || ';
-//
-//                if ($estacion_nueva->id != null) {
-//                    header('Content-Type: application/json');
-//                    echo json_encode([
-//                        'status' => true,
-//                        'estacionamiento_nuevo_id' => $estacion_nueva->codigo
-//                    ]);
-//                }
-//            } else {
-//                header('Content-Type: application/json');
-//                echo json_encode([
-//                    'status' => false,
-//                ]);
-//            }
         }
     }
 
@@ -91,8 +76,6 @@ class Estacionamiento extends CI_Controller
     public function cargarVistaParqueos($estacion_id, $estado)
     {
         $data['estacion_id'] = $estacion_id;
-
-        //$Estacion = new Estacion();
         $data['Estacion'] = $this;
         $data['estado'] = $estado;
 
@@ -151,13 +134,25 @@ class Estacionamiento extends CI_Controller
         return ($estacionamiento != null) ? $estacionamiento->id : null;
     }
 
+    public static function getEstacionamientoOrigenDestino($estacionmiento_id)
+    {
+        $estacimonamiento = \App\Estacionamiento::find($estacionmiento_id);
+
+        if ($estacimonamiento != null) {
+            $estacion_codigo = Estacion::getCodigoEstacionByIdDevolver($estacimonamiento->PUESTO_ALQUILER_id);
+
+            return $estacion_codigo . 'P'.$estacimonamiento->codigo;
+        } else {
+            return '<i class="fa fa-clock-o"></i> ';
+        }
+    }
+
     public static function validarEstacionamientoDisponible($estacion_id)
     {
         $estacionamiento = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
             ->where('ESTADO_id', '=', 4)//libre
             ->get()
             ->first();
-        //dd($estacionamiento->id);
 
         if ($estacionamiento != null) {
             header('Content-Type: application/json');
@@ -171,6 +166,5 @@ class Estacionamiento extends CI_Controller
                 'status' => false,
             ]);
         }
-
     }
 }

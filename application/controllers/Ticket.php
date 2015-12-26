@@ -66,6 +66,8 @@ class Ticket extends CI_Controller
         $BICICLETA_codigo = $_REQUEST['BICICLETA_codigo'];
         $BICICLETA_id = Bicicleta::getIdBicicletaByCodigoDevolver($BICICLETA_codigo);
         $origen_puesto_alquiler = $_REQUEST['origen_puesto_alquiler'];
+        $origen_estacionamiento = Estacionamiento::getEstacionamiento($BICICLETA_id);
+        $destino_estacionamiento = null;
         $destino_puesto_alquiler = $_REQUEST['destino_puesto_alquiler'];
         $fecha = $_REQUEST['fecha'];
         $hora_retiro = $_REQUEST['hora_retiro'];
@@ -78,7 +80,9 @@ class Ticket extends CI_Controller
             'USUARIO_id' => $USUARIO_id,
             'BICICLETA_id' => $BICICLETA_id,
             'origen_puesto_alquiler' => $origen_puesto_alquiler,
+            'origen_estacionamiento' => $origen_estacionamiento,
             'destino_puesto_alquiler' => $destino_puesto_alquiler,
+            'destino_estacionamiento' => $destino_estacionamiento,
             'fecha' => $fecha,
             'hora_retiro' => $hora_retiro,
             'hora_entrega' => $hora_entrega,
@@ -158,7 +162,6 @@ class Ticket extends CI_Controller
         switch ($campo_tipo) {
             case 'id':
                 $campo = 'id';
-                //return $ticket = \App\Ticket::find($valor);
                 break;
 
             case 'bicicleta':
@@ -169,7 +172,6 @@ class Ticket extends CI_Controller
             case 'usuario':
                 $campo = 'USUARIO_id';
                 $valor = Usuario::getUsuarioIdByNombreDevolver($valor);
-                //return  $ticket = \App\Ticket::where($campo, '=', $valor)->get();
                 break;
 
         }

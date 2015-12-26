@@ -22,7 +22,7 @@
                 <div class="col-lg-12">
                     <ol class="breadcrumb">
                         <li class="active" id="titulo">
-                            <i class="fa fa-clock-o"></i> Hoy: <?= Escritorio::getFechaEcuador() ?>
+                            <i class="fa fa-calendar"></i> Hoy: <?= Escritorio::getFechaEcuador() ?>
                             <button class="btn btn-xs btn-default" type="button"
                                     onclick="Ticket.acciones.refrescar();"><i class="fa fa-refresh"></i></button>
                         </li>
@@ -231,13 +231,12 @@
                                 <th>ID</th>
                                 <th>Tipo</th>
                                 <th>Usuario</th>
+                                <th>Bicicleta</th>
                                 <th>Origen</th>
                                 <th>Destino</th>
                                 <th>Fecha</th>
                                 <th>Hora Retiro</th>
                                 <th>Hora Entrega</th>
-                                <th>Cod. Bicicleta</th>
-                                <th>Cod. Parqueo</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>

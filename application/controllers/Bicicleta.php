@@ -381,6 +381,10 @@ class Bicicleta extends CI_Controller
         $estacionamiento_id_quitar = Estacionamiento::getEstacionamiento($bicicleta_id);
         $estacionamiento_id_colocar = Estacionamiento::cargarEstacionamientosDisponible($estacion_destino_id);
 
+        //registro en el ticket donde se guardo
+        $ticket->destino_estacionamiento = $estacionamiento_id_colocar;
+        $ticket->save();
+
         $Estacionamiento = new Estacionamiento();
 
         //la saco del parqueo anterior
