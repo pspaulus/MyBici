@@ -90,26 +90,7 @@
                             </div>
                         </div>
 
-                        <!--Parqueos-->
-                        <!--                        <div class="form-group">-->
-                        <!--                            <div class="col-xs-2 col-xs-offset-1">-->
-                        <!--                                <label for="Descripcion"> No. de Parqueos</label>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="agrupador">-->
-                        <!--                                <div class="col-xs-2">-->
-                        <!--                                    <input class="form-control" id="numero_estaciones" type="text"-->
-                        <!--                                           maxlength="2" value="1"-->
-                        <!--                                           onkeypress="return Escritorio.Validaciones.soloNumeros(event)"-->
-                        <!--                                           onkeyup="Estacion.label.cantidad();">-->
-                        <!--                                </div>-->
-                        <!--                                <div class="col-xs-2 mensaje oculto">-->
-                        <!--                                    <label class="control-label" id="error_cantidad_parqueos">&iexcl;Error de-->
-                        <!--                                        cantidad!</label>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
-
-                        <div class="form-group">
+                        <div class="">
                             <div class="agrupador">
                                 <div class="col-xs-9 col-xs-offset-3 mensaje oculto">
                                     <label class="control-label" id="error_ya_existe">&iexcl;C&oacute;digo o nombre

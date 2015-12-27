@@ -5,7 +5,7 @@ var Bicicleta = {
         cargarListaBicicletasPorCodigo: function () {
             var bicicleta_codigo = $('#codigo_bicicleta');
 
-            if (bicicleta_codigo.val().length > 2 ){
+            if (bicicleta_codigo.val().length > 2) {
                 $.ajax({
                     method: "POST",
                     url: "http://mybici.server/Bicicleta/cargarVistaListadoBicicletasPorCodigo/" + bicicleta_codigo.val().toUpperCase(),
@@ -104,6 +104,8 @@ var Bicicleta = {
             var mensaje = $('#error_cantidad');
             mensaje.parent('.mensaje').removeClass(' has-error');
             mensaje.parent('.mensaje').addClass(' oculto');
+
+            Estacion.mensajes.oculta($('#error_sin_estacion'));
         },
 
         guardar: function () {
@@ -117,37 +119,45 @@ var Bicicleta = {
 
             var secuencia = 0;
 
-            if (input_cantidad_nuevo.val() > 0 && input_cantidad_nuevo.val() < 100) {
+            if (select_estacion_inventario_nuevo.val() == null) {
+                Estacion.mensajes.mostrar($('#error_sin_estacion'));
 
-                for (var i = 0; i < input_cantidad_nuevo.val(); i++) {
-
-                    secuencia = parseInt(input_codigo_bicicleta_nuevo.val()) + i;
-
-                    console.log('codigo:'+ input_codigo_estacion_nuevo.val() + 'B' + secuencia +'\n'+
-                        'PUESTO_ALQUILER_id:' + select_estacion_inventario_nuevo.val() +'\n'+
-                        'TIPO_id:' + select_tipo_nuevo.val()+'\n'+
-                        'ESTADO_id:' + select_estado_nuevo.val());
-                    $.ajax({
-                        method: "POST",
-                        url: "http://mybici.server/Bicicleta/guardarBicicleta/",
-                        data: {
-                            codigo: input_codigo_estacion_nuevo.val() + 'B' + secuencia,
-                            PUESTO_ALQUILER_id: select_estacion_inventario_nuevo.val(),
-                            TIPO_id: select_tipo_nuevo.val(),
-                            ESTADO_id: select_estado_nuevo.val()
-                        }
-                    })
-                        .done(function (r) {
-                            console.log('guardado blicicleta estado ->' + r.status);
-                            $('.modal-backdrop').remove();
-                            Inventario.acciones.refrescar();
-                        });
-                }
             } else {
-                var mensaje = $('#error_cantidad');
-                mensaje.parent('.mensaje').addClass(' has-error');
-                mensaje.parent('.mensaje').removeClass(' oculto');
+                Estacion.mensajes.oculta($('#error_sin_estacion'));
+
+                if (input_cantidad_nuevo.val() > 0 && input_cantidad_nuevo.val() < 100) {
+
+                    for (var i = 0; i < input_cantidad_nuevo.val(); i++) {
+
+                        secuencia = parseInt(input_codigo_bicicleta_nuevo.val()) + i;
+
+                        console.log('codigo:' + input_codigo_estacion_nuevo.val() + 'B' + secuencia + '\n' +
+                            'PUESTO_ALQUILER_id:' + select_estacion_inventario_nuevo.val() + '\n' +
+                            'TIPO_id:' + select_tipo_nuevo.val() + '\n' +
+                            'ESTADO_id:' + select_estado_nuevo.val());
+                        $.ajax({
+                            method: "POST",
+                            url: "http://mybici.server/Bicicleta/guardarBicicleta/",
+                            data: {
+                                codigo: input_codigo_estacion_nuevo.val() + 'B' + secuencia,
+                                PUESTO_ALQUILER_id: select_estacion_inventario_nuevo.val(),
+                                TIPO_id: select_tipo_nuevo.val(),
+                                ESTADO_id: select_estado_nuevo.val()
+                            }
+                        })
+                            .done(function (r) {
+                                console.log('guardado blicicleta estado ->' + r.status);
+                                $('.modal-backdrop').remove();
+                                Inventario.acciones.refrescar();
+                            });
+                    }
+                } else {
+                    var mensaje = $('#error_cantidad');
+                    mensaje.parent('.mensaje').addClass(' has-error');
+                    mensaje.parent('.mensaje').removeClass(' oculto');
+                }
             }
+
         },
 
         validarCantidad: function () {

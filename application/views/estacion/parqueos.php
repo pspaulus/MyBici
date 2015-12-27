@@ -52,5 +52,10 @@
             <?php } ?>
             </tbody>
         </table>
+        <div class="tip text-center">
+            <small>
+                <a href="#listado_busqueda">Ir al inicio</a>
+            </small>
+        </div>
     </div>
 </div>

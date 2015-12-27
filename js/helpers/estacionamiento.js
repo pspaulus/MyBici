@@ -11,48 +11,48 @@ var Estacionamiento = {
             if (input_numero_estaciones_nuevo.val() <= 0) {
                 validacion_numero_estaciones_nuevo = false;
                 Estacion.mensajes.mostrar($('#error_cantidad_parqueos'));
+            }else {
+                Estacion.mensajes.oculta($('#error_cantidad_parqueos'));
             }
 
             if (validacion_numero_estaciones_nuevo) {
-                //for (var i = 0; i < input_numero_estaciones_nuevo.val(); i++) {
                 $.ajax({
                     method: "POST",
                     url: "http://mybici.server/Estacionamiento/crearEstacionamiento/" + estacion_id + '/' + input_numero_estaciones_nuevo.val(),
                     data: {}
                 })
                     .done(function (r) {
-                        //if (r.status) {
-                        //    //console.log('Ok al guardar estacionamiento ' + r.estacionamiento_nuevo_id);
-                        //    console.log('Ok al guardar estacionamiento');
-                        //} else {
-                        //    console.log('Error al guardar estacionamiento');
-                        //}
                     });
 
                 $('#crear_estacionamiento').removeClass('in');
                 $('.modal-backdrop').remove();
-                //Estacion.acciones.cargarDatosEstacion();
                 Escritorio.load.estacion();
-                //}
             }
         },
 
         cargarListaParqueos: function () {
-            var id = $('#select_estacion').val();
-            var estado = $('#filtro_estado_parqueo').val();
+            var estacion_id = $('#select_estacion').val();
+            var estacionamiento_estado = $('#filtro_estado_parqueo').val();
 
-            $.ajax({
-                method: "POST",
-                url: "http://mybici.server/Estacionamiento/cargarVistaParqueos/" + id + '/' + estado,
-                data: {}
-            })
-                .done(function (r) {
-                    $('#parqueos').html(r);
-                });
+            if (estacion_id != null) {
+                Estacion.mensajes.oculta($('#error_sin_estacion'));
+
+                $.ajax({
+                    method: "POST",
+                    url: "http://mybici.server/Estacionamiento/cargarVistaParqueos/" + estacion_id + '/' + estacionamiento_estado,
+                    data: {}
+                })
+                    .done(function (r) {
+                        $('#parqueos').html(r);
+                    });
+            } else {
+                Estacion.mensajes.mostrar($('#error_sin_estacion'));
+            }
         },
 
         limpiar: function () {
             $('#numero_estaciones_nuevo').val('1');
+            Estacion.mensajes.oculta($('#error_cantidad_parqueos'));
         },
 
         limpiarAgregar: function (estacionamiento_id) {
@@ -72,9 +72,8 @@ var Estacionamiento = {
                 })
                     .done(function (r) {
                         if (r.status) {
-                            console.log('OK: obtener id bicicleta ->'+r.bicicleta_id);
+                            console.log('OK: obtener id bicicleta ->' + r.bicicleta_id);
                             Estacionamiento.acciones.verificarBicicletaEstacionada(estacionamiento_id, r.bicicleta_id);
-                            //Estacionamiento.acciones.agregarBicicleta(estacionamiento_id, r.bicicleta_id);
                         } else {
                             console.log('ERROR: obtener id bicicleta');
                             Estacion.mensajes.mostrar($('#error_bicicleta_codigo_' + estacionamiento_id));
@@ -97,7 +96,7 @@ var Estacionamiento = {
                         console.log('OK: bicicleta no estacionada, entonce la estaciono ');
                         Estacionamiento.acciones.agregarBicicleta(estacionamiento_id, bicicleta_id);
                     } else {
-                        console.log('ERROR: bicicleta ya estacionada en '+ r.estacionamiento_id);
+                        console.log('ERROR: bicicleta ya estacionada en ' + r.estacionamiento_id);
                         Estacion.mensajes.mostrar($('#bicicleta_ya_estacionada_' + estacionamiento_id))
                     }
                 });
@@ -124,7 +123,6 @@ var Estacionamiento = {
                 data: {}
             })
                 .done(function (r) {
-                    //$('#parqueos').html(r);
                     $('.modal-backdrop').remove();
                     Estacionamiento.acciones.cargarListaParqueos();
                 });

@@ -44,7 +44,7 @@
 
         <a onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_buscar'), $('#titulo2'))">
             <!-- Subtitulo -->
-            <div class="row">
+            <div class="row" id="listado_busqueda">
                 <div class="col-xs-12">
                     <ol class="breadcrumb">
                         <li class="active" id="titulo2">
@@ -137,6 +137,11 @@
 
                             </tbody>
                         </table>
+                        <div class="tip text-center">
+                            <small>
+                                <a href="#listado_busqueda">Ir al inicio</a>
+                            </small>
+                        </div>
                     </div>
                 </div>
             </div>

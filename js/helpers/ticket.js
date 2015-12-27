@@ -21,7 +21,6 @@ var Ticket = {
 
             if (select_estacion_origen == select_estacion_destino) {
                 validacion_origen_destino = false;
-                //Estacion.mensajes.mostrar($('#error_origen_destino'));
                 console.log('Error: el origen es el mismo del destino');
             }
 
@@ -213,30 +212,6 @@ var Ticket = {
                 Estacion.mensajes.mostrar($('#error_no_valor'));
             }
         },
-
-        //buscar: function () {
-        //    var campo = $('#ticket_campo').val();
-        //    var valor = $('#ticket_valor').val();
-        //
-        //    if (valor.length != '') {
-        //        $.ajax({
-        //            method: "POST",
-        //            url: "http://mybici.server/Ticket/cargarTicket/" + campo + '/' + valor,
-        //            data: {}
-        //        })
-        //            .done(function (r) {
-        //                if (r.status) {
-        //                    Estacion.mensajes.oculta($('#error_no_valor'));
-        //                    console.log('OK: cargar ticket ->' + r.ticket);
-        //                } else {
-        //                    console.log('ERROR: cargar ticket');
-        //                }
-        //            });
-        //
-        //    } else {
-        //        Estacion.mensajes.mostrar($('#error_no_valor'));
-        //    }
-        //},
 
         limpiar: function () {
             $('#estacion_origen').prop('selectedIndex', 0);

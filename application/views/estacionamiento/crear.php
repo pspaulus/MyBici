@@ -22,7 +22,7 @@
                                            value="1" onkeypress="return Escritorio.Validaciones.soloNumeros(event)"
                                            onkeyup="Estacionamiento.label.cantidad();">
                                 </div>
-                                <div class="col-xs-2 mensaje oculto">
+                                <div class="col-xs-10 col-xs-offset-4 mensaje oculto">
                                     <label class="control-label" id="error_cantidad_parqueos">&iexcl;Error de
                                         cantidad!</label>
                                 </div>

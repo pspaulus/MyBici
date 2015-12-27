@@ -62,7 +62,7 @@
 
         <a onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_buscar'), $('#titulo3'))">
             <!--Buscar-->
-            <div class="row">
+            <div class="row" id="listado_busqueda">
                 <div class="col-xs-12">
                     <ol class="breadcrumb">
                         <li class="active" id="titulo3">

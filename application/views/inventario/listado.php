@@ -28,7 +28,7 @@ if ($filtro == 'codigo') {
                 </tr>
                 </thead>
                 <tbody>
-                <?php if( count($bicicletas_todas) == 0) $Bicicletas->load->view('sin_datos')?>
+                <?php if (count($bicicletas_todas) == 0) $Bicicletas->load->view('sin_datos') ?>
 
                 <?php if ($bicicletas_todas != null) { ?>
                     <?php $i = 1 ?>
@@ -48,7 +48,7 @@ if ($filtro == 'codigo') {
                             <td><?= $codigo_estacion . 'B' . $bicicleta->codigo ?></td>
                             <td><?= $tipo_bibicleta ?></td>
                             <td><?= $nombre_estacion ?></td>
-                            <td><?= ($estacionamiento_codigo != null) ? $estacionamiento_estacion_codigo .'P'. $estacionamiento_codigo : '-'; ?></td>
+                            <td><?= ($estacionamiento_codigo != null) ? $estacionamiento_estacion_codigo . 'P' . $estacionamiento_codigo : '-'; ?></td>
 
 
                             <td><?= $estado_bicicleta ?></td>
@@ -114,5 +114,10 @@ if ($filtro == 'codigo') {
                 <?php } ?>
                 </tbody>
             </table>
+            <div class="tip text-center">
+                <small>
+                    <a href="#listado_busqueda">Ir al inicio</a>
+                </small>
+            </div>
         </div>
     </div>

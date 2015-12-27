@@ -43,7 +43,7 @@
 
         <a onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_buscar'), $('#titulo2'))">
             <!-- Subtitulo -->
-            <div class="row">
+            <div class="row" id="listado_busqueda">
                 <div class="col-lg-12">
                     <ol class="breadcrumb">
                         <li class="active" id="titulo2">
@@ -72,6 +72,11 @@
                                         value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
                                 <?php } ?>
                             </select>
+                            <div class="agrupador">
+                                <div class="col-xs-9 col-xs-offset-3 mensaje oculto">
+                                    <label class="control-label" id="error_sin_estacion">&iexcl;No hay estaci&oacute;n!</label>
+                                </div>
+                            </div>
                         </div>
 
                         <!--Select Estado Parqueo-->
@@ -107,7 +112,7 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active">
                             <a href="#parqueos" data-toggle="tab" role="tab"
-                               onclick="Estacion.acciones.busqueda('mostrar');">Parqueos</a>
+                               onclick="Estacion.acciones.busqueda('mostrar');">Estacionamientos</a>
                         </li>
                         <li role="presentation">
                             <a href="#datos_estacion" data-toggle="tab" role="tab"

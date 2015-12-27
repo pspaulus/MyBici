@@ -39,7 +39,7 @@
                                        value="<?= $obj_usuario->contrasena ?>" disabled="">
                             </div>
                         </div>
-                        <div class="form-group ">
+                        <div class="form-group">
                             <div class="col-xs-2 col-xs-offset-1 text-left">
                                 <label>Tipo</label>
                             </div>

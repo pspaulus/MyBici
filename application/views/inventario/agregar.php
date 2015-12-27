@@ -24,12 +24,18 @@
                                 <div class="col-xs-6 mensaje">
                                     <?php $estaciones = $Estacion->cargarEstaciones() ?>
                                     <select id="select_estacion_inventario_nuevo" class="form-control"
-                                            onchange="Bicicleta.acciones.cargarUltimoCodigoEstacion();">
+                                            onchange="Bicicleta.acciones.cargarUltimoCodigoEstacion();
+                                                      Estacion.mensajes.oculta( $('#error_sin_estacion'));">
                                         <?php foreach ($estaciones as $estacion) { ?>
                                             <option
                                                 value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
                                         <?php } ?>
                                     </select>
+                                    <div class="agrupador">
+                                        <div class="col-xs-9 col-xs-offset-3 mensaje oculto">
+                                            <label class="control-label" id="error_sin_estacion">&iexcl;No hay estaci&oacute;n!</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

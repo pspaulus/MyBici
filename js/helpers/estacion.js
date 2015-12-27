@@ -8,13 +8,11 @@ var Estacion = {
             var input_nombre = $('#nombre');
             var input_longitud = $('#longitud');
             var input_latitud = $('#latitud');
-            //var input_numero_estaciones = $('#numero_estaciones');
 
             var validacion_codigo = true;
             var validacion_nombre = true;
             var validacion_longitud = true;
             var validacion_latitud = true;
-            //var validacion_estaciones = true;
 
             if (input_codigo.val() == '') {
                 validacion_codigo = false;
@@ -40,12 +38,6 @@ var Estacion = {
                 Estacion.mensajes.mostrar(mensaje);
             }
 
-            //if (input_numero_estaciones.val() <= 0) {
-            //    validacion_estaciones = false;
-            //    mensaje = $('#error_cantidad_parqueos');
-            //    Estacion.mensajes.mostrar(mensaje);
-            //}
-
             if (validacion_codigo && validacion_nombre && validacion_longitud && validacion_latitud) {
                 $.ajax({
                     method: "POST",
@@ -63,13 +55,6 @@ var Estacion = {
                             $('#crearEstacion').removeClass('in');
                             $('.modal-backdrop').remove();
                             Estacion.mensajes.oculta($('#error_ya_existe'));
-
-                            //var estacion_nueva_id = r.estacion_nueva_id;
-
-                            //for (var i = 0; i < input_numero_estaciones.val(); i++) {
-                            //    Estacionamiento.acciones.guardar(estacion_nueva_id);
-                            //}
-
                             $('#resultado').html(Escritorio.load.estacion());
 
                         } else {
@@ -91,36 +76,54 @@ var Estacion = {
             var estacion_codigo = $('#editar_estacion_codigo').val().toUpperCase();
             var estacion_nombre = $('#editar_estacion_nombre').val();
 
-            $.ajax({
-                method: "POST",
-                url: "http://mybici.server/Estacion/editarEstacion",
-                data: {
-                    id: estacion_id,
-                    nombre: estacion_nombre,
-                    codigo: estacion_codigo
+            if (estacion_codigo.length > 0) {
+                Estacion.mensajes.oculta($('#error_editar_codigo_estacion'));
+
+                if (estacion_nombre.length > 0) {
+                    Estacion.mensajes.oculta($('#error_edita_nombre_estacion'));
+
+                    $.ajax({
+                        method: "POST",
+                        url: "http://mybici.server/Estacion/editarEstacion",
+                        data: {
+                            id: estacion_id,
+                            nombre: estacion_nombre,
+                            codigo: estacion_codigo
+                        }
+                    })
+                        .done(function (r) {
+                            console.log('OK: acutlizada estacoin -> ' + estacion_id);
+                        });
+                    Escritorio.load.estacion();
+
+                } else {
+                    Estacion.mensajes.mostrar($('#error_edita_nombre_estacion'));
                 }
-            })
-                .done(function (r) {
-                    console.log('Actualizado');
-                });
-            Escritorio.load.estacion();
-            //Estacion.acciones.cargarDatosEstacion();
+            } else {
+                Estacion.mensajes.mostrar($('#error_editar_codigo_estacion'));
+            }
         },
 
         cargarDatosEstacion: function () {
             var estacion_id = $('#select_estacion').val();
 
-            $.ajax({
-                method: "POST",
-                url: "http://mybici.server/Estacion/cargarDatosEstacion/" + estacion_id,
-                data: {}
-            })
-                .done(function (r) {
-                    $('#datos_estacion').html(r);
-                });
+            if (estacion_id != null) {
+                Estacion.mensajes.oculta($('#error_sin_estacion'));
 
-            Estacion.validaciones.botonEditar('mostrar');
-            Estacion.validaciones.botonGuardar('ocultar');
+                $.ajax({
+                    method: "POST",
+                    url: "http://mybici.server/Estacion/cargarDatosEstacion/" + estacion_id,
+                    data: {}
+                })
+                    .done(function (r) {
+                        $('#datos_estacion').html(r);
+                    });
+
+                Estacion.validaciones.botonEditar('mostrar');
+                Estacion.validaciones.botonGuardar('ocultar');
+            } else {
+                Estacion.mensajes.mostrar($('#error_sin_estacion'));
+            }
         },
 
         busqueda: function (accion) {
@@ -137,7 +140,6 @@ var Estacion = {
             var input_codigo = $('#codigo');
             var input_longitud = $('#longitud');
             var input_latitud = $('#latitud');
-            //var input_numero_estaciones = $('#numero_estaciones');
 
             input_nombre.val('');
             input_codigo.val('');
@@ -145,14 +147,15 @@ var Estacion = {
             input_latitud.val('');
             //input_numero_estaciones.val('1');
             Estacion.mensajes.oculta($('#error_ya_existe'));
+            Estacion.mensajes.oculta($('#error_codigo_parqueos'));
+            Estacion.mensajes.oculta($('#error_nombre_parqueos'));
+            Estacion.mensajes.oculta($('#error_longitud_parqueos'));
+            Estacion.mensajes.oculta($('#error_latitud_parqueos'));
+            Estacion.mensajes.oculta($('#error_ya_existe'));
         }
     },
 
     label: {
-        //cantidad: function () {
-        //    var mensaje = $('#error_cantidad_parqueos');
-        //    Estacion.mensajes.oculta(mensaje);
-        //},
 
         codigo: function () {
             var mensaje = $('#error_codigo_parqueos');
@@ -198,11 +201,6 @@ var Estacion = {
             input_editar_estacion_nombre.removeAttr('disabled');
             input_editar_estacion_nombre.removeAttr('disabled');
         },
-
-        //ocultarBusqueda: function () {
-        //    $('#btn_editar_estacion').hide();
-        //    $('#btn_guardar_estacion').hide();
-        //},
 
         botonEditar: function (accion) {
             if (accion == 'ocultar')
