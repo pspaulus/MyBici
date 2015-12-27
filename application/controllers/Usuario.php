@@ -46,7 +46,6 @@ class Usuario extends CI_Controller
         header('Content-Type: application/json');
         echo json_encode([
             'status' => true,
-
         ]);
     }
 
@@ -82,10 +81,7 @@ class Usuario extends CI_Controller
 
     public static function getUsuarioIdByNombre($usuario_nombre)
     {
-        $usuario = \App\Usuario::where('nombre', '=', $usuario_nombre)
-            ->where('ESTADO_id', '=', 1)
-            ->get()
-            ->first();
+        $usuario = Usuario::buscarUsuario($usuario_nombre);
 
         if ($usuario != null) {
             header('Content-Type: application/json');
@@ -103,23 +99,44 @@ class Usuario extends CI_Controller
 
     public static function getUsuarioIdByNombreDevolver($usuario_nombre)
     {
-        $usuario = \App\Usuario::where('nombre', '=', $usuario_nombre)
-            ->where('ESTADO_id', '=', 1)
-            ->get()
-            ->first();
-
+        $usuario = Usuario::buscarUsuario($usuario_nombre);
         return ($usuario != null) ? $usuario->id : false;
+    }
+
+    public function existeUsuario($usuario_nombre)
+    {
+        $usuario = Usuario::buscarUsuario($usuario_nombre);
+
+        if ($usuario != null) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false
+            ]);
+        }
     }
 
     public static function getUsuarioNombreById($usuario_id)
     {
         $usuario = \App\Usuario::find($usuario_id);
-
         return $usuario->nombre;
     }
 
-    public function testMD5()
+    public static function buscarUsuario($usuario_nombre){
+        $usuario = \App\Usuario::where('nombre', '=', $usuario_nombre)
+            ->where('ESTADO_id', '=', 1)
+            ->get()
+            ->first();
+
+        return ($usuario != null) ? $usuario : null;
+    }
+
+    public function testMD5($usuario_clave)
     {
-        dd(md5('mendoza2015'));
+        dd(md5($usuario_clave));
     }
 }

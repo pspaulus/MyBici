@@ -1,17 +1,41 @@
 var Usuario = {
 
     acciones: {
+
+        existeUsuario: function () {
+            var nombre = $('#nombre').val();
+
+            if (nombre.length >= 4) {
+                $.ajax({
+                    method: "POST",
+                    url: "http://mybici.server/Usuario/existeUsuario/" + nombre,
+                    data: {}
+                })
+                    .done(function (r) {
+                        if (r.status) {
+                            console.log('ERROR: existe usuario');
+                            $('#existeUsuario').val(0);
+                            $('#nombre_duplicado').parent('.duplicado').removeClass(' oculto');
+                        } else {
+                            console.log('OK: No existe usuario');
+                            $('#existeUsuario').val(1);
+                            $('#nombre_duplicado').parent('.duplicado').addClass(' oculto');
+                        }
+                    });
+            }
+        },
         guardar: function () {
             var nombre = $('#nombre');
             var contrasena = $('#contrasena');
             var confirmar_contrasena = $('#confirmar_contrasena');
             var tipo = $('#tipo_usuario');
+            var existeUsuario = $('#existeUsuario');
 
-            this.validoVacioUsuario(nombre);
-            this.validoVacioUsuario(contrasena);
-            this.validoVacioUsuario(confirmar_contrasena);
+            this.validoVacio(nombre);
+            this.validoVacio(contrasena);
+            this.validoVacio(confirmar_contrasena);
 
-            if (nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena, -1)) {
+            if (existeUsuario.val()==1 && nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena, -1)) {
                 $.ajax({
                     method: "POST",
                     url: "http://mybici.server/Usuario/ingresarUsuario",
@@ -41,9 +65,9 @@ var Usuario = {
             var tipo = $('#tipo_usuario_editar' + id);
             var estado = $('#estado_editar' + id);
 
-            this.validoVacioUsuario(nombre);
-            this.validoVacioUsuario(contrasena);
-            this.validoVacioUsuario(confirmar_contrasena);
+            this.validoVacio(nombre);
+            this.validoVacio(contrasena);
+            this.validoVacio(confirmar_contrasena);
 
             if (nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena, id)) {
                 $.ajax({
@@ -135,6 +159,7 @@ var Usuario = {
             input_nombre.parents('.agrupador').removeClass(' has-error has-warning');
             contrasena.parents('.agrupador').removeClass(' has-error has-warning');
             confirmar_contrasena.parents('.agrupador').removeClass(' has-error has-warning');
+            $('#nombre_duplicado').parent('.duplicado').addClass(' oulto');
         },
 
         limpiarEditar: function () {
@@ -171,11 +196,11 @@ var Usuario = {
             }
         },
 
-        validoVacioUsuario: function (elem) {
+        validoVacio: function (elem) {
             if (elem.val() == '') {
                 elem.parents('.agrupador').addClass(' has-error');
                 elem.parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').removeClass(' oculto');
-                $(elem).parents('.agrupador').children('.form-group').children('.mensaje').children('.error').removeClass(' oculto');
+                //elem.parents('.agrupador').children('.form-group').children('.mensaje').children('.error').removeClass(' oculto');
             } else {
                 elem.parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').addClass(' oculto');
             }
@@ -192,7 +217,7 @@ var Usuario = {
 
         getUsuarioIdByNombre: function () {
             var usuario_nombre = $('#ticket_usuario_nombre').val();
-            console.log('busco usuario -> '+usuario_nombre);
+            console.log('busco usuario -> ' + usuario_nombre);
             if (usuario_nombre.length != '') {
                 $.ajax({
                     method: "POST",
