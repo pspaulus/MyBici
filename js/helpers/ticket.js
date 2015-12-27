@@ -106,7 +106,7 @@ var Ticket = {
                             Ticket.acciones.registrarNuevoParqueo(ticket_id);
                         }
                         if (estado == 'anulada') {
-
+                            Ticket.acciones.cambiarEstadoBicicleta(ticket_id, 'buena');
                         }
 
                         $('.modal-backdrop').remove();

@@ -36,6 +36,11 @@ body {
     overflow: scroll;
 }
 
+.contenedor_centrado {
+    width: 990px;
+    margin: 0 auto;
+}
+
 .sinBordeRedondeado {
     border: medium none;
     border-radius: 10px;

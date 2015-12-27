@@ -30,6 +30,7 @@ if ($filtro == 'estacion') {
                 </thead>
                 <?php if ($tickets != null) { ?>
                     <?php $i = 1 ?>
+                    <?php if( count($tickets) == 0) $Ticket->load->view('sin_datos')?>
                     <?php foreach ($tickets as $ticket) { ?>
                         <tbody>
                         <tr>
