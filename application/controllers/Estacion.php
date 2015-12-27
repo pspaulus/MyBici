@@ -10,7 +10,7 @@ class Estacion extends CI_Controller
 
     public function index()
     {
-        $this->load->view('estacion/ver');
+        $this->load->view('estacion/estacion');
     }
 
     public function crearEstacion()

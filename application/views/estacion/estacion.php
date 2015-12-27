@@ -4,7 +4,7 @@
     <div class="container-fluid">
 
         <!-- Titulo -->
-        <div class="row">
+        <div class="row" id="page_estacion">
             <div class="col-lg-12">
                 <h1 class="page-header">
                     <i class="fa fa-fw fa-map-marker"></i> Estaciones

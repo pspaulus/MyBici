@@ -38,16 +38,16 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a onclick="Escritorio.load.ticket()"><i class="fa fa-fw fa-ticket"></i> Reservas</a>
+                    <a href="#page_ticket" onclick="Escritorio.load.ticket()"><i class="fa fa-fw fa-ticket"></i> Reservas</a>
                 </li>
                 <li>
-                    <a onclick="Escritorio.load.inventario()"><i class="fa fa-fw fa-bicycle"></i> Inventario</a>
+                    <a href="#page_inventario" onclick="Escritorio.load.inventario()"><i class="fa fa-fw fa-bicycle"></i> Inventario</a>
                 </li>
                 <li>
-                    <a onclick="Escritorio.load.estacion()"><i class="fa fa-fw fa-map-marker"></i> Estaciones</a>
+                    <a href="#page_estacion" onclick="Escritorio.load.estacion()"><i class="fa fa-fw fa-map-marker"></i> Estaciones</a>
                 </li>
                 <li>
-                    <a onclick="Escritorio.load.usuario()"><i class="fa fa-fw fa-users"></i> Usuarios</a>
+                    <a href="#page_usuario" onclick="Escritorio.load.usuario()"><i class="fa fa-fw fa-users"></i> Usuarios</a>
                 </li>
 
 <!--                <li>-->

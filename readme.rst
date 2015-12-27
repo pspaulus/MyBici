@@ -2,27 +2,27 @@
  MyBici
 --------
 
-+ Sistema de Gesti&oacute;n de Alquiler de Bicicletas
++ Sistema de Gestión de Alquiler de Bicicletas
 
-    * Gesti&oacute;n de tickets generados por reservas
+    * Gestión de tickets generados por reservas
         - Resumen de estados de tickets
-        - Craci&oacute;n de tickets (reservas)
-        - B&uacute;squeda de tickets
-        - Cambios de estado de tickets
+        - Cración de tickets (reservas)
+        - Búsqueda de tickets
+        - Cambios estado de tickets
 
-    * Gesti&oacute;n de Inventario
+    * Gestión de Inventario
         - Resumen de estados de bicicletas
         - Agregar bicicletas a estaciones
-        - B&uacute;squeda de bicicletas
+        - Búsqueda de bicicletas
         - Cambios de estado de bicicletas
 
-    * Gesti&oacute;n de Estaciones
-        - Craci&oacute;n de estaciones
-        - B&uacute;squeda de estaciones
-        - Craci&oacute;n de estacionamientos para estaciones
+    * Gestión de Estaciones
+        - Creación de estaciones
+        - Búsqueda de estaciones
+        - Creación de estacionamientos para estaciones
         - Agrega de bicicletas a estacionamientos
 
-    * Gesti&oacute;n de Usuarios
-        - Craci&oacute;n de usuarios
-        - B&uacute;squeda de usuarios
+    * Gestión de Usuarios
+        - Creación de usuarios
+        - Búsqueda de usuarios
         - Bajas de usuarios

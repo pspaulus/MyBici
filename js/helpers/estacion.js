@@ -93,9 +93,8 @@ var Estacion = {
                     })
                         .done(function (r) {
                             console.log('OK: acutlizada estacoin -> ' + estacion_id);
+                            Escritorio.load.estacion();
                         });
-                    Escritorio.load.estacion();
-
                 } else {
                     Estacion.mensajes.mostrar($('#error_edita_nombre_estacion'));
                 }

@@ -10,7 +10,7 @@ class Ticket extends CI_Controller
 
     public function index()
     {
-        $this->load->view('reserva/ticket');
+        $this->load->view('reserva/reserva');
     }
 
     public static function contarTicketHoy()
