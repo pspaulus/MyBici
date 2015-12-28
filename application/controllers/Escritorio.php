@@ -20,6 +20,7 @@ class Escritorio extends CI_Controller
         $data['helpers']['bicicleta'] = base_url() . 'js/helpers/bicicleta.js';
         $data['helpers']['estacionamiento'] = base_url() . 'js/helpers/estacionamiento.js';
         $data['helpers']['ticket'] = base_url() . 'js/helpers/ticket.js';
+        $data['helpers']['map'] = base_url() . 'js/helpers/map.js';
 
         if (isset($_SESSION["Usuario"])) {
             $data['usuario'] = $_SESSION["Usuario"];

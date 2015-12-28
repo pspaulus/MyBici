@@ -48,21 +48,24 @@
                             </div>
                         </div>
 
+                        <!-- mapa -->
+                        <div class="col-xs-8 col-xs-offset-2">
+                            <div id="googleMap" style="width:100%; height:300px;"></div>
+                            <script>
+                                guardar_mapa("googleMap", -2.141470444145116, -79.96483281254768, 15);
+                            </script>
+                        </div>
+
                         <!--Longitud-->
-                        <div class="form-group">
+                        <div class="form-group oculto">
                             <div class="col-xs-2 col-xs-offset-1">
                                 <label for="Descripcion">Longitud</label>
                             </div>
                             <div class="agrupador">
                                 <div class="col-xs-6">
-                                    <input class="form-control" id="longitud" type="text" maxlength="40"
-                                           placeholder="-2.15222" value=""
-                                           onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)"
-                                           onkeyup="Estacion.label.longitud()">
-                                </div>
-                                <div class="col-xs-1">
-                                    <a href="http://www.mapcoordinates.net/es" target="_blank" title="Consultar coordenadas"><i
-                                            class="fa fa-info-circle fa-2x"></i></a>
+                                    <input class="form-control" id="longitud" type="text" maxlength="40" value="0"
+                                           readonly onkeyup="Estacion.label.longitud()"
+                                           onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
                                 </div>
                                 <div class=" row col-xs-4 col-xs-offset-3 oculto mensaje">
                                     <label class="control-label" id="error_longitud_parqueos">&iexcl;Ingrese
@@ -72,16 +75,15 @@
                         </div>
 
                         <!--Latitud-->
-                        <div class="form-group">
+                        <div class="form-group oculto">
                             <div class="col-xs-2 col-xs-offset-1">
                                 <label for="Descripcion">Latitud</label>
                             </div>
                             <div class="agrupador">
                                 <div class="col-xs-6">
-                                    <input class="form-control" id="latitud" type="text" maxlength="40"
-                                           placeholder="-79.9529" value=""
-                                           onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)"
-                                           onkeyup="Estacion.label.latitud()">
+                                    <input class="form-control" id="latitud" type="text" maxlength="40" value="0"
+                                           readonly onkeyup="Estacion.label.latitud()"
+                                           onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
                                 </div>
                                 <div class=" row col-xs-4 col-xs-offset-3 oculto mensaje">
                                     <label class="control-label" id="error_latitud_parqueos">&iexcl;Ingrese

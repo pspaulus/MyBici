@@ -151,6 +151,7 @@ var Estacion = {
             Estacion.mensajes.oculta($('#error_longitud_parqueos'));
             Estacion.mensajes.oculta($('#error_latitud_parqueos'));
             Estacion.mensajes.oculta($('#error_ya_existe'));
+            guardar_mapa();
         }
     },
 

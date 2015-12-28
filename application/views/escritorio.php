@@ -96,9 +96,11 @@
 
                 <div class="row">
                     <div class="col-xs-12 text-center">
-                        <iframe class="sinBordeRedondeado"
-                                src="https://www.google.com/maps/d/embed?mid=z0LzSFRAV0FQ.k1s6TjP9IzTE" width="100%"
-                                height="450px"></iframe>
+<!--                        <iframe class="sinBordeRedondeado"-->
+<!--                                src="https://www.google.com/maps/d/embed?mid=z0LzSFRAV0FQ.k1s6TjP9IzTE" width="100%"-->
+<!--                                height="450px"></iframe>-->
+                        <iframe class="sinBordeRedondeado" src="" width="100%" height="450px"></iframe>
+
                     </div>
                 </div>
 

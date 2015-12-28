@@ -87,6 +87,7 @@
         <?php $Estacion->load->view('estacionamiento/crear'); ?>
     </div>
 
+
     <!--Mapa-->
     <div class="col-xs-12 col-sm-6 col-sm-offset-2">
         <div class="panel panel-primary">
@@ -94,11 +95,10 @@
                 <h3 class="panel-title">Ubicaci&oacute;n</h3>
             </div>
             <div class="panel-body">
-                <a href="https://www.google.com.ec/maps/@<?= $estacion_actual->longitud ?>,<?= $estacion_actual->latitud ?>,21z"
-                   target="_blank">https://www.google.com.ec/maps/@<?= $estacion_actual->longitud ?>
-                    ,<?= $estacion_actual->latitud ?>,21z</a>
-
-                <!--<iframe src="https://www.google.com.ec/maps/@-2.1521429,-79.9528856,21z"></iframe>-->
+                <div id="cargaGoogleMap" class="mapa"></div>
+                <script>
+                    ver_mapa('cargaGoogleMap', <?= $estacion_actual->longitud ?>, <?= $estacion_actual->latitud ?>, 18);
+                </script>
             </div>
         </div>
     </div>
