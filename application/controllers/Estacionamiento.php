@@ -79,7 +79,7 @@ class Estacionamiento extends CI_Controller
         $data['Estacion'] = $this;
         $data['estado'] = $estado;
 
-        $this->load->view('estacion/parqueos', $data);
+        $this->load->view('estacionamiento/listado', $data);
     }
 
     public static function contarNumeroEstacionamiento($estacion_id)

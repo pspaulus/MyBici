@@ -40,8 +40,8 @@ if ($filtro == 'estacion') {
                             <?php $estacionamiento_destino = Estacionamiento::getEstacionamientoOrigenDestino($ticket->destino_estacionamiento) ?>
                             <td><?= $ticket->id ?></td>
                             <td><?= Tipo::getReservaTipoById($ticket->TIPO_id) ?></td>
-                            <td><?= Usuario::getUsuarioNombreById($ticket->USUARIO_id) ?></td>
-                            <td><?= Bicicleta::getBicicletaCodigoById($ticket->BICICLETA_id) ?></td>
+                            <td><i class="fa fa-user"></i> <?= Usuario::getUsuarioNombreById($ticket->USUARIO_id) ?></td>
+                            <td><i class="fa fa-bicycle"></i> <?= Bicicleta::getBicicletaCodigoById($ticket->BICICLETA_id) ?></td>
                             <td><?= Estacion::getEstacionNombreById($ticket->origen_puesto_alquiler) . ' - ' . $estacionamiento_origen ?></td>
                             <td><?= Estacion::getEstacionNombreById($ticket->destino_puesto_alquiler) . ' - ' . $estacionamiento_destino ?></td>
                             <td><?= $ticket->fecha ?></td>

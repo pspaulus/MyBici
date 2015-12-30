@@ -49,11 +49,18 @@
                         </div>
 
                         <!-- mapa -->
-                        <div class="col-xs-8 col-xs-offset-2">
-                            <div id="googleMap" style="width:100%; height:300px;"></div>
-                            <script>
-                                guardar_mapa("googleMap", -2.141470444145116, -79.96483281254768, 15);
-                            </script>
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Ubicaci&oacute;n</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="googleMap" class="mapa"></div>
+                                    <script>
+                                        guardar_mapa("googleMap", -2.141470444145116, -79.96483281254768, 15);
+                                    </script>
+                                </div>
+                            </div>
                         </div>
 
                         <!--Longitud-->

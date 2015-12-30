@@ -121,7 +121,7 @@ var Escritorio = {
         },
 
         ocultarMostrar: function(elemento, titulo) {
-            elemento.toggle();
+            elemento.slideToggle();
             titulo.toggleClass('active','inactive')
         }
     },
@@ -185,4 +185,3 @@ var Escritorio = {
         }
     }
 };
-

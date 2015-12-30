@@ -95,11 +95,12 @@ class Estacion extends CI_Controller
         return $estacion = \App\Estacion::find($id);
     }
 
-    public function cargarDatosEstacion($id){
+    public function cargarDatosEstacion($id)
+    {
         $data['estacion_actual'] = $this->cargarEstacion($id);
         $data['Estacion'] = $this;
 
-        $this->load->view('estacion/datos',$data);
+        $this->load->view('estacion/datos', $data);
     }
 
     public function editarEstacion()
@@ -130,5 +131,14 @@ class Estacion extends CI_Controller
     {
         $estacion = \App\Estacion::find($estacion_id);
         return $estacion->nombre;
+    }
+
+    public static function getEstacionNombreByCodigo($estacion_codigo)
+    {
+
+        $estacion = \App\Estacion::where('codigo', '=', $estacion_codigo)
+            ->get()
+            ->first();
+        return ($estacion != null) ? $estacion->nombre : null;
     }
 }

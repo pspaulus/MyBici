@@ -23,10 +23,6 @@
                 <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $usuario ?> <b
                         class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <!--                    <li>-->
-                    <!--                        <a href="#"><i class="fa fa-fw fa-user"></i> Perfil</a>-->
-                    <!--                    </li>-->
-<!--                    <li class="divider"></li>-->
                     <li>
                         <a onclick="Escritorio.Acciones.salir()"><i class="fa fa-fw fa-power-off"></i> Salir</a>
                     </li>
@@ -38,18 +34,21 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a href="#page_ticket" onclick="Escritorio.load.ticket()"><i class="fa fa-fw fa-ticket"></i> Reservas</a>
+                    <a href="#page_ticket" onclick="Escritorio.load.ticket()"><i class="fa fa-fw fa-ticket"></i>
+                        Reservas</a>
                 </li>
                 <li>
-                    <a href="#page_inventario" onclick="Escritorio.load.inventario()"><i class="fa fa-fw fa-bicycle"></i> Inventario</a>
+                    <a href="#page_inventario" onclick="Escritorio.load.inventario()"><i
+                            class="fa fa-fw fa-bicycle"></i> Inventario</a>
                 </li>
                 <li>
-                    <a href="#page_estacion" onclick="Escritorio.load.estacion()"><i class="fa fa-fw fa-map-marker"></i> Estaciones</a>
+                    <a href="#page_estacion" onclick="Escritorio.load.estacion()"><i class="fa fa-fw fa-map-marker"></i>
+                        Estaciones</a>
                 </li>
                 <li>
-                    <a href="#page_usuario" onclick="Escritorio.load.usuario()"><i class="fa fa-fw fa-users"></i> Usuarios</a>
+                    <a href="#page_usuario" onclick="Escritorio.load.usuario()"><i class="fa fa-fw fa-users"></i>
+                        Usuarios</a>
                 </li>
-
 <!--                <li>-->
 <!--                    <a onclick="Escritorio.load.evento()"><i class="fa fa-fw fa-envelope"></i> Eventos</a>-->
 <!--                </li>-->
@@ -72,10 +71,9 @@
         </div>
     </nav>
 
-    <div id="resultado" class="scroll">
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div id="resultado">
 
                 <div class="row">
                     <div class="col-xs-10 col-xs-offset-1 text-center">
@@ -83,29 +81,12 @@
                     </div>
                 </div>
 
-<!--                <div class="row">-->
-<!--                    <div class="col-xs-12">-->
-<!--                        <div class="panel panel-primary">-->
-<!--                            <div class="panel-heading bg-color-zulado">-->
-<!--                                <h3 class="panel-title">Bienvenido --><?//= ucfirst($usuario) ?><!--</h3>-->
-<!--                            </div>-->
-<!---->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
                 <div class="row">
-                    <div class="col-xs-12 text-center">
-<!--                        <iframe class="sinBordeRedondeado"-->
-<!--                                src="https://www.google.com/maps/d/embed?mid=z0LzSFRAV0FQ.k1s6TjP9IzTE" width="100%"-->
-<!--                                height="450px"></iframe>-->
-                        <iframe class="sinBordeRedondeado" src="" width="100%" height="450px"></iframe>
-
-                    </div>
+                    <?php $Escritorio = new Escritorio();
+                    //$Escritorio->load->view('mapas_estaciones') ?>
                 </div>
 
             </div>
         </div>
     </div>
-
 </div>

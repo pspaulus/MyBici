@@ -54,4 +54,8 @@ class Escritorio extends CI_Controller
         return date('Y-m-d', time() - ((60 * 60) * 5));
     }
 
+    public function prueba()
+    {
+        $this->load->view('mapas_estaciones');
+    }
 }

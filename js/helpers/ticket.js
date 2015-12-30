@@ -116,10 +116,10 @@ var Ticket = {
                 });
         },
 
-        cambiarEstadoBicicleta: function (ticket_id,estado_texto){
+        cambiarEstadoBicicleta: function (ticket_id, estado_texto) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Ticket/cambiarEstadoBicicleta/" + ticket_id + '/' + estado_texto ,
+                url: "http://mybici.server/Ticket/cambiarEstadoBicicleta/" + ticket_id + '/' + estado_texto,
                 data: {}
             })
                 .done(function (r) {
@@ -168,7 +168,7 @@ var Ticket = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Ticket/cargarListaTicketPorEstacion/" + estacion_id + '/' + estado_id+'/'+fecha,
+                url: "http://mybici.server/Ticket/cargarListaTicketPorEstacion/" + estacion_id + '/' + estado_id + '/' + fecha,
                 data: {}
             })
                 .done(function (r) {
@@ -288,7 +288,35 @@ var Ticket = {
 
             $("#estacion_destino").append('<option value="' + valor + '">' + texto + '</option>');
             //Ticket.acciones.quitarDestinoRepetido();
-        }
+        },
 
+        cambiarValorPlaceholder: function () {
+            var select_tipo = $('#ticket_campo');
+            var ticket_valor_buscar = $('#ticket_valor');
+            var valor;
+
+            switch (select_tipo.val()) {
+                case 'id':
+                    valor = 'Ingrese ID';
+                    break;
+
+                case 'bicicleta':
+                    valor = 'Ingrese c\u00F3digo ';
+                    break;
+
+                case 'usuario':
+                    valor = 'Ingrese nombre';
+                    break;
+            }
+
+            ticket_valor_buscar.attr('placeholder', valor);
+        },
+
+        pressEnter: function (e) {
+            if (e.keyCode == 13) {
+                console.log('Presiona enter');
+                Ticket.acciones.cargarListaTicketPorCampo();
+            }
+        }
     }
 };

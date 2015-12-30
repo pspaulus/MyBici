@@ -16,30 +16,30 @@
                         <!-- validacion parqueos disponibles en estacion destino -->
                         <input type="hidden" id="estacion_destino_parqueo_disponible" value="1">
 
-                        <!--id-->
+
                         <div class="form-group">
+                            <!--id-->
                             <div class="col-xs-2 col-xs-offset-1">
                                 <label for="ticket_id">Id</label>
                             </div>
-                            <div class="agrupador">
-                                <div class="col-xs-2">
-                                    <input class="form-control" id="ticket_id" type="text"
-                                           value="<?= Ticket::cargarUltimoId(); ?>" disabled>
-                                </div>
-                                <div class="col-xs-2 col-xs-offset-1">
-                                    <label for="ticket_fecha">Fecha</label>
-                                </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="ticket_id" type="text"
+                                       value="<?= Ticket::cargarUltimoId(); ?>" disabled>
+                            </div>
 
-                                <div class="col-xs-3">
-                                    <input class="form-control" id="ticket_fecha" type="text"
-                                           value="<?= Escritorio::getFechaEcuador() ?>" disabled>
-                                </div>
+                            <!--fecha-->
+                            <div class="col-xs-2 ">
+                                <label for="ticket_fecha">Fecha</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" id="ticket_fecha" type="text"
+                                       value="<?= Escritorio::getFechaEcuador() ?>" disabled>
                             </div>
                         </div>
 
-                        <!--fecha-->
-                        <div class="form-group">
 
+                        <div class="form-group">
+                            <!--Tipo-->
                             <div class="col-xs-2 col-xs-offset-1">
                                 <label for="ticket_tipo">Tipo</label>
                             </div>
@@ -49,6 +49,8 @@
                                     <option value="4">Tiempo</option>
                                 </select>
                             </div>
+
+                            <!--bicleta-->
                             <div class="agrupador">
                                 <div class="col-xs-2">
                                     <label for="ticket_bicicleta">Bicicleta</label>
@@ -62,16 +64,15 @@
                                         bicicletas disponibles!</label>
                                 </div>
                             </div>
+                            <script>
+                                Ticket.acciones.cargarBicicletaDisponible();
+                            </script>
                         </div>
 
-                        <script>
-                            Ticket.acciones.cargarBicicletaDisponible();
-                        </script>
 
-                        <!--Usuario-->
                         <div class="form-group">
-
                             <div class="agrupador">
+                                <!--Usuario-->
                                 <div class="col-xs-2 col-xs-offset-1">
                                     <label for="ticket_usuario_nombre">Usuario</label>
                                 </div>
@@ -82,7 +83,7 @@
                                 <div class="col-xs-5">
                                     <div class="form-group input-group">
                                         <input class="form-control" id="ticket_usuario_nombre" type="text"
-                                               placeholder="nombre de usuario"
+                                               placeholder="Ingrese el nombre del usuario"
                                                onkeyup="Estacion.mensajes.oculta($('#usuario_no_existe'));">
                                         <span class="input-group-btn">
                                             <button class="btn btn-primary" type="button"

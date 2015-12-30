@@ -8,7 +8,6 @@
     </div>
 
     <div class="row form-group">
-
         <div class="agrupador">
             <!--Codigo-->
             <div class="col-xs-2">
@@ -44,7 +43,6 @@
         </div>
 
     </div>
-
 
     <div class="row form-group">
         <!--Nombre-->
@@ -87,7 +85,6 @@
         <?php $Estacion->load->view('estacionamiento/crear'); ?>
     </div>
 
-
     <!--Mapa-->
     <div class="col-xs-12 col-sm-6 col-sm-offset-2">
         <div class="panel panel-primary">
@@ -97,7 +94,7 @@
             <div class="panel-body">
                 <div id="cargaGoogleMap" class="mapa"></div>
                 <script>
-                    ver_mapa('cargaGoogleMap', <?= $estacion_actual->longitud ?>, <?= $estacion_actual->latitud ?>, 18);
+                    ver_mapa('cargaGoogleMap', <?= $estacion_actual->longitud ?>, <?= $estacion_actual->latitud ?>, 15);
                 </script>
             </div>
         </div>

@@ -11,7 +11,7 @@ var Estacionamiento = {
             if (input_numero_estaciones_nuevo.val() <= 0) {
                 validacion_numero_estaciones_nuevo = false;
                 Estacion.mensajes.mostrar($('#error_cantidad_parqueos'));
-            }else {
+            } else {
                 Estacion.mensajes.oculta($('#error_cantidad_parqueos'));
             }
 
@@ -59,6 +59,7 @@ var Estacionamiento = {
             $('#bicicleta_codigo_' + estacionamiento_id).val('');
             Estacion.mensajes.oculta($('#error_bicicleta_codigo_' + estacionamiento_id));
             Estacion.mensajes.oculta($('#bicicleta_ya_estacionada_' + estacionamiento_id));
+            Estacion.mensajes.oculta($('#bicicleta_en_uso_' + estacionamiento_id));
         },
 
         obtenerCodigoBicicleta: function (estacionamiento_id) {
@@ -71,12 +72,17 @@ var Estacionamiento = {
                     data: {}
                 })
                     .done(function (r) {
-                        if (r.status) {
-                            console.log('OK: obtener id bicicleta ->' + r.bicicleta_id);
-                            Estacionamiento.acciones.verificarBicicletaEstacionada(estacionamiento_id, r.bicicleta_id);
+                        console.log('bicicleta_estado -> ' + r.bicicleta_estado);
+                        if ((r.bicicleta_estado != 9) && (r.bicicleta_estado != 6)) {
+                            if (r.status) {
+                                console.log('OK: obtener id bicicleta ->' + r.bicicleta_id);
+                                Estacionamiento.acciones.verificarBicicletaEstacionada(estacionamiento_id, r.bicicleta_id);
+                            } else {
+                                console.log('ERROR: obtener id bicicleta');
+                                Estacion.mensajes.mostrar($('#error_bicicleta_codigo_' + estacionamiento_id));
+                            }
                         } else {
-                            console.log('ERROR: obtener id bicicleta');
-                            Estacion.mensajes.mostrar($('#error_bicicleta_codigo_' + estacionamiento_id));
+                            Estacion.mensajes.mostrar($('#bicicleta_en_uso_' + estacionamiento_id));
                         }
                     });
             } else {

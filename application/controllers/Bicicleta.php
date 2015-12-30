@@ -260,7 +260,8 @@ class Bicicleta extends CI_Controller
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => true,
-                'bicicleta_id' => $bicicleta->id
+                'bicicleta_id' => $bicicleta->id,
+                'bicicleta_estado' => $bicicleta->ESTADO_id
             ]);
         } else {
             header('Content-Type: application/json');

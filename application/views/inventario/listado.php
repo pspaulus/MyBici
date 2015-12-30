@@ -19,10 +19,10 @@ if ($filtro == 'codigo') {
                 <thead>
                 <tr>
                     <th>No.</th>
-                    <th>C&oacute;digo</th>
+                    <th>C&oacute;d. Bicicleta</th>
                     <th>Tipo</th>
-                    <th>Estaci&oacute;n</th>
-                    <th>Estacionamiento</th>
+                    <th>Estaci&oacute;n Propietaria</th>
+                    <th>Estacionamiento Actual</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -36,19 +36,22 @@ if ($filtro == 'codigo') {
                     <?php foreach ($bicicletas_todas as $bicicleta) { ?>
                         <?php
                         $codigo_estacion = Estacion::getCodigoEstacion($bicicleta->PUESTO_ALQUILER_id);
-                        $nombre_estacion = Estacion::getNombreEstacion($bicicleta->PUESTO_ALQUILER_id);
+                        $nombre_estacion_propietaria = Estacion::getNombreEstacion($bicicleta->PUESTO_ALQUILER_id);
                         $estado_bicicleta = Bicicleta::getEstadoBicicleta($bicicleta->id);
-                        $estacionamiento_codigo = Bicicleta::getEstacionamiento($bicicleta->id);
+                        $estacionamiento_secuencia = Bicicleta::getEstacionamiento($bicicleta->id);
                         $estacionamiento_estacion_codigo = Bicicleta::getEstacionamientoEstacionCodigo($bicicleta->id);
                         $tipo_bibicleta = Bicicleta::getTipo($bicicleta->TIPO_id);
+                        $estacionamiento_codigo = ($estacionamiento_secuencia != null) ? $estacionamiento_estacion_codigo . 'P' . $estacionamiento_secuencia : '-';
+                        $estacionamiento_nombre = Estacion::getEstacionNombreByCodigo($estacionamiento_estacion_codigo);
+                        $estacionamiento_acual =  ($estacionamiento_nombre != null) ? '<i class="fa fa-map-pin"></i> '. $estacionamiento_nombre.' - '.$estacionamiento_codigo: '-';
                         ?>
                         <tr>
                             <td><strong><?= $i ?></strong></td>
                             <?php $i++ ?>
-                            <td><?= $codigo_estacion . 'B' . $bicicleta->codigo ?></td>
+                            <td><i class="fa fa-bicycle"></i> <?= $codigo_estacion . 'B' . $bicicleta->codigo ?></td>
                             <td><?= $tipo_bibicleta ?></td>
-                            <td><?= $nombre_estacion ?></td>
-                            <td><?= ($estacionamiento_codigo != null) ? $estacionamiento_estacion_codigo . 'P' . $estacionamiento_codigo : '-'; ?></td>
+                            <td><?= $nombre_estacion_propietaria ?></td>
+                            <td><?= $estacionamiento_acual ?></td>
 
 
                             <td><?= $estado_bicicleta ?></td>

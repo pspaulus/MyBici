@@ -31,6 +31,10 @@
                                     <label class="control-label"
                                            id="bicicleta_ya_estacionada_<?= $estacionamiento->id ?>">&iexcl;La bicicleta ya se encuentra estacionada en otra estaci&oacute;n!</label>
                                 </div>
+                                <div class="col-xs-10 col-xs-offset-1 mensaje oculto text-left">
+                                    <label class="control-label"
+                                           id="bicicleta_en_uso_<?= $estacionamiento->id ?>">&iexcl;La bicicleta est&aacute; en una reserva o en uso!</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -43,7 +47,7 @@
                 </button>
                 <button type="button" class="btn btn-primary"
                         onclick="Estacionamiento.acciones.obtenerCodigoBicicleta(<?= $estacionamiento->id ?>)">
-                    Guardar
+                    Estacionar
                 </button>
             </div>
 
