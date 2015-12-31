@@ -105,7 +105,9 @@ class Usuario extends CI_Controller
 
     public function existeUsuario($usuario_nombre)
     {
-        $usuario = Usuario::buscarUsuario($usuario_nombre);
+        $usuario = \App\Usuario::where('nombre', '=', $usuario_nombre)
+            ->get()
+            ->first();
 
         if ($usuario != null) {
             header('Content-Type: application/json');

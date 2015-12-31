@@ -2,6 +2,13 @@ var Usuario = {
 
     acciones: {
 
+        pressEnter: function (e) {
+            if (e.keyCode == 13) {
+                console.log('Presiona enter');
+                Usuario.acciones.buscar();
+            }
+        },
+
         existeUsuario: function () {
             var nombre = $('#nombre').val();
 
@@ -35,7 +42,7 @@ var Usuario = {
             this.validoVacio(contrasena);
             this.validoVacio(confirmar_contrasena);
 
-            if (existeUsuario.val()==1 && nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena, -1)) {
+            if (existeUsuario.val() == 1 && nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena, -1)) {
                 $.ajax({
                     method: "POST",
                     url: "http://mybici.server/Usuario/ingresarUsuario",
@@ -69,7 +76,7 @@ var Usuario = {
             this.validoVacio(contrasena);
             this.validoVacio(confirmar_contrasena);
 
-            if (nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena, id)) {
+            if (nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarEditarContrasena(contrasena, confirmar_contrasena, id)) {
                 $.ajax({
                     method: "POST",
                     url: "http://mybici.server/Usuario/editarUsuario",
@@ -81,13 +88,13 @@ var Usuario = {
                         estado: estado.val()
                     }
                 })
-                    .done(function (r) {
-                        console.log(' usuario actualizado -> ' + id);
+                    .done(function () {
+                        console.log('OK: usuario actualizado -> ' + id);
                         $('#resultado').html(Escritorio.load.usuario());
                         $('.modal-backdrop').remove();
                     });
             } else {
-                console.log('no edito' + id);
+                console.log('ERROR: no edito -> ' + id);
             }
         },
 
@@ -97,7 +104,7 @@ var Usuario = {
                 url: "http://mybici.server/Usuario/eliminarUsuario",
                 data: {id: id}
             })
-                .done(function (r) {
+                .done(function () {
                     console.log('usuario eliminado');
                     $('#resultado').html(Escritorio.load.usuario());
                     $('.modal-backdrop').remove();
@@ -110,10 +117,10 @@ var Usuario = {
 
             if (check.is(":checked")) {
                 tr.removeClass(' ocultoInactivo');
-                tr.children().children('.btn-danger').addClass(' oculto')
+                tr.children().children('.btn-danger').addClass(' oculto');
             } else {
                 tr.addClass(' ocultoInactivo');
-                tr.children().children('.btn-danger').removeClass(' oculto')
+                tr.children().children('.btn-danger').removeClass(' oculto');
             }
 
         },
@@ -160,6 +167,8 @@ var Usuario = {
             contrasena.parents('.agrupador').removeClass(' has-error has-warning');
             confirmar_contrasena.parents('.agrupador').removeClass(' has-error has-warning');
             $('#nombre_duplicado').parent('.duplicado').addClass(' oulto');
+            $('#error_mayuscula').parent('.menssaje').addClass(' oculto');
+            $('#error_numero').parent('.menssaje').addClass(' oculto');
         },
 
         limpiarEditar: function () {
@@ -173,12 +182,57 @@ var Usuario = {
                 ( id == -1 ) ?
                     $('#contrasena_no_coinciden').addClass(' oculto') :
                     $('#contrasena_no_coinciden_editar' + id).addClass(' oculto');
-                return true;
+                if (input_contrasena.val().trim().match(/[A-Z]/)) {
+                    if (input_contrasena.val().trim().match(/\d/)) {
+                        console.log('OK: guarda');
+                        return true;
+                    } else {
+                        console.log('ERROR: falta numero');
+                        $('#error_numero').parent('.menssaje').removeClass(' oculto');
+                    }
+                } else {
+                    console.log('ERROR: falta mayuscula');
+                    $('#error_mayuscula').parent('.menssaje').removeClass(' oculto');
+                }
             } else {
                 ( id == -1 ) ?
                     $('#contrasena_no_coinciden').removeClass(' oculto') :
                     $('#contrasena_no_coinciden_editar' + id).removeClass(' oculto');
                 return false;
+            }
+        },
+
+        validarEditarContrasena: function (input_contrasena, input_confirmar, id) {
+            console.log(input_contrasena.val().trim() + ' == ' + input_confirmar.val().trim());
+            if (input_contrasena.val().trim().length == 32 &&
+                input_contrasena.val().trim().match(/[a-z0-9]/) &&
+                input_confirmar.val().trim().length == 32 &&
+                input_confirmar.val().trim().match(/[a-z0-9]/)) {
+                    return true;
+            } else {
+                console.log('Error: no es MD5');
+                if (input_contrasena.val().trim() == input_confirmar.val().trim()) {
+                    ( id == -1 ) ?
+                        $('#contrasena_no_coinciden').addClass(' oculto') :
+                        $('#contrasena_no_coinciden_editar' + id).addClass(' oculto');
+                    if (input_contrasena.val().trim().match(/[A-Z]/)) {
+                        if (input_contrasena.val().trim().match(/\d/)) {
+                            console.log('OK: guarda');
+                            return true;
+                        } else {
+                            console.log('ERROR: falta numero');
+                            $('#error_numero').parent('.menssaje').removeClass(' oculto');
+                        }
+                    } else {
+                        console.log('ERROR: falta mayuscula');
+                        $('#error_mayuscula').parent('.menssaje').removeClass(' oculto');
+                    }
+                } else {
+                    ( id == -1 ) ?
+                        $('#contrasena_no_coinciden').removeClass(' oculto') :
+                        $('#contrasena_no_coinciden_editar' + id).removeClass(' oculto');
+                    return false;
+                }
             }
         },
 

@@ -19,31 +19,7 @@
                 }
             }
             ?>
-            <script>
 
-                var map = '';
-                var marker = [];
-
-                    var latlng = new google.maps.LatLng(-1, -1);
-
-                    var myOptions = {
-                        zoom: z,
-                        center: latlng,
-                        zoomControl: true,
-                        mapTypeControl: false,
-                        streetViewControl: false,
-                        mapTypeId: google.maps.MapTypeId.ROADMAP
-                    };
-
-                    var map = new google.maps.Map(document.getElementById("GoogleMapAll"), myOptions);
-
-                    var marker = new google.maps.Marker({
-                        position: latlng
-                    });
-
-                    marker.setMap(map);
-
-            </script>
         </div>
     </div>
 </div>

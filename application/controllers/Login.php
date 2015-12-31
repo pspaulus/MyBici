@@ -19,7 +19,6 @@ class Login extends CI_Controller
 
     public function validarUsuario()
     {
-        //http://mybici.server/Login/validarUsuario?usuario=admin&contrasena=123123123
         $nombre = $_REQUEST['usuario'];
         $contrasena = $_REQUEST['contrasena'];
 
@@ -27,12 +26,17 @@ class Login extends CI_Controller
             ->where("contrasena", "=", $contrasena)
             ->first();
 
-        if ( (bool) $usuario ){
+        if ( $usuario != null ){
             if ( $usuario->TIPO_id == 1  && $usuario->ESTADO_id == 1 ) {
                 session_start();
                 $_SESSION["Usuario"] = $nombre;
                 $esctritorio = new Escritorio();
                 $esctritorio->index();
+            } else {
+                header('Content-Type: application/json');
+                echo json_encode([
+                    'status' => true
+                ]);
             }
         } else {
             header('Content-Type: application/json');
@@ -41,10 +45,5 @@ class Login extends CI_Controller
             ]);
         }
 
-    }
-
-    public function prueba($contrasena)
-    {
-        dd(md5($contrasena));
     }
 }

@@ -31,7 +31,9 @@
                         <div class="input-group-addon"><i class="fa fa-fw fa-lock"></i>&nbsp;</div>
                         <input type="password" class="form-control" placeholder="Contrase&ntilde;a" id="contrasena"
                                maxlength="40"
-                               onkeyup="Login.index.validarNumeroCaracteres(this,8); Login.index.mensajeUsuarioContrasenaIncorrecto(false); Login.index.pressEnter(event)">
+                               onkeyup="Login.index.validarNumeroCaracteres(this,8);
+                                        Login.index.mensajeUsuarioContrasenaIncorrecto(false);
+                                        Login.index.pressEnter(event)">
                     </div>
                     <label class="control-label vacio oculto" for="contrasena" id="contrasena_vacio">&iexcl;Ingrese
                         contrase&ntilde;a!</label>

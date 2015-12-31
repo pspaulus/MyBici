@@ -12,6 +12,7 @@
                 <form class="form-horizontal" id="form_usuario">
                     <div class="row">
 
+                        <!--ID-->
                         <div class="form-group">
                             <div class="col-xs-2 col-xs-offset-1">
                                 <label>ID</label>
@@ -22,6 +23,7 @@
                             </div>
                         </div>
 
+                        <!--Login-->
                         <div class="agrupador">
                             <div class="form-group">
                                 <div class="col-xs-2 col-xs-offset-1">
@@ -29,7 +31,7 @@
                                 </div>
                                 <div class="mensaje">
                                     <div class="col-xs-6">
-                                        <input class="form-control" id="nombre" type="text" maxlength="40"
+                                        <input class="form-control" id="nombre" type="text" maxlength="25"
                                                placeholder="Ingrese un nombre"
                                                onkeyup="Usuario.acciones.validarNumeroCaracteresUsuario(this,4);
                                                         $('#nombre_duplicado').parent('.duplicado').addClass(' oculto');
@@ -45,11 +47,13 @@
                                             usuario debe contener al menos 4 caracteres!</label>
                                     </div>
                                     <div class="col-xs-9 col-xs-offset-3 has-error duplicado oculto">
-                                        <label class="control-label" id="nombre_duplicado">&iexcl;El nombre ya se encuentra en uso!</label>
+                                        <label class="control-label" id="nombre_duplicado">&iexcl;El nombre ya se
+                                            encuentra en uso!</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="agrupador">
                             <div class="form-group">
@@ -58,9 +62,11 @@
                                 </div>
                                 <div class="mensaje">
                                     <div class="col-xs-6">
-                                        <input class="form-control" id="contrasena" type="password" maxlength="40"
+                                        <input class="form-control" id="contrasena" type="password" maxlength="25"
                                                placeholder="Ingrese una contrase&ntilde;a" value=""
-                                               onkeyup="Usuario.acciones.validarNumeroCaracteresUsuario(this,8)">
+                                               onkeyup="Usuario.acciones.validarNumeroCaracteresUsuario(this,8);
+                                                        $('#error_numero').parent('.menssaje').addClass(' oculto');
+                                                        $('#error_mayuscula').parent('.menssaje').addClass(' oculto') ;">
                                     </div>
                                     <div class="col-xs-9 col-xs-offset-3 vacio oculto">
                                         <label class="control-label" for="contrasena"
@@ -83,9 +89,11 @@
                                 <div class="mensaje">
                                     <div class="col-xs-6">
                                         <input class="form-control" id="confirmar_contrasena" type="password"
-                                               maxlength="40"
+                                               maxlength="25"
                                                placeholder="repita la contrase&ntilde;a" value=""
-                                               onkeyup="Usuario.acciones.validarNumeroCaracteresUsuario(this,8)">
+                                               onkeyup="Usuario.acciones.validarNumeroCaracteresUsuario(this,8);
+                                                $('#error_numero').parent('.menssaje').addClass(' oculto');
+                                                $('#error_mayuscula').parent('.menssaje').addClass(' oculto');">
                                     </div>
                                     <div class="col-xs-3"></div>
                                     <div class="col-xs-9 col-xs-offset-3 vacio oculto">
@@ -102,6 +110,18 @@
                                         <label class="control-label oculto" for="confirmar_contrasena"
                                                id="contrasena_no_coinciden">&iexcl;Las contrase&ntilde;as no
                                             coinciden!</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-xs-9 col-xs-offset-3 menssaje has-error oculto">
+                                        <label class="control-label" id="error_mayuscula">&iexcl;Las contrase&ntilde;a
+                                            debe contener una letra may&uacute;scula!</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-xs-9 col-xs-offset-3 menssaje has-error oculto">
+                                        <label class="control-label" id="error_numero">&iexcl;Las contrase&ntilde;a
+                                            debe contener un n&uacute;mero!</label>
                                     </div>
                                 </div>
                             </div>
