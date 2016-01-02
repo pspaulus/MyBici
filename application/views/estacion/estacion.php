@@ -141,3 +141,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    if ($('#select_estacion').val() != null) {
+        Estacionamiento.acciones.cargarListaParqueos()
+    }
+
+
+</script>

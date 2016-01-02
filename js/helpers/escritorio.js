@@ -1,3 +1,4 @@
+var ruta = 'http://mybici.server/';
 var Escritorio = {
     load: {
 
@@ -6,11 +7,10 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Ticket",
+                url: ruta + "Ticket",
                 data: {datos: ""}
             })
                 .done(function (r) {
-                    container.innerHTML= '';
                     container.html(r);
                 });
         },
@@ -20,7 +20,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/inventario",
+                url: ruta + "inventario",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -33,7 +33,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Usuario",
+                url: ruta + "Usuario",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -46,7 +46,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Estacion",
+                url: ruta + "Estacion",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -54,12 +54,12 @@ var Escritorio = {
                 });
         },
 
-        evento: function () {
+        evento:function () {
             var container = $('#resultado');
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Evento",
+                url: ruta + "Evento",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -72,7 +72,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Marca",
+                url: ruta +"Marca",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -85,7 +85,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Modelo",
+                url: ruta + "Modelo",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -98,7 +98,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Estado",
+                url: ruta + "Estado",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -111,22 +111,22 @@ var Escritorio = {
         salir: function () {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Escritorio/salir"
+                url: ruta + "Escritorio/salir"
 
             })
                 .done(function (r) {
                     console.log(r);
-                    window.location.replace("http://mybici.server/Login");
+                    window.location.replace(ruta + "Login");
                 });
         },
 
-        ocultarMostrar: function(elemento, titulo) {
+        ocultarMostrar: function (elemento, titulo) {
             elemento.slideToggle();
-            titulo.toggleClass('active','inactive')
+            titulo.toggleClass('active', 'inactive')
         }
     },
 
-    Validaciones:{
+    Validaciones: {
         soloLetras: function (e) {
             var key = e.keyCode || e.which;
             var tecla = String.fromCharCode(key).toLowerCase();

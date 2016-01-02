@@ -114,3 +114,10 @@ a.nav-texto:hover{
     text-decoration: none !important;
     color: #EC971F !important;
 }
+
+#evento_descripcion {
+    max-height: 100px;
+    min-height: 34px;
+    max-width: 100%;
+    min-width: 100%;
+}

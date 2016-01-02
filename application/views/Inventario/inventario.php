@@ -8,7 +8,7 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             <i class="fa fa-fw fa-bicycle"></i> Inventario de Bicicletas
-            <small> Total: <?= $Bicicletas->contarBicicletas(); ?></small>
+            <small class="pull-right"> Total: <?= $Bicicletas->contarBicicletas(); ?></small>
         </h1>
     </div>
 </div>

@@ -34,24 +34,30 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a href="#page_ticket" onclick="$('.navbar-toggle').click(); Escritorio.load.ticket();"><i
-                            class="fa fa-fw fa-ticket"></i> Reservas</a>
+                    <a href="#page_ticket" onclick="$('.navbar-toggle').click(); Escritorio.load.ticket();">
+                        <i class="fa fa-fw fa-ticket"></i> Reservas
+                    </a>
                 </li>
                 <li>
-                    <a href="#page_inventario" onclick="$('.navbar-toggle').click(); Escritorio.load.inventario()"><i
-                            class="fa fa-fw fa-bicycle"></i> Inventario</a>
+                    <a href="#page_inventario" onclick="$('.navbar-toggle').click(); Escritorio.load.inventario()">
+                        <i class="fa fa-fw fa-bicycle"></i> Inventario
+                    </a>
                 </li>
                 <li>
-                    <a href="#page_estacion" onclick="$('.navbar-toggle').click(); Escritorio.load.estacion()"><i class="fa fa-fw fa-map-marker"></i>
-                        Estaciones</a>
+                    <a href="#page_estacion" onclick="$('.navbar-toggle').click(); Escritorio.load.estacion()">
+                        <i class="fa fa-fw fa-map-marker"></i> Estaciones
+                    </a>
                 </li>
                 <li>
-                    <a href="#page_usuario" onclick="$('.navbar-toggle').click(); Escritorio.load.usuario()"><i class="fa fa-fw fa-users"></i>
-                        Usuarios</a>
+                    <a href="#page_evento" onclick="$('.navbar-toggle').click(); Escritorio.load.evento()">
+                        <i class="fa fa-fw fa-envelope"></i> Eventos
+                    </a>
                 </li>
-                <!--                <li>-->
-                <!--                    <a onclick="Escritorio.l oad.evento()"><i class="fa fa-fw fa-envelope"></i> Eventos</a>-->
-                <!--                </li>-->
+                <li>
+                    <a href="#page_usuario" onclick="$('.navbar-toggle').click(); Escritorio.load.usuario()">
+                        <i class="fa fa-fw fa-users"></i> Usuarios
+                    </a>
+                </li>
                 <!--                <li>-->
                 <!--                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-list"></i>-->
                 <!--                        Tablas Auxiliares<i class="fa fa-fw fa-caret-down"></i></a>-->
