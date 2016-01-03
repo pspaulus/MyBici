@@ -108,7 +108,6 @@ var Estacionamiento = {
                 });
         },
 
-
         agregarBicicleta: function (estacionamiento_id, bicicleta_id) {
             $.ajax({
                 method: "POST",

@@ -187,6 +187,16 @@ var Estacion = {
         oculta: function (mensaje) {
             mensaje.parent('.mensaje').addClass(' oculto');
             mensaje.parents('.agrupador').removeClass(' has-error');
+        },
+
+        mostrarAlerta: function (mensaje) {
+            mensaje.parent('.mensaje').removeClass(' oculto');
+            mensaje.parents('.agrupador').addClass(' has-warning');
+        },
+
+        ocultaAlerta: function (mensaje) {
+            mensaje.parent('.mensaje').addClass(' oculto');
+            mensaje.parents('.agrupador').removeClass(' has-warning');
         }
     },
 
@@ -214,6 +224,28 @@ var Estacion = {
                 $('#btn_guardar_estacion').hide();
             if (accion == 'mostrar')
                 $('#btn_guardar_estacion').show();
-        }
+        },
+
+        EstacionamientoDisponible: function () {
+            var estacion_id = $('#select_estacion_inventario_nuevo').val();
+            var check_parquear_bicicleta = $('#parquear_bicicleta');
+
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Estacionamiento/validarEstacionamientoDisponible/" + estacion_id,
+                data: {}
+            })
+                .done(function (r) {
+                    if (r.status) {
+                        console.log('OK: estacionamiento libre -> ' + r.estacionamiento_id);
+                        Estacion.mensajes.oculta($('#error_sin_parqueo'));
+                    } else {
+                        console.log('Error: No hay estacionamiento libre');
+                        Estacion.mensajes.mostrarAlerta($('#error_sin_parqueo'));
+                        //check_parquear_bicicleta.parents('.checkbox').addClass(' oculto');
+                        check_parquear_bicicleta.attr('disabled', true);
+                    }
+                });
+        },
     }
 };

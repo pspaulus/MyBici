@@ -110,6 +110,7 @@ var Bicicleta = {
 
         guardar: function () {
             var input_cantidad_nuevo = $('#input_cantidad_nuevo');
+            var parquear_bicicleta = $('#parquear_bicicleta');
 
             var input_codigo_estacion_nuevo = $('#input_codigo_estacion_nuevo');
             var input_codigo_bicicleta_nuevo = $('#input_codigo_bicicleta_nuevo');
@@ -131,10 +132,11 @@ var Bicicleta = {
 
                         secuencia = parseInt(input_codigo_bicicleta_nuevo.val()) + i;
 
-                        console.log('codigo:' + input_codigo_estacion_nuevo.val() + 'B' + secuencia + '\n' +
+                        console.log('codigo:' + input_codigo_estacion_nuevo.val() + 'B' + secuencia);
+                        /*console.log('codigo:' + input_codigo_estacion_nuevo.val() + 'B' + secuencia + '\n' +
                             'PUESTO_ALQUILER_id:' + select_estacion_inventario_nuevo.val() + '\n' +
                             'TIPO_id:' + select_tipo_nuevo.val() + '\n' +
-                            'ESTADO_id:' + select_estado_nuevo.val());
+                            'ESTADO_id:' + select_estado_nuevo.val());*/
                         $.ajax({
                             method: "POST",
                             url: "http://mybici.server/Bicicleta/guardarBicicleta/",
@@ -146,11 +148,20 @@ var Bicicleta = {
                             }
                         })
                             .done(function (r) {
-                                console.log('guardado blicicleta estado ->' + r.status);
-                                $('.modal-backdrop').remove();
-                                Inventario.acciones.refrescar();
+                                if (r.status) {
+                                    console.log('OK: guardado blicicleta -> ' + r.bicicleta_id);
+
+                                    if (parquear_bicicleta.is(":checked")) {
+                                        Bicicleta.acciones.parquear(r.bicicleta_id);
+                                    }
+                                    $('.modal-backdrop').remove();
+                                    Inventario.acciones.refrescar();
+                                } else {
+                                    console.log('ERROR: No guarda blicicleta');
+                                }
                             });
                     }
+
                 } else {
                     var mensaje = $('#error_cantidad');
                     mensaje.parent('.mensaje').addClass(' has-error');
@@ -158,6 +169,21 @@ var Bicicleta = {
                 }
             }
 
+        },
+
+        parquear: function(bicicleta_id) {
+            $.ajax({
+                method: "POST",
+                url: "http://mybici.server/Bicicleta/Parquear/" + bicicleta_id,
+                data: {}
+            })
+                .done(function (r) {
+                    if (r.status){
+                        console.log('OK: parquear '+ r.movimiento);
+                    } else {
+                        console.log('ERROR: parquear');
+                    }
+                });
         },
 
         validarCantidad: function () {

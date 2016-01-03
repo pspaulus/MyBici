@@ -1,4 +1,4 @@
-<?php $Evento = new Evento()?>
+<?php $Evento = new Evento() ?>
 
 <!--Titulo-->
 <div class="row" id="page_evento">
@@ -24,3 +24,44 @@
 
 <!-- Modal Agregar bicicleta -->
 <?php $Evento->load->view('evento/crear', compact('Evento.php')); ?>
+
+<!--Buscar-->
+<div class="row" id="listado_busqueda">
+    <div class="col-xs-12">
+        <ol class="breadcrumb">
+            <li class="active" id="titulo3">
+                <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_buscar'), $('#titulo3'))">
+                    <i class="fa fa-search"></i> Buscar
+                </a>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div id="contenido_buscar">
+    <div class="col-xs-12">
+        <!-- Tabs -->
+        <div class="row">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#inscripciones" data-toggle="tab" role="tab">Inscripciones</a>
+                </li>
+                <li role="presentation">
+                    <a href="#datos" data-toggle="tab" role="tab">Datos</a>
+                </li>
+            </ul>
+
+            <!-- Tab panels -->
+            <div id="" class="tab-content tab-contenido">
+
+                <div role="tabpanel" class="tab-pane fade in active" id="inscripciones">
+                    contenido inscripciones
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="datos">
+                    contenido datos
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

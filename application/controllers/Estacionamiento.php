@@ -123,7 +123,7 @@ class Estacionamiento extends CI_Controller
             ->get()
             ->first();
 
-        return $estacionamiento->id;
+        return ($estacionamiento != null) ? $estacionamiento->id : null;
     }
 
     public static function getEstacionamiento($bicicleta_id)
@@ -141,7 +141,7 @@ class Estacionamiento extends CI_Controller
         if ($estacimonamiento != null) {
             $estacion_codigo = Estacion::getCodigoEstacionByIdDevolver($estacimonamiento->PUESTO_ALQUILER_id);
 
-            return $estacion_codigo . 'P'.$estacimonamiento->codigo;
+            return $estacion_codigo . 'P' . $estacimonamiento->codigo;
         } else {
             return '<i class="fa fa-clock-o"></i> ';
         }

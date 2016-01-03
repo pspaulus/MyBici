@@ -41,7 +41,7 @@ class Bicicleta extends CI_Controller
                 break;
 
             case 'en_uso':
-                $estado = [9,6];
+                $estado = [9, 6];
                 $conteo_bicicletas = \App\Bicicleta::whereIn('ESTADO_id', $estado)
                     ->get()
                     ->count();
@@ -219,7 +219,7 @@ class Bicicleta extends CI_Controller
 
         if ($bicicleta->first() == null) {
 
-            \App\Bicicleta::firstOrCreate([
+            $nueva_bicicleta = \App\Bicicleta::firstOrCreate([
                 'codigo' => $secuencia,
                 'PUESTO_ALQUILER_id' => $PUESTO_ALQUILER_id,
                 'TIPO_id' => $TIPO_id,
@@ -229,6 +229,7 @@ class Bicicleta extends CI_Controller
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => true,
+                'bicicleta_id' => $nueva_bicicleta->id
             ]);
         } else {
             header('Content-Type: application/json');
@@ -439,5 +440,33 @@ class Bicicleta extends CI_Controller
         echo json_encode([
             'status' => true,
         ]);
+    }
+
+    public function Parquear($bicicleta_id)
+    {
+        $bicicleta = \App\Bicicleta::find($bicicleta_id);
+
+        $estacion_destino_id = $bicicleta->PUESTO_ALQUILER_id;
+
+        $estacionamiento_id_colocar = Estacionamiento::cargarEstacionamientosDisponible($estacion_destino_id);
+
+        if ($estacionamiento_id_colocar != null) {
+            $Estacionamiento = new Estacionamiento();
+
+            //y la registro en el nuevo parqueo
+            $Estacionamiento->agregarBicicleta($estacionamiento_id_colocar, $bicicleta_id);
+
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true,
+                'movimiento' => $bicicleta_id . ' -> ' . $estacionamiento_id_colocar
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false
+
+            ]);
+        }
     }
 }

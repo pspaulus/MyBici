@@ -31,6 +31,7 @@
                                                 value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
                                         <?php } ?>
                                     </select>
+
                                     <div class="agrupador">
                                         <div class="col-xs-9 col-xs-offset-3 mensaje oculto">
                                             <label class="control-label" id="error_sin_estacion">&iexcl;No hay estaci&oacute;n!</label>
@@ -44,7 +45,7 @@
                         <div class="form-group">
                             <div class="col-xs-2 col-xs-offset-1">
                                 <label class="control-label"
-                                       for="input_codigo_estacion_nuevo">C&oacute;digo</label>
+                                       for="input_codigo_estacion_nuevo">C&oacute;d. Bicicleta</label>
                             </div>
                             <div class="col-xs-2">
                                 <input class="form-control" type="text" id="input_codigo_estacion_nuevo" value=""
@@ -108,6 +109,28 @@
                                 </select>
                             </div>
                         </div>
+
+                        <!-- parquearlas -->
+                        <div class="form-group">
+                            <div class="col-xs-6 col-xs-offset-3">
+                                <div class="checkbox">
+                                    <label>
+                                        <small>
+                                            <input id="parquear_bicicleta" type="checkbox">
+                                            Estacionarlas despu&eacute;s de agregar
+                                        </small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="agrupador">
+                                <div class="col-xs-9 col-xs-offset-3 mensaje oculto">
+                                    <label class="control-label" id="error_sin_parqueo"><small>&iexcl;La estaci&oacute;n no cuenta con estacionamientos disponibles!</small></label>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            Estacion.validaciones.EstacionamientoDisponible();
+                        </script>
 
                     </div>
                 </form>
