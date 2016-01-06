@@ -13,6 +13,7 @@ class Evento extends Model
         'nombre',
         'fecha',
         'descripcion',
+        'cantidad_participantes',
         'TIPO_id',
         'ESTADO_id'
     ];

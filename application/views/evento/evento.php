@@ -9,6 +9,24 @@
     </div>
 </div>
 
+<!-- historial -->
+<div class="row" id="listado_historial">
+    <div class="col-xs-12">
+        <ol class="breadcrumb">
+            <li class="active" id="titulo4">
+                <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_historial'), $('#titulo4'))">
+                    <i class="fa fa-clock-o"></i> Historial
+                </a>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div id="contenido_historial">
+    Historial
+</div>
+
+
 <!-- Crear -->
 <div class="row">
     <div class="col-xs-12">
@@ -25,20 +43,26 @@
 <!-- Modal Agregar bicicleta -->
 <?php $Evento->load->view('evento/crear', compact('Evento.php')); ?>
 
+
+
+<script>
+    Escritorio.Acciones.ocultarMostrar($('#contenido_historial'), $('#titulo4'));
+</script>
+
 <!--Buscar-->
-<div class="row" id="listado_busqueda">
+<div class="row" id="listado_editar">
     <div class="col-xs-12">
         <ol class="breadcrumb">
             <li class="active" id="titulo3">
-                <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_buscar'), $('#titulo3'))">
-                    <i class="fa fa-search"></i> Buscar
+                <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_editar'), $('#titulo3'))">
+                    <i class="fa fa-edit"></i> Editar
                 </a>
             </li>
         </ol>
     </div>
 </div>
 
-<div id="contenido_buscar">
+<div id="contenido_editar">
     <div class="col-xs-12">
         <!-- Tabs -->
         <div class="row">
@@ -59,9 +83,12 @@
                 </div>
 
                 <div role="tabpanel" class="tab-pane fade" id="datos">
-                    contenido datos
+                    <script>
+                        Evento.acciones.cargarDatosEvento();
+                    </script>
                 </div>
             </div>
         </div>
     </div>
 </div>
+

@@ -27,16 +27,16 @@ class Evento extends CI_Controller
 
     public function guardar()
     {
+        $tipo =  $_REQUEST['tipo'];
         $nombre = $_REQUEST['nombre'];
         $descripcion = ($_REQUEST['descripcion']) ?: null;
         $fecha = Escritorio::getFechaEcuador();
-        $tipo =  $_REQUEST['tipo'];
-        $estado = 15;
-
+        $estado = 15; //En construccion
         $evento_nuevo = \App\Evento::firstOrCreate([
             'nombre' => $nombre,
             'descripcion' => $descripcion,
             'fecha' => $fecha,
+            'cantidad_participantes' => $_REQUEST['cantidad'],
             'TIPO_id' => $tipo,
             'ESTADO_id' => $estado
         ]);

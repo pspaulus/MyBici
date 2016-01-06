@@ -42,7 +42,7 @@
 
                                 <div class="col-xs-6">
                                     <input class="form-control" type="text" placeholder="Ingrese nombre"
-                                           id="evento_nombre">
+                                           id="evento_nombre" onkeyup="Estacion.mensajes.oculta($('#nombre_vacio'));">
                                 </div>
 
                                 <div class="col-xs-9 col-xs-offset-3 mensaje oculto">
@@ -59,6 +59,23 @@
                             <div class="col-xs-6">
                                 <textarea class="form-control" id="evento_descripcion"
                                           placeholder="Opcional"></textarea>
+                            </div>
+                        </div>
+
+                        <!--Cantidad-->
+                        <div class="form-group">
+                            <div class="agrupador">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    <label class="control-label" for="evento_cantidad">Cant. de Participantes</label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="input" id="evento_cantidad" value="10"
+                                           maxlength="3" onkeypress="return Escritorio.Validaciones.soloNumeros(event)"
+                                           onkeyup="Bicicleta.acciones.validarCantidad();">
+                                </div>
+                                <div class="col-xs-4 mensaje oculto">
+                                    <label class="control-label" id="error_cantidad">&iexcl;Error de cantidad!</label>
+                                </div>
                             </div>
                         </div>
 
