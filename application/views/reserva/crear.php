@@ -16,7 +16,6 @@
                         <!-- validacion parqueos disponibles en estacion destino -->
                         <input type="hidden" id="estacion_destino_parqueo_disponible" value="1">
 
-
                         <div class="form-group">
                             <!--id-->
                             <div class="col-xs-2 col-xs-offset-1">

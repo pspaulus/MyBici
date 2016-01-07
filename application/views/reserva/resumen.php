@@ -1,6 +1,6 @@
 <div class="row">
 
-    <div class="col-xs-3">
+    <div class="col-xs-6 col-sm-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="row">
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="col-xs-3">
+    <div class="col-xs-6 col-sm-3">
         <div class="panel panel-yellow">
             <div class="panel-heading">
                 <div class="row">
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class="col-xs-3">
+    <div class="col-xs-6 col-sm-3">
         <div class="panel panel-green">
             <div class="panel-heading">
                 <div class="row">
@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    <div class="col-xs-3">
+    <div class="col-xs-6 col-sm-3">
         <div class="panel panel-red">
             <div class="panel-heading">
                 <div class="row">

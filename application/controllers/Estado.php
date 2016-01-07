@@ -33,4 +33,11 @@ class Estado extends CI_Controller
 
         return $estado->descripcion;
     }
+
+    public static function getEstadoUsuario()
+    {
+        $estados = \App\Estado::where('objeto', '=', 'usuario')
+            ->get();
+        return ($estados)?:null;
+    }
 }

@@ -35,13 +35,15 @@ class Login extends CI_Controller
             } else {
                 header('Content-Type: application/json');
                 echo json_encode([
-                    'status' => true
+                    'status' => true,
+                    'mensaje' => 'ERROR: usuario estandar o inactivo'
                 ]);
             }
         } else {
             header('Content-Type: application/json');
             echo json_encode([
-                'status' => true
+                'status' => true,
+                'mensaje' => 'ERROR: no encuentra usuario'
             ]);
         }
 

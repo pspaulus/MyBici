@@ -15,7 +15,7 @@ var Usuario = {
             if (nombre.length >= 4) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Usuario/existeUsuario/" + nombre,
+                    url: base_url + "Usuario/existeUsuario/" + nombre,
                     data: {}
                 })
                     .done(function (r) {
@@ -23,10 +23,12 @@ var Usuario = {
                             console.log('ERROR: existe usuario');
                             $('#existeUsuario').val(0);
                             $('#nombre_duplicado').parent('.duplicado').removeClass(' oculto');
+                            $('#nombre').parents('.agrupador').children('.form-group').children('.mensaje').addClass(' has-error');
                         } else {
                             console.log('OK: No existe usuario');
                             $('#existeUsuario').val(1);
                             $('#nombre_duplicado').parent('.duplicado').addClass(' oculto');
+                            $('#nombre').parents('.agrupador').children('.form-group').children('.mensaje').removeClass(' has-error');
                         }
                     });
             }
@@ -111,6 +113,23 @@ var Usuario = {
                 });
         },
 
+        restaurar: function (id) {
+            $.ajax({
+                method: "POST",
+                url: base_url + "Usuario/restaurar/",
+                data: {id: id}
+            })
+                .done(function (r) {
+                    if (r.status) {
+                        console.log('ERROR: restaura usuario -> '+ r.usuario_id);
+                        $('#resultado').html(Escritorio.load.usuario());
+                        $('.modal-backdrop').remove();
+                    } else {
+                        console.log('OK: No restaura usuario');
+                    }
+                });
+        },
+
         verInactivos: function () {
             var check = $('#verInactivos');
             var tr = $('tr.inactivo');
@@ -118,9 +137,12 @@ var Usuario = {
             if (check.is(":checked")) {
                 tr.removeClass(' ocultoInactivo');
                 tr.children().children('.btn-danger').addClass(' oculto');
+                tr.children().children('.btn-warning').addClass(' oculto');
             } else {
                 tr.addClass(' ocultoInactivo');
                 tr.children().children('.btn-danger').removeClass(' oculto');
+                tr.children().children('.btn-warning').removeClass(' oculto');
+                tr.children().children('.btn-default').removeClass(' oculto');
             }
 
         },
@@ -155,6 +177,7 @@ var Usuario = {
             input_nombre.val('');
             contrasena.val('');
             confirmar_contrasena.val('');
+
             $('#nombre_vacio').addClass(' oculto');
             $('#nombre_error').addClass(' oculto');
             $('#contrasena_vacio').addClass(' oculto');
@@ -162,13 +185,14 @@ var Usuario = {
             $('#confirmar_contrasena_vacio').addClass(' oculto');
             $('#confirmar_contrasena_error').addClass(' oculto');
             $('#contrasena_no_coinciden').addClass(' oculto');
+            $('#nombre_duplicado').parent('.duplicado').addClass(' oculto');
+            $('#error_mayuscula').parent('.menssaje').addClass(' oculto');
+            $('#error_numero').parent('.menssaje').addClass(' oculto');
 
             input_nombre.parents('.agrupador').removeClass(' has-error has-warning');
             contrasena.parents('.agrupador').removeClass(' has-error has-warning');
             confirmar_contrasena.parents('.agrupador').removeClass(' has-error has-warning');
-            $('#nombre_duplicado').parent('.duplicado').addClass(' oulto');
-            $('#error_mayuscula').parent('.menssaje').addClass(' oculto');
-            $('#error_numero').parent('.menssaje').addClass(' oculto');
+            $('#nombre').parents('.agrupador').children('.form-group').children('.mensaje').removeClass(' has-error');
         },
 
         limpiarEditar: function () {
@@ -208,7 +232,7 @@ var Usuario = {
                 input_contrasena.val().trim().match(/[a-z0-9]/) &&
                 input_confirmar.val().trim().length == 32 &&
                 input_confirmar.val().trim().match(/[a-z0-9]/)) {
-                    return true;
+                return true;
             } else {
                 console.log('Error: no es MD5');
                 if (input_contrasena.val().trim() == input_confirmar.val().trim()) {
@@ -254,7 +278,13 @@ var Usuario = {
             if (elem.val() == '') {
                 elem.parents('.agrupador').addClass(' has-error');
                 elem.parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').removeClass(' oculto');
-                //elem.parents('.agrupador').children('.form-group').children('.mensaje').children('.error').removeClass(' oculto');
+
+                $('#nombre_vacio').removeClass(' oculto');
+                $('#nombre_error').removeClass(' oculto');
+                $('#contrasena_vacio').removeClass(' oculto');
+                $('#contrasena_error').removeClass(' oculto');
+                $('#confirmar_contrasena_vacio').removeClass(' oculto');
+                $('#confirmar_contrasena_error').removeClass(' oculto');
             } else {
                 elem.parents('.agrupador').children('.form-group').children('.mensaje').children('.vacio').addClass(' oculto');
             }

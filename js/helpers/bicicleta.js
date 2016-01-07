@@ -8,7 +8,7 @@ var Bicicleta = {
             if (bicicleta_codigo.val().length > 2) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Bicicleta/cargarVistaListadoBicicletasPorCodigo/" + bicicleta_codigo.val().toUpperCase(),
+                    url: base_url + "Bicicleta/cargarVistaListadoBicicletasPorCodigo/" + bicicleta_codigo.val().toUpperCase(),
                     data: {}
                 })
                     .done(function (r) {
@@ -27,7 +27,7 @@ var Bicicleta = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Bicicleta/cargarVistaListadoBicicletasPorEstacion/" + estacion_id + '/' + estado_id,
+                url: base_url + "Bicicleta/cargarVistaListadoBicicletasPorEstacion/" + estacion_id + '/' + estado_id,
                 data: {}
             })
                 .done(function (r) {
@@ -38,7 +38,7 @@ var Bicicleta = {
         marcarEstado: function (bicicleta_id, estado_texto) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Bicicleta/marcarEstado/" + estado_texto,
+                url: base_url + "Bicicleta/marcarEstado/" + estado_texto,
                 data: {id: bicicleta_id}
             })
                 .done(function (r) {
@@ -55,7 +55,7 @@ var Bicicleta = {
         quitarEstacionamiento: function (ticket_id) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Bicicleta/quitarEstacionamiento/" + ticket_id,
+                url: base_url + "Bicicleta/quitarEstacionamiento/" + ticket_id,
                 data: {}
             })
                 .done(function (r) {
@@ -72,7 +72,7 @@ var Bicicleta = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Estacion/getCodigoEstacionById/" + estacion_id,
+                url: base_url + "Estacion/getCodigoEstacionById/" + estacion_id,
                 data: {}
             })
                 .done(function (r) {

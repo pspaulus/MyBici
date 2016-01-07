@@ -128,7 +128,8 @@ class Usuario extends CI_Controller
         return $usuario->nombre;
     }
 
-    public static function buscarUsuario($usuario_nombre){
+    public static function buscarUsuario($usuario_nombre)
+    {
         $usuario = \App\Usuario::where('nombre', '=', $usuario_nombre)
             ->where('ESTADO_id', '=', 1)
             ->get()
@@ -137,8 +138,26 @@ class Usuario extends CI_Controller
         return ($usuario != null) ? $usuario : null;
     }
 
-    public function testMD5($usuario_clave)
+    public function restaurar()
     {
-        dd(md5($usuario_clave));
+        $id = $_REQUEST['id'];
+
+        $usuario = \App\Usuario::find($id);
+
+        if ($usuario != null) {
+            $usuario->ESTADO_id = 1;
+            $usuario->save();
+
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true,
+                'usuario_id' =>  $usuario->id
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false
+            ]);
+        }
     }
 }

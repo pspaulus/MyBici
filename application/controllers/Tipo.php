@@ -26,4 +26,11 @@ class Tipo extends CI_Controller
 
         return $tipo->descripcion;
     }
+
+    public static function getEstadoUsuario()
+    {
+        $tipos = \App\Tipo::where('objeto', '=', 'usuario')
+            ->get();
+        return ($tipos)?:null;
+    }
 }
