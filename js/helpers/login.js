@@ -1,9 +1,11 @@
+//base_url = 'http://192.168.43.91/';
+base_url = 'http://mybici.server/';
 var Login = {
 
     index: {
 
         /**
-         * Validar usuario al presionar ingresar en el logeo
+         * Validar usuari|o al presionar ingresar en el logeo
          */
         validarUsuario: function () {
             var input_usuario = $('#usuario');
@@ -15,7 +17,7 @@ var Login = {
             if (input_usuario.val().length >= 4 && input_contrasena.val().length >= 8) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Login/validarUsuario",
+                    url: base_url+"Login/validarUsuario",
                     data: {
                         usuario: input_usuario.val().toLowerCase().trim(),
                         contrasena: $.md5(input_contrasena.val().trim())
@@ -26,7 +28,7 @@ var Login = {
                         if (r.status) {
                             Login.index.mensajeUsuarioContrasenaIncorrecto(r.status);
                         } else {
-                            window.location.replace("http://mybici.server/Escritorio");
+                            window.location.replace(base_url+"Escritorio");
                         }
                     });
             }

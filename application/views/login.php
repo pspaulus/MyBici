@@ -1,12 +1,21 @@
 <div class="container" id="formLogin">
 
+    <!--Titulo-->
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+            <h1 class="page-header text-center text-color-white">
+                <i class="fa fa-fw fa-bicycle"></i> MyBici Server
+            </h1>
+        </div>
+    </div>
+
     <!--texo login-->
     <div class="row">
         <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
             <div class="form-group">
-                <h1 class="page-header text-center text-color-white">
+                <h3 class="text-center text-color-white">
                     <i class="fa fa-fw fa-key"></i> Login
-                </h1>
+                </h3>
             </div>
         </div>
     </div>

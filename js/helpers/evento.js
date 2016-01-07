@@ -37,7 +37,7 @@ var Evento = {
             if(validacion_evento_tipo && validacion_evento_nombre && validacion_evento_estado && validacion_evento_cantidad){
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Evento/guardar/",
+                    url: base_url + "Evento/guardar/",
                     data: {
                         tipo: evento_tipo,
                         nombre: evento_nombre,
@@ -73,7 +73,7 @@ var Evento = {
 
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Estacion/cargarDatosEstacion/" + estacion_id,
+                    url: base_url + "Estacion/cargarDatosEstacion/" + estacion_id,
                     data: {}
                 })
                     .done(function (r) {

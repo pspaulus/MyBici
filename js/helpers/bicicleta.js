@@ -84,7 +84,7 @@ var Bicicleta = {
         cargarUltimoCodigoBicicleta: function (estacion_id) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Bicicleta/getSecuenciaCodigo/" + estacion_id,
+                url: base_url + "Bicicleta/getSecuenciaCodigo/" + estacion_id,
                 data: {}
             })
                 .done(function (r) {
@@ -139,7 +139,7 @@ var Bicicleta = {
                             'ESTADO_id:' + select_estado_nuevo.val());*/
                         $.ajax({
                             method: "POST",
-                            url: "http://mybici.server/Bicicleta/guardarBicicleta/",
+                            url: base_url + "Bicicleta/guardarBicicleta/",
                             data: {
                                 codigo: input_codigo_estacion_nuevo.val() + 'B' + secuencia,
                                 PUESTO_ALQUILER_id: select_estacion_inventario_nuevo.val(),
@@ -174,7 +174,7 @@ var Bicicleta = {
         parquear: function(bicicleta_id) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Bicicleta/Parquear/" + bicicleta_id,
+                url: base_url + "Bicicleta/Parquear/" + bicicleta_id,
                 data: {}
             })
                 .done(function (r) {

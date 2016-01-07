@@ -1,4 +1,3 @@
-var ruta = 'http://mybici.server/';
 var Escritorio = {
     load: {
 
@@ -7,7 +6,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: ruta + "Ticket",
+                url: base_url + "Ticket",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -20,7 +19,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: ruta + "inventario",
+                url: base_url + "inventario",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -33,7 +32,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: ruta + "Usuario",
+                url: base_url + "Usuario",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -46,7 +45,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: ruta + "Estacion",
+                url: base_url + "Estacion",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -59,7 +58,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: ruta + "Evento",
+                url: base_url + "Evento",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -72,7 +71,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: ruta +"Marca",
+                url: base_url +"Marca",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -85,7 +84,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: ruta + "Modelo",
+                url: base_url + "Modelo",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -98,7 +97,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: ruta + "Estado",
+                url: base_url + "Estado",
                 data: {datos: ""}
             })
                 .done(function (r) {
@@ -111,12 +110,12 @@ var Escritorio = {
         salir: function () {
             $.ajax({
                 method: "POST",
-                url: ruta + "Escritorio/salir"
+                url: base_url + "Escritorio/salir"
 
             })
                 .done(function (r) {
                     console.log(r);
-                    window.location.replace(ruta + "Login");
+                    window.location.replace(base_url + "Login");
                 });
         },
 

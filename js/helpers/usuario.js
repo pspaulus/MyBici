@@ -45,7 +45,7 @@ var Usuario = {
             if (existeUsuario.val() == 1 && nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena, -1)) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Usuario/ingresarUsuario",
+                    url: base_url + "Usuario/ingresarUsuario",
                     data: {
                         nombre: nombre.val().toLowerCase().trim(),
                         contrasena: $.md5(contrasena.val().trim()),
@@ -79,7 +79,7 @@ var Usuario = {
             if (nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarEditarContrasena(contrasena, confirmar_contrasena, id)) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Usuario/editarUsuario",
+                    url: base_url + "Usuario/editarUsuario",
                     data: {
                         id: id,
                         nombre: nombre.val().toLowerCase().trim(),
@@ -101,7 +101,7 @@ var Usuario = {
         eliminar: function (id) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Usuario/eliminarUsuario",
+                url: base_url + "Usuario/eliminarUsuario",
                 data: {id: id}
             })
                 .done(function () {
@@ -275,7 +275,7 @@ var Usuario = {
             if (usuario_nombre.length != '') {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Usuario/getUsuarioIdByNombre/" + usuario_nombre,
+                    url: base_url + "Usuario/getUsuarioIdByNombre/" + usuario_nombre,
                     data: {}
                 })
                     .done(function (r) {

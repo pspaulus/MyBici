@@ -38,7 +38,7 @@ var Ticket = {
             if (validacion_input_usuario_id && validacion_input_bicicleta_codigo && validacion_origen_destino && (estacion_destino_parqueo_disponible == 1)) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Ticket/guardarTicket",
+                    url: base_url + "Ticket/guardarTicket",
                     data: {
                         id: input_id,
                         TIPO_id: select_tipo,
@@ -72,7 +72,7 @@ var Ticket = {
         marcarBicicletaEstadoEnUso: function (id, estado) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Bicicleta/marcarEstado/" + estado,
+                url: base_url + "Bicicleta/marcarEstado/" + estado,
                 data: {id: id}
             })
                 .done(function (r) {
@@ -87,7 +87,7 @@ var Ticket = {
         cambiarEstado: function (ticket_id, estado) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Ticket/cambiarEstado/" + ticket_id + '/' + estado,
+                url: base_url + "Ticket/cambiarEstado/" + ticket_id + '/' + estado,
                 data: {}
             })
                 .done(function (r) {
@@ -119,7 +119,7 @@ var Ticket = {
         cambiarEstadoBicicleta: function (ticket_id, estado_texto) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Ticket/cambiarEstadoBicicleta/" + ticket_id + '/' + estado_texto,
+                url: base_url + "Ticket/cambiarEstadoBicicleta/" + ticket_id + '/' + estado_texto,
                 data: {}
             })
                 .done(function (r) {
@@ -134,7 +134,7 @@ var Ticket = {
         marcarHora: function (ticket_id, tipo_hora) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Ticket/marcarHora/" + ticket_id + '/' + tipo_hora,
+                url: base_url + "Ticket/marcarHora/" + ticket_id + '/' + tipo_hora,
                 data: {}
             })
                 .done(function (r) {
@@ -149,7 +149,7 @@ var Ticket = {
         registrarNuevoParqueo: function (ticket_id) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Bicicleta/registrarNuevoParqueo/" + ticket_id,
+                url: base_url + "Bicicleta/registrarNuevoParqueo/" + ticket_id,
                 data: {}
             })
                 .done(function (r) {
@@ -168,7 +168,7 @@ var Ticket = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Ticket/cargarListaTicketPorEstacion/" + estacion_id + '/' + estado_id + '/' + fecha,
+                url: base_url + "Ticket/cargarListaTicketPorEstacion/" + estacion_id + '/' + estado_id + '/' + fecha,
                 data: {}
             })
                 .done(function (r) {
@@ -184,7 +184,7 @@ var Ticket = {
             if (valor.length != '') {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Ticket/cargarListaTicketPorCampo/" + campo + '/' + valor,
+                    url: base_url + "Ticket/cargarListaTicketPorCampo/" + campo + '/' + valor,
                     data: {}
                 })
                     .done(function (r) {
@@ -202,7 +202,7 @@ var Ticket = {
             if (valor.length != '') {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Ticket/cargarListaTicketPorCampo/" + campo + '/' + valor,
+                    url: base_url + "Ticket/cargarListaTicketPorCampo/" + campo + '/' + valor,
                     data: {}
                 })
                     .done(function (r) {
@@ -225,7 +225,7 @@ var Ticket = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Bicicleta/cargarBicicletaDisponible/" + select_estacion_origen.val(),
+                url: base_url + "Bicicleta/cargarBicicletaDisponible/" + select_estacion_origen.val(),
                 data: {}
             })
                 .done(function (r) {
@@ -245,7 +245,7 @@ var Ticket = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Estacionamiento/validarEstacionamientoDisponible/" + estacion_destino_id,
+                url: base_url + "Estacionamiento/validarEstacionamientoDisponible/" + estacion_destino_id,
                 data: {}
             })
                 .done(function (r) {

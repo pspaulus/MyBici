@@ -41,7 +41,7 @@ var Estacion = {
             if (validacion_codigo && validacion_nombre && validacion_longitud && validacion_latitud) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Estacion/crearEstacion",
+                    url: base_url + "Estacion/crearEstacion",
                     data: {
                         nombre: input_nombre.val(),
                         codigo: input_codigo.val().toUpperCase(),
@@ -84,7 +84,7 @@ var Estacion = {
 
                     $.ajax({
                         method: "POST",
-                        url: "http://mybici.server/Estacion/editarEstacion",
+                        url: base_url + "Estacion/editarEstacion",
                         data: {
                             id: estacion_id,
                             nombre: estacion_nombre,
@@ -111,7 +111,7 @@ var Estacion = {
 
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Estacion/cargarDatosEstacion/" + estacion_id,
+                    url: base_url + "Estacion/cargarDatosEstacion/" + estacion_id,
                     data: {}
                 })
                     .done(function (r) {
@@ -232,7 +232,7 @@ var Estacion = {
 
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Estacionamiento/validarEstacionamientoDisponible/" + estacion_id,
+                url: base_url + "Estacionamiento/validarEstacionamientoDisponible/" + estacion_id,
                 data: {}
             })
                 .done(function (r) {

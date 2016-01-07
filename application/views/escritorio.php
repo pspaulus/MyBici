@@ -77,7 +77,7 @@
         </div>
     </nav>
 
-    <div id="page-wrapper">
+    <div id="page-wrapper" class="scroll">
         <div class="container-fluid">
             <div id="resultado">
 

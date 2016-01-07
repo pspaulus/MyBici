@@ -18,7 +18,7 @@ var Estacionamiento = {
             if (validacion_numero_estaciones_nuevo) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Estacionamiento/crearEstacionamiento/" + estacion_id + '/' + input_numero_estaciones_nuevo.val(),
+                    url: base_url + "Estacionamiento/crearEstacionamiento/" + estacion_id + '/' + input_numero_estaciones_nuevo.val(),
                     data: {}
                 })
                     .done(function (r) {
@@ -39,7 +39,7 @@ var Estacionamiento = {
 
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Estacionamiento/cargarVistaParqueos/" + estacion_id + '/' + estacionamiento_estado,
+                    url: base_url + "Estacionamiento/cargarVistaParqueos/" + estacion_id + '/' + estacionamiento_estado,
                     data: {}
                 })
                     .done(function (r) {
@@ -68,7 +68,7 @@ var Estacionamiento = {
             if (bicicleta_codigo.length >= 3) {
                 $.ajax({
                     method: "POST",
-                    url: "http://mybici.server/Bicicleta/getIdBicicletaByCodigo/" + bicicleta_codigo,
+                    url: base_url + "Bicicleta/getIdBicicletaByCodigo/" + bicicleta_codigo,
                     data: {}
                 })
                     .done(function (r) {
@@ -94,7 +94,7 @@ var Estacionamiento = {
         verificarBicicletaEstacionada: function (estacionamiento_id, bicicleta_id) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Bicicleta/verificarBicicletaEstacionada/" + bicicleta_id,
+                url: base_url + "Bicicleta/verificarBicicletaEstacionada/" + bicicleta_id,
                 data: {}
             })
                 .done(function (r) {
@@ -111,7 +111,7 @@ var Estacionamiento = {
         agregarBicicleta: function (estacionamiento_id, bicicleta_id) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Estacionamiento/agregarBicicleta/" + estacionamiento_id + '/' + bicicleta_id,
+                url: base_url + "Estacionamiento/agregarBicicleta/" + estacionamiento_id + '/' + bicicleta_id,
                 data: {}
             })
                 .done(function (r) {
@@ -124,7 +124,7 @@ var Estacionamiento = {
         quitarBicicleta: function (estacionamiento_id) {
             $.ajax({
                 method: "POST",
-                url: "http://mybici.server/Estacionamiento/quitarBicicleta/" + estacionamiento_id,
+                url: base_url + "Estacionamiento/quitarBicicleta/" + estacionamiento_id,
                 data: {}
             })
                 .done(function (r) {
