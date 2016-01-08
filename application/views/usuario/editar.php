@@ -28,7 +28,7 @@
                         <div class="agrupador">
                             <div class="form-group">
                                 <div class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-1 text-left">
-                                    <label for="Descripcion">Login</label>
+                                    <label for="nombre_editar<?= $obj_usuario->id ?>">Login</label>
                                 </div>
                                 <div class="mensaje">
                                     <div class="col-xs-6">
@@ -54,7 +54,7 @@
                         <div class="agrupador">
                             <div class="form-group">
                                 <div class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-1 text-left">
-                                    <label for="Descripcion">Contrase&ntilde;a</label>
+                                    <label for="contrasena_editar<?= $obj_usuario->id ?>">Contrase&ntilde;a</label>
                                 </div>
                                 <div class="mensaje">
                                     <div class="col-xs-6">
@@ -78,7 +78,7 @@
                         <div class="agrupador">
                             <div class="form-group">
                                 <div class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-1 text-left">
-                                    <label for="Descripcion">Confirme Contrase&ntilde;a</label>
+                                    <label for="confirmar_contrasena_editar<?= $obj_usuario->id ?>">Confirme Contrase&ntilde;a</label>
                                 </div>
                                 <div class="mensaje">
                                     <div class="col-xs-6">
@@ -121,7 +121,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-1 text-left">
-                                <label>Tipo</label>
+                                <label class="control-label" for="tipo_usuario_editar<?= $obj_usuario->id ?>">Tipo</label>
                             </div>
                             <div class="col-xs-6 text-left" id="estado">
                                 <select class="form-control" id="tipo_usuario_editar<?= $obj_usuario->id ?>">
@@ -134,7 +134,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-1 text-left">
-                                <label>Estado</label>
+                                <label class="control-label" for="estado_editar<?= $obj_usuario->id ?>">Estado</label>
                             </div>
                             <div class="col-xs-6">
                                 <select class="form-control" id="estado_editar<?= $obj_usuario->id ?>">

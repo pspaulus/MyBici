@@ -6,8 +6,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "Ticket",
-                data: {datos: ""}
+                url: base_url + "Ticket"
             })
                 .done(function (r) {
                     container.html(r);
@@ -19,8 +18,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "inventario",
-                data: {datos: ""}
+                url: base_url + "inventario"
             })
                 .done(function (r) {
                     container.html(r);
@@ -33,7 +31,6 @@ var Escritorio = {
             $.ajax({
                 method: "POST",
                 url: base_url + "Usuario",
-                data: {datos: ""}
             })
                 .done(function (r) {
                     container.html(r);
@@ -45,8 +42,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "Estacion",
-                data: {datos: ""}
+                url: base_url + "Estacion"
             })
                 .done(function (r) {
                     container.html(r);
@@ -58,8 +54,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "Evento",
-                data: {datos: ""}
+                url: base_url + "Evento"
             })
                 .done(function (r) {
                     container.html(r);
@@ -71,8 +66,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url +"Marca",
-                data: {datos: ""}
+                url: base_url +"Marca"
             })
                 .done(function (r) {
                     container.html(r);
@@ -84,8 +78,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "Modelo",
-                data: {datos: ""}
+                url: base_url + "Modelo"
             })
                 .done(function (r) {
                     container.html(r);
@@ -97,8 +90,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "Estado",
-                data: {datos: ""}
+                url: base_url + "Estado"
             })
                 .done(function (r) {
                     container.html(r);
@@ -107,14 +99,13 @@ var Escritorio = {
     },
 
     Acciones: {
+
         salir: function () {
             $.ajax({
                 method: "POST",
                 url: base_url + "Escritorio/salir"
-
             })
-                .done(function (r) {
-                    console.log(r);
+                .done(function () {
                     window.location.replace(base_url + "Login");
                 });
         },
@@ -126,6 +117,7 @@ var Escritorio = {
     },
 
     Validaciones: {
+
         soloLetras: function (e) {
             var key = e.keyCode || e.which;
             var tecla = String.fromCharCode(key).toLowerCase();

@@ -44,7 +44,7 @@ var Estacion = {
                     url: base_url + "Estacion/crearEstacion",
                     data: {
                         nombre: input_nombre.val(),
-                        codigo: input_codigo.val().toUpperCase(),
+                        codigo: input_codigo.val().charAt(0).toUpperCase(),
                         longitud: input_longitud.val(),
                         latitud: input_latitud.val()
                     }

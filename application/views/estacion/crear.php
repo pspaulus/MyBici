@@ -18,7 +18,7 @@
                                 <label for="Descripcion">C&oacute;digo</label>
                             </div>
                             <div class="agrupador">
-                                <div class="col-xs-2">
+                                <div class="col-xs-3 col-sm-2">
                                     <input class="form-control" id="codigo" type="text" maxlength="1"
                                            placeholder="_" value=""
                                            onkeypress="return Escritorio.Validaciones.soloLetras(event)"
@@ -36,7 +36,7 @@
                                 <label for="Descripcion">Nombre</label>
                             </div>
                             <div class="agrupador">
-                                <div class="col-xs-6">
+                                <div class="col-xs-8 col-sm-6">
                                     <input class="form-control" id="nombre" type="text" maxlength="40"
                                            placeholder="Ingrese un nombre" value=""
                                            onkeyup="Estacion.label.nombre()">
@@ -49,10 +49,10 @@
                         </div>
 
                         <!-- mapa -->
-                        <div class="col-xs-10 col-xs-offset-1">
-                            <div class="panel panel-primary">
+                        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                            <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Ubicaci&oacute;n</h3>
+                                    <h3 class="panel-title"><strong>Ubicaci&oacute;n</strong></h3>
                                 </div>
                                 <div class="panel-body">
                                     <div id="googleMap" class="mapa"></div>

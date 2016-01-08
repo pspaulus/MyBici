@@ -52,7 +52,8 @@
             </div>
             <div class="col-xs-8 col-sm-8">
                 <div class="form-group input-group">
-                    <input type="text" class="form-control" id="valor_a_buscar" maxlength="40" onkeyup="Usuario.acciones.pressEnter(event)">
+                    <input type="text" class="form-control" id="valor_a_buscar" maxlength="40"
+                           onkeyup="Usuario.acciones.pressEnter(event)">
                         <span class="input-group-btn">
                             <button class="btn btn-primary" type="button" onclick="Usuario.acciones.buscar();"><i
                                     class="fa fa-search"></i></button>
@@ -68,7 +69,7 @@
                 <label>
                     <small>
                         <input id="verInactivos" type="checkbox" onchange="Usuario.acciones.verInactivos();">Ver
-                    Inactivos
+                        Inactivos
                     </small>
                 </label>
             </div>
@@ -76,7 +77,7 @@
     </div>
 </div>
 
-    <h3>Lista de Usuarios</h3>
+<h3>Lista de Usuarios</h3>
 <div class="row">
     <div class="col-xs-12">
         <?php $collection_usuario = $Usuario->cargarUsuariosTodos(true); ?>
@@ -102,33 +103,34 @@
                         <td class="text-center">
                             <?php if (!($obj_usuario->nombre == 'administrador')){ ?>
 
-                                <?php if (false){ ?>
+                            <?php if (false) { ?>
                                 <button class="btn btn-sm btn-default" type="button" data-toggle="modal"
                                         data-target="#verUsuario_<?= $obj_usuario->id ?>"><i
                                         class="fa fa-search"></i></button>
-                                    <?php }?>
+                            <?php } ?>
 
-                                <button class="btn btn-sm btn-warning" type="button" data-toggle="modal" title="Editar"
-                                        data-target="#editarUsuario_<?= $obj_usuario->id ?>"><i
-                                        class="fa fa-edit"></i></button>
+                            <button class="btn btn-sm btn-warning" type="button" data-toggle="modal" title="Editar"
+                                    data-target="#editarUsuario_<?= $obj_usuario->id ?>"><i
+                                    class="fa fa-edit"></i></button>
 
-                                <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" title="Eliminar"
-                                        data-target="#eliminarUsuario_<?= $obj_usuario->id ?>"><i
-                                        class="fa fa-trash"></i></button>
+                            <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" title="Eliminar"
+                                    data-target="#eliminarUsuario_<?= $obj_usuario->id ?>"><i
+                                    class="fa fa-trash"></i></button>
 
-                                <button class="btn btn-sm btn-default oculto" type="button" title="Restaurar"
-                                        onclick="Usuario.acciones.restaurar(<?= $obj_usuario->id ?>)">
-                                        <i class="fa fa-refresh"></i></button>
+                            <button class="btn btn-sm btn-default oculto" type="button" title="Restaurar"
+                                    onclick="Usuario.acciones.restaurar(<?= $obj_usuario->id ?>)">
+                                <i class="fa fa-refresh"></i></button>
+                        </td>
+                        <td>
+                            <!--Modal Eliminar-->
+                            <?php $Usuario->load->view('usuario/eliminar', compact('obj_usuario')); ?>
 
-                                <!--Modal Eliminar-->
-                                <?php $Usuario->load->view('usuario/eliminar', compact('obj_usuario')); ?>
+                            <!-- ver modal-->
+                            <?php //$Usuario->load->view('usuario/ver', compact('obj_usuario')); ?>
 
-                                <!-- ver modal-->
-                                <?php //$Usuario->load->view('usuario/ver', compact('obj_usuario')); ?>
-
-                                <!-- Editar modal-->
-                                <?php $Usuario->load->view('usuario/editar', compact('obj_usuario')); ?>
-                            <?php }?>
+                            <!-- Editar modal-->
+                            <?php $Usuario->load->view('usuario/editar', compact('obj_usuario')); ?>
+                            <?php } ?>
                         </td>
                     </tr>
                 <?php } ?>

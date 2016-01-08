@@ -92,60 +92,58 @@
     <div class="row">
         <div class="col-xs-12">&nbsp;</div>
     </div>
+</div>
+<!-- Tabs -->
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#parqueos" data-toggle="tab" role="tab"
+                   onclick="Estacion.acciones.busqueda('mostrar');">Estacionamientos</a>
+            </li>
+            <li role="presentation">
+                <a href="#datos_estacion" data-toggle="tab" role="tab"
+                   onclick="Estacion.acciones.busqueda('ocultar');">Datos B&aacute;sicos</a>
+            </li>
+        </ul>
 
-    <!-- Tabs -->
-    <div class="row">
-        <div class="col-xs-12">
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#parqueos" data-toggle="tab" role="tab"
-                       onclick="Estacion.acciones.busqueda('mostrar');">Estacionamientos</a>
-                </li>
-                <li role="presentation">
-                    <a href="#datos_estacion" data-toggle="tab" role="tab"
-                       onclick="Estacion.acciones.busqueda('ocultar');">Datos B&aacute;sicos</a>
-                </li>
-            </ul>
+        <!-- Tab panels -->
+        <div id="" class="tab-content tab-contenido">
 
-            <!-- Tab panels -->
-            <div id="" class="tab-content tab-contenido">
+            <div role="tabpanel" class="tab-pane fade in active" id="parqueos">
+                <!-- tab parqueos -->
+                <!-- se llena por ajax -->
+                <div class="col-xs-12">
+                    <h3>Lista de Estacionamiento</h3>
 
-                <div role="tabpanel" class="tab-pane fade in active" id="parqueos">
-                    <!-- tab parqueos -->
-                    <!-- se llena por ajax -->
-                    <div class="col-xs-12">
-                        <h3>Lista de Estacionamiento</h3>
-
-                        <div class="table-responsive">
-                            <table id="tabla_usuario" class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>Nro.</th>
-                                    <th>C&oacute;d. Estacionamiento</th>
-                                    <th>C&oacute;d. Bicicleta - Estado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                                </thead>
-                            </table>
-                        </div>
+                    <div class="table-responsive">
+                        <table id="tabla_usuario" class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nro.</th>
+                                <th>C&oacute;d. Estacionamiento</th>
+                                <th>C&oacute;d. Bicicleta - Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                        </table>
                     </div>
-                </div>
-
-                <div role="tabpanel" class="tab-pane fade" id="datos_estacion">
-                    <script>
-                        Estacion.acciones.cargarDatosEstacion();
-                    </script>
                 </div>
             </div>
 
+            <div role="tabpanel" class="tab-pane fade" id="datos_estacion">
+                <script>
+                    Estacion.acciones.cargarDatosEstacion();
+                </script>
+            </div>
         </div>
+
     </div>
 </div>
+
 
 <script>
     if ($('#select_estacion').val() != null) {
         Estacionamiento.acciones.cargarListaParqueos()
     }
-
-
 </script>

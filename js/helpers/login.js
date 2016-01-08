@@ -1,5 +1,6 @@
 base_url = 'http://192.168.100.14/';
 //base_url = 'http://mybici.server/';
+
 var Login = {
 
     index: {
@@ -24,7 +25,6 @@ var Login = {
                     }
                 })
                     .done(function (r) {
-                        //alert(r.status);
                         if (r.status) {
                             Login.index.mensajeUsuarioContrasenaIncorrecto(r.status);
                         } else {
