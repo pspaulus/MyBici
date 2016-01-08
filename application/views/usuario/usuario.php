@@ -44,7 +44,7 @@
     <!-- Busqueda -->
     <div class="row">
         <div class="form-inline">
-            <div class="col-xs-4 col-sm-2">
+            <div class="col-xs-4 col-sm-2 col-lg-1">
                 <select class="form-control" id="filtro_usuario">
                     <option value="1">ID</option>
                     <option value="2" selected>Login</option>
@@ -62,6 +62,7 @@
             </div>
         </div>
     </div>
+
     <!-- check inactivos -->
     <div class="row">
         <div class="col-xs-12">

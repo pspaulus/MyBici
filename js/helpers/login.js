@@ -1,4 +1,4 @@
-base_url = 'http://192.168.100.14/';
+base_url = 'http://192.168.0.199/';
 //base_url = 'http://mybici.server/';
 
 var Login = {
@@ -60,7 +60,7 @@ var Login = {
             if (elem.val() == '') {
                 elem.parents('.agrupador').addClass(' has-error');
                 elem.parents('.agrupador').children('.vacio').removeClass(' oculto');
-                $(elem).parents('.agrupador').children('.error').removeClass(' oculto');
+                //$(elem).parents('.agrupador').children('.error').removeClass(' oculto');
             } else {
                 elem.parents('.agrupador').children('.vacio').addClass(' oculto');
             }

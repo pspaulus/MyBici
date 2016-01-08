@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= $Bicicletas->contarBicicletasEstado('buena'); ?></div>
-                        <div><strong>Buenas</strong></div>
+                        <div><strong>Disponible</strong></div>
                     </div>
                 </div>
             </div>

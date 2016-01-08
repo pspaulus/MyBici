@@ -26,8 +26,8 @@ class Escritorio extends CI_Controller
         if (isset($_SESSION["Usuario"])) {
             $data['usuario'] = $_SESSION["Usuario"];
 
-            $this->load->view('header');
-            $this->load->view('escritorio', $data);
+            $this->load->view('header', $data);
+            $this->load->view('escritorio');
             $this->load->view('footer');
         } else {
             $Login = new Login();
@@ -54,4 +54,35 @@ class Escritorio extends CI_Controller
     {
         return date('Y-m-d', time() - ((60 * 60) * 5));
     }
+
+
+    public static function verificarInternet()
+    {
+        $connected = @fsockopen("www.google.com", 80);
+        //website, port  (try 80 or 443)
+        if ($connected){
+            $is_conn = true; //action when connected
+            fclose($connected);
+        }else{
+            $is_conn = false; //action in connection failure
+        }
+        return $is_conn;
+    }
+
+    public static function mostrarMensaje($mensaje_tipo)
+    {
+        switch ($mensaje_tipo){
+
+            case 'sin_conexion_internet':
+                $archivo = 'sin_conexion_internet';
+                break;
+
+            case 'no_muestra_contenido':
+                $archivo = 'no_muestra_contenido';
+                break;
+        }
+        $Escritorio = new Escritorio();
+        $Escritorio->load->view('mensaje/'.$archivo);
+    }
+
 }

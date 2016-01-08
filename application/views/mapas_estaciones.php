@@ -1,6 +1,6 @@
 <!--Mapa-->
-<div class="col-xs-12 ">
-    <div class="panel panel-primary">
+<div class="col-xs-12">
+    <div class="panel panel-primary mapa">
         <div class="panel-heading">
             <h3 class="panel-title">Estaciones</h3>
         </div>

@@ -91,7 +91,7 @@ var Estacion = {
                             codigo: estacion_codigo
                         }
                     })
-                        .done(function (r) {
+                        .done(function () {
                             console.log('OK: acutlizada estacoin -> ' + estacion_id);
                             Escritorio.load.estacion();
                         });
@@ -144,13 +144,11 @@ var Estacion = {
             input_codigo.val('');
             input_longitud.val('');
             input_latitud.val('');
-            //input_numero_estaciones.val('1');
             Estacion.mensajes.oculta($('#error_ya_existe'));
             Estacion.mensajes.oculta($('#error_codigo_parqueos'));
             Estacion.mensajes.oculta($('#error_nombre_parqueos'));
             Estacion.mensajes.oculta($('#error_longitud_parqueos'));
             Estacion.mensajes.oculta($('#error_latitud_parqueos'));
-            Estacion.mensajes.oculta($('#error_ya_existe'));
             guardar_mapa();
         }
     },
@@ -239,13 +237,16 @@ var Estacion = {
                     if (r.status) {
                         console.log('OK: estacionamiento libre -> ' + r.estacionamiento_id);
                         Estacion.mensajes.oculta($('#error_sin_parqueo'));
+                        check_parquear_bicicleta.attr('disabled', false);
+                        $('#opcion_parquear').removeClass('inactivo');
                     } else {
                         console.log('Error: No hay estacionamiento libre');
                         Estacion.mensajes.mostrarAlerta($('#error_sin_parqueo'));
-                        //check_parquear_bicicleta.parents('.checkbox').addClass(' oculto');
                         check_parquear_bicicleta.attr('disabled', true);
+                        $('#opcion_parquear').addClass('inactivo');
+                        $('#parquear_bicicleta').attr('checked', false);
                     }
                 });
-        },
+        }
     }
 };

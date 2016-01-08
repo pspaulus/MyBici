@@ -30,6 +30,13 @@
             </li>
         </ul>
 
+        <?php if (!Escritorio::verificarInternet()) { ?>
+            <?php Escritorio::mostrarMensaje('sin_conexion_internet') ?>
+            <script>
+                Escritorio.mensajeFlotante.mostrar($('#sin_conexion_internet'));
+            </script>
+        <?php } ?>
+
         <!--Menú lateral izquierdo-->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
@@ -83,13 +90,19 @@
 
                 <div class="row">
                     <div class="col-xs-10 col-xs-offset-1 text-center">
-                        <h2 class="page-header">Sistema de Gesti&oacute;n de Alquiler de Bicicletas</h2>
+                        <h2 class="page-header">Sistema de Gesti&oacute;n para Pr&eacute;stamos de Bicicletas</h2>
                     </div>
                 </div>
 
                 <div class="row">
-                    <?php $Escritorio = new Escritorio();
-                    $Escritorio->load->view('mapas_estaciones') ?>
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <?php if (Escritorio::verificarInternet()) { ?>
+                            <?php $Escritorio = new Escritorio(); ?>
+                            <?php $Escritorio->load->view('mapas_estaciones'); ?>
+                        <?php } else {
+                            Escritorio::mostrarMensaje('no_muestra_contenido');
+                        } ?>
+                    </div>
                 </div>
 
             </div>

@@ -12,8 +12,8 @@ class Login extends CI_Controller
     {
         $data['helpers']['login'] = base_url() . 'js/helpers/login.js';
 
-        $this->load->view('header');
-        $this->load->view('login', $data);
+        $this->load->view('header', $data);
+        $this->load->view('login');
         $this->load->view('footer');
     }
 

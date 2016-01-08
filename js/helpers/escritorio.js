@@ -49,7 +49,7 @@ var Escritorio = {
                 });
         },
 
-        evento:function () {
+        evento: function () {
             var container = $('#resultado');
 
             $.ajax({
@@ -66,7 +66,7 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url +"Marca"
+                url: base_url + "Marca"
             })
                 .done(function (r) {
                     container.html(r);
@@ -172,6 +172,15 @@ var Escritorio = {
 
             if (letras.indexOf(tecla) == -1 && !tecla_especial) {
                 return false;
+            }
+        }
+    },
+
+    mensajeFlotante: {
+        mostrar: function (mensaje) {
+            if (mensaje) {
+                mensaje.fadeIn();
+                mensaje.delay(4000).fadeOut(500);
             }
         }
     }

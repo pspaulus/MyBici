@@ -25,7 +25,8 @@
                                     <?php $estaciones = $Estacion->cargarEstaciones() ?>
                                     <select id="select_estacion_inventario_nuevo" class="form-control"
                                             onchange="Bicicleta.acciones.cargarUltimoCodigoEstacion();
-                                                      Estacion.mensajes.oculta( $('#error_sin_estacion'));">
+                                                      Estacion.mensajes.oculta( $('#error_sin_estacion'));
+                                                      Estacion.validaciones.EstacionamientoDisponible();">
                                         <?php foreach ($estaciones as $estacion) { ?>
                                             <option
                                                 value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
@@ -69,7 +70,7 @@
                                 <label class="control-label" for="input_cantidad_nuevo">Cantidad</label>
                             </div>
                             <div class="col-xs-2">
-                                <input class="form-control" type="input" id="input_cantidad_nuevo" value="1"
+                                <input class="form-control" type="text" id="input_cantidad_nuevo" value="1"
                                        maxlength="2" onkeypress="return Escritorio.Validaciones.soloNumeros(event)"
                                        onkeyup="Bicicleta.acciones.validarCantidad();">
                             </div>
@@ -111,7 +112,7 @@
                         </div>
 
                         <!-- parquearlas -->
-                        <div class="form-group">
+                        <div class="form-group" id="opcion_parquear">
                             <div class="col-xs-6 col-xs-offset-3">
                                 <div class="checkbox">
                                     <label>

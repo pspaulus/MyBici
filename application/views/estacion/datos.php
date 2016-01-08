@@ -87,17 +87,21 @@
 
     <!--Mapa-->
     <div class="col-xs-12 col-sm-6 col-sm-offset-1">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Ubicaci&oacute;n</h3>
+        <?php if (Escritorio::verificarInternet()) { ?>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ubicaci&oacute;n</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="cargaGoogleMap" class="mapa"></div>
+                    <script>
+                        ver_mapa('cargaGoogleMap', <?= $estacion_actual->longitud ?>, <?= $estacion_actual->latitud ?>, 15);
+                    </script>
+                </div>
             </div>
-            <div class="panel-body">
-                <div id="cargaGoogleMap" class="mapa"></div>
-                <script>
-                    ver_mapa('cargaGoogleMap', <?= $estacion_actual->longitud ?>, <?= $estacion_actual->latitud ?>, 15);
-                </script>
-            </div>
-        </div>
+        <?php } else {
+            Escritorio::mostrarMensaje('no_muestra_contenido');
+        } ?>
     </div>
 
 </div>

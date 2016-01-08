@@ -5,19 +5,21 @@ var Bicicleta = {
         cargarListaBicicletasPorCodigo: function () {
             var bicicleta_codigo = $('#codigo_bicicleta');
 
-            if (bicicleta_codigo.val().length > 2) {
-                $.ajax({
-                    method: "POST",
-                    url: base_url + "Bicicleta/cargarVistaListadoBicicletasPorCodigo/" + bicicleta_codigo.val().toUpperCase(),
-                    data: {}
-                })
-                    .done(function (r) {
-                        $('#listado_bicicletas').html(r);
-                    });
+            if (bicicleta_codigo.val() != '') {
+                if (bicicleta_codigo.val().length > 2) {
+                    $.ajax({
+                        method: "POST",
+                        url: base_url + "Bicicleta/cargarVistaListadoBicicletasPorCodigo/" + bicicleta_codigo.val().toUpperCase(),
+                        data: {}
+                    })
+                        .done(function (r) {
+                            $('#listado_bicicletas').html(r);
+                        });
+                } else {
+                    Estacion.mensajes.mostrar($('#error_formato_codigo'));
+                }
             } else {
-                var mensaje = $('#error_formato_codigo');
-                mensaje.parent('.mensaje').addClass(' has-error');
-                mensaje.parent('.mensaje').removeClass(' oculto');
+                Estacion.mensajes.mostrar($('#error_vacio_codigo'));
             }
         },
 
@@ -134,9 +136,9 @@ var Bicicleta = {
 
                         console.log('codigo:' + input_codigo_estacion_nuevo.val() + 'B' + secuencia);
                         /*console.log('codigo:' + input_codigo_estacion_nuevo.val() + 'B' + secuencia + '\n' +
-                            'PUESTO_ALQUILER_id:' + select_estacion_inventario_nuevo.val() + '\n' +
-                            'TIPO_id:' + select_tipo_nuevo.val() + '\n' +
-                            'ESTADO_id:' + select_estado_nuevo.val());*/
+                         'PUESTO_ALQUILER_id:' + select_estacion_inventario_nuevo.val() + '\n' +
+                         'TIPO_id:' + select_tipo_nuevo.val() + '\n' +
+                         'ESTADO_id:' + select_estado_nuevo.val());*/
                         $.ajax({
                             method: "POST",
                             url: base_url + "Bicicleta/guardarBicicleta/",
@@ -168,18 +170,17 @@ var Bicicleta = {
                     mensaje.parent('.mensaje').removeClass(' oculto');
                 }
             }
-
         },
 
-        parquear: function(bicicleta_id) {
+        parquear: function (bicicleta_id) {
             $.ajax({
                 method: "POST",
                 url: base_url + "Bicicleta/Parquear/" + bicicleta_id,
                 data: {}
             })
                 .done(function (r) {
-                    if (r.status){
-                        console.log('OK: parquear '+ r.movimiento);
+                    if (r.status) {
+                        console.log('OK: parquear ' + r.movimiento);
                     } else {
                         console.log('ERROR: parquear');
                     }
@@ -190,13 +191,6 @@ var Bicicleta = {
             var mensaje = $('#error_cantidad');
             mensaje.parent('.mensaje').removeClass(' has-error');
             mensaje.parent('.mensaje').addClass(' oculto');
-        },
-
-        validarFormatoCodigo: function () {
-            var mensaje = $('#error_formato_codigo');
-            mensaje.parent('.mensaje').removeClass(' has-error');
-            mensaje.parent('.mensaje').addClass(' oculto');
         }
-
     }
 };

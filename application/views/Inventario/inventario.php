@@ -80,36 +80,42 @@
 
         <!--Por bicicleta-->
         <div role="tabpanel" class="tab-pane fade in active" id="por_bicicleta">
-
-            <!--Espacio-->
-            <div class="row">
-                <div class="col-xs-12">&nbsp;</div>
-            </div>
-
             <div class="row">
                 <div class="form-inline">
-                    <div class="col-xs-12">
 
+                    <!--Espacio-->
+                    <div class="col-xs-12 hidden-xs">&nbsp;</div>
+
+                    <div class="form-group">
                         <!--Codigo-->
-                        <div class="form-group espacio">
+                        <div class="col-xs-2">
                             <label class="control-label" for="codigo_bicicleta">C&oacute;digo</label>
-                            <input type="text" class="form-control" id="codigo_bicicleta" maxlength="6"
-                                   placeholder="GB1" onkeyup="Bicicleta.acciones.validarFormatoCodigo();">
+                        </div>
+                        <div class="col-xs-6 col-sm-6 espacio">
+                            <div class="agrupador">
+                                <input type="text" class="form-control" id="codigo_bicicleta" maxlength="6"
+                                       placeholder="GB1"
+                                       onkeyup="Estacion.mensajes.oculta($('#error_formato_codigo'));
+                                                Estacion.mensajes.oculta($('#error_vacio_codigo'));">
 
-                            <div class="mensaje oculto">
-                                <label class="control-label " id="error_formato_codigo">&iexcl;Error de formato
-                                    de
-                                    codigo!</label>
+                                <div class="mensaje oculto">
+                                    <label class="control-label " id="error_formato_codigo">&iexcl;Error de formato
+                                        de c&oacute;digo!</label>
+                                </div>
+                                <div class="mensaje oculto">
+                                    <label class="control-label " id="error_vacio_codigo">&iexcl;Ingrese
+                                        c&oacute;digo!</label>
+                                </div>
                             </div>
                         </div>
 
-
                         <!--Boton buscar-->
-                        <div class="form-group">
+                        <div class="col-xs-3 col-sm-2">
                             <button class="btn btn-primary" type="button"
                                     onclick="Bicicleta.acciones.cargarListaBicicletasPorCodigo()"><i
                                     class="fa fa-search"></i></button>
                         </div>
+
 
                     </div>
                 </div>
@@ -120,13 +126,13 @@
         <div role="tabpanel" class="tab-pane fade" id="por_estacion">
 
             <!--Espacio-->
-            <div class="row">
-                <div class="col-xs-12">&nbsp;</div>
+            <div class="row .hidden-xs">
+                <div class="col-sm-12">&nbsp;</div>
             </div>
 
             <div class="row">
                 <div class="form-inline">
-                    <div class="col-xs-12">
+                    <div class="col-sm-12">
 
                         <!--Select Estacion-->
                         <div class="form-group espacio">
@@ -170,29 +176,29 @@
 
     <!--Espacio-->
     <div class="row">
-        <div class="col-xs-12">&nbsp;</div>
+        <div class="col-sm-12">&nbsp;</div>
     </div>
+</div>
 
-    <div id="listado_bicicletas">
-        <h3>Lista de bicicletas</h3>
+<div id="listado_bicicletas">
+    <h3>Lista de bicicletas</h3>
 
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>C&oacute;d. Bicicleta</th>
-                            <th>Tipo</th>
-                            <th>Estaci&oacute;n Propietaria</th>
-                            <th>Estacionamiento Actual</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>C&oacute;d. Bicicleta</th>
+                        <th>Tipo</th>
+                        <th>Estaci&oacute;n Propietaria</th>
+                        <th>Estacionamiento Actual</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>

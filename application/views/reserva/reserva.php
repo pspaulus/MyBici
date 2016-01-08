@@ -99,7 +99,8 @@
                         <!--Identificador-->
                         <div class="form-group espacio">
                             <!--                                    <label class="control-label" for="ticket_campo">Identificador</label>-->
-                            <select class="form-control" id="ticket_campo" onchange="Ticket.acciones.cambiarValorPlaceholder()">
+                            <select class="form-control" id="ticket_campo"
+                                    onchange="Ticket.acciones.cambiarValorPlaceholder()">
                                 <option value="id">Ticket</option>
                                 <option value="bicicleta">Bicicleta</option>
                                 <option value="usuario">Usuario</option>
@@ -112,6 +113,7 @@
                             <div class="agrupador">
                                 <input type="text" class="form-control" id="ticket_valor" maxlength="45"
                                        onkeyup="Ticket.acciones.pressEnter(event);Estacion.mensajes.oculta($('#error_no_valor'));">
+
                                 <div class=" mensaje oculto">
                                     <label class="control-label" id="error_no_valor">&iexcl;Ingrese valor a
                                         buscar!</label>
@@ -211,31 +213,30 @@
     <div class="row">
         <div class="col-xs-12">&nbsp;</div>
     </div>
+</div>
+<div id="listado_ticket">
+    <h3>Lista de Tickets</h3>
 
-    <div id="listado_ticket">
-        <h3>Lista de Tickets</h3>
-
-        <div class="col-xs-12">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>ID</th>
-                        <th>Tipo</th>
-                        <th>Usuario</th>
-                        <th>Bicicleta</th>
-                        <th>Origen</th>
-                        <th>Destino</th>
-                        <th>Fecha</th>
-                        <th>Hora Retiro</th>
-                        <th>Hora Entrega</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>ID</th>
+                    <th>Tipo</th>
+                    <th>Usuario</th>
+                    <th>Bicicleta</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    <th>Fecha</th>
+                    <th>Hora Retiro</th>
+                    <th>Hora Entrega</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+            </table>
         </div>
     </div>
 </div>

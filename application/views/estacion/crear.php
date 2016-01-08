@@ -50,17 +50,22 @@
 
                         <!-- mapa -->
                         <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><strong>Ubicaci&oacute;n</strong></h3>
+                            <?php if (Escritorio::verificarInternet()) { ?>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Ubicaci&oacute;n</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="googleMap" class="mapa"></div>
+
+                                        <script>
+                                            guardar_mapa("googleMap", -2.141470444145116, -79.96483281254768, 15);
+                                        </script>
+                                    </div>
                                 </div>
-                                <div class="panel-body">
-                                    <div id="googleMap" class="mapa"></div>
-                                    <script>
-                                        guardar_mapa("googleMap", -2.141470444145116, -79.96483281254768, 15);
-                                    </script>
-                                </div>
-                            </div>
+                            <?php } else {
+                                Escritorio::mostrarMensaje('no_muestra_contenido');
+                            } ?>
                         </div>
 
                         <!--Longitud-->

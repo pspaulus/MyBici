@@ -44,14 +44,13 @@
                                         Login.index.mensajeUsuarioContrasenaIncorrecto(false);
                                         Login.index.pressEnter(event)">
                     </div>
-                    <label class="control-label vacio oculto" for="contrasena" id="contrasena_vacio">&iexcl;Ingrese
-                        contrase&ntilde;a!</label>
-                    <label class="control-label error oculto" for="contrasena" id="contrasena_error">&iexcl;La contrase&ntilde;a
-                        debe contener al menos 8 caracteres!</label>
-
-                    <div class="has-error mensaje">
-                        <label class="control-label oculto" for="contrasena" id="usuario_contrasena_incorrecta">&iexcl;Usuario
-                            o contrase&ntilde;a incorrecta!</label>
+                    <label class="control-label vacio oculto" for="contrasena"
+                           id="contrasena_vacio">&iexcl;Ingrese contrase&ntilde;a!</label>
+                    <label class="control-label error oculto" for="contrasena"
+                           id="contrasena_error">&iexcl;La contrase&ntilde;a debe contener al menos 8 caracteres!</label>
+                    <div class="has-error mensaje text-center">
+                        <label class="control-label oculto" for="contrasena"
+                               id="usuario_contrasena_incorrecta">&iexcl;Usuario o contrase&ntilde;a incorrecta!</label>
                     </div>
                 </div>
             </div>
