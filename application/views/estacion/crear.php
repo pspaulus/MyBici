@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                             <?php } else {
-                                Escritorio::mostrarMensaje('no_muestra_contenido');
+                                Escritorio::Mensaje('no_muestra_contenido');
                             } ?>
                         </div>
 

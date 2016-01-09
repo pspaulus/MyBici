@@ -80,8 +80,14 @@ body {
 }
 
 .espacio {
-    margin-right: 3%;
-!important;
+    margin-right: 3% !important;
+}
+
+.espacioRelleno {
+    padding-left: 3% !important;
+}
+.espacioArriba {
+    margin-top-3: 3% !important;
 }
 
 .panel-celeste {
@@ -132,7 +138,23 @@ a.nav-texto:hover {
     top: 10px;
 }
 
+.mensajeFlotanteCabecera {
+    position: relative;
+
+}
+
+.mensajeFlotanteCuerpo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
 /* map infowindow remove close button */
 .mapa > .gm-style-iw + div {
     /*display: none;*/
+}
+
+.tieneScroll {
+    overflow: auto;
 }

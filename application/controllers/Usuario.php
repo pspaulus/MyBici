@@ -20,13 +20,36 @@ class Usuario extends CI_Controller
         return $usuario;
     }
 
-    public function cargarUsuariosTodos($inactivos = false)
+    public function cargarUsuariosTodos($filtro, $valor_a_buscar, $ver_inactivos)
     {
-        $usuarios = \App\Usuario::where('ESTADO_id', '!=', 0)->get();
 
-        if ($inactivos)
-            $usuarios = \App\Usuario::all();
-
+        if ($valor_a_buscar == '') {
+            if ($ver_inactivos) {
+                $usuarios = \App\Usuario::all();
+            } else {
+                $usuarios = \App\Usuario::where('ESTADO_id', '=', 1)->get();
+            }
+        } else {
+            if ($filtro == 'id') {
+                if ($ver_inactivos) {
+                    $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar)
+                        ->get();
+                } else {
+                    $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar)
+                        ->where('ESTADO_id', '=', 1)
+                        ->get();
+                }
+            } elseif ($filtro == 'nombre') {
+                if ($ver_inactivos) {
+                    $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar . '%')
+                        ->get();
+                } else {
+                    $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar . '%')
+                        ->where('ESTADO_id', '=', 1)
+                        ->get();
+                }
+            }
+        }
         return $usuarios;
     }
 
@@ -61,6 +84,12 @@ class Usuario extends CI_Controller
         $usuario = \App\Usuario::find($id);
         $usuario->ESTADO_id = 2;
         $usuario->save();
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => true,
+            'usuario_id' => $usuario->id
+        ]);
     }
 
     public function editarUsuario()
@@ -151,7 +180,7 @@ class Usuario extends CI_Controller
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => true,
-                'usuario_id' =>  $usuario->id
+                'usuario_id' => $usuario->id
             ]);
         } else {
             header('Content-Type: application/json');
@@ -159,5 +188,15 @@ class Usuario extends CI_Controller
                 'status' => false
             ]);
         }
+    }
+
+    public function cargarVistaListaUsuario()
+    {
+        $data['filtro'] = $_REQUEST['filtro'];
+        $data['valor_a_buscar'] = $_REQUEST['valor_a_buscar'];
+        $data['ver_inactivos'] = $_REQUEST['ver_inactivos'];
+        $data['Usuario'] = $this;
+
+        $this->load->view('usuario/listado', $data);
     }
 }

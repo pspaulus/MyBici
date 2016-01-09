@@ -60,18 +60,18 @@ class Escritorio extends CI_Controller
     {
         $connected = @fsockopen("www.google.com", 80);
         //website, port  (try 80 or 443)
-        if ($connected){
+        if ($connected) {
             $is_conn = true; //action when connected
             fclose($connected);
-        }else{
+        } else {
             $is_conn = false; //action in connection failure
         }
         return $is_conn;
     }
 
-    public static function mostrarMensaje($mensaje_tipo)
+    public static function Mensaje($mensaje_tipo, $entidad = null)
     {
-        switch ($mensaje_tipo){
+        switch ($mensaje_tipo) {
 
             case 'sin_conexion_internet':
                 $archivo = 'sin_conexion_internet';
@@ -80,9 +80,29 @@ class Escritorio extends CI_Controller
             case 'no_muestra_contenido':
                 $archivo = 'no_muestra_contenido';
                 break;
-        }
-        $Escritorio = new Escritorio();
-        $Escritorio->load->view('mensaje/'.$archivo);
-    }
 
+            case 'guardar_ok':
+                $archivo = 'guardar_ok';
+                break;
+
+            case 'restaurar_ok':
+                $archivo = 'restaurar_ok';
+                break;
+
+            case 'eliminar_ok':
+                $archivo = 'eliminar_ok';
+                break;
+
+            case 'error':
+                $archivo = 'error';
+                break;
+        }
+
+        $data['entidad'] = $entidad;
+
+        if (!empty($archivo)) {
+            $Escritorio = new Escritorio();
+            $Escritorio->load->view('mensaje/' . $archivo, $data);
+        }
+    }
 }

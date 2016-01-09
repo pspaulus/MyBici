@@ -1,14 +1,14 @@
-<div id="guardar_ok" class="col-xs-10 col-xs-offset-1 mensajeFlotantecabecera oculto">
+<div id="eliminar_ok" class="col-xs-10 col-xs-offset-1 mensajeFlotantecabecera oculto">
     <div class="alert alert-success text-center mensajeFlotanteCuerpo">
         <?php if (!empty($entidad)) {
             switch ($entidad) {
                 case 'usuario':
-                    $contenido = '<i class="fa fa-check"></i> Usuario guardado con &eacute;xito.';
+                    $contenido = '<strong>OK: </strong> Usuario marcado como inactivo';
                     break;
             }
             echo $contenido;
         } else {
-            $contenido = '<i class="fa fa-check"></i> Guardado con &eacute;xito.';
+            $contenido = '<strong>OK: </strong> Registro eliminado con exito.';
         }?>
     </div>
 </div>

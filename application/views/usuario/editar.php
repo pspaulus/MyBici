@@ -33,10 +33,11 @@
                                 <div class="mensaje">
                                     <div class="col-xs-6">
                                         <input class="form-control" id="nombre_editar<?= $obj_usuario->id ?>"
-                                               type="text"
+                                               type="text" disabled
                                                maxlength="25" placeholder="Ingrese un nombre"
                                                value="<?= $obj_usuario->nombre ?>"
-                                               onkeyup="Usuario.acciones.validarNumeroCaracteresUsuario(this,4)">
+                                               onkeyup="Usuario.acciones.validarNumeroCaracteresUsuario(this,4);">
+
                                     </div>
                                     <div class="col-xs-8 col-xs-offset-4 col-sm-9 col-sm-offset-3 vacio oculto text-left">
                                         <label class="control-label" for="nombre_editar"
@@ -67,7 +68,7 @@
                                         <label class="control-label" for="contrasena_editar"
                                                id="contrasena_editar_vacio">&iexcl;Ingrese contrase&ntilde;a!</label>
                                     </div>
-                                    <div class="col-xs-8 col-xs-offset-4 col-sm-9 col-sm-offset- error oculto">
+                                    <div class="col-xs-8 col-xs-offset-4 col-sm-9 col-sm-offset-3 error oculto">
                                     <label class="control-label" for="contrasena_editar"
                                            id="contrasena_editar_error">&iexcl;La contrase&ntilde;a debe contener al
                                         menos 8 caracteres!</label>
@@ -75,6 +76,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="agrupador">
                             <div class="form-group">
                                 <div class="col-xs-3 col-xs-offset-1 col-sm-2 col-sm-offset-1 text-left">
@@ -94,7 +96,7 @@
                                                id="confirmar_contrasena_vacio">&iexcl;Ingrese confirmaci&oacute;n de
                                             contrase&ntilde;a!</label>
                                     </div>
-                                    <div class="col-xs-8 col-xs-offset-4 col-sm-9 col-sm-offset-3 error oculto">
+                                    <div class="col-xs-8 col-xs-offset-4 col-sm-9 col-sm-offset-2 error oculto">
                                     <label class="control-label" for="confirmar_contrasena_editar"
                                            id="confirmar_contrasena_error">&iexcl;La confirmaci&oacute;n de contrase&ntilde;a
                                         debe contener al menos 8 caracteres!</label>
@@ -150,6 +152,7 @@
 
                 </form>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"
                         onclick="Usuario.acciones.limpiarEditar()">Cancelar

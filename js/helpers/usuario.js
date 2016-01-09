@@ -2,20 +2,47 @@ var Usuario = {
 
     acciones: {
 
+        cargarVistaListaUsuario: function () {
+            var filtro = $('#filtro_usuario').val();
+            var valor_a_buscar = $('#valor_a_buscar').val();
+            var ver_inactivos = $('#verInactivos');
+
+            var inactivos = false;
+            if (ver_inactivos.is(":checked")) {
+                inactivos = true;
+            }
+
+            $.ajax({
+                method: "POST",
+                url: base_url + "Usuario/cargarVistaListaUsuario/",
+                data: {
+                    filtro: filtro,
+                    valor_a_buscar: valor_a_buscar,
+                    ver_inactivos: inactivos
+                },
+                beforeSend: function () {
+                    $('#listado_usuario').html(
+                        '<div class="col-xs-12 text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>'
+                    );
+                }
+            })
+                .done(function (r) {
+                    $('#listado_usuario').html(r);
+                })
+        },
+
         pressEnter: function (e) {
             if (e.keyCode == 13) {
                 console.log('Presiona enter');
-                Usuario.acciones.buscar();
+                Usuario.acciones.cargarVistaListaUsuario();
             }
         },
 
-        existeUsuario: function () {
-            var nombre = $('#nombre').val();
-
-            if (nombre.length >= 4) {
+        existeUsuario: function (nombre) {
+            if (nombre.val().length >= 4) {
                 $.ajax({
                     method: "POST",
-                    url: base_url + "Usuario/existeUsuario/" + nombre,
+                    url: base_url + "Usuario/existeUsuario/" + nombre.val(),
                     data: {}
                 })
                     .done(function (r) {
@@ -33,6 +60,8 @@ var Usuario = {
                     });
             }
         },
+
+
         guardar: function () {
             var nombre = $('#nombre');
             var contrasena = $('#contrasena');
@@ -44,7 +73,8 @@ var Usuario = {
             this.validoVacio(contrasena);
             this.validoVacio(confirmar_contrasena);
 
-            if (existeUsuario.val() == 1 && nombre.val().length >= 4 && contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena, -1)) {
+            if (existeUsuario.val() == 1 && nombre.val().length >= 4 &&
+                contrasena.val().length >= 8 && this.validarContrasena(contrasena, confirmar_contrasena, -1)) {
                 $.ajax({
                     method: "POST",
                     url: base_url + "Usuario/ingresarUsuario",
@@ -56,18 +86,22 @@ var Usuario = {
                 })
                     .done(function (r) {
                         if (r.status) {
-                            console.log('usuario guardado');
-                            $('#resultado').html(Escritorio.load.usuario());
-                            $('.modal-backdrop').remove();
+                            console.log('OK: usuario guardado');
+                            Usuario.acciones.limpiar();
+                            $('#agregarUsuario').modal('toggle');
+                            Usuario.acciones.cargarVistaListaUsuario();
+                            Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
                         } else {
-                            console.log('Error al guardar');
+                            console.log('ERROR: no al guardar');
+                            Usuario.acciones.cargarVistaListaUsuario();
+                            Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
                         }
                     });
             }
         },
 
         editar: function (id) {
-
+            var inactivos = $('#verInactivos');
             var nombre = $('#nombre_editar' + id);
             var contrasena = $('#contrasena_editar' + id);
             var confirmar_contrasena = $('#confirmar_contrasena_editar' + id);
@@ -92,8 +126,7 @@ var Usuario = {
                 })
                     .done(function () {
                         console.log('OK: usuario actualizado -> ' + id);
-                        $('#resultado').html(Escritorio.load.usuario());
-                        $('.modal-backdrop').remove();
+                        Usuario.acciones.cargarVistaListaUsuario();
                     });
             } else {
                 console.log('ERROR: no edito -> ' + id);
@@ -106,10 +139,16 @@ var Usuario = {
                 url: base_url + "Usuario/eliminarUsuario",
                 data: {id: id}
             })
-                .done(function () {
-                    console.log('usuario eliminado');
-                    $('#resultado').html(Escritorio.load.usuario());
-                    $('.modal-backdrop').remove();
+                .done(function (r) {
+                    if (r.status) {
+                        console.log('OK: usuario eliminado');
+                        $('#eliminarUsuario_' + id).modal('toggle');
+                        Usuario.acciones.cargarVistaListaUsuario();
+                        Escritorio.mensajeFlotante.mostrar($('#eliminar_ok'));
+                    } else {
+                        Usuario.acciones.cargarVistaListaUsuario();
+                        Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
+                    }
                 });
         },
 
@@ -121,11 +160,13 @@ var Usuario = {
             })
                 .done(function (r) {
                     if (r.status) {
-                        console.log('ERROR: restaura usuario -> '+ r.usuario_id);
-                        $('#resultado').html(Escritorio.load.usuario());
-                        $('.modal-backdrop').remove();
+                        console.log('ERROR: restaura usuario -> ' + r.usuario_id);
+                        Usuario.acciones.cargarVistaListaUsuario();
+                        Escritorio.mensajeFlotante.mostrar($('#restaurar_ok'));
                     } else {
                         console.log('OK: No restaura usuario');
+                        Usuario.acciones.cargarVistaListaUsuario();
+                        Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
                     }
                 });
         },
@@ -144,31 +185,39 @@ var Usuario = {
                 tr.children().children('.btn-warning').removeClass(' oculto');
                 tr.children().children('.btn-default').removeClass(' oculto');
             }
-
+            $('.modal-backdrop').remove();
         },
-        buscar: function () {
-            var filtro = $('#filtro_usuario');
-            var valor_a_buscar = $('#valor_a_buscar');
+        /*
+         buscar: function (tipo) {
+         Usuario.acciones.cargarVistaListaUsuario();
 
-            var tds = $('#tabla_usuario  td:nth-of-type(' + filtro.val() + ')');
 
-            tds.each(function (i, td) {
+         //filtra por js en vez de cargar el listado desde el server con los criterios como parametros
+         //las otras app tan de la otra manera es decir desde el server se filtra
+         Usuario.acciones.filtrar();
+         },
 
-                var texto_td = td.innerHTML.toString();
-                var que_busco = valor_a_buscar.val().toString();
+         filtrar: function() {
+         var filtro = $('#filtro_usuario');
+         var valor_a_buscar = $('#valor_a_buscar');
 
-                //if (texto_td == que_busco) {
-                if (texto_td.indexOf(que_busco) > -1) {
-                    console.log('encontro -> ' + texto_td);
-                    $(td).parents('tr').removeClass(' ocultoFiltro');
-                } else {
-                    $(td).parents('tr').addClass(' ocultoFiltro');
-                }
-            });
+         var tds = $('#tabla_usuario  td:nth-of-type(' + filtro.val() + ')');
 
-            Usuario.acciones.verInactivos();
-        },
+         tds.each(function (i, td) {
 
+         var texto_td = td.innerHTML.toString();
+         var que_busco = valor_a_buscar.val().toString();
+
+         if (texto_td.indexOf(que_busco) > -1) {
+         $(td).parents('tr').removeClass(' ocultoFiltro');
+         } else {
+         $(td).parents('tr').addClass(' ocultoFiltro');
+         }
+         });
+
+         Usuario.acciones.verInactivos();
+         },
+         */
         limpiar: function () {
             var input_nombre = $('#nombre');
             var contrasena = $('#contrasena');
@@ -196,12 +245,10 @@ var Usuario = {
         },
 
         limpiarEditar: function () {
-            $('#resultado').html(Escritorio.load.usuario());
-            $('.modal-backdrop').remove();
+            Usuario.acciones.cargarVistaListaUsuario();
         },
 
         validarContrasena: function (input_contrasena, input_confirmar, id) {
-            console.log(input_contrasena.val().trim() + ' == ' + input_confirmar.val().trim());
             if (input_contrasena.val().trim() == input_confirmar.val().trim()) {
                 ( id == -1 ) ?
                     $('#contrasena_no_coinciden').addClass(' oculto') :
@@ -219,6 +266,7 @@ var Usuario = {
                     $('#error_mayuscula').parent('.menssaje').removeClass(' oculto');
                 }
             } else {
+                console.log(input_contrasena.val().trim() + ' == ' + input_confirmar.val().trim());
                 ( id == -1 ) ?
                     $('#contrasena_no_coinciden').removeClass(' oculto') :
                     $('#contrasena_no_coinciden_editar' + id).removeClass(' oculto');

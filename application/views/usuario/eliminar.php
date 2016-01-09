@@ -2,8 +2,8 @@
      aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-body">
-                &iquest;Est&aacute; seguro eliminar?
+            <div class="modal-body text-center">
+                &iquest;Est&aacute; seguro de eliminar al usuario?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>

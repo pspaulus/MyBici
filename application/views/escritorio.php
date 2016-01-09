@@ -31,7 +31,7 @@
         </ul>
 
         <?php if (!Escritorio::verificarInternet()) { ?>
-            <?php Escritorio::mostrarMensaje('sin_conexion_internet') ?>
+            <?php Escritorio::Mensaje('sin_conexion_internet') ?>
             <script>
                 Escritorio.mensajeFlotante.mostrar($('#sin_conexion_internet'));
             </script>
@@ -61,7 +61,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#page_usuario" onclick="$('.navbar-toggle').click(); Escritorio.load.usuario()">
+                    <a  onclick="$('.navbar-toggle').click(); Escritorio.load.usuario()">
                         <i class="fa fa-fw fa-users"></i> Usuarios
                     </a>
                 </li>
@@ -86,6 +86,7 @@
 
     <div id="page-wrapper" class="scroll">
         <div class="container-fluid">
+            <div class="col-xs-12">&nbsp;</div>
             <div id="resultado">
 
                 <div class="row">
@@ -100,7 +101,7 @@
                             <?php $Escritorio = new Escritorio(); ?>
                             <?php $Escritorio->load->view('mapas_estaciones'); ?>
                         <?php } else {
-                            Escritorio::mostrarMensaje('no_muestra_contenido');
+                            Escritorio::Mensaje('no_muestra_contenido');
                         } ?>
                     </div>
                 </div>
