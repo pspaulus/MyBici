@@ -131,3 +131,8 @@ a.nav-texto:hover {
     position: fixed;
     top: 10px;
 }
+
+/* map infowindow remove close button */
+.mapa > .gm-style-iw + div {
+    /*display: none;*/
+}

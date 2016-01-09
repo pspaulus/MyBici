@@ -57,7 +57,7 @@
                 </li>
                 <li>
                     <a href="#page_evento" onclick="$('.navbar-toggle').click(); Escritorio.load.evento()">
-                        <i class="fa fa-fw fa-envelope"></i> Eventos
+                        <i class="fa fa-fw fa-calendar"></i> Eventos
                     </a>
                 </li>
                 <li>
