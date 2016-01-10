@@ -52,7 +52,7 @@
                 </li>
                 <li>
                     <a onclick="$('.navbar-toggle').click(); Escritorio.load.estacion()">
-                        <i class="fa fa-fw fa-map-marker"></i> Estaciones
+                        <i class="fa fa-fw fa-home"></i> Estaciones
                     </a>
                 </li>
                 <li>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" id="segmento_mapa">
                     <div class="col-xs-12">
                         <?php if (Escritorio::verificarInternet()) { ?>
                             <?php $Escritorio = new Escritorio(); ?>

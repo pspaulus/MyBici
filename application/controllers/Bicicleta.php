@@ -25,6 +25,21 @@ class Bicicleta extends CI_Controller
         return $conteo_bicicletas;
     }
 
+    public static function contarBicicletasDisponiblesByEstacion($estacion_id)
+    {
+        $bicicletas_disponibles = \App\Bicicleta::where('ESTADO_id', '=', 7)
+            ->where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->count();
+        return $bicicletas_disponibles;
+    }
+
+    public static function contarBicicletasTodasByEstacion($estacion_id)
+    {
+        $bicicletas_total = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->count();
+        return $bicicletas_total;
+    }
+
     public function contarBicicletasEstado($estado)
     {
         switch ($estado) {

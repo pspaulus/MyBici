@@ -86,6 +86,7 @@ var Estacion = {
                     });
             } else {
                 console.log('Error al guardar Estacion por validaciones');
+                Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
             }
         },
 

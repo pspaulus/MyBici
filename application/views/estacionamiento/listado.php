@@ -23,7 +23,7 @@
                 <tr>
                     <td><strong><?= $i ?></strong></td>
                     <?php $i++ ?>
-                    <td><i class="fa fa-map-pin"></i> <?= $Estacion->getCodigoEstacion($estacion_id) . 'P' . $estacionamiento->codigo; ?></td>
+                    <td><i class="fa fa-product-hunt"></i> <?= $Estacion->getCodigoEstacion($estacion_id) . 'P' . $estacionamiento->codigo; ?></td>
                     <?php $bicicleta = $Bicicleta->cargarBicicleta($estacionamiento->BICICLETA_id); ?>
                     <?php if ($bicicleta != null) {
                         $bicicleta_estacion_codigo = $Bicicleta->getCodigoEstacionByBicicletaEstacionId($bicicleta->PUESTO_ALQUILER_id);

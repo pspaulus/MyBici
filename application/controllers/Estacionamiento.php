@@ -13,6 +13,21 @@ class Estacionamiento extends CI_Controller
         echo 'Controller Estacionamiento';
     }
 
+    public static function contarEstacionamientoDisponiblesByEstacion($estacion_id)
+    {
+        $estacionamientos_disponibles = \App\Estacionamiento::where('ESTADO_id', '=', 7)
+            ->where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->count();
+        return $estacionamientos_disponibles;
+    }
+
+    public static function contarEstacionamientoTodosByEstacion($estacion_id)
+    {
+        $estacionamientos_total = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->count();
+        return $estacionamientos_total;
+    }
+
     public function cargarEstacionamientos($estacion_id, $estado = 'todos')
     {
         switch ($estado) {

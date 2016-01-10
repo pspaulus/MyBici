@@ -41,9 +41,11 @@ function ver_mapa_todos(mapa) {
 
         //ventana flotante del marcador
         var infowindow = new google.maps.InfoWindow({
-            content: '<div class="text-right" style="padding-left: 15px">' +
-            '<h4 class="panel-title tip">' + e.dataset.nombre + '</h3>' +
-            '</div>',
+            content: '<div>' +
+                        '<h4 style="padding-left: 15px" class="panel-title text-right tip"><i class="fa fa-home"></i> <label>' + e.dataset.nombre + '</h4>' +
+                        '<div><i class="fa fa-product-hunt"></i> <label>' + e.dataset.parqueos_disponibles + '</label> <label class="inactivo"> / ' + e.dataset.parqueos_total + '</label></div>' +
+                        '<div><i class="fa fa-bicycle"></i> <label>' + e.dataset.bicicletas_disponibles + '</label> <label class="inactivo"> / ' + e.dataset.bicicletas_total + '</label></div>' +
+                     '</div>'
         });
         infowindow.open(map, marker);
 
@@ -59,6 +61,9 @@ function ver_mapa_todos(mapa) {
         });
 
     });
+
+    var centrar = new google.maps.LatLng(-2.147, -79.963);
+    map.setCenter(centrar);
 }
 
 
@@ -67,7 +72,7 @@ function ver_mapa(mapa, x, y) {
     var latlng = new google.maps.LatLng(x, y);
 
     var myOptions = {
-        zoom: 15,
+        zoom: 18,
         center: latlng,
         zoomControl: false,
         mapTypeControl: false,

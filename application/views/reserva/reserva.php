@@ -21,8 +21,7 @@
                     <i class="fa fa-calendar"></i> Hoy: <?= Escritorio::getFechaEcuador() ?> &nbsp;
                 </a>
                 <button class="btn btn-xs btn-default" type="button"
-                        onclick="
-                                 Ticket.acciones.refrescar();"><i class="fa fa-refresh"></i></button>
+                        onclick="Ticket.acciones.refrescar();"><i class="fa fa-refresh"></i></button>
             </li>
         </ol>
     </div>

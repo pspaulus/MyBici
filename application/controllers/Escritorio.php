@@ -85,6 +85,10 @@ class Escritorio extends CI_Controller
                 $archivo = 'guardar_ok';
                 break;
 
+            case 'editar_ok':
+                $archivo = 'editar_ok';
+                break;
+
             case 'restaurar_ok':
                 $archivo = 'restaurar_ok';
                 break;

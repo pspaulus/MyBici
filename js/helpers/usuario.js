@@ -134,9 +134,11 @@ var Usuario = {
                     .done(function () {
                         console.log('OK: usuario actualizado -> ' + id);
                         Usuario.acciones.cargarVistaListaUsuario();
+                        Escritorio.mensajeFlotante.mostrar($('#editar_ok'));
                     });
             } else {
                 console.log('ERROR: no edito -> ' + id);
+                Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
             }
         },
 

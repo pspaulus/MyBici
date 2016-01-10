@@ -2,6 +2,7 @@
 
 <!-- mensajes flotantes-->
 <?php Escritorio::Mensaje('guardar_ok', 'usuario') ?>
+<?php Escritorio::Mensaje('editar_ok', 'usuario') ?>
 <?php Escritorio::Mensaje('eliminar_ok', 'usuario') ?>
 <?php Escritorio::Mensaje('restaurar_ok', 'usuario') ?>
 <?php Escritorio::Mensaje('error', 'usuario') ?>

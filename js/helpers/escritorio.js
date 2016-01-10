@@ -161,6 +161,14 @@ var Escritorio = {
         ocultarMostrar: function (elemento, titulo) {
             elemento.slideToggle();
             titulo.toggleClass('active', 'inactive')
+        },
+
+        refrescar: function() {
+            $('#segmento_mapa').html(
+                '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                '</div>');
+            location.reload();
         }
     },
 
