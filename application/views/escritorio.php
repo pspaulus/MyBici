@@ -41,27 +41,27 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a href="#page_ticket" onclick="$('.navbar-toggle').click(); Escritorio.load.ticket();">
+                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.ticket();">
                         <i class="fa fa-fw fa-ticket"></i> Reservas
                     </a>
                 </li>
                 <li>
-                    <a href="#page_inventario" onclick="$('.navbar-toggle').click(); Escritorio.load.inventario()">
+                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.inventario()">
                         <i class="fa fa-fw fa-bicycle"></i> Inventario
                     </a>
                 </li>
                 <li>
-                    <a href="#page_estacion" onclick="$('.navbar-toggle').click(); Escritorio.load.estacion()">
+                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.estacion()">
                         <i class="fa fa-fw fa-map-marker"></i> Estaciones
                     </a>
                 </li>
                 <li>
-                    <a href="#page_evento" onclick="$('.navbar-toggle').click(); Escritorio.load.evento()">
+                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.evento()">
                         <i class="fa fa-fw fa-calendar"></i> Eventos
                     </a>
                 </li>
                 <li>
-                    <a  onclick="$('.navbar-toggle').click(); Escritorio.load.usuario()">
+                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.usuario()">
                         <i class="fa fa-fw fa-users"></i> Usuarios
                     </a>
                 </li>
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1">
+                    <div class="col-xs-12">
                         <?php if (Escritorio::verificarInternet()) { ?>
                             <?php $Escritorio = new Escritorio(); ?>
                             <?php $Escritorio->load->view('mapas_estaciones'); ?>

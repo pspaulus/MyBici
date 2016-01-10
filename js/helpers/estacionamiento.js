@@ -40,7 +40,13 @@ var Estacionamiento = {
                 $.ajax({
                     method: "POST",
                     url: base_url + "Estacionamiento/cargarVistaParqueos/" + estacion_id + '/' + estacionamiento_estado,
-                    data: {}
+                    data: {},
+                    beforeSend: function () {
+                        $('#parqueos').html(
+                            '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                                '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                            '</div>');
+                    }
                 })
                     .done(function (r) {
                         $('#parqueos').html(r);

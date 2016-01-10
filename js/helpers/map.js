@@ -10,8 +10,8 @@ function ver_mapa_todos(mapa) {
     var myOptions = {
         zoom: 15,
         center: latlng,
-        zoomControl: true,
-        mapTypeControl: true,
+        zoomControl: false,
+        mapTypeControl: false,
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };

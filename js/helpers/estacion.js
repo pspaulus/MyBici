@@ -8,6 +8,7 @@ var Estacion = {
             var input_nombre = $('#nombre');
             var input_longitud = $('#longitud');
             var input_latitud = $('#latitud');
+            var existeEstacion = $('#existeCodigo');
 
             var validacion_codigo = true;
             var validacion_nombre = true;
@@ -38,7 +39,7 @@ var Estacion = {
                 Estacion.mensajes.mostrar(mensaje);
             }
 
-            if (validacion_codigo && validacion_nombre && validacion_longitud && validacion_latitud) {
+            if (existeEstacion.val() == 1 && validacion_codigo && validacion_nombre && validacion_longitud && validacion_latitud) {
                 $.ajax({
                     method: "POST",
                     url: base_url + "Estacion/crearEstacion",
@@ -52,15 +53,70 @@ var Estacion = {
                     .done(function (r) {
                         if (r.status) {
                             console.log('Ok al guardar Estación');
-                            $('#crearEstacion').removeClass('in');
-                            $('.modal-backdrop').remove();
-                            Estacion.mensajes.oculta($('#error_ya_existe'));
+                            //Estacion.mensajes.oculta($('#error_ya_existe'));
+                            //$('#crearEstacion').removeClass('in');
+                            //$('.modal-backdrop').remove();
+                            $('#crearEstacion').modal('toggle');
                             $('#resultado').html(Escritorio.load.estacion());
-
+                            Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
                         } else {
                             console.log('Error al guardar Estacion');
-                            Estacion.mensajes.mostrar($('#error_ya_existe'));
+                            //Estacion.mensajes.mostrar($('#error_ya_existe'));
                         }
+                    });
+            }
+        },
+
+        existeCodigo: function (codigo) {
+            if (codigo.val() != '') {
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "Estacion/existeCodigo/" + codigo.val(),
+                    data: {},
+                    beforeSend: function () {
+                        $('#busy_codigo').html(
+                            '<i class="fa fa-spinner fa-spin fa-1x"></i>'
+                        );
+                    }
+                })
+                    .done(function (r) {
+                        if (r.status) {
+                            console.log('ERROR: existe codigo');
+                            $('#existeCodigo').val(0);
+                            Estacion.mensajes.mostrar($('#codigo_duplicado'));
+                        } else {
+                            console.log('OK: No existe codigo');
+                            $('#existeUsuario').val(1);
+                            Estacion.mensajes.oculta($('#codigo_duplicado'));
+                        }
+                        $('#busy_codigo').html('');
+                    });
+            }
+        },
+
+        existeNombre: function (nombre) {
+            if (nombre.val() != '') {
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "Estacion/existeNombre/" + nombre.val(),
+                    data: {},
+                    beforeSend: function () {
+                        $('#busy_nombre').html(
+                            '<i class="fa fa-spinner fa-spin fa-1x"></i>'
+                        );
+                    }
+                })
+                    .done(function (r) {
+                        if (r.status) {
+                            console.log('ERROR: existe nombre estacion');
+                            $('#existeNombre').val(0);
+                            Estacion.mensajes.mostrar($('#nombre_duplicado'));
+                        } else {
+                            console.log('OK: No existe nombre estacion');
+                            $('#existeNombre').val(1);
+                            Estacion.mensajes.oculta($('#nombre_duplicado'));
+                        }
+                        $('#busy_nombre').html('');
                     });
             }
         },
@@ -112,7 +168,12 @@ var Estacion = {
                 $.ajax({
                     method: "POST",
                     url: base_url + "Estacion/cargarDatosEstacion/" + estacion_id,
-                    data: {}
+                    data: {},
+                    beforeSend: function () {
+                        $('#datos_estacion').html(
+                            '<div class="col-xs-12 text-center" style="margin-top: 25px"><i class="fa fa-spinner fa-spin fa-3x"></i></div>'
+                        );
+                    }
                 })
                     .done(function (r) {
                         $('#datos_estacion').html(r);
@@ -144,7 +205,8 @@ var Estacion = {
             input_codigo.val('');
             input_longitud.val('');
             input_latitud.val('');
-            Estacion.mensajes.oculta($('#error_ya_existe'));
+            Estacion.mensajes.oculta($('#codigo_duplicado'));
+            Estacion.mensajes.oculta($('#nombre_duplicado'));
             Estacion.mensajes.oculta($('#error_codigo_parqueos'));
             Estacion.mensajes.oculta($('#error_nombre_parqueos'));
             Estacion.mensajes.oculta($('#error_longitud_parqueos'));
@@ -172,6 +234,16 @@ var Estacion = {
 
         latitud: function () {
             var mensaje = $('#error_latitud_parqueos');
+            Estacion.mensajes.oculta(mensaje);
+        },
+
+        duplicadoCodigo: function () {
+            var mensaje = $('#codigo_duplicado');
+            Estacion.mensajes.oculta(mensaje);
+        },
+
+        duplicadoNombre: function () {
+            var mensaje = $('#nombre_duplicado');
             Estacion.mensajes.oculta(mensaje);
         }
     },

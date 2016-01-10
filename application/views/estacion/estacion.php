@@ -1,25 +1,18 @@
 <?php $Estacion = new Estacion(); ?>
 
+<!-- mensajes flotantes-->
+<?php Escritorio::Mensaje('guardar_ok', 'estacion') ?>
+<?php Escritorio::Mensaje('eliminar_ok', 'estacion') ?>
+<?php Escritorio::Mensaje('restaurar_ok', 'estacion') ?>
+<?php Escritorio::Mensaje('error', 'estacion') ?>
+
 <!-- Titulo -->
 <div class="row" id="page_estacion">
     <div class="col-lg-12">
         <h1 class="page-header">
             <i class="fa fa-fw fa-map-marker"></i> Estaciones
+            <a class="dedo" data-toggle="modal" data-target="#crearEstacion"> <i class="fa fa-plus-circle"></i> </a>
         </h1>
-    </div>
-</div>
-
-<!-- Subtitulo agregar-->
-<div class="row">
-    <div class="col-xs-12">
-        <ol class="breadcrumb">
-            <li class="active" id="titulo">
-                <!-- tigger modal agregar -->
-                <a class="dedo" data-toggle="modal" data-target="#crearEstacion">
-                    <i class="fa fa-plus-circle"></i> Agregar
-                </a>
-            </li>
-        </ol>
     </div>
 </div>
 
@@ -93,6 +86,7 @@
         <div class="col-xs-12">&nbsp;</div>
     </div>
 </div>
+
 <!-- Tabs -->
 <div class="row">
     <div class="col-xs-12">

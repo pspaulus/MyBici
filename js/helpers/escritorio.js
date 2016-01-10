@@ -6,7 +6,13 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "Ticket"
+                url: base_url + "Ticket",
+                beforeSend: function () {
+                    container.html(
+                    '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                    '</div>');
+                }
             })
                 .done(function (r) {
                     container.html(r);
@@ -18,7 +24,13 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "inventario"
+                url: base_url + "inventario",
+                beforeSend: function () {
+                    container.html(
+                        '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
             })
                 .done(function (r) {
                     container.html(r);
@@ -31,6 +43,12 @@ var Escritorio = {
             $.ajax({
                 method: "POST",
                 url: base_url + "Usuario",
+                beforeSend: function () {
+                    container.html(
+                        '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
             })
                 .done(function (r) {
                     container.html(r);
@@ -42,7 +60,13 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "Estacion"
+                url: base_url + "Estacion",
+                beforeSend: function () {
+                    container.html(
+                        '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
             })
                 .done(function (r) {
                     container.html(r);
@@ -54,7 +78,13 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "Evento"
+                url: base_url + "Evento",
+                beforeSend: function () {
+                    container.html(
+                        '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
             })
                 .done(function (r) {
                     container.html(r);
@@ -66,7 +96,13 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "Marca"
+                url: base_url + "Marca",
+                beforeSend: function () {
+                    container.html(
+                        '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
             })
                 .done(function (r) {
                     container.html(r);
@@ -78,7 +114,13 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "Modelo"
+                url: base_url + "Modelo",
+                beforeSend: function () {
+                    container.html(
+                        '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
             })
                 .done(function (r) {
                     container.html(r);
@@ -90,7 +132,13 @@ var Escritorio = {
 
             $.ajax({
                 method: "POST",
-                url: base_url + "Estado"
+                url: base_url + "Estado",
+                beforeSend: function () {
+                    container.html(
+                        '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
             })
                 .done(function (r) {
                     container.html(r);

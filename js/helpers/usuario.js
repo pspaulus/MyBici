@@ -43,7 +43,12 @@ var Usuario = {
                 $.ajax({
                     method: "POST",
                     url: base_url + "Usuario/existeUsuario/" + nombre.val(),
-                    data: {}
+                    data: {},
+                    beforeSend: function () {
+                        $('#busy_nombre').html(
+                            '<i class="fa fa-spinner fa-spin fa-1x"></i>'
+                        );
+                    }
                 })
                     .done(function (r) {
                         if (r.status) {
@@ -57,7 +62,9 @@ var Usuario = {
                             $('#nombre_duplicado').parent('.duplicado').addClass(' oculto');
                             $('#nombre').parents('.agrupador').children('.form-group').children('.mensaje').removeClass(' has-error');
                         }
+                        $('#busy_nombre').html('');
                     });
+
             }
         },
 

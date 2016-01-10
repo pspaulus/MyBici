@@ -5,6 +5,10 @@
                 case 'usuario':
                     $contenido = '<i class="fa fa-check"></i> Usuario guardado con &eacute;xito.';
                     break;
+
+                case 'estacion':
+                    $contenido = '<i class="fa fa-check"></i> Estación creado con &eacute;xito.';
+                    break;
             }
             echo $contenido;
         } else {

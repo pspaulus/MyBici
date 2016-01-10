@@ -13,6 +13,44 @@ class Estacion extends CI_Controller
         $this->load->view('estacion/estacion');
     }
 
+    public function existeCodigo($estacion_codigo)
+    {
+        $estacion = \App\Estacion::where('codigo', '=', $estacion_codigo)
+            ->get()
+            ->first();
+
+        if ($estacion != null) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false
+            ]);
+        }
+    }
+
+    public function existeNombre($estacion_nombre)
+    {
+        $estacion = \App\Estacion::where('nombre', '=', $estacion_nombre)
+            ->get()
+            ->first();
+
+        if ($estacion != null) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false
+            ]);
+        }
+    }
+
     public function crearEstacion()
     {
         $nombre = $_REQUEST['nombre'];

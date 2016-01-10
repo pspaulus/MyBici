@@ -129,6 +129,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <script>
                             Estacion.validaciones.EstacionamientoDisponible();
                         </script>

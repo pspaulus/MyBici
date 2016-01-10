@@ -86,8 +86,13 @@ body {
 .espacioRelleno {
     padding-left: 3% !important;
 }
+
 .espacioArriba {
     margin-top-3: 3% !important;
+}
+
+.espacioArribaFijo {
+    margin-top: 25px !important;
 }
 
 .panel-celeste {
