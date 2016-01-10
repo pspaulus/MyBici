@@ -2,8 +2,6 @@
 
 <!-- mensajes flotantes-->
 <?php Escritorio::Mensaje('guardar_ok', 'estacion') ?>
-<?php Escritorio::Mensaje('eliminar_ok', 'estacion') ?>
-<?php Escritorio::Mensaje('restaurar_ok', 'estacion') ?>
 <?php Escritorio::Mensaje('error', 'estacion') ?>
 
 <!-- Titulo -->
@@ -96,7 +94,7 @@
                    onclick="Estacion.acciones.busqueda('mostrar');">Estacionamientos</a>
             </li>
             <li role="presentation">
-                <a href="#datos_estacion" data-toggle="tab" role="tab"
+                <a href="#datos_estacion" data-toggle="tab" role="tab" id="mapTab"
                    onclick="Estacion.acciones.busqueda('ocultar');">Datos B&aacute;sicos</a>
             </li>
         </ul>

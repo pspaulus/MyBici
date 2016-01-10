@@ -179,4 +179,30 @@ class Estacion extends CI_Controller
             ->first();
         return ($estacion != null) ? $estacion->nombre : null;
     }
+
+    public function selectEstacion()
+    {
+        $estaciones = $this->cargarEstaciones();
+
+        if ($estaciones != null) {
+            $select = '<select id="select_estacion" class="form-control" onchange="Estacion.acciones.cargarDatosEstacion()">';
+
+            foreach ($estaciones as $estacion) {
+                $select .= '<option value="' . $estacion->id . '">' . $estacion->codigo . ' - ' . $estacion->nombre . '</option>';
+            }
+            $select .= '</select>';
+
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => true,
+                'html' => $select
+            ]);
+        } else{
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false
+            ]);
+        }
+
+    }
 }

@@ -1,6 +1,25 @@
 var Estacion = {
 
     acciones: {
+        prueba: function () {
+            Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
+        },
+
+        refrescar: function () {
+            $.ajax({
+                method: "POST",
+                url: base_url + "Estacion/selectEstacion/"
+            })
+                .done(function (r) {
+                    if (r.status) {
+                        $('#select_estacion').html(r.html);
+                    } else {
+                        console.log('ERROR: al refrescar');
+                        Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
+                    }
+                });
+
+        },
 
         guardar: function () {
             var mensaje = '';
@@ -52,18 +71,21 @@ var Estacion = {
                 })
                     .done(function (r) {
                         if (r.status) {
-                            console.log('Ok al guardar Estación');
+                            console.log('Ok al guardar Estacion');
+                            $('#crearEstacion').modal('toggle');
                             //Estacion.mensajes.oculta($('#error_ya_existe'));
                             //$('#crearEstacion').removeClass('in');
-                            //$('.modal-backdrop').remove();
-                            $('#crearEstacion').modal('toggle');
-                            $('#resultado').html(Escritorio.load.estacion());
+                            $('.modal-backdrop').remove();
+                            //$('#resultado').html(Escritorio.load.estacion());
+                            Estacion.acciones.refrescar();
                             Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
                         } else {
                             console.log('Error al guardar Estacion');
-                            //Estacion.mensajes.mostrar($('#error_ya_existe'));
+                            Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
                         }
                     });
+            } else {
+                console.log('Error al guardar Estacion por validaciones');
             }
         },
 
@@ -211,7 +233,7 @@ var Estacion = {
             Estacion.mensajes.oculta($('#error_nombre_parqueos'));
             Estacion.mensajes.oculta($('#error_longitud_parqueos'));
             Estacion.mensajes.oculta($('#error_latitud_parqueos'));
-            guardar_mapa();
+            guardar_mapa("googleMap");
         }
     },
 

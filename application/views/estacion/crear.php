@@ -80,9 +80,8 @@
                                     </div>
                                     <div class="panel-body">
                                         <div id="googleMap" class="mapa"></div>
-
                                         <script>
-                                            guardar_mapa("googleMap", -2.141470444145116, -79.96483281254768, 15);
+                                            guardar_mapa("googleMap");
                                         </script>
                                     </div>
                                 </div>

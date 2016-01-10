@@ -43,7 +43,7 @@ var Estacionamiento = {
                     data: {},
                     beforeSend: function () {
                         $('#parqueos').html(
-                            '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                            '<div class="col-xs-12 text-center" style="margin-top: 25px">' +
                                 '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
                             '</div>');
                     }

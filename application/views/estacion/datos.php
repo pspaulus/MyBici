@@ -93,12 +93,19 @@
                     <h3 class="panel-title">Ubicaci&oacute;n</h3>
                 </div>
                 <div class="panel-body">
-                    <div id="cargaGoogleMap" class="mapa"></div>
-                    <script>
-                        ver_mapa('cargaGoogleMap', <?= $estacion_actual->longitud ?>, <?= $estacion_actual->latitud ?>, 15);
-                    </script>
+                    <input type="hidden" id="estacion_actual_codigo" value="<?= $estacion_actual->codigo ?>">
+                    <input type="hidden" id="estacion_actual_latitud" value="<?= $estacion_actual->latitud ?>">
+                    <input type="hidden" id="estacion_actual_longitud" value="<?= $estacion_actual->longitud ?>">
+
+                    <div class="estacion oculto" data-nombre="<?= $estacion_actual->nombre ?>" data-codigo="<?= $estacion_actual->codigo ?>"
+                         data-latitud="<?=$estacion_actual->latitud ?>" data-longitud="<?= $estacion_actual->longitud ?>">
+                    </div>
+                    <div id="ubicacionEstacion" class="mapa"></div>
                 </div>
             </div>
+            <script>
+                ver_mapa('ubicacionEstacion', <?=$estacion_actual->latitud ?>, <?= $estacion_actual->longitud ?>);
+            </script>
         <?php } else {
             Escritorio::Mensaje('no_muestra_contenido');
         } ?>

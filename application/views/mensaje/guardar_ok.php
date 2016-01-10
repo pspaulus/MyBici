@@ -7,7 +7,7 @@
                     break;
 
                 case 'estacion':
-                    $contenido = '<i class="fa fa-check"></i> Estación creado con &eacute;xito.';
+                    $contenido = '<i class="fa fa-check"></i> Estaci&oacute;n creado con &eacute;xito.';
                     break;
             }
             echo $contenido;
