@@ -6,7 +6,8 @@
 <div class="row" id="page_ticket">
     <div class="col-lg-12">
         <h1 class="page-header">
-            <i class="fa fa-fw fa-ticket"></i> Reservas
+            <i class="fa fa-fw fa-ticket"></i> Tickets
+            <a class="dedo" data-toggle="modal" data-target="#crearTicket"> <i class="fa fa-plus-circle"></i> </a>
             <small class="pull-right"> Total Hoy: <?= $Ticket->contarTicketHoy(); ?></small>
         </h1>
     </div>
@@ -18,10 +19,13 @@
         <ol class="breadcrumb">
             <li class="active" id="titulo">
                 <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_resumen'), $('#titulo'))">
-                    <i class="fa fa-calendar"></i> Hoy: <?= Escritorio::getFechaEcuador() ?> &nbsp;
+                    <i class="fa fa-calendar"></i> Tablero de Estados
                 </a>
+                &nbsp;
+<!--                <small class="pull-right">Hoy: --><?//= Escritorio::getFechaEcuador() ?><!--</small>-->
                 <button class="btn btn-xs btn-default" type="button"
                         onclick="Ticket.acciones.refrescar();"><i class="fa fa-refresh"></i></button>
+
             </li>
         </ol>
     </div>
@@ -31,20 +35,6 @@
 <!--Resumen-->
 <div id="contenido_resumen">
     <?php $Ticket->load->view('reserva/resumen', compact('Ticket')); ?>
-</div>
-
-
-<!--Agregar-->
-<div class="row">
-    <div class="col-xs-12">
-        <ol class="breadcrumb">
-            <li class="active" id="titulo2" data-toggle="modal" data-target="#crearTicket">
-                <a class="dedo">
-                    <i class="fa fa-plus-circle"></i> Agregar
-                </a>
-            </li>
-        </ol>
-    </div>
 </div>
 
 <!-- Modal Agregar bicicleta -->

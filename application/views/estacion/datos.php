@@ -1,75 +1,91 @@
-<div class="container-fluid" id="editar_estacion">
-
-    <!--Espacio-->
-    <div class="row">
-        <div class="col-lg-12">
-            &nbsp;
-        </div>
-    </div>
+<div class="col-xs-12 col-md-6">
 
     <div class="row form-group">
-        <div class="agrupador">
-            <!--Codigo-->
-            <div class="col-xs-3 col-sm-1">
-                <label for="editar_estacion_codigo">C&oacute;digo</label>
-            </div>
+        <input type="hidden" id="editar_estacion_id" value="<?= $estacion_actual->id ?>">
+        <!--Codigo-->
+        <div class="col-xs-3">
+            <label for="editar_estacion_codigo">C&oacute;digo</label>
+        </div>
 
-            <div class="col-xs-3 col-sm-2">
+        <div class="agrupador">
+            <div class="col-xs-3 ">
                 <input class="form-control" id="editar_estacion_codigo" type="text" maxlength="1"
                        placeholder="_" value="<?= $estacion_actual->codigo ?>"
                        onkeypress="return Escritorio.Validaciones.soloLetras(event)"
-                       onkeyup="Estacion.mensajes.oculta($('#error_editar_codigo_estacion'));" disabled>
+                       onkeyup="Estacion.mensajes.oculta($('#error_editar_codigo'));" disabled>
+            </div>
 
-                <div class="oculto mensaje">
-                    <label class="control-label" id="error_editar_codigo_estacion">&iexcl;Ingrese un
-                        c&oacute;digo!</label>
-                </div>
+            <div class="col-xs-9 col-xs-offset-3 oculto mensaje">
+                <label class="control-label" id="error_editar_codigo">&iexcl;Ingrese una letra como
+                    c&oacute;digo!</label>
             </div>
         </div>
-
-        <div class="col-xs-5 col-sm-4 text-right">
-            <!-- Button editar -->
-            <button type="button" class="btn btn-warning" title="Editar Estaci&oacute;n"
-                    id="btn_editar_estacion" onclick="Estacion.acciones.editar()"><i class="fa fa-edit"></i>
-            </button>
-
-            <!-- Button guardar -->
-            <button type="button" class="btn btn-success" title="Actualizar Estaci&oacute;n"
-                    id="btn_guardar_estacion" onclick="Estacion.acciones.guardarEditar();"><i class="fa fa-check"></i>
-            </button>
-            <script>
-                Estacion.validaciones.botonGuardar('ocultar');
-            </script>
-        </div>
-
     </div>
 
     <div class="row form-group">
         <!--Nombre-->
-        <div class="col-xs-3 col-sm-1">
+        <div class="col-xs-3">
             <label for="editar_estacion_nombre">Nombre</label>
         </div>
-
-        <div class="agrupador">
-            <div class="col-xs-8 col-sm-6">
+            <div class="agrupador ">
+            <div class="col-xs-9">
                 <input class="form-control" id="editar_estacion_nombre" type="text" maxlength="40"
                        placeholder="Ingrese un nombre" value="<?= $estacion_actual->nombre ?>"
-                       onkeyup="Estacion.mensajes.oculta($('#error_edita_nombre_estacion'));" disabled>
+                       onkeyup="Estacion.mensajes.oculta($('#error_edita_nombre'));" disabled>
             </div>
-            <div class=" row col-xs-9 col-xs-offset-3 col-sm-11 col-sm-offset-1 oculto mensaje">
-                <label class="control-label" id="error_edita_nombre_estacion">&iexcl;Ingrese el
+
+            <div class="col-xs-9 col-xs-offset-3  oculto mensaje">
+                <label class="control-label" id="error_edita_nombre">&iexcl;Ingrese el
                     nombre!</label>
+            </div>
+        </div>
+    </div>
+
+    <!--Longitud-->
+    <div class="row form-group oculto" id="editar_longitud_sin_internet">
+        <div class="col-xs-3">
+            <label for="longitud">Longitud</label>
+        </div>
+        <div class="agrupador">
+            <div class="col-xs-9">
+                <input class="form-control" id="editar_longitud" type="text" maxlength="40" value="<?=$estacion_actual->longitud ?>"
+                       placeholder="-79.963209628185723" disabled
+                       onkeyup="Estacion.mensajes.oculta($('#error_editar_longitud'));"
+                       onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
+            </div>
+            <div class=" row col-xs-9 col-xs-offset-3 oculto mensaje">
+                <label class="control-label" id="error_editar_longitud">&iexcl;Ingrese
+                    longitud!</label>
+            </div>
+        </div>
+    </div>
+
+    <!--Latitud-->
+    <div class="row form-group oculto" id="editar_latitud_sin_internet">
+        <div class="col-xs-3">
+            <label for="latitud">Latitud</label>
+        </div>
+        <div class="agrupador">
+            <div class="col-xs-9">
+                <input class="form-control" id="editar_latitud" type="text" maxlength="40" value="<?=$estacion_actual->latitud ?>"
+                       placeholder="-2.1477960235290756" disabled
+                       onkeyup="Estacion.mensajes.oculta($('#error_editar_latitud'));"
+                       onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
+            </div>
+            <div class=" row col-xs-4 col-xs-offset-3 oculto mensaje">
+                <label class="control-label" id="error_editar_latitud">&iexcl;Ingrese
+                    latitud!</label>
             </div>
         </div>
     </div>
 
     <div class="row form-group">
         <!--Parqueos-->
-        <div class="col-xs-3 col-sm-1">
+        <div class="col-xs-3">
             <label for="btn_crear_estacionamiento"> Total de Estacionamientos</label>
         </div>
 
-        <div class="col-xs-3 col-sm-1">
+        <div class="col-xs-3">
             <input class="form-control" id="numero_estaciones" type="text"
                    maxlength="2" value="<?= Estacionamiento::contarNumeroEstacionamiento($estacion_actual->id) ?>"
                    onkeypress="return Escritorio.Validaciones.soloNumeros(event)"
@@ -84,33 +100,38 @@
         <!-- Modal Agregar -->
         <?php $Estacion->load->view('estacionamiento/crear'); ?>
     </div>
-
-    <!--Mapa-->
-    <div class="col-xs-12 col-sm-6 col-sm-offset-1">
-        <?php if (Escritorio::verificarInternet()) { ?>
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Ubicaci&oacute;n</h3>
-                </div>
-                <div class="panel-body">
-                    <input type="hidden" id="estacion_actual_codigo" value="<?= $estacion_actual->codigo ?>">
-                    <input type="hidden" id="estacion_actual_latitud" value="<?= $estacion_actual->latitud ?>">
-                    <input type="hidden" id="estacion_actual_longitud" value="<?= $estacion_actual->longitud ?>">
-
-                    <div class="estacion oculto" data-nombre="<?= $estacion_actual->nombre ?>" data-codigo="<?= $estacion_actual->codigo ?>"
-                         data-latitud="<?=$estacion_actual->latitud ?>" data-longitud="<?= $estacion_actual->longitud ?>">
-                    </div>
-                    <div id="ubicacionEstacion" class="mapa"></div>
-                </div>
-            </div>
-            <script>
-                ver_mapa('ubicacionEstacion', <?=$estacion_actual->latitud ?>, <?= $estacion_actual->longitud ?>);
-            </script>
-        <?php } else {
-            Escritorio::Mensaje('no_muestra_contenido');
-        } ?>
-    </div>
-
 </div>
 
+<div class="col-xs-12 col-md-6">
+
+    <!--Mapa-->
+    <?php if (Escritorio::verificarInternet()) { ?>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ubicaci&oacute;n</h3>
+            </div>
+            <div class="panel-body">
+                <input type="hidden" id="estacion_actual_codigo" value="<?= $estacion_actual->codigo ?>">
+                <input type="hidden" id="estacion_actual_latitud" value="<?= $estacion_actual->latitud ?>">
+                <input type="hidden" id="estacion_actual_longitud" value="<?= $estacion_actual->longitud ?>">
+
+                <div class="estacion oculto" data-nombre="<?= $estacion_actual->nombre ?>"
+                     data-codigo="<?= $estacion_actual->codigo ?>"
+                     data-latitud="<?= $estacion_actual->latitud ?>" data-longitud="<?= $estacion_actual->longitud ?>">
+                </div>
+                <div id="ubicacionEstacion" class="mapa"></div>
+            </div>
+        </div>
+        <script>
+            ver_mapa('ubicacionEstacion', <?=$estacion_actual->latitud ?>, <?= $estacion_actual->longitud ?>);
+        </script>
+    <?php } else {
+
+        Escritorio::Mensaje('no_muestra_contenido');
+    } ?>
+</div>
+
+<script>
+    Estacion.validaciones.habilitarRegistroSinInterner();
+</script>
 

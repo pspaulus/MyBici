@@ -146,16 +146,26 @@ class Estacion extends CI_Controller
         $estacion_id = $_REQUEST['id'];
         $codigo = $_REQUEST['codigo'];
         $nombre = $_REQUEST['nombre'];
+        $longitud = $_REQUEST['longitud'];
+        $latitud = $_REQUEST['latitud'];
 
         $estacion = \App\Estacion::find($estacion_id);
         $estacion->codigo = $codigo;
         $estacion->nombre = $nombre;
+        $estacion->longitud = $longitud;
+        $estacion->latitud = $latitud;
 
+        $resultado = $estacion->save();
 
-        $estacion->save();
+        if ($resultado) {
+            $mensaje = 'ERROR: no edita estacion ->' . $estacion->id;
+        } else {
+            $mensaje = 'ERROR: no edita';
+        }
         header('Content-Type: application/json');
         echo json_encode([
-            'status' => true,
+            'status' => $resultado,
+            'mensaje' => $mensaje
         ]);
     }
 
@@ -197,7 +207,7 @@ class Estacion extends CI_Controller
                 'status' => true,
                 'html' => $select
             ]);
-        } else{
+        } else {
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => false

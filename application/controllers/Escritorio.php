@@ -67,6 +67,7 @@ class Escritorio extends CI_Controller
             $is_conn = false; //action in connection failure
         }
         return $is_conn;
+        //return false;
     }
 
     public static function Mensaje($mensaje_tipo, $entidad = null)

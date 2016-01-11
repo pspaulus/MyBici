@@ -67,7 +67,7 @@ function ver_mapa_todos(mapa) {
 }
 
 
-function ver_mapa(mapa, x, y) {
+function ver_mapa(mapa, x, y, opciones) {
 
     var latlng = new google.maps.LatLng(x, y);
 
@@ -77,6 +77,9 @@ function ver_mapa(mapa, x, y) {
         zoomControl: false,
         mapTypeControl: false,
         streetViewControl: false,
+        draggable: false,
+        scrollwheel: false,
+        disableDoubleClickZoom: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
@@ -172,6 +175,8 @@ function guardar_mapa(mapa) {
         controlUI.addEventListener('click', function () {
             guardar_mapa("googleMap");
             map.setCenter(latlng);
+            $('#latitud').val(0);
+            $('#longitud').val(0);
         });
     }
 
@@ -188,6 +193,46 @@ function guardar_mapa(mapa) {
         //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
         if (typeof map == "undefined") return;
 
+        setTimeout(function () {
+            if (typeof map == "undefined") return;
+            var center = map.getCenter();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(center);
+        }, 400);
+    })
+}
+
+function editar_mapa(mapa, x, y, opciones) {
+
+    var latlng = new google.maps.LatLng(x, y);
+
+    var myOptions = {
+        zoom: 18,
+        center: latlng,
+        zoomControl: false,
+        mapTypeControl: false,
+        streetViewControl: false,
+        draggable: false,
+        scrollwheel: false,
+        disableDoubleClickZoom: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById(mapa), myOptions);
+
+    var latitud = $('#estacion_actual_latitud').val();
+    var longitud = $('#estacion_actual_longitud').val();
+    var codigo = $('#estacion_actual_codigo').val();
+    var ubicacion_estacion = new google.maps.LatLng(latitud, longitud);
+
+    var marker = new google.maps.Marker({
+        position: ubicacion_estacion,
+        label: codigo
+    });
+    marker.setMap(map);
+
+    $('#mapTab').on('shown.bs.tab', function () {
+        if (typeof map == "undefined") return;
         setTimeout(function () {
             if (typeof map == "undefined") return;
             var center = map.getCenter();

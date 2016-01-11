@@ -62,7 +62,7 @@
                 </li>
 <!--                <li>-->
 <!--                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.evento()">-->
-<!--                        <i class="fa fa-fw fa-calendar"></i> Eventos-->
+<!--                        <i class="fa fa-fw fa-trophy"></i> Eventos-->
 <!--                    </a>-->
 <!--                </li>-->
                 <li>

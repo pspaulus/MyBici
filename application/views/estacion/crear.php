@@ -62,14 +62,41 @@
                             </div>
                         </div>
 
-<!--                        <div>-->
-<!--                            <div class="agrupador">-->
-<!--                                <div class="col-xs-9 col-xs-offset-3 mensaje oculto">-->
-<!--                                    <label class="control-label" id="error_ya_existe">&iexcl;C&oacute;digo o nombre-->
-<!--                                        duplicado!</label>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <!--Longitud-->
+                        <div class="form-group oculto" id="longitud_sin_internet">
+                            <div class="col-xs-2 col-xs-offset-1">
+                                <label for="longitud">Longitud</label>
+                            </div>
+                            <div class="agrupador">
+                                <div class="col-xs-6">
+                                    <input class="form-control" id="longitud" type="text" maxlength="40" value=""
+                                           onkeyup="Estacion.label.longitud()" placeholder="-79.963209628185723"
+                                           onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
+                                </div>
+                                <div class=" row col-xs-4 col-xs-offset-3 oculto mensaje">
+                                    <label class="control-label" id="error_longitud_parqueos">&iexcl;Ingrese
+                                        longitud!</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Latitud-->
+                        <div class="form-group oculto" id="latitud_sin_internet">
+                            <div class="col-xs-2 col-xs-offset-1">
+                                <label for="latitud">Latitud</label>
+                            </div>
+                            <div class="agrupador">
+                                <div class="col-xs-6">
+                                    <input class="form-control" id="latitud" type="text" maxlength="40" value=""
+                                           onkeyup="Estacion.label.latitud()" placeholder="-2.1477960235290756"
+                                           onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
+                                </div>
+                                <div class=" row col-xs-4 col-xs-offset-3 oculto mensaje">
+                                    <label class="control-label" id="error_latitud_parqueos">&iexcl;Ingrese
+                                        latitud!</label>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- mapa -->
                         <div class="col-xs-12 col-sm-10 col-sm-offset-1">
@@ -89,50 +116,13 @@
                                 Escritorio::Mensaje('no_muestra_contenido');
                             } ?>
                         </div>
-
-                        <!--Longitud-->
-                        <div class="form-group oculto">
-                            <div class="col-xs-2 col-xs-offset-1">
-                                <label for="Descripcion">Longitud</label>
-                            </div>
-                            <div class="agrupador">
-                                <div class="col-xs-6">
-                                    <input class="form-control" id="longitud" type="text" maxlength="40" value="0"
-                                           readonly onkeyup="Estacion.label.longitud()"
-                                           onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
-                                </div>
-                                <div class=" row col-xs-4 col-xs-offset-3 oculto mensaje">
-                                    <label class="control-label" id="error_longitud_parqueos">&iexcl;Ingrese
-                                        longitud!</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Latitud-->
-                        <div class="form-group oculto">
-                            <div class="col-xs-2 col-xs-offset-1">
-                                <label for="Descripcion">Latitud</label>
-                            </div>
-                            <div class="agrupador">
-                                <div class="col-xs-6">
-                                    <input class="form-control" id="latitud" type="text" maxlength="40" value="0"
-                                           readonly onkeyup="Estacion.label.latitud()"
-                                           onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
-                                </div>
-                                <div class=" row col-xs-4 col-xs-offset-3 oculto mensaje">
-                                    <label class="control-label" id="error_latitud_parqueos">&iexcl;Ingrese
-                                        latitud!</label>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                 </form>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"
-                        onclick="Estacion.acciones.limpiar()">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="Estacion.acciones.limpiar()">
                     Cancelar
                 </button>
                 <button type="button" class="btn btn-primary" onclick="Estacion.acciones.guardar();">Guardar</button>
@@ -141,3 +131,4 @@
         </div>
     </div>
 </div>
+

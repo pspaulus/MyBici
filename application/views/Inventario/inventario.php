@@ -8,6 +8,7 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             <i class="fa fa-fw fa-bicycle"></i> Inventario de Bicicletas
+            <a class="dedo" data-toggle="modal" data-target="#agregarBicicleta"> <i class="fa fa-plus-circle"></i> </a>
             <small class="pull-right"> Total: <?= $Bicicletas->contarBicicletas(); ?></small>
         </h1>
     </div>
@@ -18,7 +19,7 @@
         <ol class="breadcrumb">
             <li class="active" id="titulo">
                 <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_estados'), $('#titulo'))">
-                    <i class="fa fa-clock-o"></i> Estados &nbsp;
+                    <i class="fa fa-clock-o"></i> Tablero de Estados &nbsp;
                 </a>
                 <button class="btn btn-xs btn-default" type="button" title="Refrescar"
                         onclick="Inventario.acciones.refrescar();">
@@ -32,19 +33,6 @@
 <div id="contenido_estados">
     <!--Resumen-->
     <?php $Bicicletas->load->view('inventario/resumen', compact('Bicicletas')); ?>
-</div>
-
-<!--Agregar-->
-<div class="row">
-    <div class="col-xs-12">
-        <ol class="breadcrumb">
-            <li class="active" id="titulo2">
-                <a class="dedo" data-toggle="modal" data-target="#agregarBicicleta">
-                    <i class="fa fa-plus-circle"></i> Agregar
-                </a>
-            </li>
-        </ol>
-    </div>
 </div>
 
 <!-- Modal Agregar bicicleta -->

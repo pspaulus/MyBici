@@ -16,7 +16,7 @@
 
 <!-- Subtitulo -->
 <div class="row" id="listado_busqueda">
-    <div class="col-lg-12">
+    <div class="col-xs-12">
         <ol class="breadcrumb">
             <li class="active" id="titulo2">
                 <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_buscar'), $('#titulo2'))">

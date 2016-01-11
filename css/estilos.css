@@ -103,6 +103,14 @@ body {
     margin-bottom: 25px !important;
 }
 
+.espacioIzquierda {
+    margin-left: 3% !important;
+}
+
+.espacioIzquierdaFijo {
+    margin-left: 25px !important;
+}
+
 .panel-celeste {
     border-color: #5bc0de;
 }

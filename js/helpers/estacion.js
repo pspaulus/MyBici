@@ -36,26 +36,22 @@ var Estacion = {
 
             if (input_codigo.val() == '') {
                 validacion_codigo = false;
-                mensaje = $('#error_codigo_parqueos');
-                Estacion.mensajes.mostrar(mensaje);
+                Estacion.mensajes.mostrar($('#error_codigo_parqueos'));
             }
 
             if (input_nombre.val() == '') {
                 validacion_nombre = false;
-                mensaje = $('#error_nombre_parqueos');
-                Estacion.mensajes.mostrar(mensaje);
+                Estacion.mensajes.mostrar($('#error_nombre_parqueos'));
             }
 
             if (input_longitud.val() == '') {
                 validacion_longitud = false;
-                mensaje = $('#error_longitud_parqueos');
-                Estacion.mensajes.mostrar(mensaje);
+                Estacion.mensajes.mostrar($('#error_longitud_parqueos'));
             }
 
             if (input_latitud.val() == '') {
                 validacion_latitud = false;
-                mensaje = $('#error_latitud_parqueos');
-                Estacion.mensajes.mostrar(mensaje);
+                Estacion.mensajes.mostrar($('#error_latitud_parqueos'));
             }
 
             if (existeEstacion.val() == 1 && validacion_codigo && validacion_nombre && validacion_longitud && validacion_latitud) {
@@ -83,7 +79,77 @@ var Estacion = {
                     });
             } else {
                 console.log('Error al guardar Estacion por validaciones');
-                Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
+            }
+        },
+
+        editar: function () {
+            $('#btn_editar_estacion').hide();
+            $('#btn_guardar_estacion').show();
+            Estacion.validaciones.habilitarBotones();
+        },
+
+        guardarEditar: function () {
+            var estacion_id = $('#editar_estacion_id').val();
+            var estacion_codigo = $('#editar_estacion_codigo').val().toUpperCase();
+            var estacion_nombre = $('#editar_estacion_nombre').val();
+            var input_longitud = $('#editar_longitud').val();
+            var input_latitud = $('#editar_latitud').val();
+
+            var validacion_id = true;
+            var validacion_codigo = true;
+            var validacion_nombre = true;
+            var validacion_longitud = true;
+            var validacion_latitud = true;
+
+            if (estacion_id == '') {
+                validacion_id = false;
+                Estacion.mensajes.mostrar($('#error_sin_estacion'));
+            }
+
+            if (estacion_codigo == '') {
+                validacion_codigo = false;
+                Estacion.mensajes.mostrar($('#error_editar_codigo'));
+            }
+
+            if (estacion_nombre == '') {
+                validacion_nombre = false;
+                Estacion.mensajes.mostrar($('#error_edita_nombre'));
+            }
+
+            if (input_longitud == '') {
+                validacion_longitud = false;
+                Estacion.mensajes.mostrar($('#error_editar_longitud'));
+            }
+
+            if (input_latitud == '') {
+                validacion_latitud = false;
+                Estacion.mensajes.mostrar($('#error_editar_latitud'));
+            }
+
+            if (validacion_id && validacion_codigo && validacion_nombre && validacion_longitud && validacion_latitud) {
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "Estacion/editarEstacion",
+                    data: {
+                        id: estacion_id,
+                        nombre: estacion_nombre,
+                        codigo: estacion_codigo,
+                        longitud: input_longitud,
+                        latitud: input_latitud
+                    }
+                })
+                    .done(function (r) {
+                        console.log(r.mensaje);
+                        if (r.status) {
+                            Estacion.acciones.cargarDatosEstacion();
+                            Escritorio.mensajeFlotante.mostrar($('#editar_ok'));
+                        } else {
+                            Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
+                        }
+                    });
+
+            } else {
+                console.log('ERROR: no edita por validaciones');
             }
         },
 
@@ -141,44 +207,6 @@ var Estacion = {
             }
         },
 
-        editar: function () {
-            $('#btn_editar_estacion').hide();
-            $('#btn_guardar_estacion').show();
-            Estacion.validaciones.habilitarBotones();
-        },
-
-        guardarEditar: function () {
-            var estacion_id = $('#select_estacion').val();
-            var estacion_codigo = $('#editar_estacion_codigo').val().toUpperCase();
-            var estacion_nombre = $('#editar_estacion_nombre').val();
-
-            if (estacion_codigo.length > 0) {
-                Estacion.mensajes.oculta($('#error_editar_codigo_estacion'));
-
-                if (estacion_nombre.length > 0) {
-                    Estacion.mensajes.oculta($('#error_edita_nombre_estacion'));
-
-                    $.ajax({
-                        method: "POST",
-                        url: base_url + "Estacion/editarEstacion",
-                        data: {
-                            id: estacion_id,
-                            nombre: estacion_nombre,
-                            codigo: estacion_codigo
-                        }
-                    })
-                        .done(function () {
-                            console.log('OK: acutlizada estacoin -> ' + estacion_id);
-                            Escritorio.load.estacion();
-                        });
-                } else {
-                    Estacion.mensajes.mostrar($('#error_edita_nombre_estacion'));
-                }
-            } else {
-                Estacion.mensajes.mostrar($('#error_editar_codigo_estacion'));
-            }
-        },
-
         cargarDatosEstacion: function () {
             var estacion_id = $('#select_estacion').val();
 
@@ -223,8 +251,8 @@ var Estacion = {
 
             input_nombre.val('');
             input_codigo.val('');
-            input_longitud.val('');
-            input_latitud.val('');
+            input_longitud.val(0);
+            input_latitud.val(0);
             Estacion.mensajes.oculta($('#codigo_duplicado'));
             Estacion.mensajes.oculta($('#nombre_duplicado'));
             Estacion.mensajes.oculta($('#error_codigo_parqueos'));
@@ -294,12 +322,35 @@ var Estacion = {
         habilitarBotones: function () {
             var input_editar_estacion_codigo = $('#editar_estacion_codigo');
             var input_editar_estacion_nombre = $('#editar_estacion_nombre');
+            var input_editar_longitud = $('#editar_longitud');
+            var input_editar_latitud = $('#editar_latitud');
             var btn_crear_estacionamiento = $('#btn_crear_estacionamiento');
+            var div_mapa = $('#ubicacionEstacion');
 
             btn_crear_estacionamiento.removeAttr('disabled');
             input_editar_estacion_codigo.removeAttr('disabled');
             input_editar_estacion_nombre.removeAttr('disabled');
-            input_editar_estacion_nombre.removeAttr('disabled');
+            input_editar_longitud.removeAttr('disabled');
+            input_editar_latitud.removeAttr('disabled');
+            div_mapa.removeAttr('disabled');
+        },
+
+        habilitarRegistroSinInterner: function () {
+            var hay_internet = $('#estacion_sin_internet').val();
+            var inputs_longitud = $('#longitud_sin_internet');
+            var inputs_latitud = $('#latitud_sin_internet');
+            var inputs_editar_longitud = $('#editar_longitud_sin_internet');
+            var inputs_editar_latitud = $('#editar_latitud_sin_internet');
+
+            //hay_internet = false;
+            console.log('Interent: ' + hay_internet);
+
+            if (!hay_internet) {
+                inputs_longitud.removeClass('oculto');
+                inputs_latitud.removeClass('oculto');
+                inputs_editar_longitud.removeClass('oculto');
+                inputs_editar_latitud.removeClass('oculto');
+            }
         },
 
         botonEditar: function (accion) {
