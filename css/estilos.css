@@ -95,6 +95,14 @@ body {
     margin-top: 25px !important;
 }
 
+.espacioAbajo {
+    margin-bottom: 3% !important;
+}
+
+.espacioAbajoFijo {
+    margin-bottom: 25px !important;
+}
+
 .panel-celeste {
     border-color: #5bc0de;
 }
@@ -144,15 +152,15 @@ a.nav-texto:hover {
 }
 
 .mensajeFlotanteCabecera {
-    position: relative;
+    position: relative !important;
 
 }
 
 .mensajeFlotanteCuerpo {
-    position: absolute;
+    position: absolute !important;
     right: 0;
     top: 0;
-    z-index: 1;
+    z-index: 3;
 }
 
 /* map infowindow remove close button */
@@ -162,4 +170,12 @@ a.nav-texto:hover {
 
 .tieneScroll {
     overflow: auto;
+}
+
+.contraer {
+    white-space: normal !important;
+}
+
+.textoCentrado {
+    text-align: center !important;
 }

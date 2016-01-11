@@ -25,14 +25,6 @@ class Bicicleta extends CI_Controller
         return $conteo_bicicletas;
     }
 
-    public static function contarBicicletasDisponiblesByEstacion($estacion_id)
-    {
-        $bicicletas_disponibles = \App\Bicicleta::where('ESTADO_id', '=', 7)
-            ->where('PUESTO_ALQUILER_id', '=', $estacion_id)
-            ->count();
-        return $bicicletas_disponibles;
-    }
-
     public static function contarBicicletasTodasByEstacion($estacion_id)
     {
         $bicicletas_total = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $estacion_id)
@@ -303,13 +295,15 @@ class Bicicleta extends CI_Controller
         if ($estacionamiento == null) {
             header('Content-Type: application/json');
             echo json_encode([
-                'status' => true, //no esta estacionada en ningun lado
+                'status' => true, //no esta estacionada
             ]);
         } else {
+
+            $estacionamiento_codigo = Estacionamiento::generarCodigo($estacionamiento->id);
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => false,
-                'estacionamiento_id' => $estacionamiento->id
+                'estacionamiento_codigo' => $estacionamiento_codigo
             ]);
         }
     }
@@ -482,6 +476,19 @@ class Bicicleta extends CI_Controller
                 'status' => false
 
             ]);
+        }
+    }
+
+    public static function generarCodigo($bicileta_id){
+        $bicileta = \App\Bicicleta::find($bicileta_id);
+
+        if ($bicileta != null){
+            $estacion_codigo = Estacion::getCodigoEstacionByIdDevolver($bicileta->PUESTO_ALQUILER_id);
+            $secuecia = $bicileta->codigo;
+
+            return $estacionamiento_codigo = $estacion_codigo.'B'.$secuecia ;
+        } else {
+            return null;
         }
     }
 }

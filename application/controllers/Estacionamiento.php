@@ -13,6 +13,14 @@ class Estacionamiento extends CI_Controller
         echo 'Controller Estacionamiento';
     }
 
+    public static function contarBicicletasDisponiblesByEstacion($estacion_id)
+    {
+        $bicicletas_disponibles = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->whereNotNull('BICICLETA_id')
+            ->count();
+        return $bicicletas_disponibles;
+    }
+
     public static function contarEstacionamientoDisponiblesByEstacion($estacion_id)
     {
         $estacionamientos_disponibles = \App\Estacionamiento::where('ESTADO_id', '=', 7)
@@ -28,25 +36,23 @@ class Estacionamiento extends CI_Controller
         return $estacionamientos_total;
     }
 
-    public function cargarEstacionamientos($estacion_id, $estado = 'todos')
+    public function cargarEstacionamientos($estacion_id, $estado_id)
     {
-        switch ($estado) {
-            case 'libres':
-                $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
-                    ->where('ESTADO_id', '=', '4')
+        if ($estacion_id == -1 && $estado_id == -1){
+            $estacionamientos = \App\Estacionamiento::all();
+        } else {
+            if ($estacion_id == -1 && $estado_id == -1){
+                $estacionamientos = \App\Estacionamiento::where('ESTADO_id', '=', $estado_id)
                     ->get();
-                break;
-            case 'ocupados':
-                $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
-                    ->where('ESTADO_id', '=', '5')
-                    ->get();
-                break;
-            case 'todos':
+            } elseif ( $estacion_id != -1 && $estado_id == -1 ) {
                 $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
                     ->get();
-                break;
+            } elseif ( $estacion_id != -1 && $estado_id != -1){
+                $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+                    ->where('ESTADO_id', '=', $estado_id)
+                    ->get();
+            }
         }
-
         return $estacionamientos;
     }
 
@@ -88,11 +94,14 @@ class Estacionamiento extends CI_Controller
         return $estacionamientos_secuencia;
     }
 
-    public function cargarVistaParqueos($estacion_id, $estado)
+    public function cargarVistaListadoEstacionamientos($estacion_id, $estado)
     {
         $data['estacion_id'] = $estacion_id;
-        $data['Estacion'] = $this;
         $data['estado'] = $estado;
+        $data['Estacionamiento'] = $this;
+        $data['Bicicleta'] = new Bicicleta();
+        $data['Estacion'] = new Estacion();
+
 
         $this->load->view('estacionamiento/listado', $data);
     }
@@ -110,11 +119,17 @@ class Estacionamiento extends CI_Controller
 
         $estacionamiento->BICICLETA_id = null;
         $estacionamiento->ESTADO_id = 4;
-        if ($estacionamiento->save()) {
-            echo 'OK: eliminar bicicleta en E->' . $estacionamiento->id;
-        } else {
-            echo 'ERROR: eliminar bicicleta en E->' . $estacionamiento->id;
-        }
+        $resultado = $estacionamiento->save();
+
+        $mensaje =  ($resultado)?
+            'OK: eliminar bicicleta en E->' . $estacionamiento->id :
+            'ERROR: eliminar bicicleta en E->' . $estacionamiento->id;
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $resultado,
+            'mensaje' => $mensaje
+        ]);
     }
 
     public function agregarBicicleta($estacionamiento_id, $bicicleta_id)
@@ -123,11 +138,17 @@ class Estacionamiento extends CI_Controller
 
         $estacionamiento->BICICLETA_id = $bicicleta_id;
         $estacionamiento->ESTADO_id = 5;
-        if ($estacionamiento->save()) {
-            echo 'OK: agregar bicicleta en E->' . $estacionamiento->id . ' B->' . $bicicleta_id;
-        } else {
-            echo 'ERROR: agregar bicicleta en E->' . $estacionamiento->id . ' B->' . $bicicleta_id;
-        }
+        $resultado = $estacionamiento->save();
+
+        $mensaje =  ($resultado)?
+            'OK: agregar bicicleta en E->' . $estacionamiento->id . ' B->' . $bicicleta_id :
+            'ERROR: agregar bicicleta en E->' . $estacionamiento->id . ' B->' . $bicicleta_id;
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $resultado,
+            'mensaje' => $mensaje
+        ]);
     }
 
     public static function cargarEstacionamientosDisponible($estacion_id)
@@ -180,6 +201,27 @@ class Estacionamiento extends CI_Controller
             echo json_encode([
                 'status' => false,
             ]);
+        }
+    }
+
+    public function cargarVistaBusquedaEstacionamiento()
+    {
+        $data['Estacion'] = new Estacion();
+        $data['Estacionamiento'] = $this;
+        $this->load->view('estacionamiento/estacionamiento', $data);
+    }
+
+    public static function generarCodigo($estacionamiento_id){
+        $estacionamiento = \App\Estacionamiento::find($estacionamiento_id);
+
+        if ($estacionamiento != null){
+
+            $estacion_codigo = Estacion::getCodigoEstacionByIdDevolver($estacionamiento->PUESTO_ALQUILER_id);
+            $secuecia= $estacionamiento->codigo;
+
+            return $estacionamiento_codigo = $estacion_codigo.'P'.$secuecia ;
+        } else {
+            return null;
         }
     }
 }

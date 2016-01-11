@@ -13,7 +13,7 @@
 
         foreach ($estaciones as $estacion) {
             if ($estacion != null) {
-                $bicicletas_disponibles = Bicicleta::contarBicicletasDisponiblesByEstacion($estacion->id);
+                $bicicletas_disponibles = Estacionamiento::contarBicicletasDisponiblesByEstacion($estacion->id);
                 $bicicletas_total = Bicicleta::contarBicicletasTodasByEstacion($estacion->id);
                 $parqueos_disponibles = Estacionamiento::contarEstacionamientoDisponiblesByEstacion($estacion->id);
                 $parqueos_total = Estacionamiento::contarEstacionamientoTodosByEstacion($estacion->id);

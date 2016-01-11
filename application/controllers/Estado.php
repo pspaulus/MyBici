@@ -20,6 +20,13 @@ class Estado extends CI_Controller
         return $estados;
     }
 
+    public static function getEstadoEstacionamiento()
+    {
+        $estados = \App\Estado::where('objeto', '=', 'estacionamiento')
+            ->get();
+        return $estados;
+    }
+
     public function getEstadoTickets()
     {
         $estados = \App\Estado::where('objeto', '=', 'ticket')

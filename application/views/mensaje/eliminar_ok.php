@@ -5,6 +5,10 @@
                 case 'usuario':
                     $contenido = '<strong>OK: </strong> Usuario marcado como inactivo';
                     break;
+
+                case 'estacionamiento':
+                    $contenido = '<strong>OK: </strong> Bicicleta retirada del estaciomiento';
+                    break;
             }
             echo $contenido;
         } else {

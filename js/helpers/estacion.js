@@ -73,10 +73,7 @@ var Estacion = {
                         if (r.status) {
                             console.log('Ok al guardar Estacion');
                             $('#crearEstacion').modal('toggle');
-                            //Estacion.mensajes.oculta($('#error_ya_existe'));
-                            //$('#crearEstacion').removeClass('in');
                             $('.modal-backdrop').remove();
-                            //$('#resultado').html(Escritorio.load.estacion());
                             Estacion.acciones.refrescar();
                             Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
                         } else {

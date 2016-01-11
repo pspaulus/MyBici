@@ -3,8 +3,16 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body">
-                &iquest;Est&aacute; seguro quitar?
+                <div class="row contraer">
+                    <div class="col-xs-2 text-right">
+                        <i class="fa fa-warning fa-3x"></i>
+                    </div>
+                    <div class="col-xs-10">
+                        <label>&iquest;Est&aacute; seguro retirar la bicicleta <?= $bicicleta_codigo ?> del estacionamiento <?= $estacionamiento_codigo ?>?</label>
+                    </div>
+                </div>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                 <button type="button" class="btn btn-primary"

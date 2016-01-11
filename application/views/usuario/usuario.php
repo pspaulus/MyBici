@@ -1,12 +1,12 @@
 <?php $Usuario = new Usuario(); ?>
-
-<!-- mensajes flotantes-->
-<?php Escritorio::Mensaje('guardar_ok', 'usuario') ?>
-<?php Escritorio::Mensaje('editar_ok', 'usuario') ?>
-<?php Escritorio::Mensaje('eliminar_ok', 'usuario') ?>
-<?php Escritorio::Mensaje('restaurar_ok', 'usuario') ?>
-<?php Escritorio::Mensaje('error', 'usuario') ?>
-
+<div class="col-xs-12">
+    <!-- mensajes flotantes-->
+    <?php Escritorio::Mensaje('guardar_ok', 'usuario') ?>
+    <?php Escritorio::Mensaje('eliminar_ok', 'usuario') ?>
+    <?php Escritorio::Mensaje('editar_ok', 'usuario') ?>
+    <?php Escritorio::Mensaje('restaurar_ok', 'usuario') ?>
+    <?php Escritorio::Mensaje('error', 'usuario') ?>
+</div>
 <!-- Titulo -->
 <div class="row" id="page_usuario">
     <div class="col-lg-12">

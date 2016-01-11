@@ -73,6 +73,24 @@ var Escritorio = {
                 });
         },
 
+        estacionamiento: function () {
+            var container = $('#resultado');
+
+            $.ajax({
+                method: "POST",
+                url: base_url + "Estacionamiento/cargarVistaBusquedaEstacionamiento",
+                beforeSend: function () {
+                    container.html(
+                        '<div class="col-xs-12 text-center" class="espacioArribaFijo">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
+            })
+                .done(function (r) {
+                    container.html(r);
+                });
+        },
+
         evento: function () {
             var container = $('#resultado');
 

@@ -42,7 +42,7 @@
             <ul class="nav navbar-nav side-nav">
                 <li>
                     <a onclick="$('.navbar-toggle').click(); Escritorio.load.ticket();">
-                        <i class="fa fa-fw fa-ticket"></i> Reservas
+                        <i class="fa fa-fw fa-ticket"></i> Tickets
                     </a>
                 </li>
                 <li>
@@ -56,10 +56,15 @@
                     </a>
                 </li>
                 <li>
-                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.evento()">
-                        <i class="fa fa-fw fa-calendar"></i> Eventos
+                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.estacionamiento()">
+                        <i class="fa fa-fw fa-product-hunt"></i> Estacionamientos
                     </a>
                 </li>
+<!--                <li>-->
+<!--                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.evento()">-->
+<!--                        <i class="fa fa-fw fa-calendar"></i> Eventos-->
+<!--                    </a>-->
+<!--                </li>-->
                 <li>
                     <a onclick="$('.navbar-toggle').click(); Escritorio.load.usuario()">
                         <i class="fa fa-fw fa-users"></i> Usuarios

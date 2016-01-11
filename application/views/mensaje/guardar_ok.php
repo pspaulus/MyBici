@@ -9,6 +9,10 @@
                 case 'estacion':
                     $contenido = '<i class="fa fa-check"></i> Estaci&oacute;n creado con &eacute;xito.';
                     break;
+
+                case 'estacionamiento':
+                    $contenido = '<i class="fa fa-check"></i> Bicicleta estacionada.';
+                    break;
             }
             echo $contenido;
         } else {
