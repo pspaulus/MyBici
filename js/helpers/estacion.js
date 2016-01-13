@@ -85,6 +85,8 @@ var Estacion = {
         editar: function () {
             $('#btn_editar_estacion').hide();
             $('#btn_guardar_estacion').show();
+            $('#div_mapa_ver').addClass('oculto');
+            $('#div_mapa_editar').removeClass('oculto');
             Estacion.validaciones.habilitarBotones();
         },
 
@@ -142,6 +144,8 @@ var Estacion = {
                         console.log(r.mensaje);
                         if (r.status) {
                             Estacion.acciones.cargarDatosEstacion();
+                            $('#div_mapa_ver').removeClass('oculto');
+                            $('#div_mapa_editar').addClass('oculto');
                             Escritorio.mensajeFlotante.mostrar($('#editar_ok'));
                         } else {
                             Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));

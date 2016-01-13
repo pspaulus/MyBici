@@ -104,9 +104,9 @@
 
 <div class="col-xs-12 col-md-6">
 
-    <!--Mapa-->
+    <!--ver mapa estacion -->
     <?php if (Escritorio::verificarInternet()) { ?>
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" id="div_mapa_ver">
             <div class="panel-heading">
                 <h3 class="panel-title">Ubicaci&oacute;n</h3>
             </div>
@@ -123,15 +123,39 @@
             </div>
         </div>
         <script>
-            ver_mapa('ubicacionEstacion', <?=$estacion_actual->latitud ?>, <?= $estacion_actual->longitud ?>);
+            ver_mapa('ubicacionEstacion',
+                <?= $estacion_actual->latitud ?>,
+                <?= $estacion_actual->longitud ?>
+            );
         </script>
     <?php } else {
 
+        Escritorio::Mensaje('no_muestra_contenido');
+    } ?>
+
+    <!-- editar mapa estacion -->
+    <?php if (Escritorio::verificarInternet()) { ?>
+        <div class="panel panel-primary" id="div_mapa_editar">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ubicaci&oacute;n</h3>
+            </div>
+            <div class="panel-body">
+                <div id="editar_mapa_estacion" class="mapa"></div>
+                <script>
+                    editar_mapa("editar_mapa_estacion",
+                        <?=$estacion_actual->latitud ?>,
+                        <?= $estacion_actual->longitud ?>
+                    );
+                </script>
+            </div>
+        </div>
+    <?php } else {
         Escritorio::Mensaje('no_muestra_contenido');
     } ?>
 </div>
 
 <script>
     Estacion.validaciones.habilitarRegistroSinInterner();
+    $('#div_mapa_editar').addClass('oculto');
 </script>
 

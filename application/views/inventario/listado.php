@@ -43,7 +43,7 @@ if ($filtro == 'codigo') {
                         $tipo_bibicleta = Bicicleta::getTipo($bicicleta->TIPO_id);
                         $estacionamiento_codigo = ($estacionamiento_secuencia != null) ? $estacionamiento_estacion_codigo . 'P' . $estacionamiento_secuencia : '-';
                         $estacionamiento_nombre = Estacion::getEstacionNombreByCodigo($estacionamiento_estacion_codigo);
-                        $estacionamiento_acual =  ($estacionamiento_nombre != null) ? '<i class="fa fa-map-pin"></i> '. $estacionamiento_nombre.' - '.$estacionamiento_codigo: '-';
+                        $estacionamiento_acual =  ($estacionamiento_nombre != null) ? '<i class="fa fa-fw fa-home"></i> '. $estacionamiento_nombre.' - <i class="fa fa-product-hunt"></i> '.$estacionamiento_codigo: '-';
                         ?>
                         <tr>
                             <td><strong><?= $i ?></strong></td>

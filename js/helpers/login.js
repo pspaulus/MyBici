@@ -1,4 +1,4 @@
-base_url = 'http://192.168.100.14/';
+base_url = 'http://192.168.100.15/';
 //base_url = 'http://mybici.server/';
 
 var Login = {

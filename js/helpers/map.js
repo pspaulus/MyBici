@@ -67,7 +67,7 @@ function ver_mapa_todos(mapa) {
 }
 
 
-function ver_mapa(mapa, x, y, opciones) {
+function ver_mapa(mapa, x, y) {
 
     var latlng = new google.maps.LatLng(x, y);
 
@@ -115,7 +115,7 @@ function guardar_mapa(mapa) {
     var myOptions = {
         zoom: 15,
         center: latlng,
-        zoomControl: false,
+        zoomControl: true,
         mapTypeControl: false,
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -202,18 +202,18 @@ function guardar_mapa(mapa) {
     })
 }
 
-function editar_mapa(mapa, x, y, opciones) {
+function editar_mapa(mapa, x, y) {
 
     var latlng = new google.maps.LatLng(x, y);
 
     var myOptions = {
         zoom: 18,
         center: latlng,
-        zoomControl: false,
+        zoomControl: true,
         mapTypeControl: false,
         streetViewControl: false,
-        draggable: false,
-        scrollwheel: false,
+        draggable: true,
+        scrollwheel: true,
         disableDoubleClickZoom: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -225,11 +225,92 @@ function editar_mapa(mapa, x, y, opciones) {
     var codigo = $('#estacion_actual_codigo').val();
     var ubicacion_estacion = new google.maps.LatLng(latitud, longitud);
 
+    var iconBase = 'http://maps.google.com/mapfiles/marker_white.png';
     var marker = new google.maps.Marker({
         position: ubicacion_estacion,
-        label: codigo
+        //label: codigo,
+        icon: iconBase
     });
     marker.setMap(map);
+
+    var infowindow = new google.maps.InfoWindow({
+        content: '<div>' +
+        '<h4 style="margin-bottom: -5px; color: #000; font-size: 12px" class="panel-title text-right tip">' +
+        '<i class="fa fa-home"></i> <label> Ubicaci\u00F3n Actual </label></h4>' +
+        '</div>'
+    });
+    infowindow.open(map, marker);
+
+    //mostrar ventana flotante
+    google.maps.event.addListener(marker, 'click', function () {
+        infowindow.open(map, marker);
+    });
+
+    var bandera = true;
+
+    google.maps.event.addListener(map, 'click', function (event) {
+
+        if (bandera == false) {
+            // guardar_mapa("googleMap", event.latLng.lat(), event.latLng.lng(), 15);
+        } else {
+            placeMarker(event.latLng);
+            // console.log(event);
+            bandera = false;
+        }
+    });
+
+    function placeMarker(location) {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+
+        $('#editar_latitud').val(location.lat());
+        $('#editar_longitud').val(location.lng());
+    }
+
+    function CenterControl(controlDiv, map) {
+
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Pulse para reiniciar mapa';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = '#2E6DA4';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '13px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'Marcar de nuevo';
+        controlUI.appendChild(controlText);
+
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlUI.addEventListener('click', function () {
+            editar_mapa("editar_mapa_estacion",latlng.lat(),latlng.lng());
+            map.setCenter(latlng);
+            $('#editar_latitud').val(x);
+            $('#editar_longitud').val(y);
+        });
+    }
+
+    var centerControlDiv = document.createElement('div');
+    var centerControl = new CenterControl(centerControlDiv, map);
+
+    centerControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+
+
+
 
     $('#mapTab').on('shown.bs.tab', function () {
         if (typeof map == "undefined") return;
@@ -240,4 +321,6 @@ function editar_mapa(mapa, x, y, opciones) {
             map.setCenter(center);
         }, 400);
     })
+
+
 }
