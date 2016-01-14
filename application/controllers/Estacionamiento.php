@@ -38,16 +38,19 @@ class Estacionamiento extends CI_Controller
 
     public function cargarEstacionamientos($estacion_id, $estado_id)
     {
-        if ($estacion_id == -1 && $estado_id == -1){
+        if ($estacion_id == -1 && $estado_id == -1) {
             $estacionamientos = \App\Estacionamiento::all();
         } else {
-            if ($estacion_id == -1 && $estado_id == -1){
+            if ($estacion_id == -1 && $estado_id == -1) {
                 $estacionamientos = \App\Estacionamiento::where('ESTADO_id', '=', $estado_id)
                     ->get();
-            } elseif ( $estacion_id != -1 && $estado_id == -1 ) {
+            } elseif ($estacion_id == -1 && $estado_id != -1) {
+                $estacionamientos = \App\Estacionamiento::where('ESTADO_id', '=', $estado_id)
+                    ->get();
+            } elseif ($estacion_id != -1 && $estado_id == -1) {
                 $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
                     ->get();
-            } elseif ( $estacion_id != -1 && $estado_id != -1){
+            } elseif ($estacion_id != -1 && $estado_id != -1) {
                 $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
                     ->where('ESTADO_id', '=', $estado_id)
                     ->get();
@@ -121,7 +124,7 @@ class Estacionamiento extends CI_Controller
         $estacionamiento->ESTADO_id = 4;
         $resultado = $estacionamiento->save();
 
-        $mensaje =  ($resultado)?
+        $mensaje = ($resultado) ?
             'OK: eliminar bicicleta en E->' . $estacionamiento->id :
             'ERROR: eliminar bicicleta en E->' . $estacionamiento->id;
 
@@ -140,7 +143,7 @@ class Estacionamiento extends CI_Controller
         $estacionamiento->ESTADO_id = 5;
         $resultado = $estacionamiento->save();
 
-        $mensaje =  ($resultado)?
+        $mensaje = ($resultado) ?
             'OK: agregar bicicleta en E->' . $estacionamiento->id . ' B->' . $bicicleta_id :
             'ERROR: agregar bicicleta en E->' . $estacionamiento->id . ' B->' . $bicicleta_id;
 
@@ -211,15 +214,16 @@ class Estacionamiento extends CI_Controller
         $this->load->view('estacionamiento/estacionamiento', $data);
     }
 
-    public static function generarCodigo($estacionamiento_id){
+    public static function generarCodigo($estacionamiento_id)
+    {
         $estacionamiento = \App\Estacionamiento::find($estacionamiento_id);
 
-        if ($estacionamiento != null){
+        if ($estacionamiento != null) {
 
             $estacion_codigo = Estacion::getCodigoEstacionByIdDevolver($estacionamiento->PUESTO_ALQUILER_id);
-            $secuecia= $estacionamiento->codigo;
+            $secuecia = $estacionamiento->codigo;
 
-            return $estacionamiento_codigo = $estacion_codigo.'P'.$secuecia ;
+            return $estacionamiento_codigo = $estacion_codigo . 'P' . $secuecia;
         } else {
             return null;
         }

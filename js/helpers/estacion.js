@@ -1,6 +1,7 @@
 var Estacion = {
 
     acciones: {
+
         prueba: function () {
             Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
         },
@@ -146,6 +147,7 @@ var Estacion = {
                             Estacion.acciones.cargarDatosEstacion();
                             $('#div_mapa_ver').removeClass('oculto');
                             $('#div_mapa_editar').addClass('oculto');
+                            Estacion.acciones.refrescar();
                             Escritorio.mensajeFlotante.mostrar($('#editar_ok'));
                         } else {
                             Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
