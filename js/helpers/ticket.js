@@ -1,6 +1,50 @@
 var Ticket = {
 
     acciones: {
+
+        mostrarFiltroEstacion: function() {
+            $.ajax({
+                method: "POST",
+                url: base_url + "Estacion/selectEstacion/"
+            })
+                .done(function (r) {
+                    if (r.status) {
+                        $('#select_estacion').html(r.html);
+                    } else {
+                        console.log('ERROR: al mostrar filtro de estacion');
+                        Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
+                    }
+                });
+        },
+
+        RecargarTotal: function(){
+            var contenedor = $('#total_ticket');
+            $.ajax({
+                method: "POST",
+                url: base_url + "Ticket/mostrarConteTicketHoy/"
+            })
+                .done(function (r) {
+                    contenedor.html(r);
+                });
+        },
+
+        RecargarResumen: function() {
+            var contenedor = $('#resumen_ticket');
+            $.ajax({
+                method: "POST",
+                url: base_url + "Ticket/RecargarResumen/",
+                beforeSend: function () {
+                    contenedor.html(
+                        '<div class="col-xs-12 text-center" style="margin-top: 25px">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
+            })
+                .done(function (r) {
+                    contenedor.html(r);
+                });
+        },
+
         refrescar: function () {
             $('#resultado').html(Escritorio.load.ticket());
         },
@@ -59,11 +103,17 @@ var Ticket = {
 
                             Ticket.acciones.marcarBicicletaEstadoEnUso(r.ticket_bicicleta_id, 'en_reserva');
 
-                            $('#crearTicket').removeClass('in');
+                            //$('#crearTicket').removeClass('in');
                             $('.modal-backdrop').remove();
-                            Ticket.acciones.refrescar();
+                            $('#crearTicket').modal('toggle');
+                            Ticket.acciones.RecargarResumen();
+                            //Ticket.acciones.refrescar();
+                            Ticket.acciones.cargarBicicletaDisponible();
+                            Ticket.acciones.RecargarTotal();
+                            Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
                         } else {
                             console.log('Error: no guarda ticket');
+                            Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
                         }
                     });
             }
@@ -169,7 +219,12 @@ var Ticket = {
             $.ajax({
                 method: "POST",
                 url: base_url + "Ticket/cargarListaTicketPorEstacion/" + estacion_id + '/' + estado_id + '/' + fecha,
-                data: {}
+                beforeSend: function () {
+                    $('#listado_ticket').html(
+                        '<div class="col-xs-12 text-center" style="margin-top: 25px">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
             })
                 .done(function (r) {
                     $('#listado_ticket').html(r);
@@ -185,7 +240,12 @@ var Ticket = {
                 $.ajax({
                     method: "POST",
                     url: base_url + "Ticket/cargarListaTicketPorCampo/" + campo + '/' + valor,
-                    data: {}
+                    beforeSend: function () {
+                        $('#listado_ticket').html(
+                            '<div class="col-xs-12 text-center" style="margin-top: 25px">' +
+                            '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                            '</div>');
+                    }
                 })
                     .done(function (r) {
                         $('#listado_ticket').html(r);

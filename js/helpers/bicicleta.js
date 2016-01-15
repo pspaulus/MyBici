@@ -2,6 +2,54 @@ var Bicicleta = {
 
     acciones: {
 
+        pressEnterUnidad: function (e) {
+            if (e.keyCode == 13) {
+                console.log('Presiona enter unidad');
+                Bicicleta.acciones.cargarListaBicicletasPorCodigo();
+            }
+        },
+
+        pressEnterLote: function (e) {
+            if (e.keyCode == 13) {
+                console.log('Presiona enter lote');
+                Bicicleta.acciones.cargarListaBicicletasPorEstacion();
+            }
+        },
+
+        cambioLista: function(filtro){
+            var como_listo = $('#como_listo');
+            como_listo.val(filtro)
+
+        },
+
+        RecargarTotal: function(){
+            var contenedor = $('#total_invetario');
+            $.ajax({
+                method: "POST",
+                url: base_url + "Bicicleta/mostrarTotalBicicletas/"
+            })
+                .done(function (r) {
+                    contenedor.html(r);
+                });
+        },
+
+        RecargarResumen: function() {
+            var contenedor = $('#resumen_inventario');
+            $.ajax({
+                method: "POST",
+                url: base_url + "Bicicleta/RecargarResumen/",
+                beforeSend: function () {
+                    contenedor.html(
+                        '<div class="col-xs-12 text-center" style="margin-top: 25px">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
+            })
+                .done(function (r) {
+                    contenedor.html(r);
+                });
+        },
+
         cargarListaBicicletasPorCodigo: function () {
             var bicicleta_codigo = $('#codigo_bicicleta');
 
@@ -10,7 +58,12 @@ var Bicicleta = {
                     $.ajax({
                         method: "POST",
                         url: base_url + "Bicicleta/cargarVistaListadoBicicletasPorCodigo/" + bicicleta_codigo.val().toUpperCase(),
-                        data: {}
+                        beforeSend: function () {
+                            $('#listado_bicicletas').html(
+                                '<div class="col-xs-12 text-center" style="margin-top: 25px">' +
+                                '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                                '</div>');
+                        }
                     })
                         .done(function (r) {
                             $('#listado_bicicletas').html(r);
@@ -30,7 +83,12 @@ var Bicicleta = {
             $.ajax({
                 method: "POST",
                 url: base_url + "Bicicleta/cargarVistaListadoBicicletasPorEstacion/" + estacion_id + '/' + estado_id,
-                data: {}
+                beforeSend: function () {
+                    $('#listado_bicicletas').html(
+                        '<div class="col-xs-12 text-center" style="margin-top: 25px">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>');
+                }
             })
                 .done(function (r) {
                     $('#listado_bicicletas').html(r);
@@ -38,6 +96,7 @@ var Bicicleta = {
         },
 
         marcarEstado: function (bicicleta_id, estado_texto) {
+            var como_listo =  $('#como_listo').val();
             $.ajax({
                 method: "POST",
                 url: base_url + "Bicicleta/marcarEstado/" + estado_texto,
@@ -46,10 +105,31 @@ var Bicicleta = {
                 .done(function (r) {
                     if (r.status) {
                         console.log('OK: cambio estado bicicleta');
+                        //$('.modal-backdrop').remove();
+                        //Inventario.acciones.refrescar();
+                        var modal ='';
+                        if(estado_texto == 'danada'){
+                            modal = $('#marcarEstadoDanada_'+bicicleta_id);
+                        }
+                        if(estado_texto == 'reparar'){
+                            modal = $('#marcarEstadoReparar_'+bicicleta_id);
+                        }
+                        if(estado_texto == 'buena'){
+                            modal = $('#marcarEstadoBuena_'+bicicleta_id);
+                        }
+                        modal.modal('toggle');
                         $('.modal-backdrop').remove();
-                        Inventario.acciones.refrescar();
+                        Bicicleta.acciones.RecargarResumen();
+                        if (como_listo == 'unidad'){
+                            Bicicleta.acciones.cargarListaBicicletasPorCodigo();
+                        }
+                        if (como_listo == 'lote') {
+                            Bicicleta.acciones.cargarListaBicicletasPorEstacion();
+                        }
+                        Escritorio.mensajeFlotante.mostrar($('#editar_ok'));
                     } else {
                         console.log('ERROR: cambio estado bicicleta');
+                        Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
                     }
                 });
         },
@@ -65,6 +145,7 @@ var Bicicleta = {
                         console.log('OK: se quita la bicicleta del estacionamiento');
                     } else {
                         console.log('Error: no se quita la bicicleta del estacionamiento');
+                        Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
                     }
                 });
         },
@@ -157,9 +238,17 @@ var Bicicleta = {
                                         Bicicleta.acciones.parquear(r.bicicleta_id);
                                     }
                                     $('.modal-backdrop').remove();
-                                    Inventario.acciones.refrescar();
+                                    //Inventario.acciones.refrescar();
+
+                                    Bicicleta.acciones.limpiar();
+                                    Bicicleta.acciones.cargarUltimoCodigoEstacion();
+                                    $('#agregarBicicleta').modal('toggle');
+                                    Bicicleta.acciones.RecargarResumen();
+                                    Bicicleta.acciones.RecargarTotal();
+                                    Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
                                 } else {
                                     console.log('ERROR: No guarda blicicleta');
+                                    Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
                                 }
                             });
                     }

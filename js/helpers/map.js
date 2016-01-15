@@ -11,7 +11,7 @@ function ver_mapa_todos(mapa) {
         zoom: 15,
         center: latlng,
         zoomControl: false,
-        mapTypeControl: false,
+        mapTypeControl: true,
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -74,8 +74,8 @@ function ver_mapa(mapa, x, y) {
     var myOptions = {
         zoom: 18,
         center: latlng,
-        zoomControl: false,
-        mapTypeControl: false,
+        zoomControl: true,
+        mapTypeControl: true,
         streetViewControl: false,
         draggable: false,
         scrollwheel: false,
@@ -116,7 +116,7 @@ function guardar_mapa(mapa) {
         zoom: 15,
         center: latlng,
         zoomControl: true,
-        mapTypeControl: false,
+        mapTypeControl: true,
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };

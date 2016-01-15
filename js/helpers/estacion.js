@@ -2,10 +2,6 @@ var Estacion = {
 
     acciones: {
 
-        prueba: function () {
-            Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
-        },
-
         refrescar: function () {
             $.ajax({
                 method: "POST",
@@ -19,11 +15,9 @@ var Estacion = {
                         Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
                     }
                 });
-
         },
 
         guardar: function () {
-            var mensaje = '';
             var input_codigo = $('#codigo');
             var input_nombre = $('#nombre');
             var input_longitud = $('#longitud');
@@ -55,6 +49,11 @@ var Estacion = {
                 Estacion.mensajes.mostrar($('#error_latitud_parqueos'));
             }
 
+            if (input_latitud.val() == 0 || input_latitud.val() == 0) {
+                validacion_latitud = false;
+                Estacion.mensajes.mostrar($('#error_coordenadas_mapa'));
+            }
+
             if (existeEstacion.val() == 1 && validacion_codigo && validacion_nombre && validacion_longitud && validacion_latitud) {
                 $.ajax({
                     method: "POST",
@@ -68,10 +67,13 @@ var Estacion = {
                 })
                     .done(function (r) {
                         if (r.status) {
-                            console.log('Ok al guardar Estacion');
+                            console.log(r.mensaje);
                             $('#crearEstacion').modal('toggle');
                             $('.modal-backdrop').remove();
+                            Estacion.acciones.limpiar();
                             Estacion.acciones.refrescar();
+                            Estacion.acciones.cargarDatosEstacion();
+                            Estacion.mensajes.oculta($('#error_sin_estacion'));
                             Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
                         } else {
                             console.log('Error al guardar Estacion');
@@ -79,7 +81,7 @@ var Estacion = {
                         }
                     });
             } else {
-                console.log('Error al guardar Estacion por validaciones');
+                console.log('ERROR: no guarda Estacion por validaciones');
             }
         },
 
@@ -148,6 +150,7 @@ var Estacion = {
                             $('#div_mapa_ver').removeClass('oculto');
                             $('#div_mapa_editar').addClass('oculto');
                             Estacion.acciones.refrescar();
+                            Estacion.acciones.marcarSeleccionada(estacion_id);
                             Escritorio.mensajeFlotante.mostrar($('#editar_ok'));
                         } else {
                             Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
@@ -157,6 +160,12 @@ var Estacion = {
             } else {
                 console.log('ERROR: no edita por validaciones');
             }
+            Estacion.acciones.marcarSeleccionada(estacion_id);
+        },
+
+        marcarSeleccionada: function (estacion_id){
+            console.log('option[value='+estacion_id+']');
+            $('#select_estacion').find('option[value='+estacion_id+']').attr('selected','selected');
         },
 
         existeCodigo: function (codigo) {
@@ -178,7 +187,7 @@ var Estacion = {
                             Estacion.mensajes.mostrar($('#codigo_duplicado'));
                         } else {
                             console.log('OK: No existe codigo');
-                            $('#existeUsuario').val(1);
+                            $('#existeCodigo').val(1);
                             Estacion.mensajes.oculta($('#codigo_duplicado'));
                         }
                         $('#busy_codigo').html('');
@@ -265,6 +274,8 @@ var Estacion = {
             Estacion.mensajes.oculta($('#error_nombre_parqueos'));
             Estacion.mensajes.oculta($('#error_longitud_parqueos'));
             Estacion.mensajes.oculta($('#error_latitud_parqueos'));
+            Estacion.mensajes.oculta($('#error_coordenadas_mapa'));
+            $('#googleMap').html('');
             guardar_mapa("googleMap");
         }
     },

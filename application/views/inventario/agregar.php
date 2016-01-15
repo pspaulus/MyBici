@@ -45,7 +45,7 @@
                         <!--Codigo-->
                         <div class="form-group">
                             <div class="col-xs-2 col-xs-offset-1">
-                                <label class="control-label"
+                                <label class="control-label" style="text-align: left !important;"
                                        for="input_codigo_estacion_nuevo">C&oacute;d. Bicicleta</label>
                             </div>
                             <div class="col-xs-2">
@@ -80,7 +80,7 @@
                         </div>
 
                         <!--Tipo-->
-                        <div class="form-group">
+                        <div class="form-group oculto">
                             <div class="col-xs-2 col-xs-offset-1">
                                 <label class="control-label" for="select_tipo_nuevo">Tipo</label>
                             </div>

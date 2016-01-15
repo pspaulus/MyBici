@@ -23,8 +23,8 @@ class Estacionamiento extends CI_Controller
 
     public static function contarEstacionamientoDisponiblesByEstacion($estacion_id)
     {
-        $estacionamientos_disponibles = \App\Estacionamiento::where('ESTADO_id', '=', 7)
-            ->where('PUESTO_ALQUILER_id', '=', $estacion_id)
+        $estacionamientos_disponibles = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->whereNULL('BICICLETA_id')
             ->count();
         return $estacionamientos_disponibles;
     }

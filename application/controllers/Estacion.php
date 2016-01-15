@@ -73,12 +73,13 @@ class Estacion extends CI_Controller
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => true,
-                'estacion_nueva_id' => $nueva_estacion->id
+                'mensaje' => 'Ok al guardar Estacion -> '. $nueva_estacion->id
             ]);
         } else {
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => false,
+                'mensaje' => 'ERROR: al guardar Estacion'
             ]);
         }
     }
@@ -158,7 +159,7 @@ class Estacion extends CI_Controller
         $resultado = $estacion->save();
 
         if ($resultado) {
-            $mensaje = 'ERROR: no edita estacion ->' . $estacion->id;
+            $mensaje = 'OK: edita estacion -> ' . $estacion->id;
         } else {
             $mensaje = 'ERROR: no edita';
         }

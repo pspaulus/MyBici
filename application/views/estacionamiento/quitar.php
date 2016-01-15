@@ -4,10 +4,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row contraer">
-                    <div class="col-xs-2 text-right">
-                        <i class="fa fa-warning fa-3x"></i>
-                    </div>
-                    <div class="col-xs-10">
+                    <div class="col-xs-12 text-center text-warning">
                         <label>&iquest;Est&aacute; seguro retirar la bicicleta <?= $bicicleta_codigo ?> del estacionamiento <?= $estacionamiento_codigo ?>?</label>
                     </div>
                 </div>

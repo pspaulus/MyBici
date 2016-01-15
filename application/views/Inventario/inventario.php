@@ -3,13 +3,18 @@
 <?php $Estado = new Estado(); ?>
 <?php $Tipo = new Tipo(); ?>
 
+<!-- mensajes flotantes-->
+<?php Escritorio::Mensaje('guardar_ok', 'bicicleta') ?>
+<?php Escritorio::Mensaje('editar_ok', 'bicicleta') ?>
+<?php Escritorio::Mensaje('error', 'bicicleta') ?>
+
 <!--Titulo-->
 <div class="row" id="page_inventario">
     <div class="col-lg-12">
         <h1 class="page-header">
             <i class="fa fa-fw fa-bicycle"></i> Inventario de Bicicletas
             <a class="dedo" data-toggle="modal" data-target="#agregarBicicleta"> <i class="fa fa-plus-circle"></i> </a>
-            <small class="pull-right"> Total: <?= $Bicicletas->contarBicicletas(); ?></small>
+            <small class="pull-right" id="total_invetario"> Total: <?= $Bicicletas->contarBicicletas(); ?></small>
         </h1>
     </div>
 </div>
@@ -18,20 +23,19 @@
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li class="active" id="titulo">
-                <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_estados'), $('#titulo'))">
+                <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#resumen_inventario'), $('#titulo'))">
                     <i class="fa fa-clock-o"></i> Tablero de Estados &nbsp;
                 </a>
                 <button class="btn btn-xs btn-default" type="button" title="Refrescar"
-                        onclick="Inventario.acciones.refrescar();">
+                        onclick="Bicicleta.acciones.RecargarResumen();">
                     <i class="fa fa-refresh"></i></button>
             </li>
         </ol>
     </div>
 </div>
 
-
-<div id="contenido_estados">
-    <!--Resumen-->
+<!--Resumen-->
+<div id="resumen_inventario">
     <?php $Bicicletas->load->view('inventario/resumen', compact('Bicicletas')); ?>
 </div>
 
@@ -50,16 +54,16 @@
         </ol>
     </div>
 </div>
-
+<input type="hidden" value="unidad" id="como_listo">
 
 <div id="contenido_buscar">
     <!-- Tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
-            <a href="#por_bicicleta" data-toggle="tab" role="tab">Por C&oacute;digo</a>
+            <a href="#por_bicicleta" data-toggle="tab" role="tab" onclick="Bicicleta.acciones.cambioLista('unidad')">Por Unidad</a>
         </li>
         <li role="presentation">
-            <a href="#por_estacion" data-toggle="tab" role="tab">Por Estaci&oacute;n</a>
+            <a href="#por_estacion" data-toggle="tab" role="tab" onclick="Bicicleta.acciones.cambioLista('lote')">Por Lote</a>
         </li>
     </ul>
 
@@ -84,8 +88,8 @@
                                 <input type="text" class="form-control" id="codigo_bicicleta" maxlength="6"
                                        placeholder="GB1"
                                        onkeyup="Estacion.mensajes.oculta($('#error_formato_codigo'));
-                                                Estacion.mensajes.oculta($('#error_vacio_codigo'));">
-
+                                                Estacion.mensajes.oculta($('#error_vacio_codigo'));
+                                                Bicicleta.acciones.pressEnterUnidad(event)">
                                 <div class="mensaje oculto">
                                     <label class="control-label " id="error_formato_codigo">&iexcl;Error de formato
                                         de c&oacute;digo!</label>
@@ -179,7 +183,7 @@
                     <tr>
                         <th>No.</th>
                         <th>C&oacute;d. Bicicleta</th>
-                        <th>Tipo</th>
+                        <th class="oculto">Tipo</th>
                         <th>Estaci&oacute;n Propietaria</th>
                         <th>Estacionamiento Actual</th>
                         <th>Estado</th>

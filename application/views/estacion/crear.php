@@ -110,6 +110,12 @@
                                         <script>
                                             guardar_mapa("googleMap");
                                         </script>
+
+                                    </div>
+                                    <div class="agrupador">
+                                        <div class="row col-xs-9 col-xs-offset-3 oculto mensaje">
+                                            <label class="control-label" id="error_coordenadas_mapa">&iexcl;Indique ubicaci&oacuten en el mapa!</label>
+                                        </div>
                                     </div>
                                 </div>
                             <?php } else {

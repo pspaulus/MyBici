@@ -36,7 +36,8 @@
                                                onkeyup="Usuario.acciones.validarNumeroCaracteresUsuario(this,4);
                                                         $('#nombre_duplicado').parent('.duplicado').addClass(' oculto');
                                                         $('#nombre').parents('.agrupador').children('.form-group').children('.mensaje').removeClass(' has-error');"
-                                               onblur="Usuario.acciones.existeUsuario($('#nombre'))">
+                                               onblur="Usuario.acciones.existeUsuario($('#nombre'));
+                                                       Usuario.acciones.validarNumeroCaracteresUsuario(this,4)">
                                         <input type="hidden" id="existeUsuario" value="1">
 
                                     </div>

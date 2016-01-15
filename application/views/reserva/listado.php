@@ -7,7 +7,10 @@ if ($filtro == 'estacion') {
 }
 ?>
 <div id="listado_ticket">
-    <h3>Lista de Tickets</h3>
+    <h3>
+        Lista de Tickets
+        <small class="pull-right"> Total: <?= count($tickets); ?></small>
+    </h3>
 
     <div class="col-xs-12">
         <div class="table-responsive">
@@ -16,7 +19,7 @@ if ($filtro == 'estacion') {
                 <tr>
                     <th>No.</th>
                     <th>ID</th>
-                    <th>Tipo</th>
+                    <th class="oculto">Tipo</th>
                     <th>Usuario</th>
                     <th>Bicicleta</th>
                     <th>Origen</th>
@@ -39,7 +42,7 @@ if ($filtro == 'estacion') {
                             <?php $estacionamiento_origen = Estacionamiento::getEstacionamientoOrigenDestino($ticket->origen_estacionamiento) ?>
                             <?php $estacionamiento_destino = Estacionamiento::getEstacionamientoOrigenDestino($ticket->destino_estacionamiento) ?>
                             <td><?= $ticket->id ?></td>
-                            <td><?= Tipo::getReservaTipoById($ticket->TIPO_id) ?></td>
+                            <td class="oculto"><?= Tipo::getReservaTipoById($ticket->TIPO_id) ?></td>
                             <td><i class="fa fa-user"></i> <?= Usuario::getUsuarioNombreById($ticket->USUARIO_id) ?></td>
                             <td><i class="fa fa-bicycle"></i> <?= Bicicleta::getBicicletaCodigoById($ticket->BICICLETA_id) ?></td>
                             <td><?= Estacion::getEstacionNombreById($ticket->origen_puesto_alquiler) . ' - ' . $estacionamiento_origen ?></td>
@@ -87,7 +90,7 @@ if ($filtro == 'estacion') {
                     <?php } ?>
                 <?php } ?>
             </table>
-            <div class="tip text-center">
+            <div class="tip text-center espacioAbajoFijo">
                 <small>
                     <a href="#listado_busqueda">Ir al inicio</a>
                 </small>

@@ -13,6 +13,14 @@
                 case 'estacionamiento':
                     $contenido = '<i class="fa fa-check"></i> Bicicleta estacionada.';
                     break;
+
+                case 'bicicleta':
+                    $contenido = '<i class="fa fa-check"></i> Bicicleta agregrada con &eacute;xito.';
+                    break;
+
+                case 'ticket':
+                    $contenido = '<i class="fa fa-check"></i> Ticket creado con &eacute;xito.';
+                    break;
             }
             echo $contenido;
         } else {

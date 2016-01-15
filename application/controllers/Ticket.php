@@ -21,6 +21,14 @@ class Ticket extends CI_Controller
         return $conteo_tickets;
     }
 
+    public static function mostrarConteTicketHoy()
+    {
+        $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador())
+            ->get()
+            ->count();
+        return $conteo_tickets;
+    }
+
     public static function contarTicketVigentesHoy()
     {
         $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador())
@@ -308,4 +316,10 @@ class Ticket extends CI_Controller
 
     }
 
+    public function RecargarResumen()
+    {
+        $data['Ticket'] = $this;
+        $data['Bicicletas'] = new Bicicleta();
+        $this->load->view('inventario/resumen', $data);
+    }
 }

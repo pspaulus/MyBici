@@ -9,7 +9,7 @@
                 <h4 class="modal-title text-left" id="myModalLabel"><i class="fa fa-edit"></i> Editar Usuario</h4>
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body contraer">
                 <form class="form-horizontal" id="form_usuario">
                     <div class="row">
 

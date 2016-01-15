@@ -3,7 +3,11 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body">
-                &iquest;Est&aacute; seguro enviar a reparar?
+                <div class="row contraer">
+                    <div class="col-xs-12 text-center">
+                        <label>&iquest;Est&aacute; seguro enviar a <span class="text-danger">REPARAR</span> la <span class="text-danger"><i class="fa fa-bicycle"></i> <?= Bicicleta::generarCodigo($bicicleta->id) ?></span>?</label>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>

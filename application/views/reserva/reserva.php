@@ -2,13 +2,16 @@
 <?php $Estado = new Estado(); ?>
 <?php $Ticket = new Ticket(); ?>
 
+<!-- mensajes flotantes-->
+<?php Escritorio::Mensaje('guardar_ok', 'ticket') ?>
+
 <!-- Titulo -->
 <div class="row" id="page_ticket">
     <div class="col-lg-12">
         <h1 class="page-header">
             <i class="fa fa-fw fa-ticket"></i> Tickets
             <a class="dedo" data-toggle="modal" data-target="#crearTicket"> <i class="fa fa-plus-circle"></i> </a>
-            <small class="pull-right"> Total Hoy: <?= $Ticket->contarTicketHoy(); ?></small>
+            <small class="pull-right" id="total_ticket"> Total Hoy: <?= $Ticket->contarTicketHoy(); ?></small>
         </h1>
     </div>
 </div>
@@ -18,22 +21,20 @@
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li class="active" id="titulo">
-                <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_resumen'), $('#titulo'))">
+                <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#resumen_ticket'), $('#titulo'))">
                     <i class="fa fa-calendar"></i> Tablero de Estados
                 </a>
                 &nbsp;
-<!--                <small class="pull-right">Hoy: --><?//= Escritorio::getFechaEcuador() ?><!--</small>-->
-                <button class="btn btn-xs btn-default" type="button"
-                        onclick="Ticket.acciones.refrescar();"><i class="fa fa-refresh"></i></button>
-
+                <!--<small class="pull-right">Hoy: --><?//= Escritorio::getFechaEcuador() ?><!--</small>-->
+                <button class="btn btn-xs btn-default pull-right" type="button"
+                        onclick="Ticket.acciones.RecargarResumen();"><i class="fa fa-refresh"></i></button>
             </li>
         </ol>
     </div>
 </div>
 
-
 <!--Resumen-->
-<div id="contenido_resumen">
+<div id="resumen_ticket">
     <?php $Ticket->load->view('reserva/resumen', compact('Ticket')); ?>
 </div>
 
@@ -59,14 +60,14 @@
     <!-- Tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
-            <a href="#por_codigo" data-toggle="tab" role="tab">Por C&oacute;digo</a>
+            <a href="#por_codigo" data-toggle="tab" role="tab">Por Unidad</a>
         </li>
         <!-- DESACTIVADO TAB USUARIO -->
         <!--                <li role="presentation">-->
         <!--                    <a href="#por_usuario" data-toggle="tab" role="tab">Por Usuario</a>-->
         <!--                </li>-->
         <li role="presentation">
-            <a href="#por_estacion" data-toggle="tab" role="tab">Por Estaci&oacute;n</a>
+            <a href="#por_estacion" data-toggle="tab" role="tab">Por Lote</a>
         </li>
     </ul>
 
@@ -86,18 +87,18 @@
                     <div class="col-xs-12">
 
                         <!--Identificador-->
-                        <div class="form-group espacio">
+                        <div class="form-group espacio" style="vertical-align: top">
                             <!--                                    <label class="control-label" for="ticket_campo">Identificador</label>-->
                             <select class="form-control" id="ticket_campo"
                                     onchange="Ticket.acciones.cambiarValorPlaceholder()">
-                                <option value="id">Ticket</option>
+                                <option value="id">Ticket ID</option>
                                 <option value="bicicleta">Bicicleta</option>
                                 <option value="usuario">Usuario</option>
                             </select>
                         </div>
 
                         <!--Codigo-->
-                        <div class="form-group espacio">
+                        <div class="form-group espacio" style="vertical-align: top">
 
                             <div class="agrupador">
                                 <input type="text" class="form-control" id="ticket_valor" maxlength="45"
@@ -114,7 +115,7 @@
                         </div>
 
                         <!--Boton buscar-->
-                        <div class="form-group">
+                        <div class="form-group" style="vertical-align: top">
                             <button class="btn btn-primary" type="button" id="btn_buscar"
                                     onclick="Ticket.acciones.cargarListaTicketPorCampo()"><i
                                     class="fa fa-search"></i></button>

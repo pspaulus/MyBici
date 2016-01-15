@@ -64,7 +64,7 @@
             <?php } ?>
             </tbody>
         </table>
-        <div class="tip text-center">
+        <div class="tip text-center espacioAbajoFijo">
             <small>
                 <a href="#listado_busqueda" class="dedo">Ir al inicio</a>
             </small>

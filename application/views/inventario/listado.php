@@ -8,7 +8,7 @@ if ($filtro == 'codigo') {
 ?>
 
 <h3>Lista de bicicletas
-    <small> Total: <?= count($bicicletas_todas); ?></small>
+    <small class="pull-right"> Total: <?= count($bicicletas_todas); ?></small>
 </h3>
 
 <!--Tabla-->
@@ -20,7 +20,7 @@ if ($filtro == 'codigo') {
                 <tr>
                     <th>No.</th>
                     <th>C&oacute;d. Bicicleta</th>
-                    <th>Tipo</th>
+                    <th class="oculto">Tipo</th>
                     <th>Estaci&oacute;n Propietaria</th>
                     <th>Estacionamiento Actual</th>
                     <th>Estado</th>
@@ -44,17 +44,27 @@ if ($filtro == 'codigo') {
                         $estacionamiento_codigo = ($estacionamiento_secuencia != null) ? $estacionamiento_estacion_codigo . 'P' . $estacionamiento_secuencia : '-';
                         $estacionamiento_nombre = Estacion::getEstacionNombreByCodigo($estacionamiento_estacion_codigo);
                         $estacionamiento_acual =  ($estacionamiento_nombre != null) ? '<i class="fa fa-fw fa-home"></i> '. $estacionamiento_nombre.' - <i class="fa fa-product-hunt"></i> '.$estacionamiento_codigo: '-';
+
+                        $class = '';
+                        switch($bicicleta->ESTADO_id){
+                            case 8:
+                                $class = 'text-danger';
+                                break;
+                            case 3:
+                                $class = 'text-warning';
+                                break;
+                        }
                         ?>
                         <tr>
-                            <td><strong><?= $i ?></strong></td>
+                            <td class="<?= $class ?>"><strong><?= $i ?></strong></td>
                             <?php $i++ ?>
-                            <td><i class="fa fa-bicycle"></i> <?= $codigo_estacion . 'B' . $bicicleta->codigo ?></td>
-                            <td><?= $tipo_bibicleta ?></td>
-                            <td><?= $nombre_estacion_propietaria ?></td>
-                            <td><?= $estacionamiento_acual ?></td>
+                            <td class="<?= $class ?>"><i class="fa fa-bicycle"></i> <?= $codigo_estacion . 'B' . $bicicleta->codigo ?></td>
+                            <td class="oculto <?= $class ?>"><?= $tipo_bibicleta ?></td>
+                            <td class="<?= $class ?>"><?= $nombre_estacion_propietaria ?></td>
+                            <td class="<?= $class ?>"><?= $estacionamiento_acual ?></td>
 
 
-                            <td><?= $estado_bicicleta ?></td>
+                            <td class="<?= $class ?>"><?= $estado_bicicleta ?></td>
                             <td>
                                 <?php if ($bicicleta->ESTADO_id == 7) { //buena ?>
                                     <button class="btn btn-sm btn-warning" type="button" title="Enviar a Reparar"
@@ -117,7 +127,7 @@ if ($filtro == 'codigo') {
                 <?php } ?>
                 </tbody>
             </table>
-            <div class="tip text-center">
+            <div class="tip text-center espacioAbajoFijo">
                 <small>
                     <a href="#listado_busqueda">Ir al inicio</a>
                 </small>

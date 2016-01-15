@@ -25,6 +25,13 @@ class Bicicleta extends CI_Controller
         return $conteo_bicicletas;
     }
 
+    public function mostrarTotalBicicletas()
+    {
+        $conteo_bicicletas = \App\Bicicleta::all()
+            ->count();
+        echo $conteo_bicicletas;
+    }
+
     public static function contarBicicletasTodasByEstacion($estacion_id)
     {
         $bicicletas_total = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $estacion_id)
@@ -490,5 +497,11 @@ class Bicicleta extends CI_Controller
         } else {
             return null;
         }
+    }
+
+    public function RecargarResumen()
+    {
+        $data['Bicicletas'] = $this;
+        $this->load->view('inventario/resumen', $data);
     }
 }

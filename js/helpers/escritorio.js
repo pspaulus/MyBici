@@ -70,6 +70,11 @@ var Escritorio = {
             })
                 .done(function (r) {
                     container.html(r);
+                    if ($('#select_estacion').val() == null){
+                        $('#btn_editar_estacion').addClass('oculto');
+                    } else{
+                        $('#btn_editar_estacion').removeClass('oculto');
+                    }
                 });
         },
 

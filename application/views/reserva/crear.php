@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <!--id-->
                             <div class="col-xs-2 col-xs-offset-1">
-                                <label for="ticket_id">Id</label>
+                                <label for="ticket_id">ID</label>
                             </div>
                             <div class="col-xs-3">
                                 <input class="form-control" id="ticket_id" type="text"
@@ -39,10 +39,10 @@
 
                         <div class="form-group">
                             <!--Tipo-->
-                            <div class="col-xs-2 col-xs-offset-1">
+                            <div class="col-xs-2 col-xs-offset-1 oculto">
                                 <label for="ticket_tipo">Tipo</label>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-3 oculto">
                                 <select class="form-control" id="ticket_tipo" disabled>
                                     <option value="3">Recorrido</option>
                                     <option value="4">Tiempo</option>
@@ -51,7 +51,7 @@
 
                             <!--bicleta-->
                             <div class="agrupador">
-                                <div class="col-xs-2">
+                                <div class="col-xs-2 col-xs-offset-1">
                                     <label for="ticket_bicicleta">Bicicleta</label>
                                 </div>
                                 <div class="col-xs-3">

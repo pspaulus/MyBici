@@ -15,15 +15,16 @@
     </div>
 </div>
 
-<input type="hidden" value="<?= Escritorio::verificarInternet()?>" id="estacion_sin_internet">
+<input type="hidden" value="<?= Escritorio::verificarInternet() ?>" id="estacion_sin_internet">
 
 <?php $Estacion->load->view('estacion/crear', compact('Estacion')); ?>
 
 <div class="row">
     <!--Select Estacion-->
     <div class="form-group">
-        <div class="agrupador">
-            <div class="col-xs-10 col-sm-4 col-lg-3">
+
+        <div class="col-xs-10 col-sm-4 col-lg-3">
+            <div class="agrupador">
                 <?php $estaciones = $Estacion->cargarEstaciones(); ?>
                 <select id="select_estacion" class="form-control"
                         onchange="Estacion.acciones.cargarDatosEstacion()">
@@ -32,12 +33,13 @@
                             value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
                     <?php } ?>
                 </select>
-            </div>
 
-            <div class="col-xs-9 mensaje oculto">
-                <label class="control-label" id="error_sin_estacion">&iexcl;No hay estaci&oacute;n!</label>
+                <div class="col-xs-12 mensaje oculto">
+                    <label class="control-label" id="error_sin_estacion">&iexcl;No hay estaci&oacute;n!</label>
+                </div>
             </div>
         </div>
+
 
         <div class="col-xs-2">
             <!-- Button editar -->

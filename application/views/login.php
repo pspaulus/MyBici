@@ -27,7 +27,8 @@
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-fw fa-user"></i>&nbsp;</div>
                         <input type="text" class="form-control" placeholder="Usuario" id="usuario" maxlength="40"
-                               onkeyup="Login.index.validarNumeroCaracteres(this,4)">
+                               onkeyup="Login.index.validarNumeroCaracteres(this,4)"
+                               onblur="Login.index.validarNumeroCaracteres(this,4)">
                     </div>
                     <label class="control-label vacio oculto" for="usuario" id="usuario_vacio">&iexcl;Ingrese
                         usuario!</label>
