@@ -6,7 +6,7 @@
 </div>
 
 <!-- Titulo -->
-<div class="row">
+<div class="row" id="page_estacionamientos">
     <div class="col-lg-12">
         <h1 class="page-header">
             <i class="fa fa-fw fa-product-hunt"></i> Estacionamientos

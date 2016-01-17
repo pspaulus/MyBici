@@ -41,22 +41,22 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.ticket();">
+                    <a href="#page_ticket" onclick="$('.navbar-toggle').click(); Escritorio.load.ticket();">
                         <i class="fa fa-fw fa-ticket"></i> Tickets
                     </a>
                 </li>
                 <li>
-                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.inventario()">
+                    <a href="#page_inventario" onclick="$('.navbar-toggle').click(); Escritorio.load.inventario()">
                         <i class="fa fa-fw fa-bicycle"></i> Inventario
                     </a>
                 </li>
                 <li>
-                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.estacion()">
+                    <a href="#page_estacion" onclick="$('.navbar-toggle').click(); Escritorio.load.estacion()">
                         <i class="fa fa-fw fa-home"></i> Estaciones
                     </a>
                 </li>
                 <li>
-                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.estacionamiento()">
+                    <a href="#page_estacionamiento" onclick="$('.navbar-toggle').click(); Escritorio.load.estacionamiento()">
                         <i class="fa fa-fw fa-product-hunt"></i> Estacionamientos
                     </a>
                 </li>
@@ -66,7 +66,7 @@
 <!--                    </a>-->
 <!--                </li>-->
                 <li>
-                    <a onclick="$('.navbar-toggle').click(); Escritorio.load.usuario()">
+                    <a href="#page_usuario" onclick="$('.navbar-toggle').click(); Escritorio.load.usuario()">
                         <i class="fa fa-fw fa-users"></i> Usuarios
                     </a>
                 </li>

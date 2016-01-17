@@ -135,6 +135,15 @@ class Estacionamiento extends CI_Controller
         ]);
     }
 
+    public function agregarBicicletaSinRespuesta($estacionamiento_id, $bicicleta_id)
+    {
+        $estacionamiento = \App\Estacionamiento::find($estacionamiento_id);
+
+        $estacionamiento->BICICLETA_id = $bicicleta_id;
+        $estacionamiento->ESTADO_id = 5;
+        $estacionamiento->save();
+    }
+
     public function agregarBicicleta($estacionamiento_id, $bicicleta_id)
     {
         $estacionamiento = \App\Estacionamiento::find($estacionamiento_id);

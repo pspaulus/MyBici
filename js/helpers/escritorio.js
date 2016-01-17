@@ -171,6 +171,19 @@ var Escritorio = {
 
     Acciones: {
 
+        mostrarBusy: function (contenedor,id) {
+            contenedor.toggle();
+            contenedor.parent().append(
+                '<div id="busy_'+id+'" class="col-xs-12 text-right">' +
+                    '<i class="fa fa-spinner fa-spin fa-2x"></i>' +
+                '</div>');
+        },
+
+        ocultarBusy: function (contenedor,id) {
+            contenedor.toggle();
+            contenedor.parent().children('#busy_'+id).remove();
+        },
+
         salir: function () {
             $.ajax({
                 method: "POST",

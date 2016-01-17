@@ -201,64 +201,56 @@ var Bicicleta = {
         },
 
         guardar: function () {
+            var botones_modal_agregar = $('#botones_modal_agregar');
+
             var input_cantidad_nuevo = $('#input_cantidad_nuevo');
             var parquear_bicicleta = $('#parquear_bicicleta');
-
             var input_codigo_estacion_nuevo = $('#input_codigo_estacion_nuevo');
             var input_codigo_bicicleta_nuevo = $('#input_codigo_bicicleta_nuevo');
             var select_estacion_inventario_nuevo = $('#select_estacion_inventario_nuevo');
             var select_tipo_nuevo = $('#select_tipo_nuevo');
             var select_estado_nuevo = $('#select_estado_nuevo');
+            var se_parquea = 0;
 
-            var secuencia = 0;
+            if (parquear_bicicleta.is(":checked")) {
+                se_parquea = 1;
+            }
 
             if (select_estacion_inventario_nuevo.val() == null) {
                 Estacion.mensajes.mostrar($('#error_sin_estacion'));
             } else {
                 Estacion.mensajes.oculta($('#error_sin_estacion'));
-                if (input_cantidad_nuevo.val() > 0 && input_cantidad_nuevo.val() < 100) {
+                if (input_cantidad_nuevo.val() > 0 && input_cantidad_nuevo.val() < 1000) {
+                    $.ajax({
+                        method: "POST",
+                        url: base_url + "Bicicleta/guardarBicicleta/",
+                        data: {
+                            PUESTO_ALQUILER_id: select_estacion_inventario_nuevo.val(),
+                            cantidad: input_cantidad_nuevo.val(),
+                            TIPO_id: select_tipo_nuevo.val(),
+                            ESTADO_id: select_estado_nuevo.val(),
+                            parquear: se_parquea
+                        },
+                        beforeSend: function () {
+                            Escritorio.Acciones.mostrarBusy(botones_modal_agregar,1);
+                        }
+                    })
+                        .done(function (r) {
+                            console.log(r.mensaje);
+                            if (r.status) {
+                                $('.modal-backdrop').remove();
+                                $('#agregarBicicleta').modal('toggle');
+                                Bicicleta.acciones.limpiar();
+                                Bicicleta.acciones.cargarUltimoCodigoEstacion();
 
-                    for (var i = 0; i < input_cantidad_nuevo.val(); i++) {
-
-                        secuencia = parseInt(input_codigo_bicicleta_nuevo.val()) + i;
-
-                        console.log('codigo:' + input_codigo_estacion_nuevo.val() + 'B' + secuencia);
-                        $.ajax({
-                            method: "POST",
-                            url: base_url + "Bicicleta/guardarBicicleta/",
-                            data: {
-                                codigo: input_codigo_estacion_nuevo.val() + 'B' + secuencia,
-                                PUESTO_ALQUILER_id: select_estacion_inventario_nuevo.val(),
-                                TIPO_id: select_tipo_nuevo.val(),
-                                ESTADO_id: select_estado_nuevo.val(),
-                                cantidad: i
+                                Bicicleta.acciones.RecargarResumen();
+                                Bicicleta.acciones.RecargarTotal();
+                                Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
+                            } else {
+                                Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
                             }
-                        })
-                            .done(function (r) {
-                                if (r.status) {
-                                    console.log('OK: guardado blicicleta -> ' + r.bicicleta_id);
-
-                                    if (parquear_bicicleta.is(":checked")) {
-                                        Bicicleta.acciones.parquear(r.bicicleta_id);
-                                    }
-
-                                    $('.modal-backdrop').remove();
-                                    Bicicleta.acciones.limpiar();
-                                    Bicicleta.acciones.cargarUltimoCodigoEstacion();
-
-                                    if (r.cantidad == input_cantidad_nuevo.val()) {
-                                        $('#agregarBicicleta').modal('toggle');
-                                        Bicicleta.acciones.RecargarResumen();
-                                        Bicicleta.acciones.RecargarTotal();
-                                        Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
-                                    }
-                                } else {
-                                    console.log('ERROR: No guarda blicicleta');
-                                    Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
-                                }
-                            });
-                    }
-
+                            Escritorio.Acciones.ocultarBusy(botones_modal_agregar,1);
+                        });
                 } else {
                     Estacion.mensajes.mostrar($('#error_cantidad'));
                 }

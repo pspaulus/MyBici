@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<div class="row" id="page_inventario">
+<div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li class="active" id="titulo">

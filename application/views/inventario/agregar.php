@@ -73,7 +73,7 @@
                             <div class="agrupador">
                                 <div class="col-xs-3 col-sm-2">
                                     <input class="form-control" type="text" id="input_cantidad_nuevo" value="1"
-                                           maxlength="2" onkeypress="return Escritorio.Validaciones.soloNumeros(event)"
+                                           maxlength="3" onkeypress="return Escritorio.Validaciones.soloNumeros(event)"
                                            onkeyup="Estacion.mensajes.oculta($('#error_cantidad'));">
                                 </div>
                                 <div class="col-xs-offset-4 col-xs-8 col-sm-offset-3 col-sm-8 mensaje oculto">
@@ -145,10 +145,12 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"
-                        onclick="Bicicleta.acciones.limpiar()">Cancelar
-                </button>
-                <button type="button" class="btn btn-primary" onclick="Bicicleta.acciones.guardar()">Guardar</button>
+                <div id="botones_modal_agregar">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                            onclick="Bicicleta.acciones.limpiar()">Cancelar
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="Bicicleta.acciones.guardar()">Guardar</button>
+                </div>
             </div>
 
         </div>

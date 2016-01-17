@@ -220,40 +220,32 @@ class Bicicleta extends CI_Controller
 
     public function guardarBicicleta()
     {
-        $codigo = $_REQUEST['codigo'];
+        //$codigo = $_REQUEST['codigo'];
         $PUESTO_ALQUILER_id = $_REQUEST['PUESTO_ALQUILER_id'];
         $TIPO_id = $_REQUEST['TIPO_id'];
         $ESTADO_id = $_REQUEST['ESTADO_id'];
         $cantidad = $_REQUEST['cantidad'];
+        $parquear = $_REQUEST['parquear'];
 
-        $secuencia = substr($codigo, 2);
-
-        $bicicleta = \App\Bicicleta::where('codigo', '=', $secuencia)
-            ->where('PUESTO_ALQUILER_id', '=', $PUESTO_ALQUILER_id)
-            ->get();
-
-        if ($bicicleta->first() == null) {
-
-            $nueva_bicicleta = \App\Bicicleta::firstOrCreate([
+        for ($i = 0; $i < $cantidad; $i++) {
+            $secuencia = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $PUESTO_ALQUILER_id)->get()->count() + 1;
+            $nueva_bicicleta = \App\Bicicleta::Create([
                 'codigo' => $secuencia,
                 'PUESTO_ALQUILER_id' => $PUESTO_ALQUILER_id,
                 'TIPO_id' => $TIPO_id,
                 'ESTADO_id' => $ESTADO_id
             ]);
 
-            header('Content-Type: application/json');
-            echo json_encode([
-                'status' => true,
-                'bicicleta_id' => $nueva_bicicleta->id,
-                'cantidad' => $cantidad
-            ]);
-        } else {
-            header('Content-Type: application/json');
-            echo json_encode([
-                'status' => false,
-                'cantidad' => $cantidad
-            ]);
+            if ($parquear == 1){
+                $this->parquearSinRespuesta($nueva_bicicleta->id);
+            }
         }
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => true,
+            'mensaje' => 'Se agregaron '.$cantidad.' bicicletas'
+        ]);
     }
 
     public static function getTipo($tipo_id)
@@ -459,6 +451,22 @@ class Bicicleta extends CI_Controller
         echo json_encode([
             'status' => true,
         ]);
+    }
+
+    public function parquearSinRespuesta($bicicleta_id)
+    {
+        $bicicleta = \App\Bicicleta::find($bicicleta_id);
+
+        $estacion_destino_id = $bicicleta->PUESTO_ALQUILER_id;
+
+        $estacionamiento_id_colocar = Estacionamiento::cargarEstacionamientosDisponible($estacion_destino_id);
+
+        if ($estacionamiento_id_colocar != null) {
+            $Estacionamiento = new Estacionamiento();
+
+            //y la registro en el nuevo parqueo
+            $Estacionamiento->agregarBicicletaSinRespuesta($estacionamiento_id_colocar, $bicicleta_id);
+        }
     }
 
     public function Parquear($bicicleta_id)
