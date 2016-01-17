@@ -52,11 +52,11 @@
                 <div class="form-group input-group">
                     <input type="text" class="form-control" id="valor_a_buscar" maxlength="40"
                            onkeyup="Usuario.acciones.pressEnter(event)">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button"
-                                    onclick="Usuario.acciones.cargarVistaListaUsuario()"><i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button"
+                                onclick="Usuario.acciones.cargarVistaListaUsuario()"><i class="fa fa-search"></i>
+                        </button>
+                    </span>
                 </div>
             </div>
 

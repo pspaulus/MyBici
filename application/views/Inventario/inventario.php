@@ -14,7 +14,9 @@
         <h1 class="page-header">
             <i class="fa fa-fw fa-bicycle"></i> Inventario de Bicicletas
             <a class="dedo" data-toggle="modal" data-target="#agregarBicicleta"> <i class="fa fa-plus-circle"></i> </a>
-            <small class="pull-right" id="total_invetario"> Total: <?= $Bicicletas->contarBicicletas(); ?></small>
+            <small class="pull-right" id="total_invetario" style="padding-top: 10px">
+                Total: <?= $Bicicletas->contarBicicletas(); ?>
+            </small>
         </h1>
     </div>
 </div>
@@ -81,7 +83,7 @@
                     <div class="form-group">
                         <!--Codigo-->
                         <div class="col-xs-2">
-                            <label class="control-label" for="codigo_bicicleta">C&oacute;digo</label>
+                            <label class="control-label" for="codigo_bicicleta" style="padding-top:10px">C&oacute;digo</label>
                         </div>
                         <div class="col-xs-6 col-sm-6 espacio">
                             <div class="agrupador">

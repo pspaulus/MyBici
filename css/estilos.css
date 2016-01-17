@@ -187,3 +187,11 @@ a.nav-texto:hover {
 .textoCentrado {
     text-align: center !important;
 }
+
+.sinRellenoDerecho{
+    padding-right: 0;
+}
+
+.sinRellenoIzquierdo{
+    padding-left: 0;
+}

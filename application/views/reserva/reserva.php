@@ -11,7 +11,9 @@
         <h1 class="page-header">
             <i class="fa fa-fw fa-ticket"></i> Tickets
             <a class="dedo" data-toggle="modal" data-target="#crearTicket"> <i class="fa fa-plus-circle"></i> </a>
-            <small class="pull-right" id="total_ticket"> Total Hoy: <?= $Ticket->contarTicketHoy(); ?></small>
+            <small class="pull-right" id="total_ticket" style="padding-top: 10px">
+                Total Hoy: <?= $Ticket->contarTicketHoy(); ?>
+            </small>
         </h1>
     </div>
 </div>

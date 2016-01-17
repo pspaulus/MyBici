@@ -224,6 +224,7 @@ class Bicicleta extends CI_Controller
         $PUESTO_ALQUILER_id = $_REQUEST['PUESTO_ALQUILER_id'];
         $TIPO_id = $_REQUEST['TIPO_id'];
         $ESTADO_id = $_REQUEST['ESTADO_id'];
+        $cantidad = $_REQUEST['cantidad'];
 
         $secuencia = substr($codigo, 2);
 
@@ -243,12 +244,14 @@ class Bicicleta extends CI_Controller
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => true,
-                'bicicleta_id' => $nueva_bicicleta->id
+                'bicicleta_id' => $nueva_bicicleta->id,
+                'cantidad' => $cantidad
             ]);
         } else {
             header('Content-Type: application/json');
             echo json_encode([
                 'status' => false,
+                'cantidad' => $cantidad
             ]);
         }
     }
