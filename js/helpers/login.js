@@ -6,31 +6,54 @@ var Login = {
     index: {
 
         /**
-         * Validar usuari|o al presionar ingresar en el logeo
+         * Validar usuario al presionar ingresar en el logeo
          */
         validarUsuario: function () {
-            var input_usuario = $('#usuario');
-            var input_contrasena = $('#contrasena');
+            var input_usuario = $('#usuario').val();
+            var input_contrasena = $('#contrasena').val();
 
-            this.validoVacio(input_usuario);
-            this.validoVacio(input_contrasena);
+            var validacion_usuario = true;
+            var validacion_contrasena = true;
 
-            if (input_usuario.val().length >= 4 && input_contrasena.val().length >= 8) {
+            if (input_usuario == '') {
+                validacion_usuario = false;
+                Estacion.mensajes.mostrar($('#usuario_vacio'));
+            } else {
+                if (input_usuario.length < 4) {
+                    validacion_usuario = false;
+                    Estacion.mensajes.mostrar($('#usuario_error'));
+                }
+            }
+
+            if (input_contrasena == '') {
+                validacion_contrasena = false;
+                Estacion.mensajes.mostrar($('#contrasena_vacio'));
+            } else {
+                if (input_contrasena.length < 8) {
+                    validacion_contrasena = false;
+                    Estacion.mensajes.mostrar($('#contrasena_error'));
+                }
+            }
+
+            if (validacion_usuario && validacion_contrasena) {
                 $.ajax({
                     method: "POST",
-                    url: base_url+"Login/validarUsuario",
+                    url: base_url + "Login/validarUsuario",
                     data: {
-                        usuario: input_usuario.val().toLowerCase().trim(),
-                        contrasena: $.md5(input_contrasena.val().trim())
+                        usuario: input_usuario.toLowerCase().trim(),
+                        contrasena: $.md5(input_contrasena.trim())
                     }
                 })
                     .done(function (r) {
+                        console.log(r.mensaje);
                         if (r.status) {
-                            Login.index.mensajeUsuarioContrasenaIncorrecto(r.status);
+                            Estacion.mensajes.mostrar($('#usuario_contrasena_incorrecta'));
                         } else {
-                            window.location.replace(base_url+"Escritorio");
+                            window.location.replace(base_url + "Escritorio");
                         }
                     });
+            } else {
+                console.log('ERROR: no ingresa por validaciones');
             }
         },
 

@@ -23,35 +23,49 @@
     <div class="row">
         <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
             <div class="form-group">
+
+                <!-- nombre -->
                 <div class="agrupador">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-fw fa-user"></i>&nbsp;</div>
                         <input type="text" class="form-control" placeholder="Usuario" id="usuario" maxlength="40"
-                               onkeyup="Login.index.validarNumeroCaracteres(this,4)"
-                               onblur="Login.index.validarNumeroCaracteres(this,4)">
+                               onkeyup="Estacion.mensajes.oculta($('#usuario_vacio'));
+                                        Estacion.mensajes.oculta($('#usuario_error'));
+                                        Estacion.mensajes.oculta($('#usuario_contrasena_incorrecta'));
+                                        Login.index.pressEnter(event)">
                     </div>
-                    <label class="control-label vacio oculto" for="usuario" id="usuario_vacio">&iexcl;Ingrese
-                        usuario!</label>
-                    <label class="control-label error oculto" for="usuario" id="usuario_error">&iexcl;El usuario debe
-                        contener al menos 4 caracteres!</label>
+                    <div class="mensaje text-center oculto">
+                        <label class="control-label" id="usuario_vacio">&iexcl;Ingrese usuario!</label>
+                    </div>
+                    <div class="mensaje text-center oculto">
+                        <label class="control-label" id="usuario_error">&iexcl;El usuario debe contener al menos 4
+                            caracteres!</label>
+                    </div>
                 </div>
 
+                <!-- clave -->
                 <div class="agrupador">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-fw fa-lock"></i>&nbsp;</div>
                         <input type="password" class="form-control" placeholder="Contrase&ntilde;a" id="contrasena"
                                maxlength="40"
-                               onkeyup="Login.index.validarNumeroCaracteres(this,8);
-                                        Login.index.mensajeUsuarioContrasenaIncorrecto(false);
+                               onkeyup="Estacion.mensajes.oculta($('#contrasena_vacio'));
+                                        Estacion.mensajes.oculta($('#contrasena_error'));
+                                        Estacion.mensajes.oculta($('#usuario_contrasena_incorrecta'));
                                         Login.index.pressEnter(event)">
                     </div>
-                    <label class="control-label vacio oculto" for="contrasena"
-                           id="contrasena_vacio">&iexcl;Ingrese contrase&ntilde;a!</label>
-                    <label class="control-label error oculto" for="contrasena"
-                           id="contrasena_error">&iexcl;La contrase&ntilde;a debe contener al menos 8 caracteres!</label>
-                    <div class="has-error mensaje text-center espacioArriba">
-                        <label class="control-label oculto" for="contrasena"
-                               id="usuario_contrasena_incorrecta">&iexcl;Usuario o contrase&ntilde;a incorrecta!</label>
+                    <div class="mensaje text-center oculto">
+                        <label class="control-label" for="contrasena" id="contrasena_vacio">&iexcl;Ingrese contrase&ntilde;a!</label>
+                    </div>
+                    <div class="mensaje text-center oculto">
+                        <label class="control-label" id="contrasena_error">&iexcl;La contrase&ntilde;a debe contener al
+                            menos 8 caracteres!</label>
+                    </div>
+                </div>
+                <div class="agrupador">
+                    <div class="mensaje text-center oculto espacioArriba">
+                        <label class="control-label" id="usuario_contrasena_incorrecta">&iexcl;Usuario o contrase&ntilde;a
+                            incorrecta!</label>
                     </div>
                 </div>
             </div>

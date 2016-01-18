@@ -16,6 +16,7 @@ class Login extends CI_Controller
     public function index()
     {
         $data['helpers']['login'] = base_url() . 'js/helpers/login.js';
+        $data['helpers']['estacion'] = base_url() . 'js/helpers/estacion.js';
 
         $this->load->view('header', $data);
         $this->load->view('login');
