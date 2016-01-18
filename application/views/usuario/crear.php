@@ -137,7 +137,7 @@
                             </div>
                             <div class="col-xs-6" id="estado">
                                 <select class="form-control" id="tipo_usuario">
-                                    <?php $tipos = Tipo::getEstadoUsuario(); ?>
+                                    <?php $tipos = Tipo::getTiposUsuario(); ?>
                                     <?php foreach ($tipos as $tipo) { ?>
                                         <option value="<?= $tipo->id ?>" <?= ($tipo->id == 2)?'selected="true"':'';?>><?= $tipo->descripcion ?></option>
                                     <?php } ?>

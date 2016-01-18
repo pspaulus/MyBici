@@ -22,7 +22,18 @@
                     <?php $i++ ?>
                     <td><i class="fa fa-user"></i> <strong><?= $obj_usuario->nombre ?></strong></td>
                     <td><?= $obj_usuario->id ?></td>
-                    <td><?= ($obj_usuario->TIPO_id == 2) ? 'Est&aacute;ndar' : 'Administrador' ?></td>
+                    <?php switch($obj_usuario->TIPO_id){
+                        case 2:
+                            $usuario_tipo = 'Est&aacute;ndar';
+                            break;
+                        case 1:
+                            $usuario_tipo = 'Administrador';
+                            break;
+                        case 8:
+                            $usuario_tipo = 'Operario';
+                            break;
+                    } ?>
+                    <td><?= $usuario_tipo ?></td>
                     <td><?= ($obj_usuario->ESTADO_id == 1) ? 'Activo' : 'Inactivo' ?></td>
 
                     <!-- bloquear para admin-->

@@ -26,6 +26,9 @@ class Escritorio extends CI_Controller
         if (isset($_SESSION["Usuario"])) {
             $data['usuario'] = $_SESSION["Usuario"];
 
+            $usuario = \App\Usuario::where('nombre', '=', $_SESSION["Usuario"])->get()->first();
+            $data['usuario_tipo'] = ($usuario != null) ? $usuario->TIPO_id : 3;
+
             $this->load->view('header', $data);
             $this->load->view('escritorio');
             $this->load->view('footer');

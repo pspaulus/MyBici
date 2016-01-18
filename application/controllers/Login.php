@@ -8,6 +8,11 @@ class Login extends CI_Controller
         parent::__construct();
     }
 
+    public function claveMD5($clave)
+    {
+        dd(md5($clave));
+    }
+
     public function index()
     {
         $data['helpers']['login'] = base_url() . 'js/helpers/login.js';
@@ -27,7 +32,7 @@ class Login extends CI_Controller
             ->first();
 
         if ( $usuario != null ){
-            if ( $usuario->TIPO_id == 1  && $usuario->ESTADO_id == 1 ) {
+            if ( $usuario->ESTADO_id == 1  && ($usuario->TIPO_id == 1 || $usuario->TIPO_id == 8) ) {
                 session_start();
                 $_SESSION["Usuario"] = $nombre;
                 $esctritorio = new Escritorio();

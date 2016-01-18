@@ -127,10 +127,9 @@
                             </div>
                             <div class="col-xs-6 text-left" id="estado">
                                 <select class="form-control" id="tipo_usuario_editar<?= $obj_usuario->id ?>">
+                                    <option value="8" <?= ($obj_usuario->TIPO_id == 8) ? 'selected' : '' ?>>Operario</option>
                                     <option value="2" <?= ($obj_usuario->TIPO_id == 2) ? 'selected' : '' ?>>Est&aacute;ndar</option>
-                                    <option value="1" <?= ($obj_usuario->TIPO_id == 1) ? 'selected' : '' ?>>
-                                        Administrador
-                                    </option>
+                                    <option value="1" <?= ($obj_usuario->TIPO_id == 1) ? 'selected' : '' ?>>Administrador</option>
                                 </select>
                             </div>
                         </div>
