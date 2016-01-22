@@ -20,8 +20,8 @@
                 <a class="nav-texto">Bienvenido</a>
             </li>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $usuario ?> <b
-                        class="caret"></b></a>
+                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?= $usuario_nombre ?> <b
+                        class="caret"></b></a><input type="hidden" value="<?= $tdu ?>" id="tdu">
                 <ul class="dropdown-menu">
                     <li>
                         <a onclick="Escritorio.Acciones.salir()"><i class="fa fa-fw fa-power-off"></i> Salir</a>
@@ -65,13 +65,11 @@
 <!--                        <i class="fa fa-fw fa-trophy"></i> Eventos-->
 <!--                    </a>-->
 <!--                </li>-->
-                <?php if($usuario_tipo == 1){?>
                 <li>
                     <a href="#page_usuario" onclick="$('.navbar-toggle').click(); Escritorio.load.usuario()">
                         <i class="fa fa-fw fa-users"></i> Usuarios
                     </a>
                 </li>
-                <?php }?>
                 <!--                <li>-->
                 <!--                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-list"></i>-->
                 <!--                        Tablas Auxiliares<i class="fa fa-fw fa-caret-down"></i></a>-->

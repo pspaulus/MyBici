@@ -35,10 +35,10 @@
                                         Login.index.pressEnter(event)">
                     </div>
                     <div class="mensaje text-center oculto">
-                        <label class="control-label" id="usuario_vacio">&iexcl;Ingrese usuario!</label>
+                        <label class="control-label" for="usuario" id="usuario_vacio">&iexcl;Ingrese usuario!</label>
                     </div>
                     <div class="mensaje text-center oculto">
-                        <label class="control-label" id="usuario_error">&iexcl;El usuario debe contener al menos 4
+                        <label class="control-label" for="usuario" id="usuario_error">&iexcl;El usuario debe contener al menos 4
                             caracteres!</label>
                     </div>
                 </div>
@@ -58,13 +58,13 @@
                         <label class="control-label" for="contrasena" id="contrasena_vacio">&iexcl;Ingrese contrase&ntilde;a!</label>
                     </div>
                     <div class="mensaje text-center oculto">
-                        <label class="control-label" id="contrasena_error">&iexcl;La contrase&ntilde;a debe contener al
+                        <label class="control-label" for="contrasena" id="contrasena_error">&iexcl;La contrase&ntilde;a debe contener al
                             menos 8 caracteres!</label>
                     </div>
                 </div>
                 <div class="agrupador">
                     <div class="mensaje text-center oculto espacioArriba">
-                        <label class="control-label" id="usuario_contrasena_incorrecta">&iexcl;Usuario o contrase&ntilde;a
+                        <label class="control-label" for="usuario" id="usuario_contrasena_incorrecta">&iexcl;Usuario o contrase&ntilde;a
                             incorrecta!</label>
                     </div>
                 </div>

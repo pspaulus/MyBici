@@ -1,4 +1,5 @@
-<?php $Usuario = new Usuario(); ?>
+<?php /** @var Usuario $Usuario */?>
+
 <div class="col-xs-12">
     <!-- mensajes flotantes-->
     <?php Escritorio::Mensaje('guardar_ok', 'usuario') ?>
@@ -7,6 +8,7 @@
     <?php Escritorio::Mensaje('restaurar_ok', 'usuario') ?>
     <?php Escritorio::Mensaje('error', 'usuario') ?>
 </div>
+
 <!-- Titulo -->
 <div class="row" id="page_usuario">
     <div class="col-lg-12">
@@ -18,7 +20,7 @@
     </div>
 </div>
 
-<?php $Usuario->load->view('usuario/crear', compact('Usuario')); ?>
+<?php $Usuario->cagarVistaCrear();?>
 
 <!-- Subtitulo -->
 <div class="row" id="listado_busqueda">
@@ -88,4 +90,3 @@
 <script>
     Usuario.acciones.cargarVistaListaUsuario();
 </script>
-

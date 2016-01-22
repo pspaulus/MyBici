@@ -24,10 +24,11 @@ class Escritorio extends CI_Controller
         $data['helpers']['map'] = base_url() . 'js/helpers/map.js';
 
         if (isset($_SESSION["Usuario"])) {
-            $data['usuario'] = $_SESSION["Usuario"];
-
             $usuario = \App\Usuario::where('nombre', '=', $_SESSION["Usuario"])->get()->first();
-            $data['usuario_tipo'] = ($usuario != null) ? $usuario->TIPO_id : 3;
+            $data['usuario_nombre'] = $_SESSION["Usuario"];
+            $data['tdu'] = $usuario->TIPO_id;
+
+            $_SESSION["usuario_tipo"] = ($usuario != null) ? $usuario->TIPO_id : 3;
 
             $this->load->view('header', $data);
             $this->load->view('escritorio');
@@ -58,6 +59,9 @@ class Escritorio extends CI_Controller
         return date('Y-m-d', time() - ((60 * 60) * 5));
     }
 
+    public static function varificarAdmin(){
+
+    }
 
     public static function verificarInternet()
     {

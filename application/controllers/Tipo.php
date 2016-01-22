@@ -27,10 +27,17 @@ class Tipo extends CI_Controller
         return $tipo->descripcion;
     }
 
-    public static function getTiposUsuario()
+    public static function getTiposUsuario($usuario_tipo)
     {
-        $tipos = \App\Tipo::where('objeto', '=', 'usuario')
-            ->get();
+        if ($usuario_tipo == 1){ //si es admin carga todos
+            $tipos = \App\Tipo::where('objeto', '=', 'usuario')
+                ->whereNotIn('id',[1])
+                ->get();
+        } else {
+            $tipos = \App\Tipo::where('objeto', '=', 'usuario')
+                ->whereNotIn('id',[1,8])
+                ->get();
+        }
         return ($tipos)?:null;
     }
 }

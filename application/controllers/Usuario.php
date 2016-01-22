@@ -9,7 +9,22 @@ class Usuario extends CI_Controller
 
     public function index()
     {
-        $this->load->view('usuario/usuario');
+        $data['Usuario'] = $this;
+        $this->load->view('usuario/usuario', $data);
+    }
+
+    public function cagarVistaCrear()
+    {
+        $data['Usuario'] = $this;
+        $data['usuario_tipo'] = $_SESSION["usuario_tipo"];
+        $this->load->view('usuario/crear', $data);
+    }
+
+    public function cagarVistaEditar($tdu)
+    {
+        $data['Usuario'] = $this;
+        $data['tdu'] = $tdu;
+        $this->load->view('usuario/editar', $data);
     }
 
     public function consultarUsuario($nombre, $contrasena)
@@ -20,33 +35,76 @@ class Usuario extends CI_Controller
         return $usuario;
     }
 
-    public function cargarUsuariosTodos($filtro, $valor_a_buscar, $ver_inactivos)
+    public function cargarUsuariosTodos($filtro, $valor_a_buscar, $ver_inactivos, $tdu)
     {
-
-        if ($valor_a_buscar == '') {
-            if ($ver_inactivos) {
-                $usuarios = \App\Usuario::all();
-            } else {
-                $usuarios = \App\Usuario::where('ESTADO_id', '=', 1)->get();
-            }
-        } else {
-            if ($filtro == 'id') {
+        if($tdu == 1){
+            if ($valor_a_buscar == '') {
                 if ($ver_inactivos) {
-                    $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar)
+                    $usuarios = \App\Usuario::whereNotIn('id',[1])
                         ->get();
                 } else {
-                    $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar)
-                        ->where('ESTADO_id', '=', 1)
+                    $usuarios = \App\Usuario::where('ESTADO_id', '=', 1)
+                        ->whereNotIn('id',[1])
                         ->get();
                 }
-            } elseif ($filtro == 'nombre') {
+            } else {
+                if ($filtro == 'id') {
+                    if ($ver_inactivos) {
+                        $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar)
+                            ->whereNotIn('id',[1])
+                            ->get();
+                    } else {
+                        $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar)
+                            ->where('ESTADO_id', '=', 1)
+                            ->whereNotIn('id',[1])
+                            ->get();
+                    }
+                } elseif ($filtro == 'nombre') {
+                    if ($ver_inactivos) {
+                        $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar . '%')
+                            ->whereNotIn('id',[1])
+                            ->get();
+                    } else {
+                        $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar . '%')
+                            ->where('ESTADO_id', '=', 1)
+                            ->whereNotIn('id',[1])
+                            ->get();
+                    }
+                }
+            }
+        }else {
+            if ($valor_a_buscar == '') {
                 if ($ver_inactivos) {
-                    $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar . '%')
+                    $usuarios = \App\Usuario::whereNotIn('TIPO_id',[1,8])
                         ->get();
                 } else {
-                    $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar . '%')
-                        ->where('ESTADO_id', '=', 1)
+                    $usuarios = \App\Usuario::where('ESTADO_id', '=', 1)
+                        ->whereNotIn('TIPO_id',[1,8])
                         ->get();
+                }
+            } else {
+                if ($filtro == 'id') {
+                    if ($ver_inactivos) {
+                        $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar)
+                            ->whereNotIn('TIPO_id',[1,8])
+                            ->get();
+                    } else {
+                        $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar)
+                            ->where('ESTADO_id', '=', 1)
+                            ->whereNotIn('TIPO_id',[1,8])
+                            ->get();
+                    }
+                } elseif ($filtro == 'nombre') {
+                    if ($ver_inactivos) {
+                        $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar . '%')
+                            ->whereNotIn('TIPO_id',[1,8])
+                            ->get();
+                    } else {
+                        $usuarios = \App\Usuario::where($filtro, 'LIKE', $valor_a_buscar . '%')
+                            ->where('ESTADO_id', '=', 1)
+                            ->whereNotIn('TIPO_id',[1,8])
+                            ->get();
+                    }
                 }
             }
         }
@@ -68,7 +126,7 @@ class Usuario extends CI_Controller
 
         header('Content-Type: application/json');
         echo json_encode([
-            'status' => true,
+            'status' => true
         ]);
     }
 
@@ -83,11 +141,19 @@ class Usuario extends CI_Controller
         $id = $_REQUEST['id'];
         $usuario = \App\Usuario::find($id);
         $usuario->ESTADO_id = 2;
-        $usuario->save();
+
+        if( $usuario->save()){
+            $resultado = true;
+            $mensaje = 'OK: usuario editado';
+        } else {
+            $resultado = false;
+            $mensaje = 'ERROR: No edita usuario';
+        }
 
         header('Content-Type: application/json');
         echo json_encode([
-            'status' => true,
+            'status' => $resultado,
+            'mensaje' => $mensaje,
             'usuario_id' => $usuario->id
         ]);
     }
@@ -95,17 +161,28 @@ class Usuario extends CI_Controller
     public function editarUsuario()
     {
         $id = $_REQUEST['id'];
-        $nombre = $_REQUEST['nombre'];
         $contrasena = $_REQUEST['contrasena'];
         $tipo = $_REQUEST['tipo'];
         $estado = $_REQUEST['estado'];
 
         $usuario = \App\Usuario::find($id);
-        $usuario->nombre = $nombre;
         $usuario->contrasena = $contrasena;
         $usuario->TIPO_id = $tipo;
         $usuario->ESTADO_id = $estado;
-        $usuario->save();
+
+        if( $usuario->save()){
+            $resultado = true;
+            $mensaje = 'OK: usuario editado';
+        } else {
+            $resultado = false;
+            $mensaje = 'ERROR: No edita usuario';
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $resultado,
+            'mensaje' => $mensaje
+        ]);
     }
 
     public static function getUsuarioIdByNombre($usuario_nombre)
@@ -195,6 +272,7 @@ class Usuario extends CI_Controller
         $data['filtro'] = $_REQUEST['filtro'];
         $data['valor_a_buscar'] = $_REQUEST['valor_a_buscar'];
         $data['ver_inactivos'] = $_REQUEST['ver_inactivos'];
+        $data['tdu'] = $_REQUEST['tdu'];
         $data['Usuario'] = $this;
 
         $this->load->view('usuario/listado', $data);

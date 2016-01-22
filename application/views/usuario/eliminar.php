@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body text-center">
-                &iquest;Est&aacute; seguro de eliminar al usuario?
+                &iquest;Marcar como <span class="text-danger"><strong>inactivo</strong></span> a <strong><?= $usuario_nombre ?></strong>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>

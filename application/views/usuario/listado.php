@@ -1,3 +1,5 @@
+<?php /** @var Usuario $Usuario */ ?>
+
 <div class="table-responsive">
     <table id="tabla_usuario" class="table table-hover">
         <thead>
@@ -12,7 +14,7 @@
         </thead>
         <tbody>
         <?php $i = 1 ?>
-        <?php $collection_usuario = $Usuario->cargarUsuariosTodos($filtro, $valor_a_buscar, $ver_inactivos); ?>
+        <?php $collection_usuario = $Usuario->cargarUsuariosTodos($filtro, $valor_a_buscar, $ver_inactivos, $tdu); ?>
         <?php if (count($collection_usuario) == 0) {
             $Usuario->load->view('sin_datos');
         } else { ?>
@@ -20,9 +22,10 @@
                 <tr class="<?= ($obj_usuario->ESTADO_id == 1) ? 'activo' : 'inactivo' ?>">
                     <td><strong><?= $i ?></strong></td>
                     <?php $i++ ?>
-                    <td><i class="fa fa-user"></i> <strong><?= $obj_usuario->nombre ?></strong></td>
+                    <?php $usuario_nombre = $obj_usuario->nombre ?>
+                    <td><i class="fa fa-user"></i> <strong><?= $usuario_nombre ?></strong></td>
                     <td><?= $obj_usuario->id ?></td>
-                    <?php switch($obj_usuario->TIPO_id){
+                    <?php switch ($obj_usuario->TIPO_id) {
                         case 2:
                             $usuario_tipo = 'Est&aacute;ndar';
                             break;
@@ -36,42 +39,39 @@
                     <td><?= $usuario_tipo ?></td>
                     <td><?= ($obj_usuario->ESTADO_id == 1) ? 'Activo' : 'Inactivo' ?></td>
 
-                    <!-- bloquear para admin-->
-                    <?php if (!($obj_usuario->nombre == 'administrador')){ ?>
-                        <td class="text-center">
+                    <td class="text-center">
 
-                                <!-- quitar funcion ver -->
-                                <?php if (false) { ?>
-                                    <button class="btn btn-sm btn-default" type="button" data-toggle="modal"
-                                            data-target="#verUsuario_<?= $obj_usuario->id ?>"><i
-                                            class="fa fa-search"></i></button>
-                                <?php } ?>
+                        <!-- quitar funcion ver -->
+                        <?php if (false) { ?>
+                            <button class="btn btn-sm btn-default" type="button" data-toggle="modal"
+                                    data-target="#verUsuario_<?= $obj_usuario->id ?>"><i
+                                    class="fa fa-search"></i></button>
+                        <?php } ?>
 
-                                <button class="btn btn-sm btn-warning" type="button" data-toggle="modal" title="Editar"
-                                        data-target="#editarUsuario_<?= $obj_usuario->id ?>"><i
-                                        class="fa fa-edit"></i></button>
+                        <button class="btn btn-sm btn-warning" type="button" data-toggle="modal" title="Editar"
+                                data-target="#editarUsuario_<?= $obj_usuario->id ?>"><i
+                                class="fa fa-edit"></i></button>
 
-                                <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" title="Eliminar"
-                                        data-target="#eliminarUsuario_<?= $obj_usuario->id ?>"><i
-                                        class="fa fa-trash"></i></button>
+                        <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" title="Eliminar"
+                                data-target="#eliminarUsuario_<?= $obj_usuario->id ?>"><i
+                                class="fa fa-trash"></i></button>
 
-                                <?php if ($obj_usuario->ESTADO_id == 2) { ?>
-                                    <button class="btn btn-sm btn-default" type="button" title="Restaurar"
-                                            onclick="Usuario.acciones.restaurar(<?= $obj_usuario->id ?>)">
-                                        <i class="fa fa-refresh"></i></button>
-                                <?php } ?>
-                        </td>
-                        <td>
-                            <!--Modal Eliminar-->
-                            <?php $Usuario->load->view('usuario/eliminar', compact('obj_usuario')); ?>
+                        <?php if ($obj_usuario->ESTADO_id == 2) { ?>
+                            <button class="btn btn-sm btn-default" type="button" title="Restaurar"
+                                    onclick="Usuario.acciones.restaurar(<?= $obj_usuario->id ?>)">
+                                <i class="fa fa-refresh"></i></button>
+                        <?php } ?>
+                    </td>
+                    <td>
+                        <!--Modal Eliminar-->
+                        <?php $Usuario->load->view('usuario/eliminar', compact('obj_usuario','usuario_nombre')); ?>
 
-                            <!-- ver modal-->
-                            <?php //$Usuario->load->view('usuario/ver', compact('obj_usuario')); ?>
+                        <!-- ver modal-->
+                        <?php //$Usuario->load->view('usuario/ver', compact('obj_usuario')); ?>
 
-                            <!-- Editar modal-->
-                            <?php $Usuario->load->view('usuario/editar', compact('obj_usuario')); ?>
-                        </td>
-                    <?php } ?>
+                        <!-- Editar modal-->
+                        <?php $Usuario->cagarVistaEditar($tdu); ?>
+                    </td>
                 </tr>
             <?php } ?>
         <?php } ?>
