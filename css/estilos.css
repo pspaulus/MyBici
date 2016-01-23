@@ -195,3 +195,7 @@ a.nav-texto:hover {
 .sinRellenoIzquierdo{
     padding-left: 0;
 }
+
+.text-color-white{
+    color: #FFF;
+}

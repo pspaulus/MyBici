@@ -1,4 +1,5 @@
-base_url = 'http://192.168.100.15/';
+base_url = 'http://172.16.40.162/';
+//base_url = 'http://192.168.100.15/';
 //base_url = 'http://mybici.server/';
 
 var Login = {
@@ -9,6 +10,7 @@ var Login = {
          * Validar usuario al presionar ingresar en el logeo
          */
         validarUsuario: function () {
+            var boton_ingresar = $('#boton_ingresar');
             var input_usuario = $('#usuario').val();
             var input_contrasena = $('#contrasena').val();
 
@@ -42,6 +44,9 @@ var Login = {
                     data: {
                         usuario: input_usuario.toLowerCase().trim(),
                         contrasena: $.md5(input_contrasena.trim())
+                    },
+                    beforeSend: function () {
+                        Login.acciones.mostrarBusy(boton_ingresar,-1);
                     }
                 })
                     .done(function (r) {
@@ -51,6 +56,7 @@ var Login = {
                         } else {
                             window.location.replace(base_url + "Escritorio");
                         }
+                        Login.acciones.ocultarBusy(boton_ingresar,-1);
                     });
             } else {
                 console.log('ERROR: no ingresa por validaciones');
@@ -114,5 +120,24 @@ var Login = {
             }
         }
 
+    },
+
+    acciones: {
+        mostrarBusy: function (contenedor,id) {
+            contenedor.toggle();
+            contenedor.parent().append(
+                '<div id="busy_'+id+'" class="col-xs-12 text-center text-color-white">' +
+                '<i class="fa fa-spinner fa-spin fa-2x"></i>' +
+                '</div>');
+            $('#usuario').attr('disabled');
+            $('#contrasena').attr('disabled');
+        },
+
+        ocultarBusy: function (contenedor,id) {
+            contenedor.toggle();
+            contenedor.parent().children('#busy_'+id).remove();
+            $('#usuario').removeAttr('disabled');
+            $('#contrasena').removeAttr('disabled');
+        }
     }
 };
