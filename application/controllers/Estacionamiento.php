@@ -67,21 +67,33 @@ class Estacionamiento extends CI_Controller
 
     public function crearEstacionamiento($estacion_id, $cantidad)
     {
+        $mensaje = 'ERROR: no creo estacionamientos';
+
         if (!empty($estacion_id) && !empty($cantidad)) {
+            $resultado = true;
+            $mensaje = 'OK: creo estacionamientos:';
             for ($i = 0; $i < $cantidad; $i++) {
 
                 $estacionamiento_secuencia = $this->getSecuenciaEstacionamiento($estacion_id);
 
-                $estacion_nueva = \App\Estacionamiento::firstOrCreate([
+                $estacionamiento_nuevo = \App\Estacionamiento::firstOrCreate([
                     'codigo' => $estacionamiento_secuencia,
                     'PUESTO_ALQUILER_id' => $estacion_id,
                     'BICICLETA_id' => null,
                     'ESTADO_id' => 4 //libre
                 ]);
 
-                echo 'E->' . $estacion_nueva->PUESTO_ALQUILER_id . ' P->' . $estacion_nueva->codigo . ' || ';
+                $mensaje.=  'P' . $estacionamiento_nuevo->codigo . ' || ';
             }
+        } else {
+            $resultado = false;
         }
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $resultado,
+            'mensaje' => $mensaje
+        ]);
     }
 
     public function cargarUltimoIdEstacionamiento()

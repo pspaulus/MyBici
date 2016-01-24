@@ -113,7 +113,7 @@ var Estacion = {
                 Estacion.mensajes.mostrar($('#error_coordenadas_mapa'));
             }
 
-            if (existeEstacion.val() == 1 && validacion_codigo && validacion_nombre && validacion_longitud && validacion_latitud) {
+            if ((existeEstacion.val() == 1) && validacion_codigo && validacion_nombre && validacion_longitud && validacion_latitud) {
                 $.ajax({
                     method: "POST",
                     url: base_url + "Estacion/crearEstacion",
@@ -158,6 +158,8 @@ var Estacion = {
             var estacion_nombre = $('#editar_estacion_nombre').val();
             var input_longitud = $('#editar_longitud').val();
             var input_latitud = $('#editar_latitud').val();
+            var existe_editar_codigo = $('#existe_editar_codigo');
+            var existe_editar_nombre = $('#existe_editar_nombre');
 
             var validacion_id = true;
             var validacion_codigo = true;
@@ -190,7 +192,8 @@ var Estacion = {
                 Estacion.mensajes.mostrar($('#error_editar_latitud'));
             }
 
-            if (validacion_id && validacion_codigo && validacion_nombre && validacion_longitud && validacion_latitud) {
+            if ((existe_editar_codigo.val() == 1) && (existe_editar_nombre.val() == 1) && validacion_id &&
+                validacion_codigo && validacion_nombre && validacion_longitud && validacion_latitud) {
                 $.ajax({
                     method: "POST",
                     url: base_url + "Estacion/editarEstacion",
@@ -208,7 +211,6 @@ var Estacion = {
                             Estacion.acciones.cargarDatosEstacion();
                             $('#div_mapa_ver').removeClass('oculto');
                             $('#div_mapa_editar').addClass('oculto');
-                            Estacion.acciones.refrescar();
                             Estacion.acciones.marcarSeleccionada(estacion_id);
                             Escritorio.mensajeFlotante.mostrar($('#editar_ok'));
                         } else {
@@ -219,12 +221,25 @@ var Estacion = {
             } else {
                 console.log('ERROR: no edita por validaciones');
             }
-            Estacion.acciones.marcarSeleccionada(estacion_id);
+
         },
 
         marcarSeleccionada: function (estacion_id) {
-            console.log('option[value=' + estacion_id + ']');
-            $('#select_estacion').find('option[value=' + estacion_id + ']').attr('selected', 'selected');
+            var select_estacion = $('#select_estacion');
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "Estacion/selectEstacion/"
+                })
+                    .done(function (r) {
+                        if (r.status) {
+                            select_estacion.html(r.html);
+                            console.log('option[value=' + estacion_id + ']');
+                            select_estacion.find('option[value=' + estacion_id + ']').attr('selected', 'selected');
+                        } else {
+                            console.log('ERROR: al refrescar');
+                            Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
+                        }
+                    });
         },
 
         existeCodigo: function (codigo) {
@@ -232,7 +247,6 @@ var Estacion = {
                 $.ajax({
                     method: "POST",
                     url: base_url + "Estacion/existeCodigo/" + codigo.val(),
-                    data: {},
                     beforeSend: function () {
                         $('#busy_codigo').html(
                             '<i class="fa fa-spinner fa-spin fa-1x"></i>'
@@ -250,6 +264,32 @@ var Estacion = {
                             Estacion.mensajes.oculta($('#codigo_duplicado'));
                         }
                         $('#busy_codigo').html('');
+                    });
+            }
+        },
+
+        existeEditarCodigo: function (codigo, estacion_id) {
+            if (codigo.val() != '') {
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "Estacion/existeCodigo/" + codigo.val() + '/' + estacion_id.val(),
+                    beforeSend: function () {
+                        $('#busy_editar_codigo').html(
+                            '<i class="fa fa-spinner fa-spin fa-1x"></i>'
+                        );
+                    }
+                })
+                    .done(function (r) {
+                        if (r.status) {
+                            console.log('ERROR: existe codigo');
+                            $('#existe_editar_codigo').val(0);
+                            Estacion.mensajes.mostrar($('#codigo_editar_duplicado'));
+                        } else {
+                            console.log('OK: No existe codigo');
+                            $('#existe_editar_codigo').val(1);
+                            Estacion.mensajes.oculta($('#codigo_editar_duplicado'));
+                        }
+                        $('#busy_editar_codigo').html('');
                     });
             }
         },
@@ -277,6 +317,32 @@ var Estacion = {
                             Estacion.mensajes.oculta($('#nombre_duplicado'));
                         }
                         $('#busy_nombre').html('');
+                    });
+            }
+        },
+
+        existeEditarNombre: function (nombre, id) {
+            if (nombre.val() != '') {
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "Estacion/existeEditarNombre/" + nombre.val() + '/' + id.val(),
+                    beforeSend: function () {
+                        $('#busy_editar_nombre').html(
+                            '<i class="fa fa-spinner fa-spin fa-1x"></i>'
+                        );
+                    }
+                })
+                    .done(function (r) {
+                        if (r.status) {
+                            console.log('ERROR: existe nombre estacion');
+                            $('#existe_editar_nombre').val(0);
+                            Estacion.mensajes.mostrar($('#nombre_editar_duplicado'));
+                        } else {
+                            console.log('OK: No existe nombre estacion');
+                            $('#existe_editar_nombre').val(1);
+                            Estacion.mensajes.oculta($('#nombre_editar_duplicado'));
+                        }
+                        $('#busy_editar_nombre').html('');
                     });
             }
         },

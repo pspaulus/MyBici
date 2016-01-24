@@ -63,23 +63,19 @@ class Estacion extends CI_Controller
         }
     }
 
-    public function existeCodigo($estacion_codigo)
+    public function existeCodigo($estacion_codigo, $estacion_id = null)
     {
         $estacion = \App\Estacion::where('codigo', '=', $estacion_codigo)
+            ->whereNotIn('id', [$estacion_id])
             ->get()
             ->first();
 
-        if ($estacion != null) {
-            header('Content-Type: application/json');
-            echo json_encode([
-                'status' => true
-            ]);
-        } else {
-            header('Content-Type: application/json');
-            echo json_encode([
-                'status' => false
-            ]);
-        }
+        $resultado = ($estacion != null) ? true : false;
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $resultado
+        ]);
     }
 
     public function existeNombre($estacion_nombre)
@@ -88,17 +84,27 @@ class Estacion extends CI_Controller
             ->get()
             ->first();
 
-        if ($estacion != null) {
-            header('Content-Type: application/json');
-            echo json_encode([
-                'status' => true
-            ]);
-        } else {
-            header('Content-Type: application/json');
-            echo json_encode([
-                'status' => false
-            ]);
-        }
+        $resultado = ($estacion != null) ? true : false;
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $resultado
+        ]);
+    }
+
+    public function existeEditarNombre($estacion_nombre, $estacion_id = null)
+    {
+        $estacion = \App\Estacion::where('nombre', '=', $estacion_nombre)
+            ->whereNotIn('id', [$estacion_id])
+            ->get()
+            ->first();
+
+        $resultado = ($estacion != null) ? true : false;
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $resultado
+        ]);
     }
 
     public function crearEstacion()

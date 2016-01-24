@@ -2,6 +2,9 @@
 
     <div class="row form-group">
         <input type="hidden" id="editar_estacion_id" value="<?= $estacion_actual->id ?>">
+        <input type="hidden" id="existe_editar_codigo" value="1">
+        <input type="hidden" id="existe_editar_nombre" value="1">
+
         <!--Codigo-->
         <div class="col-xs-3">
             <label for="editar_estacion_codigo">C&oacute;digo</label>
@@ -12,12 +15,19 @@
                 <input class="form-control" id="editar_estacion_codigo" type="text" maxlength="1"
                        placeholder="_" value="<?= $estacion_actual->codigo ?>"
                        onkeypress="return Escritorio.Validaciones.soloLetras(event)"
-                       onkeyup="Estacion.mensajes.oculta($('#error_editar_codigo'));" disabled>
+                       onkeyup="Estacion.mensajes.oculta($('#error_editar_codigo'));
+                                Estacion.mensajes.oculta($('#codigo_editar_duplicado'));"
+                       onblur="Estacion.acciones.existeEditarCodigo($('#editar_estacion_codigo'),$('#editar_estacion_id'))"
+                       disabled>
             </div>
+            <div id="busy_editar_codigo"></div>
 
             <div class="col-xs-9 col-xs-offset-3 oculto mensaje">
                 <label class="control-label" id="error_editar_codigo">&iexcl;Ingrese una letra como
                     c&oacute;digo!</label>
+            </div>
+            <div class="col-xs-9 col-xs-offset-3 oculto mensaje">
+                <label class="control-label" id="codigo_editar_duplicado">&iexcl;C&oacute;digo ya existe!</label>
             </div>
         </div>
     </div>
@@ -27,16 +37,21 @@
         <div class="col-xs-3">
             <label for="editar_estacion_nombre">Nombre</label>
         </div>
-            <div class="agrupador ">
-            <div class="col-xs-9">
+        <div class="agrupador ">
+            <div class="col-xs-8">
                 <input class="form-control" id="editar_estacion_nombre" type="text" maxlength="40"
                        placeholder="Ingrese un nombre" value="<?= $estacion_actual->nombre ?>"
-                       onkeyup="Estacion.mensajes.oculta($('#error_edita_nombre'));" disabled>
+                       onkeyup="Estacion.mensajes.oculta($('#error_edita_nombre'));
+                                Estacion.mensajes.oculta($('#nombre_editar_duplicado'));"
+                       onblur="Estacion.acciones.existeEditarNombre($('#editar_estacion_nombre'),$('#editar_estacion_id'))"
+                       disabled>
             </div>
-
-            <div class="col-xs-9 col-xs-offset-3  oculto mensaje">
-                <label class="control-label" id="error_edita_nombre">&iexcl;Ingrese el
-                    nombre!</label>
+            <div id="busy_editar_nombre"></div>
+            <div class="col-xs-9 col-xs-offset-3 oculto mensaje">
+                <label class="control-label" id="error_edita_nombre">&iexcl;Ingrese el nombre!</label>
+            </div>
+            <div class="col-xs-9 col-xs-offset-3 oculto mensaje">
+                <label class="control-label" id="nombre_editar_duplicado">&iexcl;Nombre ya existe!</label>
             </div>
         </div>
     </div>
@@ -48,7 +63,8 @@
         </div>
         <div class="agrupador">
             <div class="col-xs-9">
-                <input class="form-control" id="editar_longitud" type="text" maxlength="40" value="<?=$estacion_actual->longitud ?>"
+                <input class="form-control" id="editar_longitud" type="text" maxlength="40"
+                       value="<?= $estacion_actual->longitud ?>"
                        placeholder="-79.963209628185723" disabled
                        onkeyup="Estacion.mensajes.oculta($('#error_editar_longitud'));"
                        onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
@@ -67,7 +83,8 @@
         </div>
         <div class="agrupador">
             <div class="col-xs-9">
-                <input class="form-control" id="editar_latitud" type="text" maxlength="40" value="<?=$estacion_actual->latitud ?>"
+                <input class="form-control" id="editar_latitud" type="text" maxlength="40"
+                       value="<?= $estacion_actual->latitud ?>"
                        placeholder="-2.1477960235290756" disabled
                        onkeyup="Estacion.mensajes.oculta($('#error_editar_latitud'));"
                        onkeypress="return Escritorio.Validaciones.soloNumerosSimbolo(event)">
@@ -99,10 +116,10 @@
 
 
         <!-- modal agregar -->
-        <?php  ?>
+        <?php ?>
 
         <!-- modal quitar -->
-        <?php  ?>
+        <?php ?>
     </div>
 </div>
 

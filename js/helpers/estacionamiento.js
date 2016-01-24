@@ -21,11 +21,18 @@ var Estacionamiento = {
                     url: base_url + "Estacionamiento/crearEstacionamiento/" + estacion_id + '/' + cantidad_nuevo
                 })
                     .done(function (r) {
+                        console.log(r.mensaje);
+                        $('#crear_estacionamiento').removeClass('in');
+                        $('.modal-backdrop').remove();
+                        Estacion.acciones.cargarDatosEstacion();
+                        if(r.status){
+                            Escritorio.mensajeFlotante.mostrar($('#editar_ok'));
+                        } else{
+                            Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
+                        }
                     });
-
-                $('#crear_estacionamiento').removeClass('in');
-                $('.modal-backdrop').remove();
-                Escritorio.load.estacion();
+            } else {
+                console.log('ERROR: no guarda estacionamiento por validaciones');
             }
         },
 
@@ -48,9 +55,12 @@ var Estacionamiento = {
                     method: "POST",
                     url: base_url + "Estacionamiento/eliminarFisico/" + estacion_id + '/' + cantidad_eliminar
                 })
+
                     .done(function (r) {
                         console.log(r.mensaje);
+                        $('#eliminar_estacionamiento').removeClass('in');
                         $('.modal-backdrop').remove();
+                        Estacion.acciones.cargarDatosEstacion();
                         if (r.status) {
                             Estacionamiento.acciones.limpiarEliminar();
                             Escritorio.mensajeFlotante.mostrar($('#eliminar_ok'));
@@ -58,9 +68,6 @@ var Estacionamiento = {
                             Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
                         }
                     });
-
-                $('#crear_estacionamiento').removeClass('in');
-                Escritorio.load.estacion();
             } else {
                 console.log('ERROR: no eliminar por validaciones');
             }
