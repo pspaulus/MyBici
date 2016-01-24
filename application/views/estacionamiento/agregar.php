@@ -28,6 +28,9 @@
                                                     Estacion.mensajes.oculta($('error_bicicleta_codigo_<?= $estacionamiento->id ?>'));">
                                 </div>
                                 <div id="busy_agregar"></div>
+                                <span id="info_cantidad" data-toggle="tooltip" data-placement="bottom"
+                                      title="GB1 = C&oacute;digo de Estaci&oacute;n + 'B' + Secuencia de bicicleta"><i
+                                        class="fa fa-info-circle"></i></span>
                                 <div class="col-xs-10 col-xs-offset-1 contraer textoCentrado mensaje oculto">
                                     <label class="control-label"
                                            id="no_existe_bicicleta_codigo_<?= $estacionamiento->id ?>">&iexcl;C&oacute;digo
@@ -55,6 +58,11 @@
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            $('document').ready(function () {
+                                $('[data-toggle="tooltip"]').tooltip();
+                            });
+                        </script>
 
                     </div>
                 </form>

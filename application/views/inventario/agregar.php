@@ -51,7 +51,12 @@
                             <div class="col-xs-3 col-xs-offset-1 col-sm-2 col-sn-offset-1">
                                 <label class="control-label" style="text-align: left !important;"
                                        for="input_codigo_estacion_nuevo">C&oacute;d. Bicicleta</label>
+
                             </div>
+                            <span id="info_cantidad" data-toggle="tooltip" data-placement="right"
+                                  title="C&oacute;digo de Estaci&oacute;n + 'B' + Secuencia de bicicleta"><i
+                                    class="fa fa-info-circle"></i></span>
+
                             <div class="col-xs-3 col-sm-2">
                                 <input class="form-control" type="text" value="" id="nuevo_codigo_mostrar" disabled>
                                 <input class="form-control" type="hidden" id="input_codigo_estacion_nuevo"
@@ -63,6 +68,9 @@
                         </div>
                         <script>
                             Bicicleta.acciones.cargarUltimoCodigoEstacion();
+                            $('document').ready(function () {
+                                $('[data-toggle="tooltip"]').tooltip();
+                            });
                         </script>
 
                         <!--Cantidad-->
@@ -149,7 +157,8 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal"
                             onclick="Bicicleta.acciones.limpiar()">Cancelar
                     </button>
-                    <button type="button" class="btn btn-primary" onclick="Bicicleta.acciones.guardar()">Guardar</button>
+                    <button type="button" class="btn btn-primary" onclick="Bicicleta.acciones.guardar()">Guardar
+                    </button>
                 </div>
             </div>
 

@@ -1,3 +1,4 @@
+<input type="hidden" value="<?=$_SERVER['HTTP_HOST']?>" id="s_ip">
 <div class="container" id="formLogin">
 
     <!--Titulo-->

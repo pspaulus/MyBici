@@ -60,7 +60,7 @@ if ($filtro == 'codigo') {
                             <?php $i++ ?>
                             <td class="<?= $class ?>"><i class="fa fa-bicycle"></i> <?= $codigo_estacion . 'B' . $bicicleta->codigo ?></td>
                             <td class="oculto <?= $class ?>"><?= $tipo_bibicleta ?></td>
-                            <td class="<?= $class ?>"><?= $nombre_estacion_propietaria ?></td>
+                            <td class="<?= $class ?>"><i class="fa fa-home"></i><?= $nombre_estacion_propietaria ?></td>
                             <td class="<?= $class ?>"><?= $estacionamiento_acual ?></td>
 
 

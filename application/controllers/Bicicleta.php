@@ -12,6 +12,13 @@ class Bicicleta extends CI_Controller
         echo "Controlador bicicleta";
     }
 
+    public function cargarBotonCrear() {
+        $tdu = $_REQUEST["tdu"];
+        if ($tdu == 1){
+            echo '<a class="dedo" data-toggle="modal" data-target="#agregarBicicleta"> <i class="fa fa-plus-circle"></i> </a>';
+        }
+    }
+
     public function cargarBicicleta($id)
     {
         $bicicleta = \App\Bicicleta::find($id);

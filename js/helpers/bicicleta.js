@@ -1,5 +1,21 @@
 var Bicicleta = {
 
+    index:{
+        cargarBotonCrear: function() {
+            var tdu = $('#tdu').val();
+            $.ajax({
+                method: "POST",
+                url: base_url + "Bicicleta/cargarBotonCrear/",
+                data: {
+                    tdu: tdu
+                }
+            })
+                .done(function (r) {
+                    $('#contendor_boton_crear').html(r);
+                })
+        }
+    },
+
     acciones: {
 
         mostarNuevoCodigoBicicleta: function () {
@@ -188,7 +204,9 @@ var Bicicleta = {
             var input_cantidad_nuevo = $('#input_cantidad_nuevo');
             var select_estado_nuevo = $('#select_estado_nuevo');
             var select_tipo_nuevo = $('#select_tipo_nuevo');
+            var check_parquear = $('#parquear_bicicleta');
 
+            check_parquear.prop('checked',false);
             input_cantidad_nuevo.val('1');
             select_estado_nuevo.prop('selectedIndex', 1);
             select_tipo_nuevo.prop('selectedIndex', 0);

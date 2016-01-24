@@ -1,6 +1,7 @@
-base_url = 'http://172.16.40.162/';
 //base_url = 'http://192.168.100.15/';
 //base_url = 'http://mybici.server/';
+//base_url = 'http://172.16.40.162/';
+//base_url = $('#s_ip').val();
 
 var Login = {
 

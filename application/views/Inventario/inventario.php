@@ -13,13 +13,17 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             <i class="fa fa-fw fa-bicycle"></i> Inventario de Bicicletas
-            <a class="dedo" data-toggle="modal" data-target="#agregarBicicleta"> <i class="fa fa-plus-circle"></i> </a>
+            <span id="contendor_boton_crear"></span>
             <small class="pull-right" id="total_invetario" style="padding-top: 10px">
                 Total: <?= $Bicicletas->contarBicicletas(); ?>
             </small>
         </h1>
     </div>
 </div>
+<script>
+    Bicicleta.index.cargarBotonCrear();
+</script>
+
 
 <div class="row">
     <div class="col-lg-12">
@@ -59,13 +63,22 @@
 <input type="hidden" value="unidad" id="como_listo">
 
 <div id="contenido_buscar">
+    <div>
+        <label class="radio-inline">
+            <input type="radio" id="inlineRadio1" value="option1"> 1
+        </label>
+        <label class="radio-inline">
+            <input type="radio" id="inlineRadio2" value="option2"> 2
+        </label>
+    </div>
+
     <!-- Tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
-            <a href="#por_bicicleta" data-toggle="tab" role="tab" onclick="Bicicleta.acciones.cambioLista('unidad')">Por Unidad</a>
+            <a href="#por_bicicleta" data-toggle="tab" role="tab" onclick="Bicicleta.acciones.cambioLista('unidad')">Por C&oacute;digo</a>
         </li>
         <li role="presentation">
-            <a href="#por_estacion" data-toggle="tab" role="tab" onclick="Bicicleta.acciones.cambioLista('lote')">Por Lote</a>
+            <a href="#por_estacion" data-toggle="tab" role="tab" onclick="Bicicleta.acciones.cambioLista('lote')">Por Estaci&oacute;n</a>
         </li>
     </ul>
 

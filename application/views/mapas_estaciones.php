@@ -1,9 +1,10 @@
 <!--Mapa-->
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Estaciones
-            <button class="btn btn-xs btn-default" type="button"
-                onclick="Escritorio.Acciones.refrescar()"><i class="fa fa-refresh"></i></button>
+        <h3 class="panel-title"> Mapa de Estaciones
+            <button class="btn btn-xs btn-default" type="button" onclick="Escritorio.Acciones.refrescar()">
+                &nbsp;<i class="fa fa-refresh"></i>
+            </button>
         </h3>
     </div>
     <div class="panel-body">
@@ -28,7 +29,7 @@
             }
         }
         ?>
-        <div id="mapEstacionTodas" class="mapa"></div>
+        <div id="mapEstacionTodas" class="mapaGrande"></div>
         <script>
             ver_mapa_todos("mapEstacionTodas");
         </script>

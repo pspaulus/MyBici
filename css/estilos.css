@@ -138,6 +138,10 @@ a.nav-texto:hover {
     height: 250px;
 }
 
+.mapaGrande {
+    height: 415px;
+}
+
 .dedo {
     cursor: pointer !important;
 }
