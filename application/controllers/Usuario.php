@@ -13,10 +13,10 @@ class Usuario extends CI_Controller
         $this->load->view('usuario/usuario', $data);
     }
 
-    public function cagarVistaCrear()
+    public function cargarVistaCrear()
     {
         $data['Usuario'] = $this;
-        $data['usuario_tipo'] = $_SESSION["usuario_tipo"];
+        $data['tdu'] = $_REQUEST["tdu"];
         $this->load->view('usuario/crear', $data);
     }
 

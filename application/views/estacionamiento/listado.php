@@ -12,6 +12,7 @@
             <thead>
             <tr>
                 <th>Nro.</th>
+                <th>C&oacute;d. Estaci&oacute;n</th>
                 <th>C&oacute;d. Estacionamiento</th>
                 <th>C&oacute;d. Bicicleta - Estado</th>
                 <th>Acciones</th>
@@ -26,16 +27,18 @@
             <?php foreach ($estacionamientos as $estacionamiento) { ?>
                 <tr>
                     <?php $estacionamiento_codigo = $Estacionamiento->generarCodigo($estacionamiento->id); ?>
+                    <?php $estacion_nombre = Estacion::getNombreEstacion($estacionamiento->PUESTO_ALQUILER_id); ?>
                     <?php $bicicleta = $Bicicleta->cargarBicicleta($estacionamiento->BICICLETA_id); ?>
                     <?php if ($bicicleta != null) {
                         $bicicleta_codigo = Bicicleta::generarCodigo($bicicleta->id);
-                        $codigo_bicicleta_mostrar = '<i class="fa fa-bicycle"></i> ' . $bicicleta_codigo . ' - ' . Bicicleta::getEstadoBicicleta($bicicleta->id);
+                        $codigo_bicicleta_mostrar = '<i class="fa fa-bicycle"></i> ' . $bicicleta_codigo . ' - <small>' . Bicicleta::getEstadoBicicleta($bicicleta->id).'</small>';
                     } else {
                         $codigo_bicicleta_mostrar = '-';
                     }
                     ?>
 
                     <td><strong><?= $i ?></strong></td> <?php $i++ ?>
+                    <td><i class="fa fa-home"></i> <?= $estacion_nombre ?></td>
                     <td><i class="fa fa-product-hunt"></i> <?= $estacionamiento_codigo ?></td>
                     <td><?= $codigo_bicicleta_mostrar ?></td>
                     <td>

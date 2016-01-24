@@ -92,21 +92,17 @@
                    onkeyup="Estacionamiento.label.cantidad();" disabled>
         </div>
 
-        <!-- Button trigger modal crear estacionamiento -->
-        <button type="button" class="btn btn-primary" title="Agrgar estacionamientos" data-toggle="modal"
-                id="btn_crear_estacionamiento" data-target="#crear_estacionamiento" disabled><i
-                class="fa fa-plus"></i></button>
+        <div id="contenedor_botones_cantidad"></div>
+        <script>
+            Estacion.index.cargarBotonesEditarCantidad();
+        </script>
+
 
         <!-- modal agregar -->
-        <?php $Estacion->load->view('estacionamiento/crear'); ?>
-
-        <!-- button trigger modal eliminar estacionamiento -->
-        <button type="button" class="btn btn-danger" title="Elimnar estacionamientos" data-toggle="modal"
-                id="btn_eliminar_estacionamiento" data-target="#eliminar_estacionamiento" disabled><i
-                class="fa fa-minus"></i></button>
+        <?php  ?>
 
         <!-- modal quitar -->
-        <?php $Estacion->load->view('estacionamiento/eliminar'); ?>
+        <?php  ?>
     </div>
 </div>
 

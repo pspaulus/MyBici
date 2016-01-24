@@ -1,5 +1,21 @@
 var Usuario = {
 
+    index: {
+        cargarVistaCrear: function(){
+            var tdu = $('#tdu').val();
+            $.ajax({
+                method: "POST",
+                url: base_url + "Usuario/cargarVistaCrear/",
+                data: {
+                    tdu: tdu
+                }
+            })
+                .done(function (r) {
+                    $('#contenedor_div_agregar').html(r);
+                })
+        }
+    },
+
     acciones: {
 
         cargarVistaListaUsuario: function () {

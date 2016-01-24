@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= $Bicicletas->contarBicicletasEstado('buena'); ?></div>
-                        <div><strong>Disponible</strong></div>
+                        <div><strong>Disponibles</strong></div>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= $Bicicletas->contarBicicletasEstado('reparar'); ?></div>
-                        <div><strong>Reparaci&oacute;n</strong></div>
+                        <div><strong>En Reparaci&oacute;n</strong></div>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= $Bicicletas->contarBicicletasEstado('danada'); ?></div>
-                        <div><strong>Da&ntilde;ada</strong></div>
+                        <div><strong>Da&ntilde;adas</strong></div>
                     </div>
                 </div>
             </div>

@@ -13,6 +13,56 @@ class Estacion extends CI_Controller
         $this->load->view('estacion/estacion');
     }
 
+    public function cargarVistaCrear()
+    {
+        $data['Estacion'] = $this;
+        $tdu = $_REQUEST["tdu"];
+        if ($tdu == 1){
+            $this->load->view('estacion/crear', $data);
+        }
+    }
+
+    public function cargarBotonCrear() {
+        $tdu = $_REQUEST["tdu"];
+        if ($tdu == 1){
+            echo '<a class="dedo" data-toggle="modal" data-target="#crearEstacion"> <i class="fa fa-plus-circle"></i> </a>';
+        }
+    }
+
+    public function cargarBotonesEditar(){
+        $tdu = $_REQUEST["tdu"];
+        if ($tdu == 1){
+            echo '<!-- Button editar -->
+                    <button type="button" class="btn btn-warning" title="Editar Estaci&oacute;n"
+                            id="btn_editar_estacion" onclick="Estacion.acciones.editar()"><i class="fa fa-edit"></i>
+                    </button>
+
+                    <!-- Button guardar -->
+                    <button type="button" class="btn btn-success" title="Actualizar Estaci&oacute;n"
+                            id="btn_guardar_estacion" onclick="Estacion.acciones.guardarEditar();"><i class="fa fa-check"></i>
+                    </button>
+                    <script>
+                        Estacion.validaciones.botonGuardar("ocultar");
+                    </script>';
+        }
+    }
+
+    public function cargarBotonesEditarCantidad(){
+        $tdu = $_REQUEST["tdu"];
+        if ($tdu == 1){
+            echo '<!-- Button trigger modal crear estacionamiento -->
+                <button type="button" class="btn btn-primary" title="Agrgar estacionamientos" data-toggle="modal"
+                        id="btn_crear_estacionamiento" data-target="#crear_estacionamiento" disabled><i
+                        class="fa fa-plus"></i></button>
+                <!-- button trigger modal eliminar estacionamiento -->
+                <button type="button" class="btn btn-danger" title="Elimnar estacionamientos" data-toggle="modal"
+                        id="btn_eliminar_estacionamiento" data-target="#eliminar_estacionamiento" disabled><i
+                        class="fa fa-minus"></i></button>';
+            $this->load->view('estacionamiento/crear');
+            $this->load->view('estacionamiento/eliminar');
+        }
+    }
+
     public function existeCodigo($estacion_codigo)
     {
         $estacion = \App\Estacion::where('codigo', '=', $estacion_codigo)

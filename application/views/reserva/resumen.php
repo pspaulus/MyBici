@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= Ticket::contarTicketVigentesHoy(); ?></div>
-                        <div><strong>Generadas</strong></div>
+                        <div><strong>Generados</strong></div>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= Ticket::contarTicketHoyByEstado('realizadas'); ?></div>
-                        <div><strong>Realizadas</strong></div>
+                        <div><strong>Realizados</strong></div>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= Ticket::contarTicketHoyByEstado('anuladas'); ?></div>
-                        <div><strong>Anuladas</strong></div>
+                        <div><strong>Anulados</strong></div>
                     </div>
                 </div>
             </div>

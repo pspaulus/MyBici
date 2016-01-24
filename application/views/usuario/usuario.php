@@ -20,7 +20,10 @@
     </div>
 </div>
 
-<?php $Usuario->cagarVistaCrear();?>
+<div id="contenedor_div_agregar"></div>
+<script>
+    Usuario.index.cargarVistaCrear();
+</script>
 
 <!-- Subtitulo -->
 <div class="row" id="listado_busqueda">

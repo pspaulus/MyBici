@@ -216,7 +216,6 @@
                 <tr>
                     <th>No.</th>
                     <th>ID</th>
-                    <th>Tipo</th>
                     <th>Usuario</th>
                     <th>Bicicleta</th>
                     <th>Origen</th>

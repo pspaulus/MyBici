@@ -10,14 +10,22 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             <i class="fa fa-fw fa-home"></i> Estaciones
-            <a class="dedo" data-toggle="modal" data-target="#crearEstacion"> <i class="fa fa-plus-circle"></i> </a>
+            <span id="contendor_boton_crear"></span>
         </h1>
     </div>
 </div>
+<script>
+    Estacion.index.cargarBotonCrear();
+</script>
+
 
 <input type="hidden" value="<?= Escritorio::verificarInternet() ?>" id="estacion_sin_internet">
 
-<?php $Estacion->load->view('estacion/crear', compact('Estacion')); ?>
+<div id="contenedor_div_crear"></div>
+<script>
+    Estacion.index.cargarVistaCrear();
+</script>
+
 
 <div class="row">
     <!--Select Estacion-->
@@ -40,21 +48,10 @@
             </div>
         </div>
 
-
-        <div class="col-xs-2">
-            <!-- Button editar -->
-            <button type="button" class="btn btn-warning" title="Editar Estaci&oacute;n"
-                    id="btn_editar_estacion" onclick="Estacion.acciones.editar()"><i class="fa fa-edit"></i>
-            </button>
-
-            <!-- Button guardar -->
-            <button type="button" class="btn btn-success" title="Actualizar Estaci&oacute;n"
-                    id="btn_guardar_estacion" onclick="Estacion.acciones.guardarEditar();"><i class="fa fa-check"></i>
-            </button>
-            <script>
-                Estacion.validaciones.botonGuardar('ocultar');
-            </script>
-        </div>
+        <div class="col-xs-2" id="contenedor_botones_editar"></div>
+        <script>
+            Estacion.index.cargarBotonesEditar();
+        </script>
     </div>
 </div>
 

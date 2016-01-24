@@ -1,4 +1,63 @@
+
 var Estacion = {
+
+    index: {
+        cargarVistaCrear: function () {
+            var tdu = $('#tdu').val();
+            $.ajax({
+                method: "POST",
+                url: base_url + "Estacion/cargarVistaCrear/",
+                data: {
+                    tdu: tdu
+                }
+            })
+                .done(function (r) {
+                    $('#contenedor_div_crear').html(r);
+                })
+        },
+
+        cargarBotonCrear: function () {
+            var tdu = $('#tdu').val();
+            $.ajax({
+                method: "POST",
+                url: base_url + "Estacion/cargarBotonCrear/",
+                data: {
+                    tdu: tdu
+                }
+            })
+                .done(function (r) {
+                    $('#contendor_boton_crear').html(r);
+                })
+        },
+
+        cargarBotonesEditar: function(){
+            var tdu = $('#tdu').val();
+            $.ajax({
+                method: "POST",
+                url: base_url + "Estacion/cargarBotonesEditar/",
+                data: {
+                    tdu: tdu
+                }
+            })
+                .done(function (r) {
+                    $('#contenedor_botones_editar').html(r);
+                })
+        },
+
+        cargarBotonesEditarCantidad: function(){
+            var tdu = $('#tdu').val();
+            $.ajax({
+                method: "POST",
+                url: base_url + "Estacion/cargarBotonesEditarCantidad/",
+                data: {
+                    tdu: tdu
+                }
+            })
+                .done(function (r) {
+                    $('#contenedor_botones_cantidad').html(r);
+                })
+        }
+    },
 
     acciones: {
 
@@ -163,9 +222,9 @@ var Estacion = {
             Estacion.acciones.marcarSeleccionada(estacion_id);
         },
 
-        marcarSeleccionada: function (estacion_id){
-            console.log('option[value='+estacion_id+']');
-            $('#select_estacion').find('option[value='+estacion_id+']').attr('selected','selected');
+        marcarSeleccionada: function (estacion_id) {
+            console.log('option[value=' + estacion_id + ']');
+            $('#select_estacion').find('option[value=' + estacion_id + ']').attr('selected', 'selected');
         },
 
         existeCodigo: function (codigo) {
