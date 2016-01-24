@@ -4,22 +4,21 @@ var Estacionamiento = {
 
         guardar: function () {
             var estacion_id = $('#select_estacion').val();
-            var input_numero_estaciones_nuevo = $('#numero_estaciones_nuevo');
+            var cantidad_nuevo = $('#numero_estaciones_nuevo').val();
 
-            var validacion_numero_estaciones_nuevo = true;
+            var validacion_cantidad_nuevo = true;
 
-            if (input_numero_estaciones_nuevo.val() <= 0) {
-                validacion_numero_estaciones_nuevo = false;
-                Estacion.mensajes.mostrar($('#error_cantidad_parqueos'));
+            if (cantidad_nuevo <= 0) {
+                validacion_cantidad_nuevo = false;
+                Estacion.mensajes.mostrar($('#error_cantidad_nuevo'));
             } else {
-                Estacion.mensajes.oculta($('#error_cantidad_parqueos'));
+                Estacion.mensajes.oculta($('#error_cantidad_nuevo'));
             }
 
-            if (validacion_numero_estaciones_nuevo) {
+            if (validacion_cantidad_nuevo) {
                 $.ajax({
                     method: "POST",
-                    url: base_url + "Estacionamiento/crearEstacionamiento/" + estacion_id + '/' + input_numero_estaciones_nuevo.val(),
-                    data: {}
+                    url: base_url + "Estacionamiento/crearEstacionamiento/" + estacion_id + '/' + cantidad_nuevo
                 })
                     .done(function (r) {
                     });
@@ -27,6 +26,43 @@ var Estacionamiento = {
                 $('#crear_estacionamiento').removeClass('in');
                 $('.modal-backdrop').remove();
                 Escritorio.load.estacion();
+            }
+        },
+
+
+        eliminar: function () {
+            var estacion_id = $('#select_estacion').val();
+            var cantidad_eliminar = $('#cantidad_eliminar').val();
+
+            var validacion_cantidad_eliminar = true;
+
+            if (validacion_cantidad_eliminar <= 0) {
+                validacion_cantidad_eliminar = false;
+                Estacion.mensajes.mostrar($('#error_cantidad_eliminar'));
+            } else {
+                Estacion.mensajes.oculta($('#error_cantidad_eliminar'));
+            }
+
+            if (validacion_cantidad_eliminar) {
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "Estacionamiento/eliminarFisico/" + estacion_id + '/' + cantidad_eliminar
+                })
+                    .done(function (r) {
+                        console.log(r.mensaje);
+                        $('.modal-backdrop').remove();
+                        if (r.status) {
+                            Estacionamiento.acciones.limpiarEliminar();
+                            Escritorio.mensajeFlotante.mostrar($('#eliminar_ok'));
+                        } else {
+                            Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
+                        }
+                    });
+
+                $('#crear_estacionamiento').removeClass('in');
+                Escritorio.load.estacion();
+            } else {
+                console.log('ERROR: no eliminar por validaciones');
             }
         },
 
@@ -58,7 +94,12 @@ var Estacionamiento = {
 
         limpiar: function () {
             $('#numero_estaciones_nuevo').val('1');
-            Estacion.mensajes.oculta($('#error_cantidad_parqueos'));
+            Estacion.mensajes.oculta($('#error_cantidad_nuevo'));
+        },
+
+        limpiarEliminar: function () {
+            $('#cantidad_eliminar').val('1');
+            Estacion.mensajes.oculta($('#error_cantidad_eliminar'));
         },
 
         limpiarAgregar: function (estacionamiento_id) {
@@ -79,18 +120,18 @@ var Estacionamiento = {
                     url: base_url + "Bicicleta/getIdBicicletaByCodigo/" + bicicleta_codigo
                 })
                     .done(function (r) {
-                        if (r.status){
+                        if (r.status) {
                             console.log('OK: obtuvo bicicleta_id ->' + r.bicicleta_id);
 
                             if ((r.bicicleta_estado == 9) || (r.bicicleta_estado == 6)) { //en_reserva o en_uso
                                 Estacion.mensajes.mostrar($('#bicicleta_en_uso_' + estacionamiento_id));
 
-                            } else{
+                            } else {
                                 //if ((r.bicicleta_estado == 8) && (r.bicicleta_estado == 3)) { //danada o reparar
-                                    //Estacion.mensajes.mostrar($('#bicicleta_danada_' + estacionamiento_id));
+                                //Estacion.mensajes.mostrar($('#bicicleta_danada_' + estacionamiento_id));
 
                                 //} else{
-                                    Estacionamiento.acciones.verificarBicicletaEstacionada(estacionamiento_id, r.bicicleta_id);
+                                Estacionamiento.acciones.verificarBicicletaEstacionada(estacionamiento_id, r.bicicleta_id);
                                 //}
                             }
                         } else {

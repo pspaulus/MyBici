@@ -187,7 +187,14 @@ var Escritorio = {
         salir: function () {
             $.ajax({
                 method: "POST",
-                url: base_url + "Escritorio/salir"
+                url: base_url + "Escritorio/salir",
+                beforeSend: function () {
+                    $('#datos_estacion').html(
+                        '<div class="col-xs-12 text-center text-color-white" class="espacioArribaFijo">' +
+                        '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                        '</div>'
+                    );
+                }
             })
                 .done(function () {
                     window.location.replace(base_url + "Login");

@@ -27,11 +27,11 @@
                 <tr>
                     <?php $estacionamiento_codigo = $Estacionamiento->generarCodigo($estacionamiento->id); ?>
                     <?php $bicicleta = $Bicicleta->cargarBicicleta($estacionamiento->BICICLETA_id); ?>
-                    <?php if ($bicicleta != null){
+                    <?php if ($bicicleta != null) {
                         $bicicleta_codigo = Bicicleta::generarCodigo($bicicleta->id);
                         $codigo_bicicleta_mostrar = '<i class="fa fa-bicycle"></i> ' . $bicicleta_codigo . ' - ' . Bicicleta::getEstadoBicicleta($bicicleta->id);
                     } else {
-                        $codigo_bicicleta_mostrar =  '-';
+                        $codigo_bicicleta_mostrar = '-';
                     }
                     ?>
 
@@ -42,7 +42,7 @@
                         <?php if ($bicicleta == null) { ?>
                             <button class="btn btn-sm btn-primary" type="button" title="Estacionar Bicicleta"
                                     data-toggle="modal" data-target="#agregarBicicleta_<?= $estacionamiento->id ?>"><i
-                                    class="fa fa-plus"></i>&nbsp;<i class="fa fa-bicycle"></i></button>
+                                    class="fa fa-bicycle"></i>&nbsp;<i class="fa fa-sign-in"></i></button>
 
                             <!--Modal Agregar-->
                             <?php $Estacionamiento->load->view('estacionamiento/agregar', compact('estacionamiento'));
@@ -50,12 +50,12 @@
                             if ($bicicleta->ESTADO_id != 6 && $bicicleta->ESTADO_id != 9) { ?>
                                 <button class="btn btn-sm btn-danger" type="button" title="Retirar Bicicleta"
                                         data-toggle="modal" data-target="#quitarBicicleta_<?= $estacionamiento->id ?>">
-                                    <i class="fa fa-minus"></i>&nbsp;<i class="fa fa-bicycle"></i></button>
+                                    <i class="fa fa-sign-out"></i>&nbsp;<i class="fa fa-bicycle"></i></button>
 
                                 <!--Modal Eliminar-->
-                                <?php $data['estacionamiento'] = $estacionamiento;?>
-                                <?php $data['bicicleta_codigo'] = $bicicleta_codigo;?>
-                                <?php $data['estacionamiento_codigo'] = $estacionamiento_codigo;?>
+                                <?php $data['estacionamiento'] = $estacionamiento; ?>
+                                <?php $data['bicicleta_codigo'] = $bicicleta_codigo; ?>
+                                <?php $data['estacionamiento_codigo'] = $estacionamiento_codigo; ?>
                                 <?php $Estacionamiento->load->view('estacionamiento/quitar', $data);
                             }
                         } ?>

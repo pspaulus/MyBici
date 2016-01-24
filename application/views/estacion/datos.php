@@ -97,8 +97,16 @@
                 id="btn_crear_estacionamiento" data-target="#crear_estacionamiento" disabled><i
                 class="fa fa-plus"></i></button>
 
-        <!-- Modal Agregar -->
+        <!-- modal agregar -->
         <?php $Estacion->load->view('estacionamiento/crear'); ?>
+
+        <!-- button trigger modal eliminar estacionamiento -->
+        <button type="button" class="btn btn-danger" title="Elimnar estacionamientos" data-toggle="modal"
+                id="btn_eliminar_estacionamiento" data-target="#eliminar_estacionamiento" disabled><i
+                class="fa fa-minus"></i></button>
+
+        <!-- modal quitar -->
+        <?php $Estacion->load->view('estacionamiento/eliminar'); ?>
     </div>
 </div>
 

@@ -49,11 +49,17 @@ var Login = {
                         Login.acciones.mostrarBusy(boton_ingresar,-1);
                     }
                 })
-                    .done(function (r) {
+                    .done(function (r)
+                    {
                         console.log(r.mensaje);
                         if (r.status) {
                             Estacion.mensajes.mostrar($('#usuario_contrasena_incorrecta'));
                         } else {
+                            $('body').html(
+                                '<div class="col-xs-12 text-center text-color-white" class="espacioArribaFijo">' +
+                                '<i class="fa fa-spinner fa-spin fa-3x"></i>' +
+                                '</div>'
+                            );
                             window.location.replace(base_url + "Escritorio");
                         }
                         Login.acciones.ocultarBusy(boton_ingresar,-1);

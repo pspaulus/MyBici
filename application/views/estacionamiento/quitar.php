@@ -4,8 +4,8 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row contraer">
-                    <div class="col-xs-12 text-center text-warning">
-                        <label>&iquest;Est&aacute; seguro retirar la bicicleta <?= $bicicleta_codigo ?> del estacionamiento <?= $estacionamiento_codigo ?>?</label>
+                    <div class="col-xs-12 text-center">
+                        <label>&iquest;Est&aacute; seguro <span class="text-danger">retirar</span> la bicicleta <?= $bicicleta_codigo ?> del estacionamiento <?= $estacionamiento_codigo ?>?</label>
                     </div>
                 </div>
             </div>

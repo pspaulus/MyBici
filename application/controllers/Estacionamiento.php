@@ -39,20 +39,26 @@ class Estacionamiento extends CI_Controller
     public function cargarEstacionamientos($estacion_id, $estado_id)
     {
         if ($estacion_id == -1 && $estado_id == -1) {
-            $estacionamientos = \App\Estacionamiento::all();
+            $estacionamientos = \App\Estacionamiento::orderBy('PUESTO_ALQUILER_id', 'ASC')
+                ->orderBy('codigo', 'ASC')
+                ->get();
         } else {
             if ($estacion_id == -1 && $estado_id == -1) {
                 $estacionamientos = \App\Estacionamiento::where('ESTADO_id', '=', $estado_id)
+                    ->orderBy('PUESTO_ALQUILER_id', 'ASC')
                     ->get();
             } elseif ($estacion_id == -1 && $estado_id != -1) {
                 $estacionamientos = \App\Estacionamiento::where('ESTADO_id', '=', $estado_id)
+                    ->orderBy('PUESTO_ALQUILER_id', 'ASC')
                     ->get();
             } elseif ($estacion_id != -1 && $estado_id == -1) {
                 $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+                    ->orderBy('PUESTO_ALQUILER_id', 'ASC')
                     ->get();
             } elseif ($estacion_id != -1 && $estado_id != -1) {
                 $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
                     ->where('ESTADO_id', '=', $estado_id)
+                    ->orderBy('PUESTO_ALQUILER_id', 'ASC')
                     ->get();
             }
         }
@@ -61,18 +67,20 @@ class Estacionamiento extends CI_Controller
 
     public function crearEstacionamiento($estacion_id, $cantidad)
     {
-        for ($i = 0; $i < $cantidad; $i++) {
+        if (!empty($estacion_id) && !empty($cantidad)) {
+            for ($i = 0; $i < $cantidad; $i++) {
 
-            $estacionamiento_secuencia = $this->getSecuenciaEstacionamiento($estacion_id);
+                $estacionamiento_secuencia = $this->getSecuenciaEstacionamiento($estacion_id);
 
-            $estacion_nueva = \App\Estacionamiento::firstOrCreate([
-                'codigo' => $estacionamiento_secuencia,
-                'PUESTO_ALQUILER_id' => $estacion_id,
-                'BICICLETA_id' => null,
-                'ESTADO_id' => 4 //libre
-            ]);
+                $estacion_nueva = \App\Estacionamiento::firstOrCreate([
+                    'codigo' => $estacionamiento_secuencia,
+                    'PUESTO_ALQUILER_id' => $estacion_id,
+                    'BICICLETA_id' => null,
+                    'ESTADO_id' => 4 //libre
+                ]);
 
-            echo 'E->' . $estacion_nueva->PUESTO_ALQUILER_id . ' P->' . $estacion_nueva->codigo . ' || ';
+                echo 'E->' . $estacion_nueva->PUESTO_ALQUILER_id . ' P->' . $estacion_nueva->codigo . ' || ';
+            }
         }
     }
 
@@ -107,6 +115,13 @@ class Estacionamiento extends CI_Controller
 
 
         $this->load->view('estacionamiento/listado', $data);
+    }
+
+    public function cargarVistaCrearEstacionamientos()
+    {
+        $data['Estacionamiento'] = $this;
+        $data['Estacion'] = new Estacion();
+        $this->load->view('estacionamiento/crear');
     }
 
     public static function contarNumeroEstacionamiento($estacion_id)
@@ -235,6 +250,57 @@ class Estacionamiento extends CI_Controller
             return $estacionamiento_codigo = $estacion_codigo . 'P' . $secuecia;
         } else {
             return null;
+        }
+    }
+
+    public function eliminarFisico($estacion_id = null, $cantidad = null)
+    {
+        if (!empty($estacion_id) && !empty($cantidad)) {
+            $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+                ->orderBy('codigo', 'DESC')
+                ->limit($cantidad)
+                ->get();
+
+            if (count($estacionamientos) > 0) {
+                if ($this->estacionamientoSinBicicletas($estacionamientos)) {
+                    $resultado = true;
+                    $mensaje = 'OK: eliminado ' . count($estacionamientos) . ' estacionamientos';
+
+                    foreach ($estacionamientos as $estacionamiento) {
+                        if (!$estacionamiento->delete()) {
+                            $arreglo_fallo[] = $estacionamiento->id;
+                            $mensaje .= ' \n ERROR: no elimina ->' . $estacionamiento->id;
+                        }
+                    }
+
+                } else {
+                    $resultado = false;
+                    $mensaje = 'ERROR: no eliminar porque hay bicicletas en alguno de los estacionamientos';
+                }
+            } else {
+                $resultado = false;
+                $mensaje = 'ERROR: no hay estacionamientos';
+            }
+
+        } else {
+            $resultado = false;
+            $mensaje = 'ERROR: datos incorrectos';
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $resultado,
+            'mensaje' => $mensaje
+        ]);
+    }
+
+    public function estacionamientoSinBicicletas($estacionamientos)
+    {
+        foreach ($estacionamientos as $estacionamiento) {
+            if ($estacionamiento->BICICLETA_id != null) {
+                return false;
+            }
+            return true;
         }
     }
 }

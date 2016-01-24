@@ -342,9 +342,11 @@ var Estacion = {
             var input_editar_longitud = $('#editar_longitud');
             var input_editar_latitud = $('#editar_latitud');
             var btn_crear_estacionamiento = $('#btn_crear_estacionamiento');
+            var btn_eliminar_estacionamiento = $('#btn_eliminar_estacionamiento');
             var div_mapa = $('#ubicacionEstacion');
 
             btn_crear_estacionamiento.removeAttr('disabled');
+            btn_eliminar_estacionamiento.removeAttr('disabled');
             input_editar_estacion_codigo.removeAttr('disabled');
             input_editar_estacion_nombre.removeAttr('disabled');
             input_editar_longitud.removeAttr('disabled');
@@ -407,6 +409,16 @@ var Estacion = {
                         $('#parquear_bicicleta').attr('checked', false);
                     }
                 });
+        },
+
+        validarHayEstaciones: function () {
+            var estacion_id = $('#select_estacion').val();
+
+            if (estacion_id != null) {
+                Estacion.mensajes.oculta($('#error_sin_estacion'));
+            } else {
+                Estacion.mensajes.mostrar($('#error_sin_estacion'));
+            }
         }
     }
 };
