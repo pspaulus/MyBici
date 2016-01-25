@@ -42,7 +42,7 @@
                 </select>
                 <button class="btn btn-xs btn-default" type="button" title="Refrescar"
                         onclick="Bicicleta.acciones.RecargarResumen();">
-                    <i class="fa fa-refresh"></i></button>
+                    <i class="fa fa-refresh">&nbsp</i></button>
             </li>
         </ol>
     </div>

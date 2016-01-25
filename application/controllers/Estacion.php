@@ -63,7 +63,43 @@ class Estacion extends CI_Controller
         }
     }
 
-    public function existeCodigo($estacion_codigo, $estacion_id = null)
+    public function cargarBotonesEditarCantidadBicicletas(){
+        $tdu = $_REQUEST["tdu"];
+        if ($tdu == 1){
+
+            $data['Bicicletas']= new Bicicleta();
+            $data['Tipo']= new Tipo();
+            $data['Estacion']= $this;
+            $data['Estado']= new Estado();
+            echo '<!-- Button trigger modal crear bicicletas -->
+                <button type="button" class="btn btn-primary" title="Agrgar Bicicletas" data-toggle="modal"
+                        id="btn_crear_bicicleta" data-target="#agregarBicicleta" disabled><i
+                        class="fa fa-plus"></i></button>
+
+                <!-- button trigger modal eliminar bicicleta -->
+                <button type="button" class="btn btn-danger" title="Elimnar Bicicletas" data-toggle="modal"
+                        id="btn_eliminar_bicicleta" data-target="#eliminarBicicleta" disabled><i
+                        class="fa fa-minus"></i></button>';
+            $this->load->view('inventario/agregar_mini', $data);
+
+        }
+    }
+
+    public function existeCodigo($estacion_codigo)
+    {
+        $estacion = \App\Estacion::where('codigo', '=', $estacion_codigo)
+            ->get()
+            ->first();
+
+        $resultado = ($estacion != null) ? true : false;
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $resultado
+        ]);
+    }
+
+    public function existeEditarCodigo($estacion_codigo, $estacion_id = null)
     {
         $estacion = \App\Estacion::where('codigo', '=', $estacion_codigo)
             ->whereNotIn('id', [$estacion_id])
@@ -194,6 +230,7 @@ class Estacion extends CI_Controller
     {
         $data['estacion_actual'] = $this->cargarEstacion($id);
         $data['Estacion'] = $this;
+        $data['Bicicleta'] = new Bicicleta();
 
         $this->load->view('estacion/datos', $data);
     }

@@ -56,6 +56,20 @@ var Estacion = {
                 .done(function (r) {
                     $('#contenedor_botones_cantidad').html(r);
                 })
+        },
+
+        cargarBotonesEditarCantidadBicicletas: function(){
+            var tdu = $('#tdu').val();
+            $.ajax({
+                method: "POST",
+                url: base_url + "Estacion/cargarBotonesEditarCantidadBicicletas/",
+                data: {
+                    tdu: tdu
+                }
+            })
+                .done(function (r) {
+                    $('#contenedor_botones_cantidad_bicicletas').html(r);
+                })
         }
     },
 
@@ -272,7 +286,7 @@ var Estacion = {
             if (codigo.val() != '') {
                 $.ajax({
                     method: "POST",
-                    url: base_url + "Estacion/existeCodigo/" + codigo.val() + '/' + estacion_id.val(),
+                    url: base_url + "Estacion/existeEditarCodigo/" + codigo.val() + '/' + estacion_id.val(),
                     beforeSend: function () {
                         $('#busy_editar_codigo').html(
                             '<i class="fa fa-spinner fa-spin fa-1x"></i>'
@@ -468,10 +482,14 @@ var Estacion = {
             var input_editar_latitud = $('#editar_latitud');
             var btn_crear_estacionamiento = $('#btn_crear_estacionamiento');
             var btn_eliminar_estacionamiento = $('#btn_eliminar_estacionamiento');
+            var btn_crear_bicicleta= $('#btn_crear_bicicleta');
+            var btn_eliminar_bicicleta = $('#btn_eliminar_bicicleta');
             var div_mapa = $('#ubicacionEstacion');
 
             btn_crear_estacionamiento.removeAttr('disabled');
             btn_eliminar_estacionamiento.removeAttr('disabled');
+            btn_crear_bicicleta.removeAttr('disabled');
+            btn_eliminar_bicicleta.removeAttr('disabled');
             input_editar_estacion_codigo.removeAttr('disabled');
             input_editar_estacion_nombre.removeAttr('disabled');
             input_editar_longitud.removeAttr('disabled');

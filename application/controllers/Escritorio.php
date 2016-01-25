@@ -12,9 +12,6 @@ class Escritorio extends CI_Controller
 
     public function index()
     {
-        //ruta del server (esta en el controller login, pero se repite porque carga otra pagina con escritorio)
-        echo '<script> var base_url = \'http://'.$_SERVER['HTTP_HOST'].'/\'; </script>';
-
         $data['helpers']['escritorio'] = base_url() . 'js/helpers/escritorio.js';
         $data['helpers']['usuario'] = base_url() . 'js/helpers/usuario.js';
         $data['helpers']['login'] = base_url() . 'js/helpers/login.js';

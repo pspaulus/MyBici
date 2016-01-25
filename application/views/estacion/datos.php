@@ -1,7 +1,9 @@
+<?php /** @var Bicicleta $Bicicleta */?>
 <div class="col-xs-12 col-md-6">
 
     <div class="row form-group">
         <input type="hidden" id="editar_estacion_id" value="<?= $estacion_actual->id ?>">
+        <input type="hidden" id="select_estacion_inventario_nuevo" value="<?= $estacion_actual->id ?>">
         <input type="hidden" id="existe_editar_codigo" value="1">
         <input type="hidden" id="existe_editar_nombre" value="1">
 
@@ -96,30 +98,37 @@
         </div>
     </div>
 
+    <!--Parqueos-->
     <div class="row form-group">
-        <!--Parqueos-->
         <div class="col-xs-3">
-            <label for="btn_crear_estacionamiento"> Total de Estacionamientos</label>
+            <label class="control-label">Total de Estacionamientos</label>
         </div>
 
         <div class="col-xs-3">
-            <input class="form-control" id="numero_estaciones" type="text"
-                   maxlength="2" value="<?= Estacionamiento::contarNumeroEstacionamiento($estacion_actual->id) ?>"
-                   onkeypress="return Escritorio.Validaciones.soloNumeros(event)"
-                   onkeyup="Estacionamiento.label.cantidad();" disabled>
+            <input class="form-control" type="text" disabled
+                   value="<?= Estacionamiento::contarNumeroEstacionamiento($estacion_actual->id) ?>" >
         </div>
 
         <div id="contenedor_botones_cantidad"></div>
         <script>
             Estacion.index.cargarBotonesEditarCantidad();
         </script>
+    </div>
 
+    <!--bicicletas-->
+    <div class="row form-group">
+        <div class="col-xs-3">
+            <label class="control-label">Total de Bicicletas</label>
+        </div>
 
-        <!-- modal agregar -->
-        <?php ?>
+        <div class="col-xs-3">
+            <input class="form-control" type="text" disabled value="<?= $Bicicleta->contarBicicletasTodasByEstacion($estacion_actual->id)?>">
+        </div>
 
-        <!-- modal quitar -->
-        <?php ?>
+        <div id="contenedor_botones_cantidad_bicicletas"></div>
+        <script>
+            Estacion.index.cargarBotonesEditarCantidadBicicletas();
+        </script>
     </div>
 </div>
 
@@ -178,5 +187,6 @@
 <script>
     Estacion.validaciones.habilitarRegistroSinInterner();
     $('#div_mapa_editar').addClass('oculto');
+    Estacion.index.cargarBotonesEditar();
 </script>
 

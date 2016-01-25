@@ -50,7 +50,8 @@
 
         <div class="col-xs-2" id="contenedor_botones_editar"></div>
         <script>
-            Estacion.index.cargarBotonesEditar();
+            //se movio a despues de mostrar datos
+            //Estacion.index.cargarBotonesEditar();
         </script>
     </div>
 </div>

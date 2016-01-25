@@ -267,6 +267,7 @@ var Bicicleta = {
 
                                 Bicicleta.acciones.RecargarResumen();
                                 Bicicleta.acciones.RecargarTotal();
+                                Estacion.acciones.cargarDatosEstacion();
                                 Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
                             } else {
                                 Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));

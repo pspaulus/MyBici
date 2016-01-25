@@ -3,7 +3,7 @@
     <div class="panel-heading">
         <h3 class="panel-title"> Mapa de Estaciones
             <button class="btn btn-xs btn-default" type="button" onclick="Escritorio.Acciones.refrescar()">
-                &nbsp;<i class="fa fa-refresh"></i>
+                <i class="fa fa-refresh">&nbsp;</i>
             </button>
         </h3>
     </div>

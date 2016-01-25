@@ -29,7 +29,7 @@
                 &nbsp;
                 <!--<small class="pull-right">Hoy: --><?//= Escritorio::getFechaEcuador() ?><!--</small>-->
                 <button class="btn btn-xs btn-default pull-right" type="button"
-                        onclick="Ticket.acciones.RecargarResumen();"><i class="fa fa-refresh"></i></button>
+                        onclick="Ticket.acciones.RecargarResumen();"><i class="fa fa-refresh">&nbsp;</i></button>
             </li>
         </ol>
     </div>

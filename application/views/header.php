@@ -27,3 +27,4 @@
     <?php } ?>
 </head>
 <body>
+<?='<script> var base_url = \'http://'.$_SERVER['HTTP_HOST'].'/\'; </script>';?>
