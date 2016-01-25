@@ -60,18 +60,13 @@ if ($filtro == 'codigo') {
                             <?php $i++ ?>
                             <td class="<?= $class ?>"><i class="fa fa-bicycle"></i> <?= $codigo_estacion . 'B' . $bicicleta->codigo ?></td>
                             <td class="oculto <?= $class ?>"><?= $tipo_bibicleta ?></td>
-                            <td class="<?= $class ?>"><i class="fa fa-home"></i><?= $nombre_estacion_propietaria ?></td>
+                            <td class="<?= $class ?>"><i class="fa fa-home"></i> <?= $nombre_estacion_propietaria ?></td>
                             <td class="<?= $class ?>"><?= $estacionamiento_acual ?></td>
 
 
                             <td class="<?= $class ?>"><?= $estado_bicicleta ?></td>
                             <td>
                                 <?php if ($bicicleta->ESTADO_id == 7) { //buena ?>
-                                    <button class="btn btn-sm btn-warning" type="button" title="Enviar a Reparar"
-                                            data-toggle="modal"
-                                            data-target="#marcarEstadoReparar_<?= $bicicleta->id ?>"><i
-                                            class="fa fa-wrench"></i></button>
-
                                     <button class="btn btn-sm btn-danger" type="button" title="Marcar Da&ntilde;ada"
                                             data-toggle="modal"
                                             data-target="#marcarEstadoDanada_<?= $bicicleta->id ?>"><i
@@ -79,9 +74,6 @@ if ($filtro == 'codigo') {
                                     </button>
                                     <!--Modal marcar Dañada-->
                                     <?php $Bicicletas->load->view('inventario/danada', compact('bicicleta')); ?>
-
-                                    <!--modal enviar a taller -->
-                                    <?php $Bicicletas->load->view('inventario/reparar', compact('bicicleta')); ?>
                                 <?php } ?>
 
 
@@ -90,32 +82,17 @@ if ($filtro == 'codigo') {
                                             data-toggle="modal"
                                             data-target="#marcarEstadoReparar_<?= $bicicleta->id ?>"><i
                                             class="fa fa-wrench"></i></button>
-                                    <button class="btn btn-sm btn-success" type="button" title="Marcar Buena"
-                                            data-toggle="modal"
-                                            data-target="#marcarEstadoBuena_<?= $bicicleta->id ?>"><i
-                                            class="fa fa-check"></i></button>
+
                                     <!--modal enviar a taller -->
                                     <?php $Bicicletas->load->view('inventario/reparar', compact('bicicleta')); ?>
-
-                                    <!--modal marca buena -->
-                                    <?php $Bicicletas->load->view('inventario/buena', compact('bicicleta')); ?>
                                 <?php } ?>
 
 
                                 <?php if ($bicicleta->ESTADO_id == 3) { // reparar ?>
-                                    <button class="btn btn-sm btn-danger" type="button" title="Marcar Da&ntilde;ada"
-                                            data-toggle="modal"
-                                            data-target="#marcarEstadoDanada_<?= $bicicleta->id ?>"><i
-                                            class="fa fa-close"></i>
-                                    </button>
-
                                     <button class="btn btn-sm btn-success" type="button" title="Marcar Buena"
                                             data-toggle="modal"
                                             data-target="#marcarEstadoBuena_<?= $bicicleta->id ?>"><i
                                             class="fa fa-check"></i></button>
-
-                                    <!--Modal marcar Dañada-->
-                                    <?php $Bicicletas->load->view('inventario/danada', compact('bicicleta')); ?>
 
                                     <!--modal marca buena -->
                                     <?php $Bicicletas->load->view('inventario/buena', compact('bicicleta')); ?>
@@ -127,10 +104,12 @@ if ($filtro == 'codigo') {
                 <?php } ?>
                 </tbody>
             </table>
+
             <div class="tip text-center espacioAbajoFijo">
                 <small>
                     <a href="#listado_busqueda">Ir al inicio</a>
                 </small>
             </div>
+
         </div>
     </div>

@@ -8,7 +8,7 @@
                         <i class="fa fa-circle-o fa-4x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><?= $Bicicletas->contarBicicletasEstado('en_uso'); ?></div>
+                        <div class="huge"><?= $Bicicletas->contarBicicletasEstado('en_uso', $estacion_id); ?></div>
                         <div><strong>En uso</strong></div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                         <i class="fa fa-check fa-4x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><?= $Bicicletas->contarBicicletasEstado('buena'); ?></div>
+                        <div class="huge"><?= $Bicicletas->contarBicicletasEstado('buena',$estacion_id); ?></div>
                         <div><strong>Disponibles</strong></div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <i class="fa fa-wrench fa-4x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><?= $Bicicletas->contarBicicletasEstado('reparar'); ?></div>
+                        <div class="huge"><?= $Bicicletas->contarBicicletasEstado('reparar', $estacion_id); ?></div>
                         <div><strong>En Reparaci&oacute;n</strong></div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         <i class="fa fa-close fa-4x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><?= $Bicicletas->contarBicicletasEstado('danada'); ?></div>
+                        <div class="huge"><?= $Bicicletas->contarBicicletasEstado('danada',$estacion_id); ?></div>
                         <div><strong>Da&ntilde;adas</strong></div>
                     </div>
                 </div>

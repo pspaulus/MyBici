@@ -51,13 +51,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#page_estacion" onclick="$('.navbar-toggle').click(); Escritorio.load.estacion()">
-                        <i class="fa fa-fw fa-home"></i> Estaciones
+                    <a href="#page_estacionamiento" onclick="$('.navbar-toggle').click(); Escritorio.load.estacionamiento()">
+                        <i class="fa fa-fw fa-product-hunt"></i> Estacionamientos
                     </a>
                 </li>
                 <li>
-                    <a href="#page_estacionamiento" onclick="$('.navbar-toggle').click(); Escritorio.load.estacionamiento()">
-                        <i class="fa fa-fw fa-product-hunt"></i> Estacionamientos
+                    <a href="#page_estacion" onclick="$('.navbar-toggle').click(); Escritorio.load.estacion()">
+                        <i class="fa fa-fw fa-home"></i> Estaciones
                     </a>
                 </li>
 <!--                <li>-->

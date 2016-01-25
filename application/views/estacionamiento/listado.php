@@ -25,18 +25,29 @@
             <?php if (count($estacionamientos) == 0) $Estacionamiento->load->view('sin_datos') ?>
 
             <?php foreach ($estacionamientos as $estacionamiento) { ?>
-                <tr>
-                    <?php $estacionamiento_codigo = $Estacionamiento->generarCodigo($estacionamiento->id); ?>
-                    <?php $estacion_nombre = Estacion::getNombreEstacion($estacionamiento->PUESTO_ALQUILER_id); ?>
-                    <?php $bicicleta = $Bicicleta->cargarBicicleta($estacionamiento->BICICLETA_id); ?>
-                    <?php if ($bicicleta != null) {
-                        $bicicleta_codigo = Bicicleta::generarCodigo($bicicleta->id);
-                        $codigo_bicicleta_mostrar = '<i class="fa fa-bicycle"></i> ' . $bicicleta_codigo . ' - <small>' . Bicicleta::getEstadoBicicleta($bicicleta->id).'</small>';
-                    } else {
-                        $codigo_bicicleta_mostrar = '-';
-                    }
-                    ?>
 
+                <?php $estacionamiento_codigo = $Estacionamiento->generarCodigo($estacionamiento->id); ?>
+                <?php $estacion_nombre = Estacion::getNombreEstacion($estacionamiento->PUESTO_ALQUILER_id); ?>
+                <?php $bicicleta = $Bicicleta->cargarBicicleta($estacionamiento->BICICLETA_id); ?>
+                <?php if ($bicicleta != null) {
+                    $bicicleta_codigo = Bicicleta::generarCodigo($bicicleta->id);
+                    $bicicleta_estado = Bicicleta::getEstadoBicicleta($bicicleta->id);
+                    $codigo_bicicleta_mostrar = '<i class="fa fa-bicycle"></i> ' . $bicicleta_codigo .
+                        ' - <small>' . $bicicleta_estado . '</small>';
+                    $clase = $bicicleta->ESTADO_id;
+                } else {
+                    $codigo_bicicleta_mostrar = '-';
+                    $clase = '';
+                }
+
+                if ($clase == 3) {
+                    $clase = 'text-warning';
+                } else if ($clase == 8) {
+                    $clase = 'text-danger';
+                }
+
+                ?>
+                <tr class="<?= $clase; ?>">
                     <td><strong><?= $i ?></strong></td> <?php $i++ ?>
                     <td><i class="fa fa-home"></i> <?= $estacion_nombre ?></td>
                     <td><i class="fa fa-product-hunt"></i> <?= $estacionamiento_codigo ?></td>

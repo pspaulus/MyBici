@@ -12,9 +12,10 @@ class Bicicleta extends CI_Controller
         echo "Controlador bicicleta";
     }
 
-    public function cargarBotonCrear() {
+    public function cargarBotonCrear()
+    {
         $tdu = $_REQUEST["tdu"];
-        if ($tdu == 1){
+        if ($tdu == 1) {
             echo '<a class="dedo" data-toggle="modal" data-target="#agregarBicicleta"> <i class="fa fa-plus-circle"></i> </a>';
         }
     }
@@ -46,7 +47,7 @@ class Bicicleta extends CI_Controller
         return $bicicletas_total;
     }
 
-    public function contarBicicletasEstado($estado)
+    public function contarBicicletasEstado($estado = null, $estacion_id = null)
     {
         switch ($estado) {
             case 'buena':
@@ -63,15 +64,30 @@ class Bicicleta extends CI_Controller
 
             case 'en_uso':
                 $estado = [9, 6];
-                $conteo_bicicletas = \App\Bicicleta::whereIn('ESTADO_id', $estado)
-                    ->get()
-                    ->count();
+                if($estacion_id == -1){
+                    $conteo_bicicletas = \App\Bicicleta::whereIn('ESTADO_id', $estado)
+                        ->get()
+                        ->count();
+                } else {
+                    $conteo_bicicletas = \App\Bicicleta::whereIn('ESTADO_id', $estado)
+                        ->where('PUESTO_ALQUILER_id','=',$estacion_id)
+                        ->get()
+                        ->count();
+                }
+
                 return $conteo_bicicletas;
                 break;
 
         }
-        $conteo_bicicletas = \App\Bicicleta::where('ESTADO_id', '=', $estado)
-            ->count();
+
+        if($estacion_id == -1){
+            $conteo_bicicletas = \App\Bicicleta::where('ESTADO_id', '=', $estado)
+                ->count();
+        } else {
+            $conteo_bicicletas = \App\Bicicleta::where('ESTADO_id', '=', $estado)
+                ->where('PUESTO_ALQUILER_id', '=', $estacion_id)
+                ->count();
+        }
         return $conteo_bicicletas;
     }
 
@@ -243,7 +259,7 @@ class Bicicleta extends CI_Controller
                 'ESTADO_id' => $ESTADO_id
             ]);
 
-            if ($parquear == 1){
+            if ($parquear == 1) {
                 $this->parquearSinRespuesta($nueva_bicicleta->id);
             }
         }
@@ -251,7 +267,7 @@ class Bicicleta extends CI_Controller
         header('Content-Type: application/json');
         echo json_encode([
             'status' => true,
-            'mensaje' => 'Se agregaron '.$cantidad.' bicicletas'
+            'mensaje' => 'Se agregaron ' . $cantidad . ' bicicletas'
         ]);
     }
 
@@ -504,22 +520,24 @@ class Bicicleta extends CI_Controller
         }
     }
 
-    public static function generarCodigo($bicileta_id){
+    public static function generarCodigo($bicileta_id)
+    {
         $bicileta = \App\Bicicleta::find($bicileta_id);
 
-        if ($bicileta != null){
+        if ($bicileta != null) {
             $estacion_codigo = Estacion::getCodigoEstacionByIdDevolver($bicileta->PUESTO_ALQUILER_id);
             $secuecia = $bicileta->codigo;
 
-            return $estacionamiento_codigo = $estacion_codigo.'B'.$secuecia ;
+            return $estacionamiento_codigo = $estacion_codigo . 'B' . $secuecia;
         } else {
             return null;
         }
     }
 
-    public function RecargarResumen()
+    public function cargarVistaResumen()
     {
         $data['Bicicletas'] = $this;
+        $data['estacion_id'] = $_REQUEST['estacion_id'];
         $this->load->view('inventario/resumen', $data);
     }
 }
