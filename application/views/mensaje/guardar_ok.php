@@ -1,4 +1,4 @@
-<div id="guardar_ok" class="col-xs-10 col-xs-offset-1 mensajeFlotantecabecera oculto">
+<div id="guardar_ok" class="col-xs-10 col-xs-offset-1 oculto">
     <div class="alert alert-success text-center mensajeFlotanteCuerpo">
         <?php if (!empty($entidad)) {
             switch ($entidad) {

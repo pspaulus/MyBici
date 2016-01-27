@@ -10,7 +10,27 @@ class Ticket extends CI_Controller
 
     public function index()
     {
-        $this->load->view('reserva/reserva');
+        $data['Ticket'] = $this;
+        $data['Estacion'] = new Estacion();
+        $data['Estado'] = new Estado();
+
+        $this->load->view('reserva/reserva', $data);
+    }
+
+    public function cargarBotonCrear()
+    {
+        $tdu = $_REQUEST["tdu"];
+        if ($tdu == 1) {
+            echo '<a class="dedo" data-toggle="modal" data-target="#crearTicket"> <i class="fa fa-plus-circle"></i> </a>';
+        }
+    }
+
+    public function cargarVistaCrear()
+    {
+        $data['Usuario'] = new Usuario();
+        $data['Ticket'] = $this;
+        $data['tdu'] = $_REQUEST["tdu"];
+        $this->load->view('reserva/crear', $data);
     }
 
     public static function contarTicketHoy()
@@ -29,16 +49,17 @@ class Ticket extends CI_Controller
         return $conteo_tickets;
     }
 
-    public static function contarTicketVigentesHoy()
+    public static function contarTicketVigentesHoy($estacion_id)
     {
         $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador())
             ->whereIn('ESTADO_id', [10])
+            ->where('origen_puesto_alquiler', '=', $estacion_id)
             ->get()
             ->count();
         return $conteo_tickets;
     }
 
-    public static function contarTicketHoyByEstado($estado)
+    public static function contarTicketHoyByEstado($estado,$estacion_id)
     {
         switch ($estado) {
             case 'realizadas':
@@ -51,10 +72,19 @@ class Ticket extends CI_Controller
                 $estado = 11;
                 break;
         }
-        $conteo_tickets = \App\Ticket::where('ESTADO_id', '=', $estado)
-            ->where('fecha', '=', Escritorio::getFechaEcuador())
-            ->get()
-            ->count();
+
+        if($estacion_id != -1) {
+            $conteo_tickets = \App\Ticket::where('ESTADO_id', '=', $estado)
+                ->where('fecha', '=', Escritorio::getFechaEcuador())
+                ->where('origen_puesto_alquiler', '=', $estacion_id)
+                ->get()
+                ->count();
+        }else{
+            $conteo_tickets = \App\Ticket::where('ESTADO_id', '=', $estado)
+                ->where('fecha', '=', Escritorio::getFechaEcuador())
+                ->get()
+                ->count();
+        }
         return $conteo_tickets;
     }
 
@@ -318,8 +348,9 @@ class Ticket extends CI_Controller
 
     public function RecargarResumen()
     {
-        $data['Ticket'] = $this;
-        $data['Bicicletas'] = new Bicicleta();
-        $this->load->view('inventario/resumen', $data);
+        //$data['Ticket'] = $this;
+        $data['estacion_id'] = $_REQUEST['estacion_id'];
+
+        $this->load->view('reserva/resumen', $data);
     }
 }

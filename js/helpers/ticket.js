@@ -1,5 +1,35 @@
 var Ticket = {
 
+    index: {
+        cargarVistaCrear: function(){
+            var tdu = $('#tdu').val();
+            $.ajax({
+                method: "POST",
+                url: base_url + "Ticket/cargarVistaCrear/",
+                data: {
+                    tdu: tdu
+                }
+            })
+                .done(function (r) {
+                    $('#contenedor_div_crear').html(r);
+                })
+        },
+
+        cargarBotonCrear: function() {
+            var tdu = $('#tdu').val();
+            $.ajax({
+                method: "POST",
+                url: base_url + "Ticket/cargarBotonCrear/",
+                data: {
+                    tdu: tdu
+                }
+            })
+                .done(function (r) {
+                    $('#contendor_boton_crear').html(r);
+                })
+        }
+    },
+
     acciones: {
 
         mostrarFiltroEstacion: function() {
@@ -29,10 +59,14 @@ var Ticket = {
         },
 
         RecargarResumen: function() {
-            var contenedor = $('#resumen_ticket');
+            var contenedor = $('#contenedor_resumen');
+            var estacion_id = $('#select_estacion_resumen').val();
             $.ajax({
                 method: "POST",
                 url: base_url + "Ticket/RecargarResumen/",
+                data: {
+                    estacion_id: estacion_id
+                },
                 beforeSend: function () {
                     contenedor.html(
                         '<div class="col-xs-12 text-center" style="margin-top: 25px">' +

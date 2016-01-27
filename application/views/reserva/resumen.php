@@ -8,7 +8,7 @@
                         <i class="fa fa-circle fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><?= Ticket::contarTicketVigentesHoy(); ?></div>
+                        <div class="huge"><?= Ticket::contarTicketVigentesHoy($estacion_id); ?></div>
                         <div><strong>Generados</strong></div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                         <i class="fa fa-circle-o fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><?= Ticket::contarTicketHoyByEstado('en_curso'); ?></div>
+                        <div class="huge"><?= Ticket::contarTicketHoyByEstado('en_curso',$estacion_id); ?></div>
                         <div><strong>En curso</strong></div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <i class="fa fa-check-circle-o fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><?= Ticket::contarTicketHoyByEstado('realizadas'); ?></div>
+                        <div class="huge"><?= Ticket::contarTicketHoyByEstado('realizadas',$estacion_id); ?></div>
                         <div><strong>Realizados</strong></div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         <i class="fa fa-times-circle-o fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><?= Ticket::contarTicketHoyByEstado('anuladas'); ?></div>
+                        <div class="huge"><?= Ticket::contarTicketHoyByEstado('anuladas',$estacion_id); ?></div>
                         <div><strong>Anulados</strong></div>
                     </div>
                 </div>

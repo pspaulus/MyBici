@@ -1,9 +1,11 @@
 <?php $Estacion = new Estacion(); ?>
 
 <!-- mensajes flotantes-->
-<?php Escritorio::Mensaje('guardar_ok', 'estacion') ?>
-<?php Escritorio::Mensaje('editar_ok', 'estacion') ?>
-<?php Escritorio::Mensaje('error', 'estacion') ?>
+<div class="mensajeFlotanteContenedor">
+    <?php Escritorio::Mensaje('guardar_ok', 'estacion') ?>
+    <?php Escritorio::Mensaje('editar_ok', 'estacion') ?>
+    <?php Escritorio::Mensaje('error', 'estacion') ?>
+</div>
 
 <!-- Titulo -->
 <div class="row" id="page_estacion">

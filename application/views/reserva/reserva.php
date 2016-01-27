@@ -1,22 +1,30 @@
-<?php $Estacion = new Estacion(); ?>
-<?php $Estado = new Estado(); ?>
-<?php $Ticket = new Ticket(); ?>
+<?php /** @var Ticket $Ticket */ ?>
+<?php /** @var Estacion $Estacion */ ?>
+<?php /** @var Estado $Estado */ ?>
 
 <!-- mensajes flotantes-->
-<?php Escritorio::Mensaje('guardar_ok', 'ticket') ?>
+<div class="mensajeFlotanteContenedor">
+    <?php Escritorio::Mensaje('guardar_ok', 'ticket') ?>
+</div>
 
 <!-- Titulo -->
 <div class="row" id="page_ticket">
     <div class="col-lg-12">
         <h1 class="page-header">
             <i class="fa fa-fw fa-ticket"></i> Tickets
-            <a class="dedo" data-toggle="modal" data-target="#crearTicket"> <i class="fa fa-plus-circle"></i> </a>
+            <span id="contendor_boton_crear"></span>
             <small class="pull-right" id="total_ticket" style="padding-top: 10px">
                 Total Hoy: <?= $Ticket->contarTicketHoy(); ?>
             </small>
         </h1>
     </div>
 </div>
+
+<div id="contenedor_div_agregar"></div>
+<script>
+    Ticket.index.cargarBotonCrear();
+</script>
+
 
 <!-- Subtitulo -->
 <div class="row">
@@ -27,6 +35,15 @@
                     <i class="fa fa-calendar"></i> Tablero de Estados
                 </a>
                 &nbsp;
+                <?php $estaciones = $Estacion->cargarEstaciones(); ?>
+                <select id="select_estacion_resumen" onchange="Ticket.acciones.RecargarResumen();">
+                    <option value="-1">Estaci&oacute;n Todas</option>
+                    <?php foreach ($estaciones as $estacion) { ?>
+                        <option
+                            value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
+                    <?php } ?>
+                </select>
+                &nbsp;
                 <!--<small class="pull-right">Hoy: --><?//= Escritorio::getFechaEcuador() ?><!--</small>-->
                 <button class="btn btn-xs btn-default pull-right" type="button"
                         onclick="Ticket.acciones.RecargarResumen();"><i class="fa fa-refresh">&nbsp;</i></button>
@@ -36,12 +53,16 @@
 </div>
 
 <!--Resumen-->
-<div id="resumen_ticket">
-    <?php $Ticket->load->view('reserva/resumen', compact('Ticket')); ?>
-</div>
+<div id="contenedor_resumen"></div>
+<script>
+    Ticket.acciones.RecargarResumen();
+</script>
 
-<!-- Modal Agregar bicicleta -->
-<?php $Ticket->load->view('reserva/crear', compact('Ticket')); ?>
+<!-- Modal Agregar -->
+<div id="contenedor_div_crear"></div>
+<script>
+    Ticket.index.cargarVistaCrear();
+</script>
 
 <!--Buscar-->
 <div class="row" id="listado_busqueda">
@@ -51,6 +72,17 @@
                 <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#contenido_buscar'), $('#titulo3'))">
                     <i class="fa fa-search"></i> Buscar
                 </a>
+                &nbsp;
+                <label class="radio-inline">
+                    <input type="radio" name="tipo_busqueda" id="busqueda_por_codigo"
+                           onclick="$('#por_codido').removeClass('oculto');
+                                    $('#por_estacion').addClass('oculto');" checked> C&oacute;digo
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="tipo_busqueda" id="busqueda_por_estado"
+                           onclick="$('#por_estacion').removeClass('oculto');
+                                    $('#por_codido').addClass('oculto');""> Estaci&oacute;n
+                </label>
             </li>
         </ol>
     </div>
@@ -59,30 +91,8 @@
 
 <div id="contenido_buscar">
 
-    <!-- Tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active">
-            <a href="#por_codigo" data-toggle="tab" role="tab">Por Unidad</a>
-        </li>
-        <!-- DESACTIVADO TAB USUARIO -->
-        <!--                <li role="presentation">-->
-        <!--                    <a href="#por_usuario" data-toggle="tab" role="tab">Por Usuario</a>-->
-        <!--                </li>-->
-        <li role="presentation">
-            <a href="#por_estacion" data-toggle="tab" role="tab">Por Lote</a>
-        </li>
-    </ul>
-
-    <!-- Tab panels -->
-    <div class="tab-content tab-contenido">
-
         <!--Por codigo-->
-        <div role="tabpanel" class="tab-pane fade in active" id="por_codigo">
-
-            <!--Espacio-->
-            <div class="row">
-                <div class="col-xs-12">&nbsp;</div>
-            </div>
+        <div class="" id="por_codido">
 
             <div class="row">
                 <div class="form-inline">
@@ -90,7 +100,6 @@
 
                         <!--Identificador-->
                         <div class="form-group espacio" style="vertical-align: top">
-                            <!--                                    <label class="control-label" for="ticket_campo">Identificador</label>-->
                             <select class="form-control" id="ticket_campo"
                                     onchange="Ticket.acciones.cambiarValorPlaceholder()">
                                 <option value="id">Ticket ID</option>
@@ -129,12 +138,7 @@
         </div>
 
         <!--Por Estacion-->
-        <div role="tabpanel" class="tab-pane fade" id="por_estacion">
-
-            <!--Espacio-->
-            <div class="row">
-                <div class="col-xs-12">&nbsp;</div>
-            </div>
+        <div class="oculto" id="por_estacion">
 
             <div class="row">
                 <div class="form-inline">
@@ -199,7 +203,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
     <!--Espacio-->
     <div class="row">

@@ -1,4 +1,4 @@
-<div class="col-xs-12">
+<div class="mensajeFlotanteContenedor">
     <!-- mensajes flotantes-->
     <?php Escritorio::Mensaje('guardar_ok', 'estacionamiento') ?>
     <?php Escritorio::Mensaje('eliminar_ok', 'estacionamiento') ?>

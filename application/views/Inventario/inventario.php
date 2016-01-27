@@ -4,9 +4,11 @@
 <?php $Tipo = new Tipo(); ?>
 
 <!-- mensajes flotantes-->
-<?php Escritorio::Mensaje('guardar_ok', 'bicicleta') ?>
-<?php Escritorio::Mensaje('editar_ok', 'bicicleta') ?>
-<?php Escritorio::Mensaje('error', 'bicicleta') ?>
+<div class="mensajeFlotanteContenedor">
+    <?php Escritorio::Mensaje('guardar_ok', 'bicicleta') ?>
+    <?php Escritorio::Mensaje('editar_ok', 'bicicleta') ?>
+    <?php Escritorio::Mensaje('error', 'bicicleta') ?>
+</div>
 
 <!--Titulo-->
 <div class="row" id="page_inventario">
@@ -32,6 +34,7 @@
                 <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#resumen_inventario'), $('#titulo'))">
                     <i class="fa fa-clock-o"></i> Tablero de Estados &nbsp;
                 </a>
+                &nbsp;
                 <?php $estaciones = $Estacion->cargarEstaciones(); ?>
                 <select id="select_estacion_inventario" onchange="Bicicleta.acciones.RecargarResumen();">
                     <option value="-1">Estaci&oacute;n Todas</option>
@@ -40,6 +43,7 @@
                             value="<?= $estacion->id ?>"><?= $estacion->codigo . ' - ' . $estacion->nombre ?></option>
                     <?php } ?>
                 </select>
+                &nbsp;
                 <button class="btn btn-xs btn-default" type="button" title="Refrescar"
                         onclick="Bicicleta.acciones.RecargarResumen();">
                     <i class="fa fa-refresh">&nbsp</i></button>

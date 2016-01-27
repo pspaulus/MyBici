@@ -1,6 +1,6 @@
 <?php /** @var Usuario $Usuario */?>
 
-<div class="col-xs-12">
+<div class="mensajeFlotantecabecera">
     <!-- mensajes flotantes-->
     <?php Escritorio::Mensaje('guardar_ok', 'usuario') ?>
     <?php Escritorio::Mensaje('eliminar_ok', 'usuario') ?>

@@ -59,12 +59,12 @@ var Bicicleta = {
 
         RecargarResumen: function () {
             var contenedor = $('#resumen_inventario');
-            var select_estacion_inventario = $('#select_estacion_inventario').val();
+            var estacion_id = $('#select_estacion_inventario').val();
             $.ajax({
                 method: "POST",
                 url: base_url + "Bicicleta/cargarVistaResumen/",
                 data:{
-                    estacion_id: select_estacion_inventario
+                    estacion_id: estacion_id
                 },
                 beforeSend: function () {
                     contenedor.html(
