@@ -43,7 +43,6 @@ var Bicicleta = {
         cambioLista: function (filtro) {
             var como_listo = $('#como_listo');
             como_listo.val(filtro)
-
         },
 
         RecargarTotal: function () {
@@ -59,7 +58,7 @@ var Bicicleta = {
 
         RecargarResumen: function () {
             var contenedor = $('#resumen_inventario');
-            var estacion_id = $('#select_estacion_inventario').val();
+            var estacion_id = $('#select_estacion_resumen').val();
             $.ajax({
                 method: "POST",
                 url: base_url + "Bicicleta/cargarVistaResumen/",

@@ -32,6 +32,11 @@ var Ticket = {
 
     acciones: {
 
+        cambioLista: function (filtro) {
+            var como_listo = $('#como_listo');
+            como_listo.val(filtro)
+        },
+
         mostrarFiltroEstacion: function() {
             $.ajax({
                 method: "POST",

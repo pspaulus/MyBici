@@ -74,25 +74,28 @@
                 </a>
                 &nbsp;
                 <label class="radio-inline">
-                    <input type="radio" name="tipo_busqueda" id="busqueda_por_codigo"
-                           onclick="$('#por_codido').removeClass('oculto');
-                                    $('#por_estacion').addClass('oculto');" checked> C&oacute;digo
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="tipo_busqueda" id="busqueda_por_estado"
-                           onclick="$('#por_estacion').removeClass('oculto');
+                    <input type="radio" name="tipo_busqueda" id="busqueda_por_estado" checked
+                           onclick="Ticket.acciones.cambioLista('por_estacion');
+                                    $('#por_estacion').removeClass('oculto');
                                     $('#por_codido').addClass('oculto');""> Estaci&oacute;n
+                </label>
+
+                <label class="radio-inline">
+                    <input type="radio" name="tipo_busqueda" id="busqueda_por_codigo"
+                           onclick="Ticket.acciones.cambioLista('por_codigo');
+                                    $('#por_codido').removeClass('oculto');
+                                    $('#por_estacion').addClass('oculto');"> C&oacute;digo
                 </label>
             </li>
         </ol>
     </div>
 </div>
-
+<input type="hidden" value="lote" id="como_listo">
 
 <div id="contenido_buscar">
 
         <!--Por codigo-->
-        <div class="" id="por_codido">
+        <div class="oculto" id="por_codido">
 
             <div class="row">
                 <div class="form-inline">
@@ -138,7 +141,7 @@
         </div>
 
         <!--Por Estacion-->
-        <div class="oculto" id="por_estacion">
+        <div class="" id="por_estacion">
 
             <div class="row">
                 <div class="form-inline">
@@ -210,28 +213,8 @@
         <div class="col-xs-12">&nbsp;</div>
     </div>
 </div>
-<div id="listado_ticket">
-    <h3>Lista de Tickets</h3>
+<div id="listado_ticket"></div>
 
-    <div class="col-xs-12">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>ID</th>
-                    <th>Usuario</th>
-                    <th>Bicicleta</th>
-                    <th>Origen</th>
-                    <th>Destino</th>
-                    <th>Fecha</th>
-                    <th>Hora Retiro</th>
-                    <th>Hora Entrega</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
-</div>
+<script>
+    Ticket.acciones.cargarListaTicketPorEstacion();
+</script>

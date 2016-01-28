@@ -1,6 +1,22 @@
 <div class="row">
 
     <div class="col-xs-6 col-sm-3">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-check fa-4x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"><?= $Bicicletas->contarBicicletasEstado('buena',$estacion_id); ?></div>
+                        <div><strong>Disponibles</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="row">
@@ -14,22 +30,6 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-
-    <div class="col-xs-6 col-sm-3">
-        <div class="panel panel-green">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-check fa-4x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge"><?= $Bicicletas->contarBicicletasEstado('buena',$estacion_id); ?></div>
-                        <div><strong>Disponibles</strong></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 

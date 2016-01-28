@@ -1,7 +1,7 @@
 <div class="row">
 
     <div class="col-xs-6 col-sm-3">
-        <div class="panel panel-primary">
+        <div class="panel panel-yellow">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
@@ -18,7 +18,7 @@
     </div>
 
     <div class="col-xs-6 col-sm-3">
-        <div class="panel panel-yellow">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">

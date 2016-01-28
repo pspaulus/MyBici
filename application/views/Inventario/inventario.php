@@ -36,7 +36,7 @@
                 </a>
                 &nbsp;
                 <?php $estaciones = $Estacion->cargarEstaciones(); ?>
-                <select id="select_estacion_inventario" onchange="Bicicleta.acciones.RecargarResumen();">
+                <select id="select_estacion_resumen" onchange="Bicicleta.acciones.RecargarResumen();">
                     <option value="-1">Estaci&oacute;n Todas</option>
                     <?php foreach ($estaciones as $estacion) { ?>
                         <option
@@ -71,27 +71,28 @@
                 </a>
                 &nbsp;
                 <label class="radio-inline">
+                    <input type="radio" name="tipo_busqueda" id="busqueda_por_estado" checked
+                           onclick="Bicicleta.acciones.cambioLista('lote');
+                                    $('#por_estacion').removeClass('oculto');
+                                    $('#por_bicicleta').addClass('oculto');"> Estaci&oacute;n
+                </label>
+
+                <label class="radio-inline">
                     <input type="radio" name="tipo_busqueda" id="busqueda_por_codigo"
                            onclick="Bicicleta.acciones.cambioLista('unidad');
                                     $('#por_bicicleta').removeClass('oculto');
-                                    $('#por_estacion').addClass('oculto');" checked> C&oacute;digo
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="tipo_busqueda" id="busqueda_por_estado"
-                           onclick="Bicicleta.acciones.cambioLista('lote');
-                                    $('#por_estacion').removeClass('oculto');
-                                    $('#por_bicicleta').addClass('oculto');""> Estaci&oacute;n
+                                    $('#por_estacion').addClass('oculto');"> C&oacute;digo
                 </label>
             </li>
         </ol>
     </div>
 </div>
-<input type="hidden" value="unidad" id="como_listo">
+<input type="hidden" value="lote" id="como_listo">
 
 <div id="contenido_buscar">
 
     <!--Por bicicleta-->
-    <div class="" id="por_bicicleta">
+    <div class="oculto" id="por_bicicleta">
         <div class="row">
             <div class="form-inline">
 
@@ -133,7 +134,7 @@
     </div>
 
     <!--Por Estacion-->
-    <div class="oculto" id="por_estacion">
+    <div class="" id="por_estacion">
         <div class="row">
             <div class="form-inline">
                 <div class="col-sm-12">
@@ -183,26 +184,8 @@
     </div>
 </div>
 
-<div id="listado_bicicletas">
-    <h3>Lista de bicicletas</h3>
+<div id="listado_bicicletas"></div>
 
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>C&oacute;d. Bicicleta</th>
-                        <th class="oculto">Tipo</th>
-                        <th>Estaci&oacute;n Propietaria</th>
-                        <th>Estacionamiento Actual</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+    Bicicleta.acciones.cargarListaBicicletasPorEstacion();
+</script>
