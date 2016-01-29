@@ -6,12 +6,12 @@ if ($filtro == 'estacion') {
     $tickets = $Ticket->cargarTicket($campo, $valor);
 }
 ?>
-<div id="listado_ticket">
-    <h3>
-        Lista de Tickets
-        <small class="pull-right"> Total: <?= count($tickets); ?></small>
-    </h3>
+<h3>
+    Lista de Tickets
+    <small class="pull-right"> Total: <?= count($tickets); ?></small>
+</h3>
 
+<div id="row">
     <div class="col-xs-12">
         <div class="table-responsive">
             <table class="table table-hover">

@@ -20,7 +20,7 @@ class Ticket extends CI_Controller
     public function cargarBotonCrear()
     {
         $tdu = $_REQUEST["tdu"];
-        if ($tdu == 1) {
+        if ($tdu == 1 || $tdu == 8) {
             echo '<a class="dedo" data-toggle="modal" data-target="#crearTicket"> <i class="fa fa-plus-circle"></i> </a>';
         }
     }
@@ -359,7 +359,25 @@ class Ticket extends CI_Controller
         $tiempo_expiracion =  (15*60); //15 minutos
         $tickets = \App\Ticket::where('fecha','<',Escritorio::getFechaEcuador())
             ->where('fecha','<',Escritorio::getFechaEcuador())
+            ->whereNotIn('ESTADO_id', [11,12,13])
             ->get();
-        dd($tickets);
+
+        $i = 0;
+        if (count($tickets) > 0){
+
+            foreach($tickets as $ticket){
+                $i++;
+                $this->cambiarEstado($ticket->id, 'anulada');
+                $this->cambiarEstadoBicicleta($ticket->id, 'buena');
+            }
+        }
+
+        $mensaje = '<i class="fa fa-check"></i> Se han anulado '. $i .' tickets por expiraci&oacute;n';
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => true,
+            'mensaje' => $mensaje
+        ]);
     }
 }

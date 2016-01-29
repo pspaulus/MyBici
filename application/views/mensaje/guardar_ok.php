@@ -21,6 +21,10 @@
                 case 'ticket':
                     $contenido = '<i class="fa fa-check"></i> Ticket creado con &eacute;xito.';
                     break;
+
+                case 'escritorio':
+                    $contenido = '';
+                    break;
             }
             echo $contenido;
         } else {

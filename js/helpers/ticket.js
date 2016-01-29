@@ -32,6 +32,18 @@ var Ticket = {
 
     acciones: {
 
+        barrerTicket: function () {
+            var barrer_ticket_contenedor = $('#barrer_ticket_contenedor');
+            $.ajax({
+                method: "POST",
+                url: base_url + "Ticket/barrerTicket"
+            })
+                .done(function (r) {
+                    barrer_ticket_contenedor.html(r.mensaje);
+                    Escritorio.mensajeFlotante.mostrar($('#barrer_ticket_contenedor'));
+                });
+        },
+
         cambioLista: function (filtro) {
             var como_listo = $('#como_listo');
             como_listo.val(filtro)

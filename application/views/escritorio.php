@@ -1,3 +1,10 @@
+<!-- mensajes flotantes-->
+<div class="mensajeFlotanteContenedor">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="alert alert-success text-center mensajeFlotanteCuerpo" id="barrer_ticket_contenedor"></div>
+    </div>
+</div>
+
 <div id="wrapper">
     <nav class="navbar navbar-inverse navbar-fixed-top sinBordeRedondeado" role="navigation">
 
@@ -115,3 +122,7 @@
         </div>
     </div>
 </div>
+<script>
+    Ticket.acciones.barrerTicket();
+    setInterval('Ticket.acciones.barrerTicket()', ( 5*60*1000));
+</script>
