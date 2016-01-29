@@ -353,4 +353,13 @@ class Ticket extends CI_Controller
 
         $this->load->view('reserva/resumen', $data);
     }
+
+    public function barrerTicket()
+    {
+        $tiempo_expiracion =  (15*60); //15 minutos
+        $tickets = \App\Ticket::where('fecha','<',Escritorio::getFechaEcuador())
+            ->where('fecha','<',Escritorio::getFechaEcuador())
+            ->get();
+        dd($tickets);
+    }
 }

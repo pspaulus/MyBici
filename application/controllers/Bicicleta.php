@@ -95,18 +95,24 @@ class Bicicleta extends CI_Controller
     {
         //todas
         if ($estacion_id == -1 && $estado_id == -1) {
-            $bicicletas = \App\Bicicleta::all();
+            $bicicletas = \App\Bicicleta::orderBy('PUESTO_ALQUILER_id', 'ASC')
+                ->orderBy('codigo', 'ASC')
+                ->get();
         }
 
         //por estacion
         if ($estacion_id != -1 && $estado_id == -1) {
             $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $estacion_id)
+                ->orderBy('PUESTO_ALQUILER_id', 'ASC')
+                ->orderBy('codigo', 'ASC')
                 ->get();
         }
 
         //por estado
         if ($estacion_id == -1 && $estado_id != -1) {
             $bicicletas = \App\Bicicleta::where('ESTADO_id', '=', $estado_id)
+                ->orderBy('PUESTO_ALQUILER_id', 'ASC')
+                ->orderBy('codigo', 'ASC')
                 ->get();
         }
 
@@ -114,6 +120,8 @@ class Bicicleta extends CI_Controller
         if ($estacion_id != -1 && $estado_id != -1) {
             $bicicletas = \App\Bicicleta::where('PUESTO_ALQUILER_id', '=', $estacion_id)
                 ->where('ESTADO_id', '=', $estado_id)
+                ->orderBy('PUESTO_ALQUILER_id', 'ASC')
+                ->orderBy('codigo', 'ASC')
                 ->get();
         }
 

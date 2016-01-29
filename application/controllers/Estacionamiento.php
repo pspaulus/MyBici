@@ -15,9 +15,12 @@ class Estacionamiento extends CI_Controller
 
     public static function contarBicicletasDisponiblesByEstacion($estacion_id)
     {
-        $bicicletas_disponibles = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
-            ->whereNotNull('BICICLETA_id')
+        $bicicletas_disponibles = \App\Estacionamiento::where('ESTACIONAMIENTO.PUESTO_ALQUILER_id', '=', $estacion_id)
+            ->whereNotNull('ESTACIONAMIENTO.BICICLETA_id')
+            ->join('BICICLETA', 'ESTACIONAMIENTO.BICICLETA_id', '=', 'BICICLETA.id')
+            ->whereNotIn('BICICLETA.ESTADO_id', [8,3,9,6])
             ->count();
+
         return $bicicletas_disponibles;
     }
 
@@ -46,19 +49,23 @@ class Estacionamiento extends CI_Controller
             if ($estacion_id == -1 && $estado_id == -1) {
                 $estacionamientos = \App\Estacionamiento::where('ESTADO_id', '=', $estado_id)
                     ->orderBy('PUESTO_ALQUILER_id', 'ASC')
+                    ->orderBy('codigo', 'ASC')
                     ->get();
             } elseif ($estacion_id == -1 && $estado_id != -1) {
                 $estacionamientos = \App\Estacionamiento::where('ESTADO_id', '=', $estado_id)
                     ->orderBy('PUESTO_ALQUILER_id', 'ASC')
+                    ->orderBy('codigo', 'ASC')
                     ->get();
             } elseif ($estacion_id != -1 && $estado_id == -1) {
                 $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
                     ->orderBy('PUESTO_ALQUILER_id', 'ASC')
+                    ->orderBy('codigo', 'ASC')
                     ->get();
             } elseif ($estacion_id != -1 && $estado_id != -1) {
                 $estacionamientos = \App\Estacionamiento::where('PUESTO_ALQUILER_id', '=', $estacion_id)
                     ->where('ESTADO_id', '=', $estado_id)
                     ->orderBy('PUESTO_ALQUILER_id', 'ASC')
+                    ->orderBy('codigo', 'ASC')
                     ->get();
             }
         }
