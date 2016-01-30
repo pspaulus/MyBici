@@ -18,7 +18,7 @@ if ($filtro == 'estacion') {
                 <thead>
                 <tr>
                     <th>No.</th>
-                    <th>ID</th>
+                    <th>Ticket ID</th>
                     <th class="oculto">Tipo</th>
                     <th>Usuario</th>
                     <th>Bicicleta</th>
@@ -36,6 +36,29 @@ if ($filtro == 'estacion') {
                     <?php if( count($tickets) == 0) $Ticket->load->view('sin_datos')?>
                     <?php foreach ($tickets as $ticket) { ?>
                         <tbody>
+                        <?php
+                            switch ($ticket->ESTADO_id) {
+                                case 13:
+                                    $color_estado = 'text-danger';
+                                    break;
+
+                                case 12:
+                                    $color_estado = 'text-success';
+                                    break;
+
+                                case 11:
+                                    $color_estado = 'text-primary';
+                                    break;
+
+                                case 10:
+                                    $color_estado = 'text-warning';
+                                    break;
+
+                                default:
+                                    $color_estado = '';
+                                    break;
+                            }
+                        ?>
                         <tr>
                             <td><?= $i ?></td>
                             <?php $i++ ?>
@@ -45,18 +68,19 @@ if ($filtro == 'estacion') {
                             <td class="oculto"><?= Tipo::getReservaTipoById($ticket->TIPO_id) ?></td>
                             <td><i class="fa fa-user"></i> <?= Usuario::getUsuarioNombreById($ticket->USUARIO_id) ?></td>
                             <td><i class="fa fa-bicycle"></i> <?= Bicicleta::getBicicletaCodigoById($ticket->BICICLETA_id) ?></td>
-                            <td><?= Estacion::getEstacionNombreById($ticket->origen_puesto_alquiler) . ' - ' . $estacionamiento_origen ?></td>
-                            <td><?= Estacion::getEstacionNombreById($ticket->destino_puesto_alquiler) . ' - ' . $estacionamiento_destino ?></td>
-                            <td><?= $ticket->fecha.' <small>'.$ticket->hora_creacion.'</small>' ?></td>
+                            <td><i class="fa fa-home"></i> <?= Estacion::getEstacionNombreById($ticket->origen_puesto_alquiler) . ' - ' . $estacionamiento_origen ?></td>
+                            <td><i class="fa fa-home"></i> <?= Estacion::getEstacionNombreById($ticket->destino_puesto_alquiler) . ' - ' . $estacionamiento_destino ?></td>
+                            <td><?= $ticket->fecha.' / <small>'.$ticket->hora_creacion.'</small>' ?></td>
                             <td><?= $ticket->hora_retiro ?></td>
                             <td><?= $ticket->hora_entrega ?></td>
-                            <td><?= Estado::getEstadoNombreById($ticket->ESTADO_id) ?></td>
+                            <td class="<?= $color_estado ?>"><?= Estado::getEstadoNombreById($ticket->ESTADO_id) ?></td>
                             <td>
 
                                 <?php if ($ticket->ESTADO_id == 10) { ?>
                                     <button class="btn btn-xs btn-primary" type="button" title="Marcar En curso"
                                             data-toggle="modal" data-target="#marcarEstadoEnCurso_<?= $ticket->id ?>"
-                                            id="en_curso_ticket_<?= $ticket->id ?>"><i class="fa fa-circle-o fa-2x"></i>
+                                            id="en_curso_ticket_<?= $ticket->id ?>">
+                                        &nbsp;&nbsp;&nbsp;<i class="fa fa-circle-o fa-2x"></i>&nbsp;&nbsp;&nbsp;
                                     </button>
 
                                     <!--Modal marcar En curso-->
@@ -64,10 +88,10 @@ if ($filtro == 'estacion') {
                                 <?php } ?>
 
                                 <?php if ($ticket->ESTADO_id == 11) { ?>
-                                    <button class="btn btn-xs btn-success" type="button" title="Marcar Realizada"
+                                    <button class="btn btn-xs btn-success" type="button" title="Marcar Realizado"
                                             data-toggle="modal" data-target="#marcarEstadoRealizada_<?= $ticket->id ?>"
-                                            id="realizado_ticket_<?= $ticket->id ?>"><i
-                                            class="fa fa-check-circle-o fa-2x"></i>
+                                            id="realizado_ticket_<?= $ticket->id ?>">
+                                        &nbsp;&nbsp;&nbsp;<i class="fa fa-check-circle-o fa-2x"></i>&nbsp;&nbsp;&nbsp;
                                     </button>
 
                                     <!--Modal marcar Realizada-->
@@ -75,10 +99,10 @@ if ($filtro == 'estacion') {
                                 <?php } ?>
 
                                 <?php if ($ticket->ESTADO_id == 10) { ?>
-                                    <button class="btn btn-xs btn-danger" type="button" title="Marcar Anulada"
+                                    <button class="btn btn-xs btn-danger" type="button" title="Marcar Anulado"
                                             data-toggle="modal" data-target="#marcarEstadoAnulada_<?= $ticket->id ?>"
-                                            id="anular_ticket_<?= $ticket->id ?>"><i
-                                            class="fa fa-times-circle-o fa-2x"></i>
+                                            id="anular_ticket_<?= $ticket->id ?>">
+                                        &nbsp;&nbsp;&nbsp;<i class="fa fa-times-circle-o fa-2x"></i>&nbsp;&nbsp;&nbsp;
                                     </button>
 
                                     <!--Modal marcar Anulada-->

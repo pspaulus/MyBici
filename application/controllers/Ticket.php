@@ -367,7 +367,7 @@ class Ticket extends CI_Controller
     public function barrerTicket()
     {
         $quince_minutos_antes = date('H:i:s', time() - ((60 * 60) * 5) - (15 * 60));
-        $tickets = \App\Ticket::where('fecha','<',Escritorio::getFechaEcuador())
+        $tickets = \App\Ticket::where('fecha','<=',Escritorio::getFechaEcuador())
             ->where('hora_creacion','<', $quince_minutos_antes )
             ->whereNotIn('ESTADO_id', [11,12,13])
             ->get();

@@ -5,6 +5,8 @@
 <!-- mensajes flotantes-->
 <div class="mensajeFlotanteContenedor">
     <?php Escritorio::Mensaje('guardar_ok', 'ticket') ?>
+    <?php Escritorio::Mensaje('editar_ok', 'ticket') ?>
+    <?php Escritorio::Mensaje('eliminar_ok', 'ticket') ?>
 </div>
 
 <!-- Titulo -->
@@ -45,8 +47,11 @@
                 </select>
                 &nbsp;
                 <!--<small class="pull-right">Hoy: --><?//= Escritorio::getFechaEcuador() ?><!--</small>-->
-                <button class="btn btn-xs btn-default pull-right" type="button"
-                        onclick="Ticket.acciones.RecargarResumen();"><i class="fa fa-refresh">&nbsp;</i></button>
+                <button class="btn btn-xs btn-danger pull-right" type="button" title="Forzar Expirados" style="margin-left: 10px"
+                        onclick="Ticket.acciones.barrerTicket();"><i class="fa fa-clock-o"></i></button>
+
+                <button class="btn btn-xs btn-default pull-right" type="button" title="Refrescar"
+                        onclick="Ticket.acciones.RecargarResumen();"><i class="fa fa-refresh"></i></button>
             </li>
         </ol>
     </div>
@@ -75,14 +80,14 @@
                 &nbsp;
                 <label class="radio-inline">
                     <input type="radio" name="tipo_busqueda" id="busqueda_por_estado" checked
-                           onclick="Ticket.acciones.cambioLista('por_estacion');
+                           onclick="Ticket.acciones.cambioLista('lote');
                                     $('#por_estacion').removeClass('oculto');
                                     $('#por_codido').addClass('oculto');""> Estaci&oacute;n
                 </label>
 
                 <label class="radio-inline">
                     <input type="radio" name="tipo_busqueda" id="busqueda_por_codigo"
-                           onclick="Ticket.acciones.cambioLista('por_codigo');
+                           onclick="Ticket.acciones.cambioLista('unidad');
                                     $('#por_codido').removeClass('oculto');
                                     $('#por_estacion').addClass('oculto');"> C&oacute;digo
                 </label>

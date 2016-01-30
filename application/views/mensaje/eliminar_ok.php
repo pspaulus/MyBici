@@ -9,6 +9,10 @@
                 case 'estacionamiento':
                     $contenido = '<strong>OK: </strong> Bicicleta retirada del estaciomiento';
                     break;
+
+                case 'ticket':
+                    $contenido = '<strong>OK: </strong> Ticket anulado';
+                    break;
             }
             echo $contenido;
         } else {

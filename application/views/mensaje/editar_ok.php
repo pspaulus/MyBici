@@ -13,6 +13,10 @@
                 case 'bicicleta':
                     $contenido = '<i class="fa fa-check"></i> Se cambia el estado a la bicicleta.';
                     break;
+
+                case 'ticket':
+                    $contenido = '<i class="fa fa-check"></i> Se cambia el estado a ticket.';
+                    break;
             }
             echo $contenido;
         } else {

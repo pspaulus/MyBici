@@ -32,7 +32,17 @@ var Ticket = {
 
     acciones: {
 
+        cargarListadoAutomatico: function (como_listo) {
+            if (como_listo == 'unidad') {
+                Ticket.acciones.cargarListaTicketPorCampo();
+            }
+            if (como_listo == 'lote') {
+                Ticket.acciones.cargarListaTicketPorEstacion();
+            }
+        },
+
         barrerTicket: function () {
+            var como_listo = $('#como_listo').val();
             var barrer_ticket_contenedor = $('#barrer_ticket_contenedor');
             $.ajax({
                 method: "POST",
@@ -41,6 +51,8 @@ var Ticket = {
                 .done(function (r) {
                     barrer_ticket_contenedor.html(r.mensaje);
                     Escritorio.mensajeFlotante.mostrar($('#barrer_ticket_contenedor'));
+                    Ticket.acciones.RecargarResumen();
+                    Ticket.acciones.cargarListadoAutomatico(como_listo);
                 });
         },
 
@@ -101,6 +113,7 @@ var Ticket = {
         },
 
         guardar: function () {
+            var como_listo = $('#como_listo').val();
             var input_id = $('#ticket_id').val();
             var select_tipo = $('#ticket_tipo').val();
             var input_bicicleta_codigo = $('#ticket_bicicleta').val();
@@ -165,6 +178,7 @@ var Ticket = {
                             $('.modal-backdrop').remove();
                             $('#crearTicket').modal('toggle');
                             Ticket.acciones.RecargarResumen();
+                            Ticket.acciones.cargarListadoAutomatico(como_listo);
                             //Ticket.acciones.refrescar();
                             Ticket.acciones.cargarBicicletaDisponible();
                             Ticket.acciones.RecargarTotal();
@@ -208,6 +222,7 @@ var Ticket = {
         },
 
         cambiarEstado: function (ticket_id, estado) {
+            var como_listo = $('#como_listo').val();
             $.ajax({
                 method: "POST",
                 url: base_url + "Ticket/cambiarEstado/" + ticket_id + '/' + estado,
@@ -232,7 +247,16 @@ var Ticket = {
                         }
 
                         $('.modal-backdrop').remove();
-                        Ticket.acciones.refrescar();
+                        //Ticket.acciones.refrescar();
+                        $('#agregarBicicleta').modal('toggle');
+                        Ticket.acciones.cargarListadoAutomatico(como_listo);
+                        Ticket.acciones.RecargarResumen();
+
+                        if(estado == 'anulada'){
+                            Escritorio.mensajeFlotante.mostrar($('#eliminar_ok'));
+                        } else {
+                            Escritorio.mensajeFlotante.mostrar($('#editar_ok'));
+                        }
                     } else {
                         console.log('ERROR: cambio estado ticket');
                     }
@@ -347,6 +371,7 @@ var Ticket = {
         },
 
         limpiar: function () {
+            $('.modal-backdrop').remove();
             $('#estacion_origen').prop('selectedIndex', 0);
             $('#estacion_destino').prop('selectedIndex', 1);
             Estacion.mensajes.oculta($('#estacion_sin_bicicleta'));
