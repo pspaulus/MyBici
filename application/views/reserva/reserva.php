@@ -31,7 +31,7 @@
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li class="active" id="titulo">
-                <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#resumen_ticket'), $('#titulo'))">
+                <a class="dedo" onclick="Escritorio.Acciones.ocultarMostrar($('#contenedor_resumen'), $('#titulo'))">
                     <i class="fa fa-calendar"></i> Tablero de Estados
                 </a>
                 &nbsp;

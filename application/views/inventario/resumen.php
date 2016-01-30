@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?= $Bicicletas->contarBicicletasEstado('en_uso', $estacion_id); ?></div>
-                        <div><strong>En uso</strong></div>
+                        <div><strong>Ocupadas</strong></div>
                     </div>
                 </div>
             </div>

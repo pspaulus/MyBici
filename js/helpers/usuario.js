@@ -441,8 +441,7 @@ var Usuario = {
             if (usuario_nombre.length != '') {
                 $.ajax({
                     method: "POST",
-                    url: base_url + "Usuario/getUsuarioIdByNombre/" + usuario_nombre,
-                    data: {}
+                    url: base_url + "Usuario/getUsuarioIdByNombre/" + usuario_nombre
                 })
                     .done(function (r) {
                         if (r.status) {

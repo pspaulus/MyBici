@@ -24,7 +24,7 @@ if ($filtro == 'estacion') {
                     <th>Bicicleta</th>
                     <th>Origen</th>
                     <th>Destino</th>
-                    <th>Fecha</th>
+                    <th>Fecha / Hora de Solicitud</th>
                     <th>Hora Retiro</th>
                     <th>Hora Entrega</th>
                     <th>Estado</th>
@@ -37,17 +37,17 @@ if ($filtro == 'estacion') {
                     <?php foreach ($tickets as $ticket) { ?>
                         <tbody>
                         <tr>
-                            <td><strong><?= $i ?></strong></td>
+                            <td><?= $i ?></td>
                             <?php $i++ ?>
                             <?php $estacionamiento_origen = Estacionamiento::getEstacionamientoOrigenDestino($ticket->origen_estacionamiento) ?>
                             <?php $estacionamiento_destino = Estacionamiento::getEstacionamientoOrigenDestino($ticket->destino_estacionamiento) ?>
-                            <td><?= $ticket->id ?></td>
+                            <td><strong><?= $ticket->id ?></strong></td>
                             <td class="oculto"><?= Tipo::getReservaTipoById($ticket->TIPO_id) ?></td>
                             <td><i class="fa fa-user"></i> <?= Usuario::getUsuarioNombreById($ticket->USUARIO_id) ?></td>
                             <td><i class="fa fa-bicycle"></i> <?= Bicicleta::getBicicletaCodigoById($ticket->BICICLETA_id) ?></td>
                             <td><?= Estacion::getEstacionNombreById($ticket->origen_puesto_alquiler) . ' - ' . $estacionamiento_origen ?></td>
                             <td><?= Estacion::getEstacionNombreById($ticket->destino_puesto_alquiler) . ' - ' . $estacionamiento_destino ?></td>
-                            <td><?= $ticket->fecha ?></td>
+                            <td><?= $ticket->fecha.' <small>'.$ticket->hora_creacion.'</small>' ?></td>
                             <td><?= $ticket->hora_retiro ?></td>
                             <td><?= $ticket->hora_entrega ?></td>
                             <td><?= Estado::getEstadoNombreById($ticket->ESTADO_id) ?></td>

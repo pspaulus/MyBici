@@ -38,6 +38,7 @@ class Ticket extends CI_Controller
         $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador())
             ->get()
             ->count();
+
         return $conteo_tickets;
     }
 
@@ -46,16 +47,24 @@ class Ticket extends CI_Controller
         $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador())
             ->get()
             ->count();
+
         return $conteo_tickets;
     }
 
     public static function contarTicketVigentesHoy($estacion_id)
     {
-        $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador())
-            ->whereIn('ESTADO_id', [10])
-            ->where('origen_puesto_alquiler', '=', $estacion_id)
-            ->get()
-            ->count();
+        if ($estacion_id == -1){
+            $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador())
+                ->whereIn('ESTADO_id', [10])
+                ->get()
+                ->count();
+        } else {
+            $conteo_tickets = \App\Ticket::where('fecha', '=', Escritorio::getFechaEcuador())
+                ->whereIn('ESTADO_id', [10])
+                ->where('origen_puesto_alquiler', '=', $estacion_id)
+                ->get()
+                ->count();
+        }
         return $conteo_tickets;
     }
 
@@ -121,7 +130,8 @@ class Ticket extends CI_Controller
             'origen_estacionamiento' => $origen_estacionamiento,
             'destino_puesto_alquiler' => $destino_puesto_alquiler,
             'destino_estacionamiento' => $destino_estacionamiento,
-            'fecha' => $fecha,
+            'fecha' => Escritorio::getFechaHoraEcuador(),
+            'hora_creacion' => Escritorio::getHoraEcuador(),
             'hora_retiro' => $hora_retiro,
             'hora_entrega' => $hora_entrega,
             'duracion' => $duracion,
@@ -356,12 +366,14 @@ class Ticket extends CI_Controller
 
     public function barrerTicket()
     {
-        $tiempo_expiracion =  (15*60); //15 minutos
+        $quince_minutos_antes = date('H:i:s', time() - ((60 * 60) * 5) - (15 * 60));
         $tickets = \App\Ticket::where('fecha','<',Escritorio::getFechaEcuador())
-            ->where('fecha','<',Escritorio::getFechaEcuador())
+            ->where('hora_creacion','<', $quince_minutos_antes )
             ->whereNotIn('ESTADO_id', [11,12,13])
             ->get();
 
+
+        //dd($tickets,$quince_minutos_antes);
         $i = 0;
         if (count($tickets) > 0){
 

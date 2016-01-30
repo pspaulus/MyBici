@@ -27,12 +27,12 @@
                             </div>
 
                             <!--fecha-->
-                            <div class="col-xs-2 ">
+                            <div class="col-xs-2 oculto">
                                 <label for="ticket_fecha">Fecha</label>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-3 oculto">
                                 <input class="form-control" id="ticket_fecha" type="text"
-                                       value="<?= Escritorio::getFechaEcuador() ?>" disabled>
+                                       value="<?= Escritorio::getFechaHoraEcuador() ?>" disabled>
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@
                                     <input class="form-control" id="ticket_bicicleta" type="text"
                                            value="<?= Bicicleta::cargarBicicletaDisponibleMostrar(1) ?>" disabled>
                                 </div>
-                                <div class="col-xs-6 col-xs-offset-6 oculto mensaje">
+                                <div class="col-xs-8 col-xs-offset-3 oculto mensaje">
                                     <label class="control-label" id="estacion_sin_bicicleta">&iexcl;Estaci&oacute;n sin
                                         bicicletas disponibles!</label>
                                 </div>
@@ -135,13 +135,17 @@
                                     </select>
                                 </div>
                                 <div class="col-xs-9 col-xs-offset-3">
-                                    <div class="oculto mensaje">
-                                        <label class="control-label" id="error_origen_destino">&iexcl;El detino no puede
+                                    <div class="oculto mensaje has-error">
+                                        <label class="control-label" id="error_origen_destino">&iexcl;El destino no puede
                                             ser el mismo que el origen!</label>
                                     </div>
                                     <div class="oculto mensaje">
-                                        <label class="control-label" id="error_sin_parqueo">&iexcl;El detino no tiene
+                                        <label class="control-label" id="error_sin_parqueo">&iexcl;El destino no tiene
                                             parqueos disponibes!</label>
+                                    </div>
+                                    <div class="oculto mensaje">
+                                        <label class="control-label" id="error_usuario_con_ticket">&iexcl;El usuario ya
+                                            tiene un ticket con vigencia o en curso!</label>
                                     </div>
                                 </div>
                             </div>

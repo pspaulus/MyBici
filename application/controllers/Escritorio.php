@@ -59,6 +59,11 @@ class Escritorio extends CI_Controller
         return date('Y-m-d', time() - ((60 * 60) * 5));
     }
 
+    public static function getFechaHoraEcuador()
+    {
+        return date('Y-m-d H:i:s', time() - ((60 * 60) * 5));
+    }
+
     public static function varificarAdmin(){
 
     }

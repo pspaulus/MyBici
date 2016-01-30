@@ -113,6 +113,7 @@ var Ticket = {
             var validacion_input_bicicleta_codigo = true;
             var validacion_input_usuario_id = true;
             var validacion_origen_destino = true;
+            var validacion_usuario_sin_ticket = true;
 
             if (select_estacion_origen == select_estacion_destino) {
                 validacion_origen_destino = false;
@@ -130,7 +131,13 @@ var Ticket = {
                 console.log('Error: usuario_id');
             }
 
-            if (validacion_input_usuario_id && validacion_input_bicicleta_codigo && validacion_origen_destino && (estacion_destino_parqueo_disponible == 1)) {
+            if (Ticket.acciones.usuarioSinTicket(input_usuario_id)) {
+                validacion_usuario_sin_ticket = false;
+                Estacion.mensajes.mostrar($('#error_usuario_con_ticket'));
+            }
+
+            if (validacion_input_usuario_id && validacion_input_bicicleta_codigo && validacion_origen_destino &&
+                validacion_usuario_sin_ticket && (estacion_destino_parqueo_disponible == 1)) {
                 $.ajax({
                     method: "POST",
                     url: base_url + "Ticket/guardarTicket",
@@ -161,11 +168,26 @@ var Ticket = {
                             //Ticket.acciones.refrescar();
                             Ticket.acciones.cargarBicicletaDisponible();
                             Ticket.acciones.RecargarTotal();
+                            Ticket.acciones.limpiar();
                             Escritorio.mensajeFlotante.mostrar($('#guardar_ok'));
                         } else {
                             console.log('Error: no guarda ticket');
                             Escritorio.mensajeFlotante.mostrar($('#error_mensaje'));
                         }
+                    });
+            }
+        },
+
+        usuarioSinTicket: function(id){
+            if (id != 'Id' && id != '-' && id == ''){
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "Usuario/usuarioSinTicket/",
+                    data: {id: id}
+                })
+                    .done(function (r) {
+                        //console.log(r.mensaje);
+                        return r.status;
                     });
             }
         },
@@ -329,6 +351,9 @@ var Ticket = {
             $('#estacion_destino').prop('selectedIndex', 1);
             Estacion.mensajes.oculta($('#estacion_sin_bicicleta'));
             Estacion.mensajes.oculta($('#usuario_no_existe'));
+            Estacion.mensajes.oculta($('#error_origen_destino'));
+            Estacion.mensajes.oculta($('#error_sin_parqueo'));
+            Ticket.index.cargarVistaCrear();
         },
 
         cargarBicicletaDisponible: function () {

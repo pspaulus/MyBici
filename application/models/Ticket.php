@@ -18,6 +18,7 @@ class Ticket extends Model
         'destino_puesto_alquiler',
         'destino_estacionamiento',
         'fecha',
+        'hora_creacion',
         'hora_retiro',
         'hora_entrega',
         'duracion',

@@ -203,6 +203,27 @@ class Usuario extends CI_Controller
         }
     }
 
+    public function usuarioSinTicket($usuario_id)
+    {
+        $tickets = \App\Ticket::where('USUARIO_id','=',$usuario_id)
+            ->whereIn('ESTADO_id',[10,11])
+            ->get();
+
+        if (count($tickets) == 0 ){
+            echo json_encode([
+                'status' => true,
+                'mensaje' => 'OK: usuario sin tickets vigentes'
+            ]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'status' => false,
+                'mensaje' => 'ERROR: usuario con tickets vigentes'
+            ]);
+        }
+
+    }
+
     public static function getUsuarioIdByNombreDevolver($usuario_nombre)
     {
         $usuario = Usuario::buscarUsuario($usuario_nombre);
