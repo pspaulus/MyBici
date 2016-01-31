@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Paul Sabando">
     <title>MyBici</title>
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/estilos.css">
-    <link rel="stylesheet" href="/css/sb-admin.css">
-    <link rel="stylesheet" href="/css/morris.css">
-    <link rel="stylesheet" href="/css/font-awesome.css">
-    <link rel="stylesheet" href="/css/datepicker.css">
-    <link rel="icon" type="image/png" href="/icons/ico_bicicleta.jpg"/>
+    <link rel="stylesheet" href="<?= base_url() ?>/css/bootstrap.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/css/estilos.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/css/sb-admin.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/css/morris.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/css/font-awesome.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/css/datepicker.css">
+    <link rel="icon" type="image/png" href="<?= base_url() ?>/icons/ico_bicicleta.jpg"/>
 
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/raphael.min.js"></script>
-    <script src="/js/morris.js"></script>
-    <script src="/js/jQuery-MD5.js"></script>
-    <script src="/js/bootstrap-datepicker.js"></script>
+    <script src="<?= base_url() ?>/js/jquery.js"></script>
+    <script src="<?= base_url() ?>/js/bootstrap.js"></script>
+    <script src="<?= base_url() ?>/js/raphael.min.js"></script>
+    <script src="<?= base_url() ?>/js/morris.js"></script>
+    <script src="<?= base_url() ?>/js/jQuery-MD5.js"></script>
+    <script src="<?= base_url() ?>/js/bootstrap-datepicker.js"></script>
     <?php foreach ($helpers as $helper) { ?>
         <script type="text/javascript" src="<?= $helper ?>"></script>
     <?php } ?>
@@ -27,4 +27,4 @@
     <?php } ?>
 </head>
 <body>
-<?='<script> var base_url = \'http://'.$_SERVER['HTTP_HOST'].'/\'; </script>';?>
+<?='<script> var base_url = \'http://'.$_SERVER['HTTP_HOST'].'/web/MyBici_server/\'; </script>';?>

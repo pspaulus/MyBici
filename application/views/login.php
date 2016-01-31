@@ -1,4 +1,4 @@
-<input type="hidden" value="<?=$_SERVER['HTTP_HOST']?>" id="s_ip">
+<input type="hidden" value="<?= $_SERVER['HTTP_HOST'] ?>/web/MyBici_server/" id="s_ip">
 <div class="container" id="formLogin">
 
     <!--Titulo-->

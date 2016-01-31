@@ -16,7 +16,7 @@ class Login extends CI_Controller
     public function index()
     {
         //ruta del server
-        echo '<script> var base_url = \'http://'.$_SERVER['HTTP_HOST'].'/\'; </script>';
+        echo '<script> var base_url = \'http://'.$_SERVER['HTTP_HOST'].'/web/MyBici_server/\'; </script>';
 
         $data['helpers']['login'] = base_url() . 'js/helpers/login.js';
         $data['helpers']['estacion'] = base_url() . 'js/helpers/estacion.js';

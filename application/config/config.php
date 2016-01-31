@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 //$config['base_url'] = 'http://mybici.server/'; //tambien ajustar url base a los helpers js en login
-$config['base_url'] = "http://".$_SERVER['HTTP_HOST'];
+$config['base_url'] = "http://".$_SERVER['HTTP_HOST']."/web/MyBici_server/";
 
 /*
 |--------------------------------------------------------------------------
