@@ -366,14 +366,15 @@ class Ticket extends CI_Controller
 
     public function barrerTicket()
     {
-        $quince_minutos_antes = date('H:i:s', time() - ((60 * 60) * 5) - (15 * 60));
+        //$quince_minutos_antes = date('H:i:s', time() - ((60 * 60) * 5) - (15 * 60));
+        $quince_minutos_antes = date('H:i:s', time() - (15 * 60));
         $tickets = \App\Ticket::where('fecha','<=',Escritorio::getFechaEcuador())
             ->where('hora_creacion','<', $quince_minutos_antes )
             ->whereNotIn('ESTADO_id', [11,12,13])
             ->get();
 
 
-        //dd($tickets,$quince_minutos_antes);
+        //dd($tickets,Escritorio::getFechaEcuador(), $quince_minutos_antes);
         $i = 0;
         if (count($tickets) > 0){
 
@@ -391,5 +392,14 @@ class Ticket extends CI_Controller
             'status' => true,
             'mensaje' => $mensaje
         ]);
+    }
+
+    public function resumenHoy($estacion_id)
+    {
+        $tickets['generados'] = Ticket::contarTicketVigentesHoy($estacion_id);
+        $tickets['en_curso'] = Ticket::contarTicketHoyByEstado('en_curso',$estacion_id);
+        $tickets['realizados'] = Ticket::contarTicketHoyByEstado('realizadas',$estacion_id);
+        $tickets['anulado'] = Ticket::contarTicketHoyByEstado('anuladas',$estacion_id);;
+        echo json_encode($tickets);
     }
 }

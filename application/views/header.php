@@ -23,7 +23,8 @@
         <script type="text/javascript" src="<?= $helper ?>"></script>
     <?php } ?>
     <?php if (Escritorio::verificarInternet()) { ?>
-        <script src="http://maps.googleapis.com/maps/api/js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD9_tmNFbXbnoF5ONOj7DWRYJlYk30zvt8"></script>
+        
     <?php } ?>
 </head>
 <body>
