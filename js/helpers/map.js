@@ -40,13 +40,9 @@ function ver_mapa_todos(mapa) {
         marker.setMap(map);
 
         //ventana flotante del marcador
-        var infowindow = new google.maps.InfoWindow({
-            content: '<div>' +
-                        '<h4 style="padding-left: 15px" class="panel-title text-right tip"><i class="fa fa-home"></i> <label>' + e.dataset.nombre + '</h4>' +
-                        '<div><i class="fa fa-product-hunt"></i> <label>' + e.dataset.parqueos_disponibles + '</label> <label class="inactivo"> / ' + e.dataset.parqueos_total + '</label></div>' +
-                        '<div><i class="fa fa-bicycle"></i> <label>' + e.dataset.bicicletas_disponibles + '</label> <label class="inactivo"> / ' + e.dataset.bicicletas_total + '</label></div>' +
-                     '</div>'
-        });
+        var datos_estacion = getInfoEstacionHtmlMap(e);
+        console.log(datos_estacion);
+        var infowindow = new google.maps.InfoWindow({content: datos_estacion});
         infowindow.open(map, marker);
 
         //al dar click amplia
@@ -64,6 +60,15 @@ function ver_mapa_todos(mapa) {
 
     var centrar = new google.maps.LatLng(-2.147, -79.963);
     map.setCenter(centrar);
+}
+
+function getInfoEstacionHtmlMap(estacion) {
+    return '<div id="estacion_' + estacion.dataset.codigo + '">' +
+                '<h4 style="padding-left: 15px" class="panel-title text-right tip"><i class="fa fa-home"></i> <label>' + estacion.dataset.nombre + '</h4>' +
+                '<div><i class="fa fa-product-hunt"></i> <label>' + estacion.dataset.parqueos_disponibles + '</label> <label class="inactivo"> / ' + estacion.dataset.parqueos_total + '</label></div>' +
+                '<div><i class="fa fa-bicycle"></i> <label>' + estacion.dataset.bicicletas_disponibles + '</label> <label class="inactivo"> / ' + estacion.dataset.bicicletas_total + '</label></div>' +
+            '</div>'
+        
 }
 
 

@@ -31,7 +31,7 @@
         ?>
         <div id="mapEstacionTodas" class="mapaGrande"></div>
         <script>
-            ver_mapa_todos("mapEstacionTodas");
+            ver_mapa_todos("mapEstacionTodas");            
         </script>
     </div>
 </div>

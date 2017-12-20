@@ -79,7 +79,7 @@
 </div>
 
 <script type="text/javascript">
-var dashboard = new Vue({
+	var dashboard = new Vue({
 		el: '#dashboard',
 		data: {
 			tickets: {
